@@ -13,6 +13,7 @@ development:
   mail_delivery_method: smtp
   smtp_email_address: "localhost"
   smtp_email_port: 1025
+  domain: "dev.sharetribe.com"
 
 test:
   # Add local `test` environment configuration overrides here
