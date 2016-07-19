@@ -15,7 +15,7 @@
     * "Can't connect to local MySQL server through socket"
         * If you are using AMPPS, run this command
         * sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
-* Use a FQDN like dev.sharetribe.com to avoid problems caused by localhost
+* Use a FQDN like dev.eivey.com to avoid problems caused by localhost
 * Update your config/config.yml config file with config/config.dev.yml for development
 
 
