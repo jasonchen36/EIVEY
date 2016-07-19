@@ -21,7 +21,7 @@ module.exports = {
 
     // See use of 'vendor' in the CommonsChunkPlugin inclusion below.
     vendor: [
-      'babel-polyfill',
+      // 'babel-polyfill',
       'es5-shim/es5-shim',
       'es5-shim/es5-sham',
       'whatwg-fetch',
