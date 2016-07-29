@@ -1,32 +1,3 @@
-# EIVEY #
-
-## Description ##
-
-* This is a peer-to-peer marketplace CMS forked from [Sharetribe](https://github.com/sharetribe/sharetribe) core.
-
-## Software Architecture (High Level) ##
-
-* Built upon Ruby and Rails and MySQL
-
-## How to Set Up a Dev Environment ##
-
-* Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
-    * If needed, upgrade your Ruby version using [these](https://gorails.com/setup/osx/10.11-el-capitan) instructions. 
-    * "Can't connect to local MySQL server through socket"
-        * If you are using AMPPS, run this command
-        * sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
-* Use a FQDN like dev.eivey.com to avoid problems caused by localhost
-* Update your config/config.yml config file with config/config.dev.yml for development
-
-
-## How to Deploy ##
-
-* todo
-
-
---------------------------------------------------
-
-
 # Sharetribe
 
 [![Build Status](https://travis-ci.org/sharetribe/sharetribe.svg?branch=master)](https://travis-ci.org/sharetribe/sharetribe) [![Dependency Status](https://gemnasium.com/sharetribe/sharetribe.png)](https://gemnasium.com/sharetribe/sharetribe) [![Code Climate](https://codeclimate.com/github/sharetribe/sharetribe.png)](https://codeclimate.com/github/sharetribe/sharetribe)
@@ -67,6 +38,7 @@ Before you get started, the following needs to be installed:
 
 * [**Sphinx**](http://pat.github.com/ts/en/installing_sphinx.html). Version 2.1.4 has been used successfully, but newer versions should work as well. Make sure to enable MySQL support. If you're using OS X and have Homebrew installed, install it with `brew install sphinx --with-mysql`
 * [**Imagemagick**](http://www.imagemagick.org). If you're using OS X and have Homebrew installed, install it with `brew install imagemagick`
+
 
 ### Setting up the development environment
 
