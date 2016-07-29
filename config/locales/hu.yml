@@ -192,7 +192,7 @@ hu:
         search_preferences: "Keresési beállítások"
         default_search_type: "Keresés típusa: %{select_search_type}"
         keyword_search: "Keresés kulcsszóra"
-        keyword_and_location_search: ~
+        keyword_and_location_search: "Kulcsszó és hely szerinti keresés"
         location_search: "Helyszín szerinti keresés"
         select_distance_unit: "Távolság megjelenítése %{distance_units_selector}"
         km: km
@@ -272,6 +272,10 @@ hu:
         language: Nyelv
         url: link
         empty: "Ön nem rendelkezik további menü linkekkel"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Az öszes exportálása CSV-ként"
         transactions: "Mutassa a tranzakciókat"
@@ -976,6 +980,11 @@ hu:
       has_posted_a_new_listing: "%{author_name} új hirdetést adott fel:"
       you_are_receiving_this_because: "Ön azért kapja ezt az értesítőt mert követi ezt a hirdetőt: %{author_name}"
       view_listing: "Hirdetés megtekintése"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: "Az útmutató kezdőknek betőltése sikertelen. Tisztában vagyunk a problémával és igyekszünk kijavítani."
@@ -1111,7 +1120,7 @@ hu:
       some_private_offers_exist: "Van már %{number_of_listings} ajánlata"
       some_private_requests_exist: "Van már %{number_of_listings} ajánlatkérése"
     custom_filters:
-      update_view: "Nézet frissítése"
+      update_view: Keresés
       min: "Min:"
       max: "Max:"
     event_feed:
@@ -1220,7 +1229,7 @@ hu:
       feedback_handle: Értékelés
       give_feedback: "Keressen minket"
       or_check_our: "vagy elenőrizze a mi"
-      send_feedback_to_admin: "Értékelés készítése"
+      send_feedback_to_admin: "Visszajelzés küldése"
       to_see_what_others_have_suggested: "itt láthatja milyen fejlesztési ötletei voltak a többi felhasználónak és szavazhat is rájuk"
       your_email_address: "Az Ön e-mail címe"
       connect: Bejelentkezés
@@ -2085,12 +2094,12 @@ hu:
       december: Dec
     today: Ma
     clear: Töröl
-    format: hh/nn/éééé
+    format: mm/dd/yyyy
   time:
     formats:
       short: "hónap nap, év %H:%perc-kor"
       shorter: "hónap nap %H:%perc-kor"
-      short_date: "hónap nap, év"
+      short_date: "%b %e, %Y"
   timestamps:
     day_ago: "%{count} napja"
     days_ago: "%{count} napja"
@@ -2132,6 +2141,7 @@ hu:
   web:
     topbar:
       menu: Menü
+      more: Bővebben
       search_placeholder: Keresés...
       user: Felhasználó
       inbox: "Bejövő üzenetek"

@@ -271,6 +271,10 @@ es-ES:
         language: Idioma
         url: URL
         empty: "No tienes ningún menú de enlaces adicionales"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Exportar todos como CSV"
         transactions: "Ver transacciones"
@@ -971,6 +975,11 @@ es-ES:
       has_posted_a_new_listing: "%{author_name} ha publicado un nuevo anuncio"
       you_are_receiving_this_because: "Has recibido ésta notificación porque sigues a %{author_name}."
       view_listing: "Ver anuncio"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: "La guía de inicio no se ha cargado correctamente. Nuestro equipo está trabajando para arreglar el problema lo antes posible."
@@ -2131,6 +2140,7 @@ es-ES:
   web:
     topbar:
       menu: Menú
+      more: ~
       search_placeholder: Buscar...
       user: Usuario
       inbox: "Bandeja de Entrada"

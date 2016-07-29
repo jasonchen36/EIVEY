@@ -271,6 +271,10 @@ de:
         language: Sprache
         url: URL
         empty: "Du hast keine zusätzlichen Menü-Links"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Exportiere Alles als CSV Datei"
         transactions: "Transaktionen anzeigen"
@@ -975,6 +979,11 @@ de:
       has_posted_a_new_listing: "%{author_name} hat ein neues Angebot veröffentlicht:"
       you_are_receiving_this_because: "Du hast diese Benachrichtigung erhalten, weil du %{author_name} folgst."
       view_listing: "Eintrag ansehen"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: "Die Kurzanleitung konnte nicht geladen werden. Wir wurden über dieses Problem informiert und werden es schnellstmöglich lösen."
@@ -2135,6 +2144,7 @@ de:
   web:
     topbar:
       menu: Menü
+      more: Mehr
       search_placeholder: "Suche ..."
       user: Nutzer
       inbox: Eingang

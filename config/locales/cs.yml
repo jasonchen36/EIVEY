@@ -276,6 +276,10 @@ cs:
         language: Jazyk
         url: "URL adresa"
         empty: "Nejsou zde žádné odkazy"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Exportovat vše do formátu CSV"
         transactions: Transakce
@@ -984,6 +988,11 @@ cs:
       has_posted_a_new_listing: "Uživatel %{author_name} přidal nový inzerát:"
       you_are_receiving_this_because: "Obdrželi jste toto upozornění, protože sledujete uživatele %{author_name}."
       view_listing: "Zobrazit inzerát"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: ~
@@ -2146,6 +2155,7 @@ cs:
   web:
     topbar:
       menu: ~
+      more: ~
       search_placeholder: ~
       user: ~
       inbox: ~

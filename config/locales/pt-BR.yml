@@ -191,12 +191,12 @@ pt-BR:
         search_preferences: "Preferências de Busca"
         default_search_type: "Tipo de Busca: %{select_search_type}"
         keyword_search: "Palavra-Chave da Busca"
-        keyword_and_location_search: ~
+        keyword_and_location_search: "Busca por palavras chave e localização"
         location_search: "Localização da Busca"
         select_distance_unit: "Mostrar a distância em %{distance_units_selector}"
         km: km
         miles: milhas
-        show_only_nearby: ~
+        show_only_nearby: "Mostrar apenas anúncios próximos com a busca de localização"
         listing_preferences: "Preferências de anúncios"
         transaction_preferences: "Transação - preferências"
         show_listing_publishing_date: "Data de publicação de exibição da lista na página de anúncio"
@@ -271,6 +271,10 @@ pt-BR:
         language: Idioma
         url: URL
         empty: "Você não tem quaisquer ligações de menu adicionais"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Exporte tudo como CSV"
         transactions: "Ver transações"
@@ -975,6 +979,11 @@ pt-BR:
       has_posted_a_new_listing: "%{author_name} publicou um novo anúncio:"
       you_are_receiving_this_because: "Você recebeu esta notificação porque você segue %{author_name}."
       view_listing: "Ver anúncio"
+    new_member_notification:
+      new_member_has_joined: "Um novo membro se juntou ao %{community}. Eles ainda precisam confirmar o seu endereço de e-mail."
+      this_is_automatic_message: "Esta é uma mensagem automática enviada para os administradores do(a) %{community}."
+      person_name: "Nome:"
+      person_email: "Email:"
   error_messages:
     onboarding:
       server_rendering: "Guia de introdução falhou ao carregar. Fomos informados sobre a situação e iremos corrigir isso."
@@ -1198,7 +1207,7 @@ pt-BR:
       signup: "Criar conta"
       search_placeholder: "O que você está procurando?"
     listings:
-      no_listing_image: ~
+      no_listing_image: "Sem imagem"
   layouts:
     admin:
       admin: "Painel de administração do %{service_name}"
@@ -2137,17 +2146,18 @@ pt-BR:
   web:
     topbar:
       menu: Menu
+      more: Mais
       search_placeholder: Busca...
-      user: ~
-      inbox: ~
-      profile: ~
-      manage_listings: ~
-      settings: ~
-      logout: ~
-      login: ~
-      signup: ~
-      admin_dashboard: ~
-      language: ~
+      user: Usuário
+      inbox: "Caixa de Entrada"
+      profile: Perfil
+      manage_listings: "Gerenciar anúncios"
+      settings: Configurações
+      logout: Sair
+      login: Login
+      signup: "Criar conta"
+      admin_dashboard: "Painel de administração"
+      language: Idioma
   will_paginate:
     models:
       person:

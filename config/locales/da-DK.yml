@@ -271,6 +271,10 @@ da-DK:
         language: Sprog
         url: URL
         empty: "Du har ikke tilføjet nogen nye links i menuen"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Eksporter alle som CSV"
         transactions: "Vis transaktioner"
@@ -971,6 +975,11 @@ da-DK:
       has_posted_a_new_listing: "%{author_name} har oprettet en ny annonce:"
       you_are_receiving_this_because: "Du har modtaget denne mail, fordi du følger %{author_name}."
       view_listing: "Vis annonce"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: "Kom godt i gang guide kunne ikke indlæses. Vi er blevet informeret om situationen, og vi løser det."
@@ -1237,7 +1246,7 @@ da-DK:
       how_to_use: "Sådan virker det"
       info_about_kassi: "Hvad er %{service_name}?"
       news: Nyheder
-      register_details: Privatlivspolitik
+      register_details: Privatliv
       terms: Brugervilkår
     logged_in:
       admin: Administration
@@ -1523,7 +1532,7 @@ da-DK:
       valid_until_radio_buttons:
         for_the_time_being: "For tiden"
       privacy:
-        privacy: Privatlivspolitik
+        privacy: Privatliv
         private: "Privat (kan kun ses for brugere)"
         public: "Offentlig (kan ses af alle)"
     help_texts:
@@ -2131,6 +2140,7 @@ da-DK:
   web:
     topbar:
       menu: Menu
+      more: ~
       search_placeholder: Søg...
       user: Bruger
       inbox: Indbakke

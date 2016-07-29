@@ -266,6 +266,10 @@ ka:
         language: ენა
         url: URL
         empty: "თქვენ არ გაქვთ დამატებით მენიუს ბმულები"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "დააექსპორტე ყველა CSV-დ"
         transactions: "ტრანზაქციების ნახვა"
@@ -964,6 +968,11 @@ ka:
       has_posted_a_new_listing: "%{author_name} დაპოსტა ახალი ჩამონათვალი"
       you_are_receiving_this_because: "თქვენ მიიღეთ შეტყობინება, იმიტომ, რომ მისდევთ %{author_name}-ს."
       view_listing: "ნახე ჩამონათვლები"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: "დაწყების გიდის ჩატვირთვა ვერ მოხერხდა. ჩვენ ვართ ინფორმირებულები ამის შესახებ და ვმუშაობთ მის გამოსწორებაზე."
@@ -2117,6 +2126,7 @@ ka:
   web:
     topbar:
       menu: მენიუ
+      more: ~
       search_placeholder: ძებნა...
       user: მომხმარებელი
       inbox: ინბოქსი

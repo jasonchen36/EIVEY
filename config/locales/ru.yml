@@ -281,6 +281,10 @@ ru:
         language: Язык
         url: URL
         empty: "У вас нет дополнительных ссылок меню"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: ~
         transactions: "Посмотреть транзакции"
@@ -491,7 +495,7 @@ ru:
         rent: Аренда
         request: Предложение
         offer: Запрос
-        inquiry: Контакты
+        inquiry: Связаться
   common:
     edit_page: "Редактировать страницу"
     default_community_slogan: "Сотрудничайте, делитесь и помогайте"
@@ -969,6 +973,11 @@ ru:
       has_posted_a_new_listing: "%{author_name} разместил новую публикацию:"
       you_are_receiving_this_because: "Вы получили это уведомление так как вы подписаны на %{author_name}."
       view_listing: "Просмотр предложения"
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: ~
@@ -1597,7 +1606,7 @@ ru:
       add_profile_picture: "Добавить изображение профиля"
       comments: Комментарии
       contact_by_phone: "Телефон:"
-      contact: Контакты
+      contact: Связаться
       favor_offer: "Предложение услуги"
       favor_request: "Запрос услуги"
       inquiry: Запрос
@@ -2137,6 +2146,7 @@ ru:
   web:
     topbar:
       menu: ~
+      more: ~
       search_placeholder: ~
       user: ~
       inbox: ~

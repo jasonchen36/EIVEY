@@ -266,6 +266,10 @@ zh-HK:
         language: 語言
         url: URL
         empty: 你沒有其它目錄連結
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: ~
         transactions: 查閱交易記錄
@@ -962,6 +966,11 @@ zh-HK:
       has_posted_a_new_listing: "%{author_name}已經發表了一個新的訊息："
       you_are_receiving_this_because: "你關注了%{author_name}所以收到這個通知。"
       view_listing: 查看訊息
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: ~
@@ -2106,6 +2115,7 @@ zh-HK:
   web:
     topbar:
       menu: ~
+      more: ~
       search_placeholder: ~
       user: ~
       inbox: ~

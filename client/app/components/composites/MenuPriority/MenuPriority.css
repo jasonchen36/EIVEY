@@ -1,0 +1,29 @@
+.menuPriority {
+  display: flex;
+  align-items: center;
+}
+
+.priorityLinks {
+  overflow: hidden;
+  width: 0;
+  height: var(--MenuPriority_height);
+  position: relative;
+}
+
+.priorityLink {
+  display: inline-block;
+  margin-right: var(--MenuPriority_itemSpacing);
+  color: var(--MenuPriority_textColor);
+  letter-spacing: var(--MenuPriority_letterSpacing);
+  font-size: var(--MenuPriority_fontSize);
+  line-height: var(--MenuPriority_height);
+  white-space: nowrap;
+
+  &:focus,
+  &:hover {
+    color: var(--MenuPriority_textColorHover);
+    outline: none;
+  }
+}
+
+.hiddenLinks {} /* stylelint-disable-line block-no-empty */

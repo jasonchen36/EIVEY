@@ -191,12 +191,12 @@ nb:
         search_preferences: Søkeinnstillinger
         default_search_type: "Søketype: %{select_search_type}"
         keyword_search: Nøkkelord-søk
-        keyword_and_location_search: ~
+        keyword_and_location_search: "Steds- og nøkkelordsøk"
         location_search: Stedsnavn-søk
         select_distance_unit: "Vis avstand i %{distance_units_selector}"
         km: km
         miles: miles
-        show_only_nearby: ~
+        show_only_nearby: "Vis kun annonser i nærområdet med stedssøk"
         listing_preferences: Annonseinnstillinger
         transaction_preferences: Transaksjonsinnstillinger
         show_listing_publishing_date: "Vis dato annonsen ble publisert"
@@ -271,6 +271,10 @@ nb:
         language: Språk
         url: URL
         empty: "Du har ingen ekstra menylenker"
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: "Eksportér alle i CSV-fil"
         transactions: "Vis transaksjoner"
@@ -977,6 +981,11 @@ nb:
       has_posted_a_new_listing: "%{author_name} har lagt ut en ny annonse:"
       you_are_receiving_this_because: "Du mottok denne varslingen fordi du følger %{author_name}"
       view_listing: "Se annonse"
+    new_member_notification:
+      new_member_has_joined: "Et nytt medlem har registrert seg på %{community}. Vedkommende må kanskje fremdeles bekrefte sin e-postadresse."
+      this_is_automatic_message: "Dette er en automatisk melding sendt til administratorer av %{community}."
+      person_name: "Navn:"
+      person_email: "E-post:"
   error_messages:
     onboarding:
       server_rendering: "Oppstartsveiledningen kunne ikke lastes! Vi har blitt informert om situasjonen og jobber med en fiks!"
@@ -2137,6 +2146,7 @@ nb:
   web:
     topbar:
       menu: Meny
+      more: ~
       search_placeholder: Søk...
       user: Bruker
       inbox: Innboks
@@ -2147,7 +2157,7 @@ nb:
       login: "Logg inn"
       signup: "Registrer deg"
       admin_dashboard: ~
-      language: ~
+      language: Språk
   will_paginate:
     models:
       person:

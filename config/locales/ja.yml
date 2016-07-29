@@ -266,6 +266,10 @@ ja:
         language: 言語
         url: URL
         empty: 追加メニューリンクはありません
+        max_number_of_links: ~
+        all: ~
+        max_number_of_links_info: ~
+        about_page: ~
       transactions:
         export_all_as_csv: ~
         transactions: お支払い履歴の表示
@@ -958,6 +962,11 @@ ja:
       has_posted_a_new_listing: "%{author_name}さんが新しいリストを投稿をしました："
       you_are_receiving_this_because: "あなたが%{author_name}さんをフォローしているので、このお知らせを送らせていただいております。"
       view_listing: リストを閲覧する
+    new_member_notification:
+      new_member_has_joined: ~
+      this_is_automatic_message: ~
+      person_name: ~
+      person_email: ~
   error_messages:
     onboarding:
       server_rendering: ~
@@ -2099,6 +2108,7 @@ ja:
   web:
     topbar:
       menu: ~
+      more: ~
       search_placeholder: ~
       user: ~
       inbox: ~
