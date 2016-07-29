@@ -405,6 +405,16 @@ ActiveRecord::Schema.define(version: 20160728102918) do
   add_index "emails", ["community_id"], name: "index_emails_on_community_id", using: :btree
   add_index "emails", ["person_id"], name: "index_emails_on_person_id", using: :btree
 
+  create_table "favors", force: :cascade do |t|
+    t.string   "owner_id",    limit: 255
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "payment",     limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status",      limit: 255,   default: "enabled"
+  end
+
   create_table "feature_flags", force: :cascade do |t|
     t.integer  "community_id", limit: 4,                  null: false
     t.string   "feature",      limit: 255,                null: false
@@ -424,6 +434,14 @@ ActiveRecord::Schema.define(version: 20160728102918) do
     t.integer  "is_handled",   limit: 4,     default: 0
     t.string   "email",        limit: 255
     t.integer  "community_id", limit: 4
+  end
+
+  create_table "filters", force: :cascade do |t|
+    t.string   "person_id",  limit: 255
+    t.text     "keywords",   limit: 65535
+    t.string   "category",   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "follower_relationships", force: :cascade do |t|
@@ -453,6 +471,29 @@ ActiveRecord::Schema.define(version: 20160728102918) do
   add_index "invitations", ["code"], name: "index_invitations_on_code", using: :btree
   add_index "invitations", ["inviter_id"], name: "index_invitations_on_inviter_id", using: :btree
 
+  create_table "items", force: :cascade do |t|
+    t.string   "owner_id",   limit: 255
+    t.string   "title",      limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "payment",    limit: 4
+    t.string   "status",     limit: 255, default: "enabled"
+  end
+
+  create_table "kassi_events", force: :cascade do |t|
+    t.string   "receiver_id",    limit: 255
+    t.string   "realizer_id",    limit: 255
+    t.integer  "eventable_id",   limit: 4
+    t.string   "eventable_type", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "kassi_events_people", id: false, force: :cascade do |t|
+    t.string "person_id",      limit: 255
+    t.string "kassi_event_id", limit: 255
+  end
+
   create_table "landing_page_versions", force: :cascade do |t|
     t.integer  "community_id", limit: 4,        null: false
     t.integer  "version",      limit: 4,        null: false
@@ -472,6 +513,15 @@ ActiveRecord::Schema.define(version: 20160728102918) do
   end
 
   add_index "landing_pages", ["community_id"], name: "index_landing_pages_on_community_id", unique: true, using: :btree
+
+  create_table "listing_comments", force: :cascade do |t|
+    t.string   "author_id",  limit: 255
+    t.integer  "listing_id", limit: 4
+    t.text     "content",    limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "is_read",    limit: 4,     default: 0
+  end
 
   create_table "listing_followers", id: false, force: :cascade do |t|
     t.string  "person_id",  limit: 255
@@ -946,6 +996,42 @@ ActiveRecord::Schema.define(version: 20160728102918) do
   add_index "people", ["reset_password_token"], name: "index_people_on_reset_password_token", unique: true, using: :btree
   add_index "people", ["username", "community_id"], name: "index_people_on_username_and_community_id", unique: true, using: :btree
   add_index "people", ["username"], name: "index_people_on_username", using: :btree
+
+  create_table "person_comments", force: :cascade do |t|
+    t.string   "author_id",        limit: 255
+    t.string   "target_person_id", limit: 255
+    t.text     "text_content",     limit: 65535
+    t.integer  "grade",            limit: 4
+    t.string   "task_type",        limit: 255
+    t.integer  "task_id",          limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "kassi_event_id",   limit: 4
+  end
+
+  create_table "person_conversations", force: :cascade do |t|
+    t.string   "person_id",        limit: 255
+    t.integer  "conversation_id",  limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "is_read",          limit: 4,   default: 0
+    t.datetime "last_sent_at"
+    t.datetime "last_received_at"
+  end
+
+  create_table "person_interesting_listings", force: :cascade do |t|
+    t.string   "person_id",  limit: 255
+    t.integer  "listing_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "person_read_listings", force: :cascade do |t|
+    t.string   "person_id",  limit: 255
+    t.integer  "listing_id", limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "prospect_emails", force: :cascade do |t|
     t.string   "email",      limit: 255

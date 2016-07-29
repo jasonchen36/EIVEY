@@ -176,7 +176,14 @@ class Admin::CommunitiesController < ApplicationController
     # Redirect if payment gateway in use but it's not braintree
     redirect_to admin_details_edit_path if @current_community.payment_gateway && !@current_community.braintree_in_use?
 
-    braintree_params = params[:payment_gateway]
+    braintree_params = braintree_params = params.require(:payment_gateway).permit(
+                       :braintree_environment,
+                       :braintree_public_key,
+                       :braintree_private_key,
+                       :braintree_merchant_id,
+                       :braintree_master_merchant_id,
+                       :braintree_client_side_encryption_key
+                       )
     community_params = params.require(:community).permit(:commission_from_seller)
 
     unless @current_community.update_attributes(community_params)
@@ -191,8 +198,16 @@ class Admin::CommunitiesController < ApplicationController
   end
 
   def create_payment_gateway
-    @current_community.payment_gateway = BraintreePaymentGateway.create(params[:payment_gateway].merge(community: @current_community))
-    update_payment_gateway
+  braintree_params = params.require(:payment_gateway).permit(
+  :braintree_environment,
+  :braintree_public_key,
+  :braintree_private_key,
+  :braintree_merchant_id,
+  :braintree_master_merchant_id,
+  :braintree_client_side_encryption_key
+  )
+  @current_community.payment_gateway = BraintreePaymentGateway.create(braintree_params.merge(community: @current_community))
+  update_payment_gateway
   end
 
   def test_welcome_email
