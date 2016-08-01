@@ -12,14 +12,23 @@
 
 * Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
     * If needed, upgrade your Ruby version using [these](https://gorails.com/setup/osx/10.11-el-capitan) instructions. 
+* Use a FQDN like dev.eivey.com to avoid problems caused by localhostw
+* Update your config/config.yml config file with config/config.dev.yml for development
+
+### MySql ###
 * "Can't connect to local MySQL server through socket"
     * If you are using AMPPS, run this command
     * sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
-* Use a FQDN like dev.eivey.com to avoid problems caused by localhostw
-* Update your config/config.yml config file with config/config.dev.yml for development
-* Sphinx indexing issues?  [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
+
+### Rake (Rails) ###
+* List all available tasks
+    * bundle exec rake --tasks
+* Generate missing CSS files
+    * bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+    
+### Sphinx ###
+* Indexing issues?
+   * [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
 
 ## How to Deploy ##
-
 * todo
-
