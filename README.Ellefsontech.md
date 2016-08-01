@@ -23,7 +23,7 @@
 ### Rake (Rails) ###
 * List all available tasks
     * bundle exec rake --tasks
-* Generate missing CSS files
+* Generate missing CSS files or rebuild after Sass modifications
     * bundle exec rake sharetribe:generate_customization_stylesheets_immediately
     
 ### Sphinx ###
