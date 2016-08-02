@@ -1853,6 +1853,7 @@ input[type=text].delivery-price-field {
 /* Colors */
 $light_grey: #fdfbfb;
 $network-green: #00a26c;
+$eivey-yellow: #ddb35a;
 
 @mixin action-button($color) {
   @include border-radius(em(5));

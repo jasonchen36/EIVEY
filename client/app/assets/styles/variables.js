@@ -17,8 +17,8 @@ const textColorSelected = '#4a4a4a';
 const backgroundLightColor = 'white';
 const backgroundLightColorHover = 'rgba(169, 172, 176, 0.07)';
 const backgroundColorGrey = '#F7F7F7';
-const customColorFallback = '#a64c5d';
-const customColor2Fallback = '#00a26c';
+const customColorFallback = '#abcdc6';
+const customColor2Fallback = '#ddb35a';
 const alertColor = '#ff4e36';
 
 const topbarBorderColor = 'rgba(169, 172, 176, 0.5)';
