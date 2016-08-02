@@ -122,7 +122,6 @@ $elementSpacing: lines(0.5);
 }
 
 .header-user-avatar {
-  @include border-radius($default-border-radius);
   @include header-block;
 }
 

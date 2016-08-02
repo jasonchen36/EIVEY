@@ -242,7 +242,6 @@ ul {
       display: block;
       font-weight: normal;
       cursor: pointer;
-      @include border-radius(em(5));
       width: lines(9.5);
       min-height: em(38);
     }
@@ -1333,7 +1332,6 @@ $noscript-height: lines(4);
     position: relative;
     display: block;
     width: 100%;
-    @include border-radius(em(5));
     border: 2px solid $border;
     min-height: 42px;
     &:hover {
@@ -1664,7 +1662,6 @@ input[type=text].delivery-price-field {
 
   .grey {
     background: $highlight;
-    @include border-radius(em(5));
   }
 
   .conversation-price {
@@ -1856,7 +1853,6 @@ $network-green: #00a26c;
 $eivey-yellow: #ddb35a;
 
 @mixin action-button($color) {
-  @include border-radius(em(5));
   @include normal-type;
 
   color: $background;

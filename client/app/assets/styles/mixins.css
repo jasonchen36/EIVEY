@@ -12,7 +12,7 @@
   display: inline-block;
   margin: var(--verticalSpaceElement) var(--gutter) 0 0;
   border: 1px;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   font-size: var(--fontSize);
   font-weight: 600;
   text-decoration: none;

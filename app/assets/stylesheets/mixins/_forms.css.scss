@@ -94,7 +94,6 @@
 
 // Form button or a link that looks like a button
 @mixin button($bg-color) {
-  @include border-radius(em(5));
   background: $bg-color;
   color: $background;
   text-align: center;

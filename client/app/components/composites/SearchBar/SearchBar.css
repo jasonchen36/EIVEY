@@ -130,7 +130,7 @@
 
   @media (--large-viewport) {
     display: block;
-    border-radius: calc(var(--SearchBar_height) / 2);
+    /*border-radius: calc(var(--SearchBar_height) / 2);*/
   }
 }
 
