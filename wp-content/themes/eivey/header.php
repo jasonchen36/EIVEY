@@ -28,10 +28,14 @@
             'menu_class' => 'standard-menu'
         )); ?>
     </nav>
-    <div class="small-12">
+    <div class="small-12 text-center">
         <a href="/">
             <div class="i--icon-logo"></div>
         </a>
+        <span id="logo-tagline-border"></span>
+        <div id="logo-tagline">
+            Buy &amp; Sell Pre-Loved Designer Fashion
+        </div>
     </div>
     <div class="small-12">
         <nav id="menu-header" class="standard-menu">

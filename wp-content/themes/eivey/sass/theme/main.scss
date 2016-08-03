@@ -8,6 +8,10 @@ Use helper classes to style elements that otherwise wouldn't need to have a full
 
 //main styles
 //-----------------------------
+a {
+  cursor: pointer;
+}
+
 .standard-menu {
   display: inline-block;
   list-style: none;
@@ -18,7 +22,6 @@ Use helper classes to style elements that otherwise wouldn't need to have a full
   a {
     text-decoration: none;
     color: $color-global-black;
-    cursor: pointer;
     @include transition-with-defaults(color);
     &:hover {
       color: $color-global-grey;

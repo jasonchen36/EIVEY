@@ -1,6 +1,9 @@
+$logo-width: 410px;
+
 header {
+  margin-bottom: 25px;
   .i--icon-logo {
-    width: 410px;
+    width: $logo-width;
     height: 100px;
     margin: auto;
     max-width: 100%;
@@ -23,4 +26,22 @@ header {
       color: $color-global-black;
     }
   }
+}
+
+#logo-tagline-border {
+  border-top: 2px dotted $color-global-grey;
+  width: $logo-width;
+  height: 2px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+#logo-tagline {
+  color: $color-global-grey;
+  margin: 10px auto;
+  max-width: $logo-width;
+  text-transform: uppercase;
+  font-size: 17px;
+  @extend .f--georgia;
 }
