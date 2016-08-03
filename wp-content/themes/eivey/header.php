@@ -21,10 +21,10 @@
 </head>
 <body <?php body_class(); ?>>
 <header class="grid-container">
-    <nav id="menu-header-secondary" class="small-12 text-right">
+    <nav id="menu-header-secondary-container" class="small-12 text-right">
         <?php wp_nav_menu(array(
             'theme_location' => 'header_secondary', 
-            'menu_id' => 'header-menu-secondary',
+            'menu_id' => 'menu-header-secondary',
             'menu_class' => 'standard-menu'
         )); ?>
     </nav>
@@ -36,14 +36,5 @@
         <div id="logo-tagline">
             Buy &amp; Sell Pre-Loved Designer Fashion
         </div>
-    </div>
-    <div class="small-12">
-        <nav id="menu-header" class="standard-menu">
-            <?php wp_nav_menu(array( 
-                'theme_location' => 'header', 
-                'menu_id' => 'header-menu',
-                'menu_class' => 'standard-menu'
-            )); ?>
-        </nav>
     </div>
 </header>

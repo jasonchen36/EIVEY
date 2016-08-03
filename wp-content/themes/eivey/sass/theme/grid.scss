@@ -10,6 +10,11 @@ Notes: Always design for mobile-first such that your media queries use min-width
   @include container;
 }
 
+.small-grid-container {
+  @include container;
+  max-width: 842px;
+}
+
 .grid-content {
   /* Styles for mobile view go here */
   @include span(12); //optional since divs are 100% width by default

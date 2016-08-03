@@ -10,10 +10,10 @@
  */
 
 ?>
-<footer id="menu-footer">
+<footer id="menu-footer-container">
     <?php wp_nav_menu(array(
         'theme_location' => 'footer',
-        'menu_id' => 'footer-menu',
+        'menu_id' => 'menu-footer',
         'menu_class' => 'standard-menu'
     )); ?>
 </footer>

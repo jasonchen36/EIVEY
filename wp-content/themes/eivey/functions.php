@@ -33,8 +33,8 @@ if (!function_exists('eivey_setup')) {
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
+            'homepage' => esc_html__('Homepage', 'eivey'),
             'header' => esc_html__('Header', 'eivey'),
-            'header_secondary' => esc_html__('Header Secondary', 'eivey'),
             'footer' => esc_html__('Footer', 'eivey'),
         ));
     }
@@ -53,6 +53,24 @@ function eivey_scripts() {
     wp_enqueue_script('eivey-logic-main', get_template_directory_uri().'/build/app.main.min.js', array(), '20160803', true);
 }
 add_action('wp_enqueue_scripts', 'eivey_scripts');
+
+
+/**
+ * custom admin css
+ */
+function arthistory_admin_css() { ?>
+    <style>
+        #menu-comments, #menu-tools, #menu-posts, /* sidebar */
+        #wp-admin-bar-wp-logo, #wp-admin-bar-comments, /*top bar*/
+        #contextual-help-link-wrap, #screen-options-link-wrap, /* misc */
+        #types-information-table /* editor page */
+        {
+            display: none!important;
+        }
+    </style>
+<?php }
+
+add_action('admin_head', 'arthistory_admin_css');
 
 
 /**
