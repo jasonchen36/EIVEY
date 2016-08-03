@@ -34,6 +34,7 @@ if (!function_exists('eivey_setup')) {
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus(array(
             'header' => esc_html__('Header', 'eivey'),
+            'header_secondary' => esc_html__('Header Secondary', 'eivey'),
             'footer' => esc_html__('Footer', 'eivey'),
         ));
     }

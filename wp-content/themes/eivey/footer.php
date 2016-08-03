@@ -11,8 +11,11 @@
 
 ?>
 <footer id="menu-footer">
-    <h3>Footer</h3>
-    <?php wp_nav_menu( array( 'theme_location' => 'footer', 'menu_id' => 'footer-menu' ) ); ?>
+    <?php wp_nav_menu(array(
+        'theme_location' => 'footer',
+        'menu_id' => 'footer-menu',
+        'menu_class' => 'standard-menu'
+    )); ?>
 </footer>
 <?php wp_footer(); ?>
 </body>

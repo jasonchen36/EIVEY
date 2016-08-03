@@ -1,28 +1,26 @@
 header {
-  margin-bottom: 50px;
   .i--icon-logo {
-    height: 125px;
+    width: 410px;
+    height: 100px;
+    margin: auto;
+    max-width: 100%;
   }
 }
 
-#header-grid-content {
-  @include tablet-up {
-    @include span(8 last);
-  }
-}
-
-#header-grid-sidebar {
-  @include tablet-up {
-    @include span(4);
-  }
-}
-
-#header-primary-menu {
-  list-style: none;
+#menu-header-secondary {
   li {
-    display: inline-block;
-    &:not(:first-child){
-      margin-left: 10px;
+    padding: 0 10px;
+    &:not(:last-child){
+      border-right: 2px solid $color-global-grey;
+    }
+  }
+  a {
+    color: $color-global-grey;
+    text-transform: uppercase;
+    font-size: 15px;
+    @extend .f--open-sans;
+    &:hover {
+      color: $color-global-black;
     }
   }
 }

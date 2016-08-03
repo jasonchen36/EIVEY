@@ -8,24 +8,46 @@ Use helper classes to style elements that otherwise wouldn't need to have a full
 
 //main styles
 //-----------------------------
-html,body,p,a,blockquote {
-  @extend .f--helvetica-neue;
+.standard-menu {
+  display: inline-block;
+  list-style: none;
+  li {
+    display: inline-block;
+    float: left;
+  }
+  a {
+    text-decoration: none;
+    color: $color-global-black;
+    cursor: pointer;
+    @include transition-with-defaults(color);
+    &:hover {
+      color: $color-global-grey;
+    }
+  }
 }
-
-h1,h2,h3,h4,h5 {
-  @extend .f--agenda-medium;
-}
-
-img {
-  max-width: 100%;
-}
-
 
 //helper classes
 //-----------------------------
 .faded-out {
   display: none;
   opacity: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.full-screen-takeover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  overflow-y: scroll;
 }
 
 //typography
@@ -49,6 +71,15 @@ img {
   text-transform: uppercase;
 }
 
+//float
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 //visibility
 .hide-for-small {
   @include mobile {
@@ -67,6 +98,22 @@ img {
 }
 .hide-for-large {
   @include desktop {
+    display: none;
+  }
+}
+.show-for-medium {
+  @include mobile {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+}
+.show-for-large {
+  @include mobile {
+    display: none;
+  }
+  @include tablet {
     display: none;
   }
 }

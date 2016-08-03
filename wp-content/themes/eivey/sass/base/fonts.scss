@@ -9,20 +9,14 @@ Note: font file paths are relative to deployed file paths, not source paths
 
 //font declarations
 //-----------------------------
-//@font-face {
-//  font-family: 'AgendaMedium';
-//  src: url('assets/fonts/AgendaMedium.woff2') format('woff2'), url('assets/fonts/AgendaMedium.woff') format('woff'),url('assets/fonts/AgendaMedium.ttf') format('truetype');
-//  font-weight: normal;
-//  font-style: normal
-//}
 
 
 //extensible classes
 //-----------------------------
-.f--agenda-medium {
-  font-family: AgendaMedium, Arial, sans-serif;
+.f--open-sans {
+  font-family: 'Open Sans', sans-serif;
 }
 
-.f--helvetica-neue {
-  font-family: "HelveticaNeue", Helvetica Neue, Helvetica, Tahoma, Geneva, Arial, sans-serif;
+.f--georgia {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
