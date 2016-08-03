@@ -13,27 +13,25 @@
  */
 
 get_header(); ?>
-    <div id="primary" class="content-area">
-        <main id="main" class="site-main" role="main">
-            <?php if ( have_posts()) {
-                if (is_home() && !is_front_page()){ ?>
-                    <header>
-                        <h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-                    </header>
-                <?php }
-                /* Start the Loop */
-                while (have_posts()) {
-                    the_post(); ?>
-                    <div class="entry-content">
-                        <?php the_content(); ?>
-                    </div><!-- .entry-content -->
-                <?php }
-            } else { ?>
+    <main class="small-grid-container">
+        <?php if ( have_posts()) {
+            if (is_home() && !is_front_page()){ ?>
+                <header>
+                    <h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+                </header>
+            <?php }
+            /* Start the Loop */
+            while (have_posts()) {
+                the_post(); ?>
                 <div class="entry-content">
-                    No results found
+                    <?php the_content(); ?>
                 </div><!-- .entry-content -->
-            <?php } ?>
-        </main><!-- #main -->
-    </div><!-- #primary -->
+            <?php }
+        } else { ?>
+            <div class="entry-content">
+                No results found
+            </div><!-- .entry-content -->
+        <?php } ?>
+    </main>
 <?php
 get_footer();
