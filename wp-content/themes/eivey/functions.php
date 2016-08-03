@@ -46,6 +46,7 @@ add_action('after_setup_theme', 'eivey_setup');
  * Enqueue scripts and styles.
  */
 function eivey_scripts() {
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css');
     wp_enqueue_style('eivey-style-base', get_template_directory_uri().'/build/app.base.min.css');
     wp_enqueue_style('eivey-style-main', get_template_directory_uri().'/build/app.main.min.css');
     wp_enqueue_script('eivey-logic-base', get_template_directory_uri().'/build/app.base.min.js');

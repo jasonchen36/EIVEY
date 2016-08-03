@@ -9,11 +9,17 @@ Use helper classes to style elements that otherwise wouldn't need to have a full
 //main styles
 //-----------------------------
 html,body,h1,h2,h3,h4,h5,p,a,blockquote {
+  color: $color-global-black;
   @extend .f--open-sans;
 }
 
 a {
   cursor: pointer;
+  text-decoration: none;
+  @include transition-with-defaults(color);
+  &:hover {
+    color: $color-global-grey;
+  }
 }
 
 img {
@@ -28,14 +34,6 @@ img {
   li {
     display: inline-block;
     float: left;
-  }
-  a {
-    text-decoration: none;
-    color: $color-global-black;
-    @include transition-with-defaults(color);
-    &:hover {
-      color: $color-global-grey;
-    }
   }
 }
 
