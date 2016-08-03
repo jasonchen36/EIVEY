@@ -1,0 +1,28 @@
+header {
+  margin-bottom: 50px;
+  .i--icon-logo {
+    height: 125px;
+  }
+}
+
+#header-grid-content {
+  @include tablet-up {
+    @include span(8 last);
+  }
+}
+
+#header-grid-sidebar {
+  @include tablet-up {
+    @include span(4);
+  }
+}
+
+#header-primary-menu {
+  list-style: none;
+  li {
+    display: inline-block;
+    &:not(:first-child){
+      margin-left: 10px;
+    }
+  }
+}

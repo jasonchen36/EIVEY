@@ -1,0 +1,68 @@
+/*
+Index Page
+
+Notes: It's especially important with Sass and CSS that you focus on DRY programming https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
+
+Since Sass is a CSS preprocessor, it makes many things easier, including nesting CSS selectors.  But try not to nest your Sass more than 2 levels deep as this can lead very quickly to code bloat and slow down browser rendering.  Use a combination of well placed ids and class names to flatten your Sass to a manageable level.  Best practice example:
+
+parent {
+  child {
+    style1: value1;
+    &:last-child {
+      style1: value2;
+    }
+  }
+}
+
+Note that even though we have split up our Sass into separate files, it is all concatenated into a single file and evaluated together.  That means that everything nested within the #index-page selector below will only be applied to children of that page.  However, we do not want to fit everything within that selector (as noted above).  Use prefixes in CSS class names and ids to help distinguish where styles should be applied.  This helps improve human readability and reduce CSS bloat.  Best practice example:
+
+.page-title {
+  //across all pages, probably best located in a file in the "theme" folder
+}
+
+.index-page-title {
+  //only applies to titles on the index page and doesn't have to be nested under the #index-page selector
+}
+
+Important: CSS & JavaScript searches by id are much faster than by class name.  Use ids strategically to leverage this speed and reduce redundant CSS which happens when overlapping classes are added to the same element.
+
+We've loaded a CSS normalize library to help smooth out browser inconsistencies and so the ideal CSS that we write never has to use the "!important" suffix.  If you find yourself using this command, look at your codebase and evaluate what can/should be globalized versus localized.  Take the time to do this regularly during development so that it is not a tangled mess at the end of the project.
+
+*/
+
+
+//core
+//-----------------------------
+#index-page {
+  //try to avoid declarations like the one below where a specific html element is referenced.  it's better to add classes in the html for ease of maintenance and globalization (if needed) later
+  a {
+    color: $color-global-dark-grey;
+    @include transition-with-defaults(color);
+    &:hover {
+      color: $color-global-medium-grey;
+    }
+  }
+}
+
+
+//main content
+//-----------------------------
+#index-main-content {
+  p {
+    @extend .text-center;
+  }
+}
+
+#index-image-carousel {
+  margin: 30px 0;
+}
+
+
+//sidebar
+//-----------------------------
+#index-main-sidebar {
+  .i--icon-logo {
+    height: 125px;
+    display: block;
+  }
+}

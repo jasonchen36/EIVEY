@@ -1,45 +1,84 @@
-[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
+# ----- Overview ----- #
+To use this project you need to do the following:
 
-_s
-===
+1. Clone this repo
+2. Install Dependencies
+3. Compile build files
 
-Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+This project is built upon a Grunt workflow (Gruntfile.js) and uses NPM and Bower as grunt-specific and frontend package managers, respectively.  We set fixed version numbers explicitly for each both NPM and Bower packages so that all packages have been tested to work together upon cloning from Git.  Update individual packages with this in mind.
 
-My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
+## Clone Repo ##
+```
+#!bash
+git clone https://{{username}}@bitbucket.org/ellefsontech/ellefsontech.frontend.git {{projectroot}}
+```
 
-* A just right amount of lean, well-commented, modern, HTML5 templates.
-* A helpful 404 template.
-* A custom header implementation in `inc/custom-header.php` just add the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
-* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
-* Some small tweaks in `inc/extras.php` that can improve your theming experience.
-* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
-* 2 sample CSS layouts in `layouts/` for a sidebar on either side of your content.
-* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
-* Licensed under GPLv2 or later. :) Use it to make something cool.
 
-Getting Started
----------------
+## Install Dependencies ##
+```
+#!bash
+cd {{projectroot}}
+npm install
+bower install
+```
 
-If you want to keep it simple, head over to http://underscores.me and generate your `_s` based theme from there. You just input the name of the theme you want to create, click the "Generate" button, and you get your ready-to-awesomize starter theme.
+## Compile Build Files ##
+```
+#!bash
+cd {{projectroot}}
+grunt build
+```
 
-If you want to set things up manually, download `_s` from GitHub. The first thing you want to do is copy the `_s` directory and change the name to something else (like, say, `megatherium`), and then you'll need to do a five-step find and replace on the name in all the templates.
 
-1. Search for `'_s'` (inside single quotations) to capture the text domain.
-2. Search for `_s_` to capture all the function names.
-3. Search for `Text Domain: _s` in style.css.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks.
-5. Search for `_s-` to capture prefixed handles.
+# ----- Running a Development Environment ----- #
+After compiling the build files run:
+```
+#!bash
+cd {{projectroot}}
+grunt dev
+```
 
-OR
+# ----- Modules List ----- #
 
-* Search for: `'_s'` and replace with: `'megatherium'`
-* Search for: `_s_` and replace with: `megatherium_`
-* Search for: `Text Domain: _s` and replace with: `Text Domain: megatherium` in style.css.
-* Search for: <code>&nbsp;_s</code> and replace with: <code>&nbsp;Megatherium</code>
-* Search for: `_s-` and replace with: `megatherium-`
+## Bluebird (Promises) ##
+* http://bluebirdjs.com/
+* JS global variables Promise and P (alias for Promise) are available
+* Supports IE7+ http://bluebirdjs.com/docs/install.html
 
-Then, update the stylesheet header in `style.css` and the links in `footer.php` with your own information. Next, update or delete this readme.
+## MomentJS (Timestamps & Dates) ##
+* http://momentjs.com/
+* JS global function moment() is available
+* Supports IE8+ http://momentjs.com/docs/
 
-Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
+## StoreJS (Cookies) ##
+* https://github.com/marcuswestin/store.js/
+* JS global variable store is available
+* Supports IE6+ https://github.com/marcuswestin/store.js/#support-browsers
 
-Good luck!
+## Handlebars (HTML Templating) ##
+* http://handlebarsjs.com/
+* JS global variable Handlebars is available
+* Supports IE6+ https://github.com/wycats/handlebars.js
+
+## Velocity (Animations) ##
+* http://julian.com/research/velocity/
+* velocity() method available on jQuery objects
+* Supports IE8+ http://julian.com/research/velocity/#dependencies
+
+## Slick (Carousel) ##
+* http://kenwheeler.github.io/slick/
+* slick() method available on jQuery objects
+* Supports IE8+ https://github.com/kenwheeler/slick/issues/806
+
+## Susy (Grid Framework) ##
+* http://susy.oddbird.net/
+* Intro doc https://css-tricks.com/build-web-layouts-easily-susy/
+* Supports IE6+ https://groups.google.com/forum/#!topic/compass-users/10wavrSly_o
+
+
+# ----- Style Guides ----- #
+The following style guides are not intended as definitive rules but they are benchmarks to work towards.  It is important to maintain a consistent coding style throughout the project even if you deviate from the style guides.
+
+* CSS https://docs.google.com/document/d/1ix1u56_wGyxvqTwcj_plzoNykVilFOqfWcpEgJ8aO6M/edit?usp=sharing
+* HTML https://docs.google.com/document/d/1QjqasWbet-tcnxObvW7zwNq0Kfiiu2yM6k20tkqf0TY/edit?usp=sharing
+* JavaScript https://docs.google.com/document/d/1jRybsfXCGTtNRbiM9Kyqnnw4wgsHKPICOQ1OWNQvV4I/edit?usp=sharing

@@ -1,0 +1,40 @@
+/*
+Imports and settings that might change with theme development
+*/
+
+
+//source
+//-----------------------------
+@import "base/media-queries";
+@import "base/mixins";
+@import "base/colors";
+@import "base/fonts";
+@import "base/icons";
+
+
+//Susy (grid)
+//-----------------------------
+@import "../bower_components/susy/sass/susy";
+
+//settings
+$susy: (
+        columns: 12,
+        container: 1120px,//max-width = 1120px
+        global-box-sizing: border-box
+);
+
+/* Makes border-box properties */
+@include border-box-sizing;
+
+
+//theme
+//-----------------------------
+@import "theme/main";
+@import "theme/grid";
+@import "theme/header";
+@import "theme/footer";
+
+
+//templates
+//-----------------------------
+@import "templates/index";

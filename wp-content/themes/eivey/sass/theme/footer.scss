@@ -1,0 +1,15 @@
+footer {
+  margin-top: 50px;
+  p {
+    font-size: 11px;
+  }
+}
+
+.footer-grid-content {
+  @include tablet-up {
+    @include span(6);
+    &:last-child {
+      @include span(6 last);
+    }
+  }
+}

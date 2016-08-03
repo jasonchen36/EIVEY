@@ -1,0 +1,72 @@
+/*
+
+These main styles are the globalized foundation for the theme and are often what need to be overwritten by localized changes
+
+Use helper classes to style elements that otherwise wouldn't need to have a full declaration or that are one-off occurrences
+
+*/
+
+//main styles
+//-----------------------------
+html,body,p,a,blockquote {
+  @extend .f--helvetica-neue;
+}
+
+h1,h2,h3,h4,h5 {
+  @extend .f--agenda-medium;
+}
+
+img {
+  max-width: 100%;
+}
+
+
+//helper classes
+//-----------------------------
+.faded-out {
+  display: none;
+  opacity: 0;
+}
+
+//typography
+.text-bold {
+  font-weight: bold;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+//visibility
+.hide-for-small {
+  @include mobile {
+    display: none;
+  }
+}
+.hide-for-medium {
+  @include tablet {
+    display: none;
+  }
+}
+.hide-for-medium-up {
+  @include tablet-up {
+    display: none;
+  }
+}
+.hide-for-large {
+  @include desktop {
+    display: none;
+  }
+}

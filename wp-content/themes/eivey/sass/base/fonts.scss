@@ -1,0 +1,28 @@
+/*
+
+We only load a certain subset of possible font file extensions because fonts are extremely hard on the browser in terms of rendering engines.  The extensions that we have chosen follow the recommendations here https://css-tricks.com/snippets/css/using-font-face/ .  It supports IE9+
+
+If you only have a font in a certain extension, there are tools online to convert it to the other types.  There is not one specific tool that is recommended at this time.
+
+Note: font file paths are relative to deployed file paths, not source paths
+*/
+
+//font declarations
+//-----------------------------
+//@font-face {
+//  font-family: 'AgendaMedium';
+//  src: url('assets/fonts/AgendaMedium.woff2') format('woff2'), url('assets/fonts/AgendaMedium.woff') format('woff'),url('assets/fonts/AgendaMedium.ttf') format('truetype');
+//  font-weight: normal;
+//  font-style: normal
+//}
+
+
+//extensible classes
+//-----------------------------
+.f--agenda-medium {
+  font-family: AgendaMedium, Arial, sans-serif;
+}
+
+.f--helvetica-neue {
+  font-family: "HelveticaNeue", Helvetica Neue, Helvetica, Tahoma, Geneva, Arial, sans-serif;
+}

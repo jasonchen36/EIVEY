@@ -1,0 +1,12 @@
+# environment
+.idea/
+.DS_Store
+cgi-bin/
+
+# dependencies
+node_modules/
+bower_components/
+
+# build files
+.sass-cache
+build/
