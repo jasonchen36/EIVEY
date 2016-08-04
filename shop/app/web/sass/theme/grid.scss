@@ -1,0 +1,338 @@
+/*
+Grid
+
+Notes: Always design for mobile-first such that your media queries use min-width instead of max-width
+*/
+
+//grid
+//-----------------------------
+.grid-container {
+  @include container;
+}
+
+.small-grid-container {
+  @include container;
+  max-width: 842px;
+}
+
+.grid-content {
+  /* Styles for mobile view go here */
+  @include span(12); //optional since divs are 100% width by default
+
+  /* Styles for desktop view go here */
+  @include tablet-up {
+    /* Tells Susy there's 8 columns in the content */
+    @include span(8);
+  }
+}
+
+.grid-sidebar {
+  /* Styles for mobile view go here */
+  //sidebar becomes 100% by default
+
+  /* Styles for desktop view go here */
+  @include tablet-up {
+    /* Tells Susy there's 4 columns in the sidebar, and its the last item on the row. */
+    @include span(4 last);
+  }
+}
+
+$grid-padding: 5px;
+
+//mobile
+//-----------------------------
+.small-1 {
+  padding: 0 $grid-padding;
+  @include span(1);
+  &:last-child {
+    @include span(1 last);
+  }
+}
+.small-2 {
+  padding: 0 $grid-padding;
+  @include span(2);
+  &:last-child {
+    @include span(2 last);
+  }
+}
+.small-3 {
+  padding: 0 $grid-padding;
+  @include span(3);
+  &:last-child {
+    @include span(3 last);
+  }
+}
+.small-4 {
+  padding: 0 $grid-padding;
+  @include span(4);
+  &:last-child {
+    @include span(4 last);
+  }
+}
+.small-5 {
+  padding: 0 $grid-padding;
+  @include span(5);
+  &:last-child {
+    @include span(5 last);
+  }
+}
+.small-6 {
+  padding: 0 $grid-padding;
+  @include span(6);
+  &:last-child {
+    @include span(6 last);
+  }
+}
+.small-7 {
+  padding: 0 $grid-padding;
+  @include span(7);
+  &:last-child {
+    @include span(7 last);
+  }
+}
+.small-8 {
+  padding: 0 $grid-padding;
+  @include span(8);
+  &:last-child {
+    @include span(8 last);
+  }
+}
+.small-9 {
+  padding: 0 $grid-padding;
+  @include span(9);
+  &:last-child {
+    @include span(9 last);
+  }
+}
+.small-10 {
+  padding: 0 $grid-padding;
+  @include span(10);
+  &:last-child {
+    @include span(10 last);
+  }
+}
+.small-11 {
+  padding: 0 $grid-padding;
+  @include span(11);
+  &:last-child {
+    @include span(11 last);
+  }
+}
+.small-12 {
+  padding: 0 $grid-padding;
+  @include span(12);
+}
+
+
+//tablet
+//-----------------------------
+.medium-1 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(1);
+    &:last-child {
+      @include span(1 last);
+    }
+  }
+}
+.medium-2 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(2);
+    &:last-child {
+      @include span(2 last);
+    }
+  }
+}
+.medium-3 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(3);
+    &:last-child {
+      @include span(3 last);
+    }
+  }
+}
+.medium-4 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(4);
+    &:last-child {
+      @include span(4 last);
+    }
+  }
+}
+.medium-5 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(5);
+    &:last-child {
+      @include span(5 last);
+    }
+  }
+}
+.medium-6 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(6);
+    &:last-child {
+      @include span(6 last);
+    }
+  }
+}
+.medium-7 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(7);
+    &:last-child {
+      @include span(7 last);
+    }
+  }
+}
+.medium-8 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(8);
+    &:last-child {
+      @include span(8 last);
+    }
+  }
+}
+.medium-9 {
+  padding: 0 $grid-padding;
+  @include span(9);
+  &:last-child {
+    @include span(9 last);
+  }
+}
+.medium-10 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(10);
+    &:last-child {
+      @include span(10 last);
+    }
+  }
+}
+.medium-11 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(11);
+    &:last-child {
+      @include span(11 last);
+    }
+  }
+}
+.medium-12 {
+  padding: 0 $grid-padding;
+  @include tablet-up {
+    @include span(12);
+  }
+}
+
+
+//desktop
+//-----------------------------
+.large-1 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(1);
+    &:last-child {
+      @include span(1 last);
+    }
+  }
+}
+.large-2 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(2);
+    &:last-child {
+      @include span(2 last);
+    }
+  }
+}
+.large-3 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(3);
+    &:last-child {
+      @include span(3 last);
+    }
+  }
+}
+.large-4 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(4);
+    &:last-child {
+      @include span(4 last);
+    }
+  }
+}
+.large-5 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(5);
+    &:last-child {
+      @include span(5 last);
+    }
+  }
+}
+.large-6 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(6);
+    &:last-child {
+      @include span(6 last);
+    }
+  }
+}
+.large-7 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(7);
+    &:last-child {
+      @include span(7 last);
+    }
+  }
+}
+.large-8 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(8);
+    &:last-child {
+      @include span(8 last);
+    }
+  }
+}
+.large-9 {
+  padding: 0 $grid-padding;
+  @include span(9);
+  &:last-child {
+    @include span(9 last);
+  }
+}
+.large-10 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(10);
+    &:last-child {
+      @include span(10 last);
+    }
+  }
+}
+.large-11 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(11);
+    &:last-child {
+      @include span(11 last);
+    }
+  }
+}
+.large-12 {
+  padding: 0 $grid-padding;
+  @include desktop {
+    @include span(12);
+  }
+}

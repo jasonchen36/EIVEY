@@ -16,6 +16,8 @@
   %meta{ :property => "og:type", :content =>"website"}
   %meta{:"http-equiv" => "content-language", content: "#{I18n.locale}"}
   %meta{name: "twitter:card", content: "summary"}
+  %link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/app.base.min.css"}
+  %link{:rel => :stylesheet, :type => :"text/css", :href => "/assets/app.main.min.css"}
 
   / Additional meta tags for SEO, etc.
   = content_for :head
