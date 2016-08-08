@@ -94,7 +94,7 @@ const baseProps = {
     },
   },
   newListingButton: {
-    text: 'Post a new listing',
+    text: 'SELL',
   },
 };
 

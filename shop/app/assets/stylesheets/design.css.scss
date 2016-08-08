@@ -29,7 +29,7 @@
 
 .design-component {
   border: 1px solid #CCC;
-  @include border-radius(5px);
+  //@include border-radius(5px);
 }
 
 .design-example {
@@ -42,7 +42,7 @@
   background-color: #FCFCFC;
   padding: lines(0.5);
   @include small-type;
-  @include border-bottom-radius(5px);
+  //@include border-bottom-radius(5px);
   overflow-x: scroll;
 }
 

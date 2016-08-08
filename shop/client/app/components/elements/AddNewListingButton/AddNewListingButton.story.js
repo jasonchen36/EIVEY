@@ -6,7 +6,7 @@ import AddNewListingButton from './AddNewListingButton';
 storiesOf('Add new listing button')
   .add('Default background color', () => (
     withProps(AddNewListingButton, {
-      text: 'Post a new listing',
+      text: 'SELL',
       url: '#',
     })))
   .add('Custom background color', () => (

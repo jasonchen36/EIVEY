@@ -112,7 +112,7 @@ storiesOf('MenuMobile')
               url: '#',
             },
             newListingButton: {
-              text: 'Post a new listing',
+              text: 'SELL',
               url: 'www.example.com/post',
               mobileLayoutOnly: true,
             },

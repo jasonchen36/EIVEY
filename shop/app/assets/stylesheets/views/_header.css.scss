@@ -2,7 +2,7 @@
 @import "compass/css3/background-size";
 
 /* Height of the whole header bar */
-$headerHeight: lines(2.5);
+$headerHeight: lines(8);
 
 /* Height of an element (i.e. button) in the header bar */
 $elementHeight: em(40);
@@ -18,7 +18,7 @@ $textLineHeight: $headerHeight - em(3);
 $elementSpacing: lines(0.5);
 
 .header {
-  height: $headerHeight;
+  height: 160px;
   width: 100%;
 }
 
@@ -28,6 +28,10 @@ $elementSpacing: lines(0.5);
 
 .header-left {
   float: left;
+  .logo-tag{
+    padding-top:38px;
+    font-size:12px;
+  }
 }
 
 .header-right {
