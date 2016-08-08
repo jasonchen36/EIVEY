@@ -137,16 +137,33 @@ $listing-author-avatar-height: 108;
   @include big-type;
   height: em($listing-author-avatar-width, 22) / 2;
   line-height: em($listing-author-avatar-width, 18) / 2;
+  color: #636466;
 }
 
 .listing-author-name-link {
   display: block;
   @include ellipsis;
+  color: #636466;
 }
 
 .listing-author-contact-button {
-  @include grey-button;
+  @include big-button($link);
   width: 100%;
+  background: #abcdc6!important;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin: 0.75em 0;
+  padding: 0 1.5em;
+  padding-bottom: 4px;
+  margin-top:0px;
+  font-size: 22px;
+  height: 2.625em;
+  border: 0;
+  display: table;
+  line-height: 1.5em;
+  width: 100%;
+  text-transform: uppercase;
 }
 
 // Listing author activity
@@ -204,6 +221,7 @@ $listing-author-avatar-height: 108;
 // Transaction action button
 .book-button {
   @include big-button($link);
+  background-color: #abcdc6 !important;
   margin-top: 0;
   width: 100%;
   text-align: center;
@@ -225,6 +243,7 @@ $listing-author-avatar-height: 108;
   }
   &.not-selected {
     color: $border;
+    display:none;
   }
 }
 

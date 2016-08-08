@@ -135,12 +135,12 @@
               %span.listing-price-quantity
                 = text
 
-    .row-with-divider
+    .row
       .col-12
         #listing-message-links
           = render :partial => "listing_actions", locals: { form_path: form_path, payment_gateway: payment_gateway, delivery_opts: delivery_opts, process: process, listing_unit_type: listing_unit_type, country_code: country_code }
 
-    .row-with-divider
+    .row
       .col-12
         .listing-author
           .listing-author-avatar
@@ -155,7 +155,7 @@
                     = t(".contact")
 
     - if @current_community.testimonials_in_use && received_testimonials.size > 0
-      .row-with-divider.listing-author-activity
+      .row.listing-author-activity
         .col-12
           %i.listing-author-activity-icon{:class => icon_class("testimonial")}
           .listing-author-activity-item

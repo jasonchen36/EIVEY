@@ -43,7 +43,7 @@ body {
 
 .page-content {
   padding-bottom: lines(3);
-  padding-top: lines(0.5);
+  padding-top: 2.5em;
 
   p {
     margin-bottom: lines(0.5);
@@ -1996,6 +1996,7 @@ figure.fluidratio {
   }
 
   .title-container {
+    background-color:#CoCoCo;
     position: absolute;
     top: 0;
     left: 0;
@@ -2089,22 +2090,29 @@ figure.fluidratio {
       vertical-align: top;
       margin-right: em(-4);
       padding: 0 em(15);
-      width: 40%;
       display: inline;
-      line-height: 40px;
-      height: 42px;
+      width: 30%;
+      margin-top: -6%;
+      border: solid 1px grey;
+      line-height: 36px;
+      height: 36px;
+      margin-left: 71%;
     }
 
     button.action-button {
+      display: inline;
       vertical-align: top;
       padding: em(8);
-      margin: 0 0 0 3%;
-      width: 24%;
       margin-right: em(-4);
       border-width: 0;
       padding: 3px 0 0 0;
-      line-height: 38px;
-      height: 42px;
+      margin-left: -13%;
+      width: 22%;
+      line-height: 45px;
+      height: 48px;
+      color: grey;
+      background-color: transparent;
+    }
     }
 
     @include media(tablet) {
@@ -2149,17 +2157,16 @@ figure.fluidratio {
 
       input[type=text] {
         @include normal-type;
-        width: 40%;
-        line-height: $search-bar-height;
-        height: $search-bar-height;
+        width: 30%;
+        margin-top: -6%;
+        margin-left: 71%;
+        border: solid 1px grey;
+        line-height: 36px;
+        height: 36px;
       }
 
       button.action-button {
-        display:none;
-        margin-left: 1%;
-        width: 22%;
-        line-height: $search-bar-height - 2px; // -2 for finetuning vertical centering
-        height: $search-bar-height;
+f
       }
 
     }
@@ -2176,10 +2183,27 @@ figure.fluidratio {
   }
 }
 
-
-.footer{
+.eivey-footer{
   color: #939598;
   background-color: #f1f2f2;
-  font-size:22px;
+  font-size:14px;
+  text-align:left;
+  padding: 2% 7% 1%;
+}
+.footer-support, .footer-company{
+  font-size:14px;
+  color: #939598;
+}
+.company{
+  padding-left: 8%;
+}
+.footer-support{
+  padding-left:0.75em;
+}
+.social{
   text-align:center;
+}
+
+.social-icon{
+  font-size:2em;
 }
