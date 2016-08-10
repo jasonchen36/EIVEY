@@ -7,7 +7,6 @@
 .home-toolbar {
   @include pie-clearfix;
   margin-bottom: lines(0.5);
-  border-bottom: 1px solid $border;
 
   @include media(tablet) {
     margin-bottom: lines(1);
@@ -154,7 +153,6 @@ $home-list-image-padding-mobile: lines(0.5);
   width: 100%;
   height: 100%;
   display: block;
-  @include border-radius($default-border-radius);
 }
 
 .home-no-image {
@@ -365,7 +363,6 @@ $home-list-avatar-padding: lines(0.25);
 }
 
 .home-no-listings {
-  @include border-radius($default-border-radius);
   padding: lines(0.5) lines(1);
   background: $highlight;
 }
@@ -388,11 +385,23 @@ $home-list-avatar-padding: lines(0.25);
   }
 }
 
+.home-categories-top-main{
+  padding-right: 2.8em;
+  color: #6d6f72;
+}
+
+.product-grid-filter{
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black!important;
+  font-weight: 200;
+}
 .home-categories-sub {
   @extend .home-categories-link;
   font-size: 14px;
   margin-left: lines(0.5);
 }
+
 
 .home-toolbar-toggle-container {
   margin-bottom: lines(0.5);

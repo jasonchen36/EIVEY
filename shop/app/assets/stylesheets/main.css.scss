@@ -1958,9 +1958,6 @@ figure.fluidratio {
 
   figure.marketplace-cover-small-fade {
     height: em($small-cover-photo-mobile-height, 16);
-    @include media(tablet) {
-      @include fluid-ratio(em(1920) em($small-cover-photo-height), em($small-cover-photo-height) em($small-cover-photo-height));
-    }
   }
 
   .marketplace-lander-content {
@@ -1975,13 +1972,6 @@ figure.fluidratio {
     position: relative;
     padding: 0;
     color: $background;
-    @include larger-type;
-    line-height: em(18);
-    @include media(tablet) {
-      padding: 0 lines(1);
-      @include huge-type;
-      line-height: em(15);
-    }
   }
 
   .title-container {
@@ -2017,10 +2007,6 @@ figure.fluidratio {
       vertical-align: middle;
       text-align: center;
 
-      .listing-title-header-tag{
-        border-bottom: dotted 1px #939598;
-      }
-
       @include media(large-mobile) {
         @include big-type;
       }
@@ -2030,6 +2016,9 @@ figure.fluidratio {
         @include large-type;
       }
     }
+  }
+  .listing-title-header-tag{
+    border-bottom: dotted 1px #939598 !important;
   }
 
   p {
@@ -2199,6 +2188,7 @@ figure.fluidratio {
 
 .social-icon{
   font-size:2em;
+  padding:10px;
 }
 
 .flash-notifcations{
