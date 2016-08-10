@@ -2,7 +2,7 @@
 @import "compass/css3/background-size";
 
 /* Height of the whole header bar */
-$headerHeight: lines(8);
+$headerHeight: lines(9);
 
 /* Height of an element (i.e. button) in the header bar */
 $elementHeight: em(40);
@@ -18,7 +18,7 @@ $textLineHeight: $headerHeight - em(3);
 $elementSpacing: lines(0.5);
 
 .header {
-  height: 160px;
+  height: $headerHeight;
   width: 100%;
 }
 
@@ -53,7 +53,7 @@ $elementSpacing: lines(0.5);
 
 .header-hover {
   &:hover {
-    background-color: $highlight;
+  //we don't need a hover colour, it makes the header look bad.
   }
 
   &.toggled {
@@ -102,7 +102,6 @@ $elementSpacing: lines(0.5);
 }
 
 .header-menu-toggle-container {
-  @include button($highlight);
   @include button-group-button-padding;
   height: $elementHeight;
   line-height: $buttonLineHeight;

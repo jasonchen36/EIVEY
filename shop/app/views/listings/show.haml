@@ -18,7 +18,7 @@
 - content_for :keywords, StringUtils.keywords(@listing.title)
 
 - content_for :title_header do
-  %h1
+  %h1.listing-title-header-tag
     %span#listing-title.listing-title= @listing.title
 
 %script{type: "text/template", class: "template", id: "image-frame-template"}
@@ -48,11 +48,13 @@
                 = link_to params.merge(image: @prev_image_id), class: "listing-image-navi listing-image-navi-left", id: "listing-image-navi-left" do
                   .listing-image-navi-arrow-container
                     .listing-image-arrow-icon-container.left
-                      = icon_tag("directleft", ["navigate-icon-fix", "listing-image-navi-arrow"])
+                      %i.fa.fa-angle-left{"aria-hidden" => "true"}
+                      -#= icon_tag("directleft", ["navigate-icon-fix", "listing-image-navi-arrow"])
                 = link_to params.merge(image: @next_image_id), class: "listing-image-navi listing-image-navi-right", id: "listing-image-navi-right" do
                   .listing-image-navi-arrow-container
                     .listing-image-arrow-icon-container.right
-                      = icon_tag("directright", ["navigate-icon-fix", "listing-image-navi-arrow"])
+                      %i.fa.fa-angle-right{"aria-hidden" => "true"}
+                      -#= icon_tag("directright", ["navigate-icon-fix", "listing-image-navi-arrow"])
             #thumbnail-stripe.listing-image-thumbnail-stripe
 
             - content_for :extra_javascript do
@@ -72,7 +74,7 @@
                         = t(".no_description")
 
     .row
-      .col-12
+      .col-12.listing-details
         - if @listing.description && !@listing.description.blank?
           - text_with_line_breaks do
             = @listing.description

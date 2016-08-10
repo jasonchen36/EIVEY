@@ -44,11 +44,20 @@
 }
 
 .listing-price-amount {
-  @include huge-type;
-  color: $light-body;
+  font-family: georgia;
+  font-weight: 400;
+  color: black;
   display: block;
   float: left;
   margin-right: lines(0.25);
+}
+.listing-details{
+  padding-left:0px !important;
+  font-size:12px;
+  p{
+    margin-left: 0 !important;
+    font-weight:200 !important;
+  }
 }
 
 .listing-price-quantity {
@@ -118,7 +127,7 @@ $listing-author-avatar-height: 108;
 }
 
 .listing-author-avatar-image {
-  @include border-radius($default-border-radius);
+  border: solid 1px black;
   display: block;
   width: 100%;
   height: 100%;
@@ -136,7 +145,6 @@ $listing-author-avatar-height: 108;
 .listing-author-name {
   @include big-type;
   height: em($listing-author-avatar-width, 22) / 2;
-  line-height: em($listing-author-avatar-width, 18) / 2;
   color: #636466;
 }
 
@@ -229,6 +237,7 @@ $listing-author-avatar-height: 108;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
+  text-transform: uppercase;
 }
 
 // Transaction action button
@@ -243,8 +252,16 @@ $listing-author-avatar-height: 108;
   }
   &.not-selected {
     color: $border;
-    display:none;
   }
+}
+
+.paymenticon{
+  font-size: 2em!important;
+  padding-right: 18px;
+}
+.paymentHelp{
+  font-size:12px;
+  padding-left: 0px;
 }
 
 .checkbox-option-checkmark {

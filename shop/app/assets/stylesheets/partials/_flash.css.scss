@@ -41,6 +41,7 @@
 .ajax-error,
 .flash-error,
 .ajax-update-error {
+  margin-top:20px;
   color: $background;
   background: $error-red;
 }

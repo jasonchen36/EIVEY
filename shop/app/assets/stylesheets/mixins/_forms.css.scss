@@ -33,7 +33,6 @@
 
   // Borders
   @include button-group-borders(0);
-  @include border-radius(0);
 
   // Border radius
   $radius: lines(0.25);
@@ -141,7 +140,6 @@
 
 // Button on top of cover photo
 @mixin cover-photo-button($color) {
-  @include border-radius(em(5));
   @include normal-type;
 
   color: $background;

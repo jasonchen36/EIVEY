@@ -19,6 +19,7 @@
 }
 
 .home-toolbar-button-group {
+  display:none;
   @include button-group;
   margin-bottom: lines(0.5);
 
