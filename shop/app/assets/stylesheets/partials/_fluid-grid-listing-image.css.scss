@@ -18,15 +18,16 @@
 .fluid-thumbnail-grid-image-title {
   position: absolute;
   bottom: 0;
+  color:black!important;
   padding: lines(0.5);
   line-height: 1.2em;
 }
 
-.fluid-thumbnail-grid-image-overlay {
-  @include border-top-radius($default-border-radius);
-  @include overlay;
-  @include absolutely-all;
-}
+//.fluid-thumbnail-grid-image-overlay {
+//  @include border-top-radius($default-border-radius);
+//  @include overlay;
+//  @include absolutely-all;
+//}
 
 .fluid-thumbnail-grid-image-image {
   @include border-top-radius($default-border-radius);
