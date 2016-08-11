@@ -419,8 +419,8 @@ $home-list-avatar-padding: lines(0.25);
 }
 
 .custom-filter-title {
-  font-weight: 700;
-  @include title-border;
+  font-weight: 200;
+  border-bottom: 1px solid #939598;
 }
 
 .custom-filter-options {
@@ -528,6 +528,32 @@ $home-list-avatar-padding: lines(0.25);
   left: 0px;
   bottom: 0;
 }
+//  Does the client want custom checkboxes, or is it just what was put in the design because replacing checkboxes is not fun
+//input[type=checkbox] {
+//  display: inline-block;
+//  font-family: FontAwesome;
+//  font-style: normal;
+//  font-weight: normal;
+//  line-height: 1;
+//  -webkit-font-smoothing: antialiased;
+//  -moz-osx-font-smoothing: grayscale;
+//  visibility: hidden;
+//  color: #939598;
+//  font-size: 14px;
+//}
+//
+//input[type=checkbox]:before {
+//  //content: "fa fa-var-square-o";
+//  content: '\00f096';
+//  visibility: visible;
+//  //font-size: 12px;
+//}
+//
+//input[type=checkbox]:checked:before{
+//  //content: "fa fa-var-check-square-o";
+//  content: '\00f046';
+//}
+
 
 //////////////////////////////////////////////////
 // Fix for fastclick & google autocomplete bug  //
