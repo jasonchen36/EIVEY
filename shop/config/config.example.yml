@@ -10,7 +10,10 @@
 
 development:
   # Add local `development` environment configuration overrides here
-
+  mail_delivery_method: smtp
+  smtp_email_address: "localhost"
+  smtp_email_port: 1025
+  domain: "ec2-52-207-201-57.compute-1.amazonaws.com/shop/"
 test:
   # Add local `test` environment configuration overrides here
 
