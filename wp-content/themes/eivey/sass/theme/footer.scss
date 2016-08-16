@@ -1,3 +1,5 @@
+//core
+//-----------------------------
 footer {
   .fa {
     color: $color-global-grey;
@@ -10,42 +12,55 @@ footer {
   }
 }
 
+
+//footer top
+//-----------------------------
 #footer-tagline {
   color: $color-global-grey;
-  margin-bottom: 10px;
+  margin: 75px 0 10px 0;
   font-size: 24px;
   font-weight: normal;
   @extend .f--georgia;
+}
+
+#footer-social-accounts {
+  margin-bottom: 70px;
+}
+
+
+//footer bottom
+//-----------------------------
+#footer-menu-container {
+  background: $color-footer-background;
+  padding: 25px 0 20px 0;
 }
 
 #footer-trademark {
   color: $color-global-grey;
   font-size: 12px;
   margin-bottom: 0;
+  text-align: center;
 }
 
-#menu-footer {
-  width: 100%;
-  margin: 0;
-  li {
-    padding: 0 10px;
-    line-height: 14px;
-    width: 50%;
-    &:first-child{
-      text-align: right;
-      border-right: 1px solid $color-global-grey;
-    }
-    &:last-child {
-      text-align: left;
-      border-left: 1px solid $color-global-grey;
-    }
+.footer-menu-title {
+  font-size: 15px;
+  font-family: $font-open-sans-bold;
+  margin: 15px 0 0 0;
+  color: $color-footer-text;
+  @include tablet-up{
+    margin: 0;
   }
+}
+
+.standard-menu-footer {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   a {
-    vertical-align: bottom;
-    color: $color-global-grey;
-    font-size: 12px;
+    color: $color-footer-text;
+    font-size: 15px;
     &:hover {
-      color: $color-global-black;
+      color: lighten($color-footer-text, 20%);
     }
   }
 }
