@@ -1,5 +1,11 @@
 <?php
 /**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/php/template-tags.php';
+
+
+/**
  * eivey functions and definitions.
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
@@ -35,7 +41,9 @@ if (!function_exists('eivey_setup')) {
         register_nav_menus(array(
             'homepage' => esc_html__('Homepage', 'eivey'),
             'header' => esc_html__('Header', 'eivey'),
-            'footer' => esc_html__('Footer', 'eivey'),
+            'footer-left' => esc_html__('Footer Left Column', 'eivey'),
+            'footer-center' => esc_html__('Footer Center Column', 'eivey'),
+            'footer-right' => esc_html__('Footer Right Column', 'eivey'),
         ));
     }
 }
@@ -61,7 +69,7 @@ add_action('wp_enqueue_scripts', 'eivey_scripts');
  */
 function arthistory_admin_css() { ?>
     <style>
-        #menu-comments, #menu-tools, #menu-posts, /* sidebar */
+        #menu-comments, #menu-tools, /* sidebar */
         #wp-admin-bar-wp-logo, #wp-admin-bar-comments, /*top bar*/
         #contextual-help-link-wrap, #screen-options-link-wrap, /* misc */
         #types-information-table /* editor page */

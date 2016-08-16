@@ -26,15 +26,32 @@
             <i class="fa fa-pinterest-p" aria-hidden="true"></i>
         </a>
     </div>
-    <h5 id="footer-trademark">&copy; <?php echo date('Y');?> EIVEY.  All rights reserved, EIVEY <sup>&copy;</sup> is a registered trademark of Eivey</h5>
-    <nav id="menu-footer-container">
-        <?php wp_nav_menu(array(
-            'theme_location' => 'footer',
-            'menu_id' => 'menu-footer',
-            'menu_class' => 'standard-menu'
-        )); ?>
-    </nav>
 </footer>
+<section id="footer-menu-container">
+    <nav class="extra-small-grid-container">
+        <div class="small-12 medium-4">
+            <h4 class="footer-menu-title">Support</h4>
+            <?php wp_nav_menu(array(
+                'theme_location' => 'footer-left',
+                'menu_class' => 'standard-menu-footer'
+            )); ?>
+        </div>
+        <div class="small-12 medium-4">
+            <?php wp_nav_menu(array(
+                'theme_location' => 'footer-center',
+                'menu_class' => 'standard-menu-footer'
+            )); ?>
+        </div>
+        <div class="small-12 medium-4 grid-end">
+            <h4 class="footer-menu-title">Contact</h4>
+            <?php wp_nav_menu(array(
+                'theme_location' => 'footer-right',
+                'menu_class' => 'standard-menu-footer'
+            )); ?>
+        </div>
+    </nav>
+    <h5 id="footer-trademark" class="small-grid-container">&copy; <?php echo date('Y');?> EIVEY.  All rights reserved, EIVEY <sup>&copy;</sup> is a registered trademark of Eivey</h5>
+</section>
 <?php wp_footer(); ?>
 </body>
 </html>

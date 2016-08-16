@@ -6,6 +6,15 @@
     %span.profile-title= @person.name(@current_community) + (@community_customization && @community_customization.storefront_label ? @community_customization.storefront_label : "")
 
 .row
+  .col-4
+    .row
+      .people-image
+        = huge_avatar_thumb(@person)
+
+    .row
+      .profile-action-buttons-desktop
+        = render :partial => "profile_action_buttons"
+
   .col-8
 
     .row.relative
@@ -14,7 +23,7 @@
       .profile-action-buttons-mobile
         = render :partial => "profile_action_buttons"
 
-    .row
+    .row.person-details
       - if @person.description && !@person.description.blank?
         - text_with_line_breaks do
           = @person.description
@@ -63,14 +72,6 @@
             #profile-testimonials-list
               = render :partial => "testimonials", :locals => {:received_testimonials => received_testimonials, :limit => 3}
 
-  .col-4
-    .row
-      .people-image
-        = huge_avatar_thumb(@person)
-
-    .row
-      .profile-action-buttons-desktop
-        = render :partial => "profile_action_buttons"
 
 - content_for :extra_javascript do
   :javascript

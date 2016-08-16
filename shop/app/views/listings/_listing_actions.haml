@@ -103,6 +103,15 @@
       %button.book-button
         .content
           = action_button_label(@listing)
+      .paymenticons.row
+        %i.fa.fa-cc-paypal.paymenticon{"aria-hidden" => "true"}
+        %i.fa.fa-cc-mastercard.paymenticon{"aria-hidden" => "true"}
+        %i.fa.fa-cc-visa.paymenticon{"aria-hidden" => "true"}
+        %i.fa.fa-cc-discover.paymenticon{"aria-hidden" => "true"}
+        %i.fa.fa-cc-amex.paymenticon{"aria-hidden" => "true"}
+        .row.col-12.paymentHelp
+          %a{:href => "", :target => "blank"} Payment Help
+
 
     - if payment_gateway == :paypal && process != :none
       .row

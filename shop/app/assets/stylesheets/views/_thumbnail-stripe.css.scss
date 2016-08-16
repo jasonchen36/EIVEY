@@ -3,7 +3,7 @@
 .listing-image-thumbnail-stripe {
   width: 100%;
   overflow: hidden;
-  height: 64px;
+  height: 125px;
   margin-top: 2px;
   position: relative;
 }
@@ -27,9 +27,8 @@
 }
 
 .listing-image-thumbnail {
-  width: 64px;
-  height: 64px;
+  width: 125px;
+  height: 125px;
   padding: 2px;
-  border-radius: $default-border-radius;
   cursor: pointer;
 }

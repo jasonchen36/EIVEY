@@ -37,9 +37,9 @@ ST.thumbnailStripe = function(images, opts) {
   if(elements.length < 2) {
     container.hide();
   }
-
-  thumbnailContainerWidth = elements.length * thumbnailWidth + 2 * paddingAdjustment;
-  thumbnailContainer.width(thumbnailContainerWidth);
+  //
+  // thumbnailContainerWidth = elements.length * thumbnailWidth + 2 * paddingAdjustment;
+  // thumbnailContainer.width(thumbnailContainerWidth);
 
   // State
   var initialIdx = 0;

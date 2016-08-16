@@ -12,7 +12,7 @@ get_header(); ?>
     <div id="primary" class="content-area">
         <main id="main" class="site-main" role="main">
 
-            <section class="error-404 not-found">
+            <section class="error-404 not-found small-grid-container">
                 <header class="page-header">
                     <h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'eivey' ); ?></h1>
                 </header><!-- .page-header -->
@@ -22,12 +22,6 @@ get_header(); ?>
 
                     <?php
                     get_search_form();
-
-                    /* translators: %1$s: smiley */
-                    $archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'eivey' ), convert_smilies( ':)' ) ) . '</p>';
-                    the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-
-                    the_widget( 'WP_Widget_Tag_Cloud' );
                     ?>
 
                 </div><!-- .page-content -->

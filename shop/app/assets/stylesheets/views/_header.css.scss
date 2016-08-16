@@ -2,7 +2,7 @@
 @import "compass/css3/background-size";
 
 /* Height of the whole header bar */
-$headerHeight: lines(2.5);
+$headerHeight: lines(5);
 
 /* Height of an element (i.e. button) in the header bar */
 $elementHeight: em(40);
@@ -19,6 +19,7 @@ $elementSpacing: lines(0.5);
 
 .header {
   height: $headerHeight;
+  margin-bottom: 3em;
   width: 100%;
 }
 
@@ -28,6 +29,10 @@ $elementSpacing: lines(0.5);
 
 .header-left {
   float: left;
+  .logo-tag{
+    padding-top:38px;
+    font-size:12px;
+  }
 }
 
 .header-right {
@@ -45,11 +50,12 @@ $elementSpacing: lines(0.5);
   margin-top: $elementPadding;
   margin-bottom: $elementPadding;
   height: $elementHeight;
+  width: 16em;
 }
 
 .header-hover {
   &:hover {
-    background-color: $highlight;
+  //we don't need a hover colour, it makes the header look bad.
   }
 
   &.toggled {
@@ -98,7 +104,6 @@ $elementSpacing: lines(0.5);
 }
 
 .header-menu-toggle-container {
-  @include button($highlight);
   @include button-group-button-padding;
   height: $elementHeight;
   line-height: $buttonLineHeight;
@@ -122,7 +127,11 @@ $elementSpacing: lines(0.5);
 }
 
 .header-user-avatar {
-  @include header-block;
+    //@include header-block;
+  display: block;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  height: 2.5em;
 }
 
 .header-user-toggle {

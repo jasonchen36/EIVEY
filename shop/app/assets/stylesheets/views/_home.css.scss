@@ -7,7 +7,6 @@
 .home-toolbar {
   @include pie-clearfix;
   margin-bottom: lines(0.5);
-  border-bottom: 1px solid $border;
 
   @include media(tablet) {
     margin-bottom: lines(1);
@@ -19,6 +18,7 @@
 }
 
 .home-toolbar-button-group {
+  display:none;
   @include button-group;
   margin-bottom: lines(0.5);
 
@@ -153,7 +153,6 @@ $home-list-image-padding-mobile: lines(0.5);
   width: 100%;
   height: 100%;
   display: block;
-  @include border-radius($default-border-radius);
 }
 
 .home-no-image {
@@ -364,7 +363,6 @@ $home-list-avatar-padding: lines(0.25);
 }
 
 .home-no-listings {
-  @include border-radius($default-border-radius);
   padding: lines(0.5) lines(1);
   background: $highlight;
 }
@@ -387,11 +385,23 @@ $home-list-avatar-padding: lines(0.25);
   }
 }
 
+.home-categories-top-main{
+  padding-right: 2.8em;
+  color: #6d6f72;
+}
+
+.product-grid-filter{
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black!important;
+  font-weight: 200;
+}
 .home-categories-sub {
   @extend .home-categories-link;
   font-size: 14px;
   margin-left: lines(0.5);
 }
+
 
 .home-toolbar-toggle-container {
   margin-bottom: lines(0.5);
@@ -409,8 +419,8 @@ $home-list-avatar-padding: lines(0.25);
 }
 
 .custom-filter-title {
-  font-weight: 700;
-  @include title-border;
+  font-weight: 200;
+  border-bottom: 1px solid #939598;
 }
 
 .custom-filter-options {
@@ -518,6 +528,32 @@ $home-list-avatar-padding: lines(0.25);
   left: 0px;
   bottom: 0;
 }
+//  Does the client want custom checkboxes, or is it just what was put in the design because replacing checkboxes is not fun
+//input[type=checkbox] {
+//  display: inline-block;
+//  font-family: FontAwesome;
+//  font-style: normal;
+//  font-weight: normal;
+//  line-height: 1;
+//  -webkit-font-smoothing: antialiased;
+//  -moz-osx-font-smoothing: grayscale;
+//  visibility: hidden;
+//  color: #939598;
+//  font-size: 14px;
+//}
+//
+//input[type=checkbox]:before {
+//  //content: "fa fa-var-square-o";
+//  content: '\00f096';
+//  visibility: visible;
+//  //font-size: 12px;
+//}
+//
+//input[type=checkbox]:checked:before{
+//  //content: "fa fa-var-check-square-o";
+//  content: '\00f046';
+//}
+
 
 //////////////////////////////////////////////////
 // Fix for fastclick & google autocomplete bug  //

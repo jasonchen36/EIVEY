@@ -44,11 +44,22 @@
 }
 
 .listing-price-amount {
-  @include huge-type;
-  color: $light-body;
+  font-size: 3em;
+  padding-bottom: 15px;
+  font-family: georgia;
+  font-weight: 400;
+  color: black;
   display: block;
   float: left;
   margin-right: lines(0.25);
+}
+.listing-details{
+  padding-left:0px !important;
+  font-size:12px;
+  p{
+    margin-left: 0 !important;
+    font-weight:200 !important;
+  }
 }
 
 .listing-price-quantity {
@@ -118,7 +129,7 @@ $listing-author-avatar-height: 108;
 }
 
 .listing-author-avatar-image {
-  @include border-radius($default-border-radius);
+  border: solid 1px black;
   display: block;
   width: 100%;
   height: 100%;
@@ -136,17 +147,33 @@ $listing-author-avatar-height: 108;
 .listing-author-name {
   @include big-type;
   height: em($listing-author-avatar-width, 22) / 2;
-  line-height: em($listing-author-avatar-width, 18) / 2;
+  color: #636466;
 }
 
 .listing-author-name-link {
   display: block;
   @include ellipsis;
+  color: #636466;
 }
 
 .listing-author-contact-button {
-  @include grey-button;
+  @include big-button($link);
   width: 100%;
+  background: #abcdc6!important;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  margin: 0.75em 0;
+  padding: 0 1.5em;
+  padding-bottom: 4px;
+  margin-top:0px;
+  font-size: 22px;
+  height: 2.625em;
+  border: 0;
+  display: table;
+  line-height: 1.5em;
+  width: 100%;
+  text-transform: uppercase;
 }
 
 // Listing author activity
@@ -204,6 +231,7 @@ $listing-author-avatar-height: 108;
 // Transaction action button
 .book-button {
   @include big-button($link);
+  background-color: #abcdc6 !important;
   margin-top: 0;
   width: 100%;
   text-align: center;
@@ -211,6 +239,7 @@ $listing-author-avatar-height: 108;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
+  text-transform: uppercase;
 }
 
 // Transaction action button
@@ -226,6 +255,15 @@ $listing-author-avatar-height: 108;
   &.not-selected {
     color: $border;
   }
+}
+
+.paymenticon{
+  font-size: 2em!important;
+  padding-right: 18px;
+}
+.paymentHelp{
+  font-size:12px;
+  padding-left: 0px;
 }
 
 .checkbox-option-checkmark {
