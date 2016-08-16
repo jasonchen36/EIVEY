@@ -1,5 +1,11 @@
 <?php
 /**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/php/template-tags.php';
+
+
+/**
  * eivey functions and definitions.
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
@@ -63,7 +69,7 @@ add_action('wp_enqueue_scripts', 'eivey_scripts');
  */
 function arthistory_admin_css() { ?>
     <style>
-        #menu-comments, #menu-tools, #menu-posts, /* sidebar */
+        #menu-comments, #menu-tools, /* sidebar */
         #wp-admin-bar-wp-logo, #wp-admin-bar-comments, /*top bar*/
         #contextual-help-link-wrap, #screen-options-link-wrap, /* misc */
         #types-information-table /* editor page */
