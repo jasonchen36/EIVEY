@@ -127,7 +127,11 @@ $elementSpacing: lines(0.5);
 }
 
 .header-user-avatar {
-  @include header-block;
+    //@include header-block;
+  display: block;
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+  height: 2.5em;
 }
 
 .header-user-toggle {

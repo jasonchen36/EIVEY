@@ -2281,6 +2281,10 @@ $checkbox_brown_colour:#9d5a45;
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
       cursor: pointer;
     }
+    input[type="checkbox"]:focus {
+      outline: 0 none
+      box-shadow: none;
+    }
   }
 }
 
