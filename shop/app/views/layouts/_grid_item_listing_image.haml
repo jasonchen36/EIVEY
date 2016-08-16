@@ -12,10 +12,6 @@
     - with_first_listing_image(listing) do |first_image_url|
       = image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "#{modifier_class} fluid-thumbnail-grid-image-image"}
 
-    .fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
-    .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
-      = listing.title
-
     .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
       - if listing.price
         %span.fluid-thumbnail-grid-image-price
@@ -28,3 +24,6 @@
       - else
         %span.fluid-thumbnail-grid-image-type{:class => "#{modifier_class}"}
           = shape_name(listing)
+  .fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
+  .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
+    = listing.title

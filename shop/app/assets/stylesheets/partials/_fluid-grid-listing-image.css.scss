@@ -16,8 +16,6 @@
 }
 
 .fluid-thumbnail-grid-image-title {
-  position: absolute;
-  bottom: 0;
   color:black!important;
   padding: lines(0.5);
   line-height: 1.2em;
@@ -30,11 +28,12 @@
 //}
 
 .fluid-thumbnail-grid-image-image {
-  @include border-top-radius($default-border-radius);
+  //@include border-top-radius($default-border-radius);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  border: solid 1px black;
 }
 
 .fluid-thumbnail-grid-image-price-container {
