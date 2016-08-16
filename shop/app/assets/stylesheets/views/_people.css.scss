@@ -7,8 +7,9 @@ $profile-pic-gutter-mobile: lines(0.5);
 .people-image {
   display: none;
   > img {
-    @include border-radius($default-border-radius);
+    //@include border-radius($default-border-radius);
     width: 100%;
+    border: 1px solid black;
   }
 
   @include media(tablet) {
@@ -16,9 +17,20 @@ $profile-pic-gutter-mobile: lines(0.5);
   }
 }
 
-.people-header {
+.person-details{
+  p{
+    font-size:12px;
+    font-weight: 200;
+    margin: 10px;
+    padding:0;
+    max-width: 100%;
+  }
+}
+h1, h2{
+  border-bottom:1px dotted #939598;
+}
+.people-header{
   padding-bottom: lines(0.25);
-  border-bottom: 1px solid $border;
 }
 
 .people-load-more-listings-container {
@@ -52,8 +64,10 @@ $profile-pic-gutter-mobile: lines(0.5);
 }
 
 .profile-edit-link, .profile-contact-link {
-  @include grey-button;
+  @include big-button(#abcdc6);
   width: 100%;
+  background-color: #abcdc6 !important;
+  color: white !important;
 }
 
 .people-image-mobile {
@@ -63,7 +77,7 @@ $profile-pic-gutter-mobile: lines(0.5);
   left: 0;
 
   > img {
-    @include border-radius($default-border-radius);
+    //@include border-radius($default-border-radius);
     width: 100%;
   }
 
@@ -75,6 +89,15 @@ $profile-pic-gutter-mobile: lines(0.5);
 
 .people-fluid-thumbnail-grid-container {
   @include create-fluid-thumbnail-grid(people, 1, 1, 2, 3, 2, 2, 3, 3);
+  #profile-followed-people-list{
+    .fluid-thumbnail-grid-image-title{
+      position:absolute;
+      padding-top:13em;
+    }
+  }
+  .follow-button-container{
+    padding-top: 1.5em;
+  }
 }
 
 //.people-listings {
