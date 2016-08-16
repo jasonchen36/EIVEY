@@ -24,14 +24,10 @@
       - else
         - if(location_search_in_use)
           = render partial: "location_bar"
-        - else
-          = render partial: "search_bar"
   - else
     .browse-view-search-form
       - if(location_search_in_use)
         = render partial: "location_bar"
-      - else
-        = render partial: "search_bar"
 
 - if @current_community.private? && @big_cover_photo
   - if @community_customization && @community_customization.private_community_homepage_content

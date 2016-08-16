@@ -1928,37 +1928,40 @@ figure.fluidratio {
 .marketplace-lander {
   position: relative;
 
-  figure.marketplace-cover {
-    background-image: url(image-path($cover-photo-url));
-    height: auto;
-    background-size: cover;
-  }
-
-  figure.marketplace-cover-small {
-    background-image: url(image-path($small-cover-photo-url));
-    height: em($small-cover-photo-mobile-height);
-    @include media(tablet) {
-      @include fluid-ratio(em(1920) em($small-cover-photo-height), em(300) em($small-cover-photo-height));
-    }
-  }
-
-  .coverimage-fade {
-    position: absolute;
-    top: lines(0);
-    max-width: em(1920);
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    background: rgba($highlight, 0.9);
-
-    &.without-text {
-      background: rgba($highlight, 0.625);
-    }
-  }
-
-  figure.marketplace-cover-small-fade {
-    height: em($small-cover-photo-mobile-height, 16);
-  }
+  //figure.marketplace-cover {
+  //  background-image: url(image-path($cover-photo-url));
+  //  height: auto;
+  //  background-size: cover;
+  //}
+  //
+  //figure.marketplace-cover-small {
+  //  background-image: url(image-path($small-cover-photo-url));
+  //  height: em($small-cover-photo-mobile-height);
+  //  @include media(tablet) {
+  //    @include fluid-ratio(em(1920) em($small-cover-photo-height), em(300) em($small-cover-photo-height));
+  //  }
+  //}
+  //
+  //.coverimage-fade {
+  //  position: absolute;
+  //  top: lines(0);
+  //  max-width: em(1920);
+  //  width: 100%;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  //  background: rgba($highlight, 0.9);
+  //
+  //  &.without-text {
+  //    background: rgba($highlight, 0.625);
+  //  }
+  //}
+  //
+  //figure.marketplace-cover-small-fade {
+  //  height: em($small-cover-photo-mobile-height, 16);
+  //  @include media(tablet) {
+  //    @include fluid-ratio(em(1920) em($small-cover-photo-height), em($small-cover-photo-height) em($small-cover-photo-height));
+  //  }
+  //}
 
   .marketplace-lander-content {
     padding-top: 5em;
@@ -1972,6 +1975,13 @@ figure.fluidratio {
     position: relative;
     padding: 0;
     color: $background;
+    @include larger-type;
+    line-height: em(18);
+    @include media(tablet) {
+      padding: 0 lines(1);
+      @include huge-type;
+      line-height: em(15);
+    }
   }
 
   .title-container {
@@ -1993,6 +2003,7 @@ figure.fluidratio {
   .marketplace-title-header {
     width: 100%;
     height: 100%;
+    z-index: -9999999;
     padding: 0;
     text-transform:uppercase;
     display: table;
@@ -2269,6 +2280,28 @@ $checkbox_brown_colour:#9d5a45;
       width: 24px;
       box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
       cursor: pointer;
+    }
+  }
+}
+
+//Custom header search stuff
+.browse-view-search-form-input{
+  position: relative;
+  margin-left:57.5%;
+  width: 22em;
+  .search-form-input{
+    width: 100%;
+    input{
+      padding: 0;
+    }
+    .action-button{
+      color: #939598;
+      font-size: 1.25em;
+      background-color:transparent;
+      padding:0;
+      margin-top: -1.6em;
+      width: 0px;
+      margin-left: 16em;
     }
   }
 }

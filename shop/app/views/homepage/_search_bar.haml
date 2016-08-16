@@ -1,5 +1,5 @@
 .search-form-input.search-form-text-field
   = text_field_tag "q", params[:q]
-.search-form-input
-  %button.action-button#search-button{type: 'submit'}
-    = icon_tag("search", ["icon-part"])
+  .search-form-input-button
+    %button.action-button#search-button{type: 'submit'}
+      = icon_tag("search", ["icon-part"])
