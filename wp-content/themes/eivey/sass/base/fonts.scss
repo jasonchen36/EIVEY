@@ -10,13 +10,16 @@ Note: font file paths are relative to deployed file paths, not source paths
 //font declarations
 //-----------------------------
 
+$font-open-sans: 'Open Sans', sans-serif;
+$font-open-sans-bold: 'Open Sans Bold', sans-serif;
+$font-georgia: Georgia, 'Times New Roman', Times, serif;
 
 //extensible classes
 //-----------------------------
 .f--open-sans {
-  font-family: 'Open Sans', sans-serif;
+  font-family: $font-open-sans;
 }
 
 .f--georgia {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: $font-georgia;
 }

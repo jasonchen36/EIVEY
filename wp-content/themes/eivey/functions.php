@@ -35,7 +35,9 @@ if (!function_exists('eivey_setup')) {
         register_nav_menus(array(
             'homepage' => esc_html__('Homepage', 'eivey'),
             'header' => esc_html__('Header', 'eivey'),
-            'footer' => esc_html__('Footer', 'eivey'),
+            'footer-left' => esc_html__('Footer Left Column', 'eivey'),
+            'footer-center' => esc_html__('Footer Center Column', 'eivey'),
+            'footer-right' => esc_html__('Footer Right Column', 'eivey'),
         ));
     }
 }
