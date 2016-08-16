@@ -80,9 +80,17 @@ class HomepageController < ApplicationController
     if request.xhr? # checks if AJAX request
       search_result.on_success { |listings|
         @listings = listings # TODO Remove
+        @categories = categories
+        @listingsWithCategories = []
+        listings.each do |listing|
+          listing.category = @categories.select { |c| c.id == listing.category_id }
+          @listingsWithCategories += listing
+          puts "listings : "
+          puts listing.category
+        end
 
         if @view_type == "grid" then
-          render partial: "grid_item", collection: @listings, as: :listing, locals: { show_distance: location_search_in_use }
+          render partial: "grid_item", collection: @listingsWithCategories, as: :listing, locals: { show_distance: location_search_in_use}
         elsif location_search_in_use
           render partial: "list_item_with_distance", collection: @listings, as: :listing, locals: { shape_name_map: shape_name_map, testimonials_in_use: @current_community.testimonials_in_use, show_distance: location_search_in_use }
         else
