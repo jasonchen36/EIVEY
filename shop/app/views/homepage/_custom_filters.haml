@@ -11,7 +11,7 @@
             - field.options.sort.each do |option|
               .custom-filter-checkbox-container
                 %label.custom-filter-checkbox-label
-                  - if field.name(I18n.locale) == "Colours"
+                  - if field.name(I18n.locale) == "Colour"
                     - colourOption = option.id
                     - if colourOption == 1
                       %span.colourTile.col-2.white

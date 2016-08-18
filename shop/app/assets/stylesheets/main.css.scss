@@ -1801,6 +1801,9 @@ input[type=text].delivery-price-field {
   }
 
   .send-button {
+    @include big-button(#abcdc6);
+    color:white;
+    background-color:#abcdc6;
     padding-top: lines(0.25);
   }
 
