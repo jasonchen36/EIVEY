@@ -17,7 +17,7 @@ $home-thumbnail-grid-author: $home-thumbnail-grid-avatar + ($home-thumbnail-grid
 }
 
 .home-fluid-thumbnail-grid-author {
-  @include border-bottom-radius($default-border-radius);
+  //@include border-bottom-radius($default-border-radius);
   background-color: $highlight;
   height: $home-thumbnail-grid-author;
   position: relative;
@@ -28,8 +28,9 @@ $home-thumbnail-grid-author: $home-thumbnail-grid-avatar + ($home-thumbnail-grid
 }
 
 .home-fluid-thumbnail-grid-author-avatar-image {
-  @include border-radius($default-border-radius);
+  //@include border-radius($default-border-radius);
   height: $home-thumbnail-grid-avatar;
+  width: $home-thumbnail-grid-avatar;
 }
 
 .home-fluid-thumbnail-grid-author-name {

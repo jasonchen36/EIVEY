@@ -15,7 +15,6 @@
 
   .account-settings-row {
     position: relative;
-    @include border-radius(em(5));
     border: 2px solid $border;
     margin-bottom: lines(1);
     min-height: 42px;
@@ -36,7 +35,6 @@
     }
 
     .account-settings-email-row {
-      @include border-radius($default-border-radius);
       width: 100%;
       overflow: hidden;
       padding: lines(0.5) 0;
@@ -207,7 +205,6 @@
 
 .paypal-wizard {
   border: 1px solid $border;
-  @include border-radius($default-border-radius);
   margin-bottom: lines(1);
   margin-top: lines(2);
 }

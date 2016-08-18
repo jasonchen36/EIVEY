@@ -5,7 +5,7 @@ input[type=text],
 input[type=password],
 input[type=number],
 textarea {
-  @include border-radius(em(5));
+  //@include border-radius(em(5));
   border: 2px solid $border;
   min-height: 42px;
   width: 100%;

@@ -2123,7 +2123,6 @@ figure.fluidratio {
     p {
       @include large-type;
       margin: lines(0.5) auto;
-      max-width: lines(15);
     }
 
     input[type=text] {
@@ -2180,6 +2179,7 @@ figure.fluidratio {
   color: #939598;
   background-color: #f1f2f2;
   font-size:14px;
+  margin-top: 8%;
   text-align:left;
   padding: 2% 7% 1%;
 }
