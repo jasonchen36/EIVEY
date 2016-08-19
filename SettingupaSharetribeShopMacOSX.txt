@@ -1,0 +1,34 @@
+﻿Requirements
+* Node 6.3.1
+* Ruby 6.3.1
+
+
+Setup
+* Clone the repository: https://bitbucket.org/ellefsontech/eivey.web/src/95b0db57b2ebaebd5063fa6eb376aefe9d9cc336/shop/?at=master
+Install dependencies
+* gem install bundler
+* brew install mysql
+* cd shop
+* bundle install
+* Bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+* npm install
+* cd /app/web
+* npm install
+* bower install
+* grunt build
+
+
+Hook up app to Database
+* Setup a database using MAMP / AMPPS / RDS
+* Create a database called sharetribe_dev
+* Run the sql script “sharetribe_development.sql”
+* cd shop/config
+* cp database.example.yml database.yml
+* nano database.yml
+   * Fill in database credentials for your local mySQL db
+* cp config.example.yml config.yml
+* nano config.yml
+   * Set domain : “localhost:3000/shop” 
+Running the app
+* cd /shop 
+* bundle exec rails server -e development
