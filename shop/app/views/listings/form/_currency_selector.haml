@@ -1,4 +1,4 @@
-.currency-selector
+%span.currency-selector
   - if @current_community.available_currencies
     - currencies = @current_community.available_currencies.gsub(" ","").split(",")
     - if currencies.size > 1
