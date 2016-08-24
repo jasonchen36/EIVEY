@@ -1,8 +1,8 @@
 .price-container
   - if shape[:price_enabled]
     = form.label :price, t(".price")
-    = form.text_field :price, :class => "price-field", :maxlength => "10", :placeholder => "0", :value => (@listing.price ? @listing.price.to_s: 0)
     = render partial: "listings/form/currency_selector", locals: {form: form}
+    = form.text_field :price, :class => "price-field", :maxlength => "10", :placeholder => "0", :value => (@listing.price ? @listing.price.to_s: 0)
 
     - if unit_options.empty?
       -# No-op
@@ -52,7 +52,7 @@
           = t(".after_service_fee_you_will_get_vat", :sum_with_currency => '<span id="fee_display"></span>').html_safe
         - else
           = t(".after_service_fee_you_will_get", :sum_with_currency => '<span id="fee_display"></span>').html_safe
-
+  %p.price-info The Eivey fee of 20% includes PayPal and credit card charges PLUS an estimated $10 shipping fee will be deducted from the sale price
 - if payment_gateway == :paypal
   = render layout: "layouts/lightbox", locals: { id: "paypal_fee_info_content"} do
     %h2= t("common.paypal_fee_info.title")

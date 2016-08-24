@@ -390,6 +390,7 @@ window.ST = window.ST || {};
     imageLoadingInProgressConfirm) {
 
     $('#help_valid_until_link').click(function() { $('#help_valid_until').lightbox_me({centered: true, zIndex: 1000000}); });
+    $('input.title_text_field:first').placeholder = "Include Designer/Brand and the name of the item";
     $('input.title_text_field:first').focus();
 
     var $shipping_price_container = $('.js-shipping-price-container');

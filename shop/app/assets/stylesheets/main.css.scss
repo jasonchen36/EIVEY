@@ -42,6 +42,7 @@ body {
 }
 
 .page-content {
+  min-height:800px;
   margin-top: 20px;
   padding-bottom: lines(3);
 
@@ -1361,10 +1362,29 @@ $noscript-height: lines(4);
   max-width: lines(5);
 }
 
-.currency-selector {
-  margin-left: lines(0.25);
-  display: inline;
-  @include big-type;
+.price-container{
+  position: relative;
+  text-align: left;
+}
+.price-container span{
+  position: absolute;
+  transform: translate(0,-50%);
+  top: 44%;
+  pointer-events: none;
+  margin-left: 0.4em; /* adjust as appropriate */
+}
+.price-container input{
+  text-indent: 1em; /* adjust as appropriate */
+}
+
+.question-circle{
+  font-size: 1.5em;
+  color: #abcdc6;
+}
+
+.price-info{
+  font-size: 12px;
+  font-weight: 200;
 }
 
 .quantity-field {
@@ -2294,8 +2314,9 @@ $checkbox_brown_colour:#9d5a45;
 //Custom header search stuff
 .browse-view-search-form-input{
   position: relative;
-  margin-left:57.5%;
+  margin-left:58.75%;
   width: 22em;
+  z-index: -99999;
   margin-top: -25px;
   .search-form-input{
     width: 100%;
