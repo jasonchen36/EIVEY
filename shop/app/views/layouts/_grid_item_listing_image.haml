@@ -18,8 +18,9 @@
       = listing.title
 
       -#please put the category type and size here
-    .fluid-thumbnail-grid-image-size
-      = listing.category_id
+    .fluid-thumbnail-grid-image-category
+      = localized_category_from_id(listing.category_id)
+
       -#  please update this with the actual category name not the id TODO: Fix
     .fluid-thumbnail-grid-image-size
       %span.fluid-thumbnail-size

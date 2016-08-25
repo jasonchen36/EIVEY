@@ -1644,31 +1644,8 @@ input[type=text].delivery-price-field {
     min-height: 250px;
   }
 }
-/*
-  -----------------------------------------------
-  home page grid
-  -----------------------------------------------
-*/
-.home-fluid-thumbnail-grid-border{
-  border: solid black 1px;
-}
 
-.fluid-thumbnail-grid-image-details{
-  text-align: center;
-  color:black;
-  .fluid-thumbnail-grid-image-title{
-    font-weight: 600;
-    line-height: 1em;
-    text-transform: uppercase;
-  }
-  .fluid-thumbnail-grid-image-size{
-    line-height: 1em;
-  }
-  .fluid-thumbnail-grid-image-price{
-    font-family: 'Open Sans';
-    font-weight: 600;
-  }
-}
+
 /*
   -----------------------------------------------
   New testimonial form, conversation status form
