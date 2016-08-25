@@ -1,0 +1,15 @@
+setup for new environment -> follow the instructions by sharetribe: https://github.com/sharetribe/sharetribe
+
+Apache config proxies requests to /shop to port 3000. -> see /etc/apache2/sites-available/000-default.conf
+- for help see: http://stackoverflow.com/questions/8541182/apache-redirect-to-another-port
+
+The Rails base url has been changed inside config/application.rb
+- for help see: https://timlentse.github.io/2015/12/06/How-to-mount-a-rails-app-in-a-subdirectory-with-NGINX.html
+
+Node requires v6.3.1
+- use node version manager -> sudo apt-get install nvm
+-> nvm install 6.3.1
+
+Database URL: ensure that it matches the URL of the website
+- this url is in the database -> communities table -> "domain" field
+-> 08/15/2016 -> the current URL is ec2-52-207-201-57.compute-1.amazonaws.com/
