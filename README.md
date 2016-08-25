@@ -30,5 +30,37 @@
 * Indexing issues?
    * [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
 
-## How to Deploy ##
-* todo
+## How to Deploy (Wordpress) ##
+*checkout code
+git clone {repo url} html
+sudo chown -R ubuntu:ubuntu  html/
+
+*install node
+sudo apt-get update
+sudo apt-get install nodejs
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-get install npm
+
+*install bower & grunt
+sudo npm install -g bower grunt-cli
+
+*install ruby & sass
+sudo apt-get install ruby
+sudo gem install sass
+
+*on every deploy
+cd wp-content/themes/eivey
+npm install
+bower install
+grunt build
+
+
+
+UPDATE `table_name` SET `field_name` = replace(same_field_name, 'old address', 'new address')
+
+run on:
+wp_options table on option_value
+wp_postmeta table on meta_value
+wp_posts table on post_content
+
+enable mod rewrite on the server: https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-ubuntu-14-04
