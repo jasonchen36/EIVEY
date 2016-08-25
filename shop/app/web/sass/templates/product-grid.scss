@@ -14,7 +14,7 @@
 
 .fluid-thumbnail-grid-image-details {
   text-align: center;
-  color: black;
+  color: $color-global-black;
 
   .fluid-thumbnail-grid-image-title {
     font-weight: 600;
@@ -37,7 +37,7 @@
 }
 
 .fluid-thumbnail-grid-image-title {
-  color:black!important;
+  color: $color-global-black;
   line-height: 1.2em;
   padding-top: 10px;
 }

@@ -136,4 +136,8 @@ module ListingsHelper
     t(listing.action_button_tr_key)
   end
 
+  def get_listing_attribute_value(listing, key)
+    "#{key}" + "M"
+  end
+
 end
