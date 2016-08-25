@@ -12,18 +12,28 @@
     - with_first_listing_image(listing) do |first_image_url|
       = image_tag first_image_url, {:alt => listed_listing_title(listing), :class => "#{modifier_class} fluid-thumbnail-grid-image-image"}
 
+  -#.fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
+  .fluid-thumbnail-grid-image-details{:class => "#{modifier_class}"}
+    .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
+      = listing.title
+
+      -#please put the category type and size here
+    .fluid-thumbnail-grid-image-size
+      = listing.category_id
+      -#  please update this with the actual category name not the id TODO: Fix
+    .fluid-thumbnail-grid-image-size
+      %span.fluid-thumbnail-size
+        Size: M
+        -#currently using M as a placeholder TODO: Fix
     .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
-      - if listing.price
-        %span.fluid-thumbnail-grid-image-price
-          = humanized_money_with_symbol(listing.price).upcase
-          - price_unit = price_quantity_slash_unit(listing)
-        - if !price_unit.blank?
-          - price_text = " " + price_unit
-          %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
-            = price_text
-      - else
-        %span.fluid-thumbnail-grid-image-type{:class => "#{modifier_class}"}
-          = shape_name(listing)
-  .fluid-thumbnail-grid-image-overlay{:class => "#{modifier_class}"}
-  .fluid-thumbnail-grid-image-title{:class => "#{modifier_class}"}
-    = listing.title
+    - if listing.price
+      %span.fluid-thumbnail-grid-image-price
+        = humanized_money_with_symbol(listing.price).upcase
+        - price_unit = price_quantity_slash_unit(listing)
+      - if !price_unit.blank?
+        - price_text = " " + price_unit
+        %span.fluid-thumbnail-grid-image-quantity{:title => price_text}
+          = price_text
+    - else
+      %span.fluid-thumbnail-grid-image-type{:class => "#{modifier_class}"}
+        = shape_name(listing)
