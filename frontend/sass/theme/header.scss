@@ -15,11 +15,16 @@ header {
   li {
     padding: 0 2.33%;
     text-align: center;
+    margin-bottom: 5px;
     &:first-child {
-      padding-left: 0;
+      @include desktop{
+        padding-left: 0;
+      }
     }
     &:last-child {
-      padding-right: 0;
+      @include desktop {
+        padding-right: 0;
+      }
     }
   }
   a {
