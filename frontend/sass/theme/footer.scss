@@ -32,7 +32,10 @@ footer {
 //-----------------------------
 #footer-menu-container {
   background: $color-footer-background;
-  padding: 25px 0 20px 0;
+  padding: 25px 10px 20px 10px;
+  @include tablet-up {
+    padding: 25px 0 20px 0;
+  }
 }
 
 #footer-trademark {
