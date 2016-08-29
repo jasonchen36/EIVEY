@@ -54,6 +54,7 @@ add_action('after_setup_theme', 'eivey_setup');
  * Enqueue scripts and styles.
  */
 function eivey_scripts() {
+    wp_enqueue_style('google-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans');
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css');
     wp_enqueue_style('eivey-style-base', '/frontend/build/app.base.min.css');
     wp_enqueue_style('eivey-style-main', '/frontend/build/app.main.min.css');
