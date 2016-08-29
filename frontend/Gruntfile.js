@@ -22,7 +22,11 @@ module.exports = function(grunt){
         mainSass: [
             'sass/**/*.scss',
             '!sass/app.base.scss',
-            '!sass/lib/**/*.scss'
+            '!sass/lib/**/*.scss',
+            '!sass/sharetribe/**/*.scss'
+        ],
+        sharetribeSass: [
+            'sass/sharetribe/**/*.scss'
         ],
         handlebars: [
             'handlebars/**/*.hbs'
@@ -120,6 +124,17 @@ module.exports = function(grunt){
                 dist: {
                     src: 'build/app.main.min.css'
                 }
+            },
+            sharetribe: {
+                options: {
+                    map: true, // inline sourcemaps,
+                    processors: [
+                        require('autoprefixer')({browsers: 'last 2 versions'}) // add vendor prefixes
+                    ]
+                },
+                dist: {
+                    src: 'build/app.sharetribe.min.css'
+                }
             }
         },
         /*
@@ -139,6 +154,15 @@ module.exports = function(grunt){
             main: {
                 files: {
                     'build/app.main.min.css': 'sass/app.main.scss'
+                },
+                options: {
+                    style: 'compressed',
+                    trace: true
+                }
+            },
+            sharetribe: {
+                files: {
+                    'build/app.sharetribe.min.css': 'sass/app.sharetribe.scss'
                 },
                 options: {
                     style: 'compressed',
@@ -204,6 +228,13 @@ module.exports = function(grunt){
             mainSass: {
                 files: watchFiles.mainSass,
                 tasks: ['sass:main','postcss:main'],
+                options: {
+                    livereload: true
+                }
+            },
+            sharetribeSass: {
+                files: watchFiles.sharetribeSass,
+                tasks: ['sass:sharetribe','postcss:sharetribe'],
                 options: {
                     livereload: true
                 }
