@@ -31,16 +31,6 @@ a, input, button {
   --------------------------
 */
 
-body {
-  @include source-sans-pro;
-  @include normal-type;
-
-  @include media(tiny-mobile) {
-    // Zooms out on tiny screens
-    font-size: em(13);
-  }
-}
-
 .page-content {
   min-height:800px;
   margin-top: 20px;
@@ -88,7 +78,7 @@ body {
   height: auto; // fixes some height issues in the map view
   //border: solid darken($highlight, 9%);
   //border-width: 0 0 lines(1);
-}
+}f
 
 ul {
   padding-left: lines(1);

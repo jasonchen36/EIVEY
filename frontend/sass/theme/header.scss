@@ -10,6 +10,24 @@ header {
   }
 }
 
+#menu-categories {
+  width: 100%;
+  li {
+    padding: 0 2.33%;
+    text-align: center;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  a {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
 #menu-header-secondary {
   li {
     padding: 0 10px;

@@ -6,7 +6,7 @@ $banner_image = get_post_meta(get_the_ID(), 'wpcf-homepage-banner-image', true);
             <nav id="menu-homepage-container">
                 <?php wp_nav_menu(array(
                     'theme_location' => 'homepage',
-                    'menu_id' => 'menu-homepage',
+                    'menu_id' => 'menu-categories',
                     'menu_class' => 'standard-menu'
                 )); ?>
             </nav>
