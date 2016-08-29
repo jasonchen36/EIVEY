@@ -17,12 +17,6 @@ $textLineHeight: $headerHeight - em(3);
 /* Default spacing between header bar elements */
 $elementSpacing: lines(0.5);
 
-.header {
-  height: $headerHeight;
-  margin-bottom: 3em;
-  width: 100%;
-}
-
 .header-wrapper {
   @include wrapper(0);
 }
@@ -85,16 +79,11 @@ $elementSpacing: lines(0.5);
   }
 }
 
-@mixin header-menu-button($bgcolor) {
-  @include button($bgcolor);
-  @include header-block;
-  padding-left: em(20);
-  padding-right: em(20);
-  line-height: $buttonLineHeight;
-}
-
 .new-listing-link {
-  @include header-menu-button($link2);
+  @include button($link2);
+  width: 100%;
+  line-height: $buttonLineHeight;
+  margin: 0;
 }
 
 .header-menu-container {
