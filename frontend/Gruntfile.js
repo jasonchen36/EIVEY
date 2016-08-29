@@ -13,7 +13,13 @@ module.exports = function(grunt){
     //these define the folders and files that are watched by the "grunt dev" command
     var watchFiles = {
         mainJs: [
-            'js/**/*.js'
+            'js/**/*.js',
+            '!js/app.sharetribe.js',
+            '!js/sharetribe/**/*.js'
+        ],
+        sharetribeJs: [
+            'js/app.sharetribe.js',
+            'js/sharetribe/**/*.js'
         ],
         baseSass: [
             'sass/app.base.scss',
@@ -92,6 +98,14 @@ module.exports = function(grunt){
             main: {
                 src: [
                     watchFiles.mainJs
+                ],
+                options: {
+                    jshintrc: true
+                }
+            },
+            sharetribe: {
+                src: [
+                    watchFiles.sharetribeJs
                 ],
                 options: {
                     jshintrc: true
@@ -202,7 +216,24 @@ module.exports = function(grunt){
                         'js/app.js',
                         'js/lib/*.js',
                         'js/modules/*.js',
-                        'js/**/*.js'
+                        'js/**/*.js',
+                        '!js/sharetribe/**/*.js'
+                    ]
+                },
+                options: {
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+                    sourceMap: true,
+                    preserveComments: 'some',
+                    mangle: false
+                }
+            },
+            sharetribe: {
+                files: {
+                    'build/app.sharetribe.min.js': [
+                        'js/app.sharetribe.js',
+                        'js/lib/*.js',
+                        'js/modules/*.js',
+                        'js/sharetribe/**/*.js'
                     ]
                 },
                 options: {
@@ -249,6 +280,13 @@ module.exports = function(grunt){
             mainJs: {
                 files: watchFiles.mainJs,
                 tasks: ['jshint:main','uglify:main'],
+                options: {
+                    livereload: true
+                }
+            },
+            sharetribeJs: {
+                files: watchFiles.sharetribeJs,
+                tasks: ['jshint:sharetribe','uglify:sharetribe'],
                 options: {
                     livereload: true
                 }
