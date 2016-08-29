@@ -126,11 +126,11 @@ $elementSpacing: lines(0.5);
 .header-user-toggle {
   padding-left: $elementSpacing;
   display: block;
+  width: 175px!important;
   @include clearfix;
 }
 
 @mixin header-toggle-menu {
-  min-width: em(200);
   position: absolute;
 }
 
@@ -139,6 +139,7 @@ $elementSpacing: lines(0.5);
 }
 
 .header-toggle-menu-user {
+  width: 175px!important;
   @include header-toggle-menu;
 }
 
