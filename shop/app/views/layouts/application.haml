@@ -29,22 +29,6 @@
         :locals => {external_plan_service_login_url: admin_plan_path}
 
   - content_for(:page_content) do
-    %section.marketplace-lander
-      - if @big_cover_photo
-        .coverimage
-          %figure.marketplace-cover.fluidratio
-            .lander-content.marketplace-lander-content
-              = yield :title_header
-      - else
-        .coverimage
-          %figure.marketplace-cover-small.fluidratio
-          .coverimage-fade{:class => yield(:coverfade_class)}
-            %figure.marketplace-cover-small-fade.fluidratio
-        .title-container
-          .title-header-wrapper
-            .marketplace-title-header
-              = yield :title_header
-
     %article.page-content
       .wrapper
         = render :partial => "layouts/notifications"
