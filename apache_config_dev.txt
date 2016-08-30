@@ -1,0 +1,18 @@
+<VirtualHost dev.eivey.ca:80>
+        <Directory /var/www/dev.eivey.ca>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+        DocumentRoot /var/www/dev.eivey.ca
+
+        ServerName dev.eivey.ca
+
+        ProxyPass /shop http://127.0.0.1:3000/
+        ProxyPassReverse /shop http://127.0.0.1:3000/
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
