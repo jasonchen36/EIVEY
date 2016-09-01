@@ -21,14 +21,14 @@ Install dependencies
 Hook up app to Database
 * Setup a database using MAMP / AMPPS / RDS
 * Create a database called sharetribe_dev
-* Run the sql script “sharetribe_development.sql”
+* Run the sql script "sharetribe_development.sql"
 * cd shop/config
 * cp database.example.yml database.yml
 * nano database.yml
    * Fill in database credentials for your local mySQL db
 * cp config.example.yml config.yml
 * nano config.yml
-   * Set domain : “localhost:3000/shop” 
+   * Set domain : "localhost:3000/shop"
 Running the app
 * cd /shop 
 * bundle exec rails server -e development
