@@ -137,7 +137,7 @@ module ListingsHelper
   end
 
   def get_listing_attribute_value(listing, key)
-    "#{key}" + "M"
+    "todo"
   end
 
 end
