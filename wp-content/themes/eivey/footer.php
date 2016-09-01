@@ -43,7 +43,7 @@
             )); ?>
         </div>
         <div class="small-12 medium-4 grid-end">
-            <h4 class="footer-menu-title">Contact</h4>
+            <h4 class="footer-menu-title">Company</h4>
             <?php wp_nav_menu(array(
                 'theme_location' => 'footer-right',
                 'menu_class' => 'standard-menu-footer'
