@@ -7,15 +7,19 @@
           .custom-filter-title
             = field.name(I18n.locale)
           - make_scrollable = field.options.size > 12
-          .custom-filter-options{:class => make_scrollable ? "scrollable" : ""}
-            - field.options.sort.each do |option|
-              .custom-filter-checkbox-container
-                %label.custom-filter-checkbox-label
-                  - if field.name(I18n.locale) == "Color"
+          - if field.name(I18n.locale).downcase == "color" || field.name(I18n.locale).downcase == "colour"
+            #grid-color-filter-container.custom-filter-options
+              - field.options.sort.each do |option|
+                .custom-filter-checkbox-container
+                  - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
+                  = check_box_tag param_name, "#{option.id}", params[param_name]
+                  %label.color-filter-container{for: "#{param_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', "_")}"}
                     %span{class: "color-filter #{option.title.downcase}"}
-                      - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                      = check_box_tag param_name, "#{option.id}", params[param_name]
-                  - else
+          -else
+            .custom-filter-options{:class => make_scrollable ? "scrollable" : ""}
+              - field.options.sort.each do |option|
+                .custom-filter-checkbox-container
+                  %label.custom-filter-checkbox-label
                     - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
                     = check_box_tag param_name, "#{option.id}", params[param_name]
                     %span.custom-filter-checkbox-label-text

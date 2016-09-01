@@ -1,7 +1,33 @@
 .custom-filter-checkbox-container {
   padding: 0 5px;
-  float: left;
-  margin-top: 10px;
+  margin-top: 5px;
+  &:first-child {
+    margin-top: 10px;
+  }
+}
+
+#grid-color-filter-container {
+  .custom-filter-checkbox-container {
+    float: left;
+    margin-top: 10px;
+  }
+  input {
+    display: none;
+  }
+}
+
+.color-filter-container {
+  height: 30px;
+  width: 30px;
+  border: 3px solid transparent;
+  @include transition-with-defaults(border);
+  &:hover {
+    border-color: $color-grid-grey;
+  }
+}
+
+input[type=checkbox]:checked + .color-filter-container {
+  border-color: $color-grid-grey;
 }
 
 .color-filter {
@@ -10,18 +36,6 @@
   display: inline-block;
   cursor: pointer;
   border: 1px solid transparent;
-  input[type=checkbox] {
-    -webkit-appearance: none;
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    outline: none;
-    box-shadow: none;
-    margin: -1px 0 0 -1px;
-    &:checked {
-      border: 3px solid #CCC;
-    }
-  }
   &.white {
     background-color: $color-filter-white;
     border: 1px solid $color-filter-grey;
@@ -56,4 +70,11 @@
   &.brown {
     background-color: $color-filter-brown;
   }
+}
+
+.product-grid-filter{
+  font-size: 14px;
+  text-transform: uppercase;
+  color: $color-global-grey!important;
+  font-weight: 200;
 }
