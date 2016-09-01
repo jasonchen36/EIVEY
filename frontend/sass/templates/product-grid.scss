@@ -1,0 +1,59 @@
+.custom-filter-checkbox-container {
+  padding: 0 5px;
+  float: left;
+  margin-top: 10px;
+}
+
+.color-filter {
+  height: 24px;
+  width: 24px;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid transparent;
+  input[type=checkbox] {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    outline: none;
+    box-shadow: none;
+    margin: -1px 0 0 -1px;
+    &:checked {
+      border: 3px solid #CCC;
+    }
+  }
+  &.white {
+    background-color: $color-filter-white;
+    border: 1px solid $color-filter-grey;
+  }
+  &.grey {
+    background-color: $color-filter-grey;
+  }
+  &.black {
+    background-color: $color-filter-black;
+  }
+  &.yellow {
+    background-color: $color-filter-yellow;
+  }
+  &.orange {
+    background-color: $color-filter-orange;
+  }
+  &.red {
+    background-color: $color-filter-red;
+  }
+  &.pink {
+    background-color: $color-filter-pink;
+  }
+  &.purple {
+    background-color: $color-filter-purple;
+  }
+  &.blue {
+    background-color: $color-filter-blue;
+  }
+  &.green {
+    background-color: $color-filter-green;
+  }
+  &.brown {
+    background-color: $color-filter-brown;
+  }
+}

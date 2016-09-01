@@ -12,63 +12,9 @@
               .custom-filter-checkbox-container
                 %label.custom-filter-checkbox-label
                   - if field.name(I18n.locale) == "Color"
-                    - colourOption = option.id
-                    - if colourOption == 1
-                      %span.colourTile.col-2.white
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      //White
-                    - elsif colourOption == 4
-                      %span.colourTile.col-2.yellow
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Yellow
-                    - elsif colourOption == 5
-                      %span.colourTile.col-2.orange
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Orange
-                    - elsif colourOption == 6
-                      %span.colourTile.col-2.red
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Red
-                    - elsif colourOption == 7
-                      %span.colourTile.col-2.pink
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Pink
-                    - elsif colourOption == 8
-                      %span.colourTile.col-2.purple
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Purple
-                    - elsif colourOption == 9
-                      %span.colourTile.col-2.blue
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Blue
-                    - elsif colourOption == 10
-                      %span.colourTile.col-2.green
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Green
-                    - elsif colourOption == 11
-                      %span.colourTile.col-2.brown
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Brown
-                    - elsif colourOption == 3
-                      %span.colourTile.col-2.black
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                      // Black
-                    - elsif colourOption == 2
-                      %span.colourTile.col-2.grey
-                        - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
-                        = check_box_tag param_name, "#{option.id}", params[param_name]
-                    // Grey
-                    -#  = check_box_tag param_name, "#{option.id}", params[param_name]
+                    %span{class: "color-filter #{option.title.downcase}"}
+                      - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
+                      = check_box_tag param_name, "#{option.id}", params[param_name]
                   - else
                     - param_name = type == :dropdown ? "filter_option_#{option.id}" : "checkbox_filter_option_#{option.id}"
                     = check_box_tag param_name, "#{option.id}", params[param_name]
@@ -76,7 +22,7 @@
                       = option.title(I18n.locale)
 
   - field.with(:numeric) do
-    .rowx
+    .row
       .col-12
         .custom-filter-title
           = field.name(I18n.locale)
