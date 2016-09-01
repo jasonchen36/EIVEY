@@ -86,11 +86,6 @@ $elementSpacing: lines(0.5);
   margin: 0;
 }
 
-.header-menu-container {
-  display: block;
-  padding: $elementPadding $elementSpacing;
-}
-
 .header-menu-toggle-container {
   @include button-group-button-padding;
   height: $elementHeight;

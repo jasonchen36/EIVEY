@@ -2199,27 +2199,3 @@ figure.fluidratio {
 .flash-notifcations{
   margin-top: 20px;
 }
-
-//Custom header search stuff
-.browse-view-search-form-input{
-  position: relative;
-  margin-left:58.75%;
-  width: 22em;
-  z-index: -99999;
-  margin-top: -25px;
-  .search-form-input{
-    width: 100%;
-    input{
-      padding: 0;
-    }
-    .action-button{
-      color: #939598;
-      font-size: 1.25em;
-      background-color:transparent;
-      padding:0;
-      margin-top: -1.6em;
-      width: 0px;
-      margin-left: 16em;
-    }
-  }
-}

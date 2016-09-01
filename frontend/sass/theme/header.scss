@@ -1,3 +1,5 @@
+//core
+//-----------------------------
 $logo-width: 410px;
 
 header {
@@ -10,6 +12,9 @@ header {
   }
 }
 
+
+//category menu
+//-----------------------------
 #menu-categories {
   width: 100%;
   li {
@@ -33,6 +38,8 @@ header {
   }
 }
 
+//secondary header menu
+//-----------------------------
 #menu-header-secondary {
   li {
     padding: 0 10px;
@@ -50,6 +57,9 @@ header {
   }
 }
 
+
+//logo
+//-----------------------------
 #logo-tagline-border {
   border-top: 2px dotted $color-global-grey;
   width: $logo-width;
@@ -67,4 +77,14 @@ header {
   font-size: 17px;
   text-align: center;
   @extend .f--georgia;
+}
+
+
+//sell button
+//-----------------------------
+#header-menu-container {
+  display: block;
+  padding: 2.5em 0.75em;
+  width: 200px;
+  float: right;
 }

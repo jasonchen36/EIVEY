@@ -9,13 +9,10 @@
       #logo-tagline
         Buy &amp; Sell Pre-Loved Designer Fashion
 
-    -#sell button
-    .small-12.medium-2.grid-end
-      .header-menu-container
-        = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
-
     -#account links and menus
-    .small-12.medium-5.grid-end
+    .small-12.medium-7.grid-end
+      #header-menu-container
+        = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
       - if logged_in
         .float-right
           = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
@@ -30,6 +27,12 @@
           .left
             = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
               = t("header.login")
+    .small-12.medium-7.grid-end
+      .search-form-input.search-form-text-field
+        = text_field_tag "q", params[:q]
+        .search-form-input-button
+          %button.action-button#search-button{type: 'submit'}
+            = icon_tag("search", ["icon-part"])
 
   #header-mobile-menu.grid-container.hide-for-large
     -#  todo, mobile menu
