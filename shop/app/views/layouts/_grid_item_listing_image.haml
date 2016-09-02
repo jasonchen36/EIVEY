@@ -24,7 +24,7 @@
         Size:
         = get_listing_attribute_value(listing, "size")
 
-    .fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
+    -#.fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}
     - if listing.price
       %span.fluid-thumbnail-grid-image-price
         = humanized_money_with_symbol(listing.price).upcase
