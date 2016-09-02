@@ -1,0 +1,129 @@
+/*
+
+These main styles are the globalized foundation for the theme and are often what need to be overwritten by localized changes
+
+Use helper classes to style elements that otherwise wouldn't need to have a full declaration or that are one-off occurrences
+
+*/
+
+//main styles
+//-----------------------------
+html,body,h1,h2,h3,h4,h5,p,a,blockquote {
+  color: $color-global-black;
+  @extend .f--open-sans;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  @include transition-with-defaults(color);
+  &:hover {
+    color: $color-global-grey;
+  }
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+//helper classes
+//-----------------------------
+.faded-out {
+  display: none;
+  opacity: 0;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.full-screen-takeover {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99999;
+  overflow-y: scroll;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+//typography
+.text-bold {
+  font-weight: bold;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-upper {
+  text-transform: uppercase;
+}
+
+//float
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+//visibility
+.hide-for-small {
+  @include mobile {
+    display: none!important;
+  }
+}
+.hide-for-medium {
+  @include tablet {
+    display: none!important;
+  }
+}
+.hide-for-medium-up {
+  @include tablet-up {
+    display: none!important;
+  }
+}
+.hide-for-large {
+  @include desktop {
+    display: none!important;
+  }
+}
+.show-for-medium {
+  @include mobile {
+    display: none!important;
+  }
+  @include desktop {
+    display: none!important;
+  }
+}
+.show-for-large {
+  @include mobile {
+    display: none!important;
+  }
+  @include tablet {
+    display: none!important;
+  }
+}

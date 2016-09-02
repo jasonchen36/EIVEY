@@ -31,20 +31,8 @@ a, input, button {
   --------------------------
 */
 
-body {
-  @include source-sans-pro;
-  @include normal-type;
-
-  @include media(tiny-mobile) {
-    // Zooms out on tiny screens
-    font-size: em(13);
-  }
-}
-
 .page-content {
   min-height:800px;
-  margin-top: 20px;
-  padding-bottom: lines(3);
 
   p {
     margin-bottom: lines(0.5);
@@ -57,10 +45,6 @@ body {
 
   br {
     height: lines(0.5);
-  }
-
-  @include media(tablet) {
-    padding-top: lines(1);
   }
 
 }
@@ -88,11 +72,11 @@ body {
   height: auto; // fixes some height issues in the map view
   //border: solid darken($highlight, 9%);
   //border-width: 0 0 lines(1);
-}
+}f
 
-ul {
-  padding-left: lines(1);
-}
+ ul {
+   padding-left: lines(1);
+ }
 
 .section {
   padding: lines(0.5);
@@ -551,7 +535,6 @@ label.error {
   bottom: em(-4);
   left: em(2);
 
-  @include source-sans-pro;
   @include mega-type;
   z-index: 0;
   @include media(tablet) {
@@ -1571,9 +1554,9 @@ input[type=text].delivery-price-field {
 */
 
 .initiate-transaction-totals {
-    background-color: $highlight;
-    padding: lines(0.5);
-    margin-bottom: lines(0.5);
+  background-color: $highlight;
+  padding: lines(0.5);
+  margin-bottom: lines(0.5);
 }
 
 .initiate-transaction-per-unit-wrapper,
@@ -1582,7 +1565,7 @@ input[type=text].delivery-price-field {
 .initiate-transaction-sum-wrapper,
 .initiate-transaction-shipping-price-wrapper,
 .initiate-transaction-total-wrapper {
-    @include clearfix;
+  @include clearfix;
 }
 
 .initiate-transaction-per-unit-label,
@@ -1591,7 +1574,7 @@ input[type=text].delivery-price-field {
 .initiate-transaction-sum-label,
 .initiate-transaction-shipping-price-label,
 .initiate-transaction-total-label {
-    float: left;
+  float: left;
 }
 
 .initiate-transaction-per-unit-value,
@@ -1600,12 +1583,12 @@ input[type=text].delivery-price-field {
 .initiate-transaction-sum-value,
 .initiate-transaction-shipping-price-value,
 .initiate-transaction-total-value {
-    float: right;
-    margin-right: lines(0.25);
+  float: right;
+  margin-right: lines(0.25);
 }
 
 .initiate-transaction-total-wrapper {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /*
@@ -1615,14 +1598,14 @@ input[type=text].delivery-price-field {
 */
 
 .shipping-address-container {
-    background-color: $highlight;
-    padding: lines(0.5);
-    margin-bottom: lines(0.5);
-    margin-top: lines(0.5);
+  background-color: $highlight;
+  padding: lines(0.5);
+  margin-bottom: lines(0.5);
+  margin-top: lines(0.5);
 }
 
 .shipping-address-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /*
@@ -1644,31 +1627,8 @@ input[type=text].delivery-price-field {
     min-height: 250px;
   }
 }
-/*
-  -----------------------------------------------
-  home page grid
-  -----------------------------------------------
-*/
-.home-fluid-thumbnail-grid-border{
-  border: solid black 1px;
-}
 
-.fluid-thumbnail-grid-image-details{
-  text-align: center;
-  color:black;
-  .fluid-thumbnail-grid-image-title{
-    font-weight: 600;
-    line-height: 1em;
-    text-transform: uppercase;
-  }
-  .fluid-thumbnail-grid-image-size{
-    line-height: 1em;
-  }
-  .fluid-thumbnail-grid-image-price{
-    font-family: 'Open Sans';
-    font-weight: 600;
-  }
-}
+
 /*
   -----------------------------------------------
   New testimonial form, conversation status form
@@ -2115,11 +2075,6 @@ figure.fluidratio {
     }
   }
 
-  .search-form-input {
-    vertical-align: top;
-    display: inline;
-  }
-
   .browse-view-search-form {
     width: 100%;
     padding-top: lines(0.5);
@@ -2150,86 +2105,74 @@ figure.fluidratio {
       color: grey;
       background-color: transparent;
     }
-    }
-
-    @include media(tablet) {
-      padding: lines(1) 0;
-    }
   }
 
   @include media(tablet) {
+    padding: lines(1) 0;
+  }
+}
+
+@include media(tablet) {
 
 
-    .marketplace-lander-content-title {
-      margin-bottom: 0;
-      margin-top: 0;
-      @include huge-type;
-      line-height: em(13);
-    }
+  .marketplace-lander-content-title {
+    margin-bottom: 0;
+    margin-top: 0;
+    @include huge-type;
+    line-height: em(13);
+  }
 
-    p {
-      @include large-type;
-      margin: lines(0.5) auto;
-    }
+  p {
+    @include large-type;
+    margin: lines(0.5) auto;
+  }
+
+  input[type=text] {
+    @include big-type;
+    padding: em(11) em(14) em(11) em(14);
+    width: lines(15);
+  }
+
+  button.action-button {
+    width: lines(4);
+    padding: em(14) em(16) em(11) em(16);
+    @include big-type;
+  }
+
+  .browse-view-search-form {
+    $search-bar-height: 48px;
 
     input[type=text] {
-      @include big-type;
-      padding: em(11) em(14) em(11) em(14);
-      width: lines(15);
+      @include normal-type;
+      width: 30%;
+      margin-top: -6%;
+      margin-left: 71%;
+      border: solid 1px grey;
+      line-height: 36px;
+      height: 36px;
     }
 
     button.action-button {
-      width: lines(4);
-      padding: em(14) em(16) em(11) em(16);
-      @include big-type;
-    }
-
-    .search-form-text-field {
-      width: lines(10);
-    }
-
-    .browse-view-search-form {
-      $search-bar-height: 48px;
-
-      input[type=text] {
-        @include normal-type;
-        width: 30%;
-        margin-top: -6%;
-        margin-left: 71%;
-        border: solid 1px grey;
-        line-height: 36px;
-        height: 36px;
-      }
-
-      button.action-button {
-        margin-left: 88%;
-        line-height: 36px;
-        height: 36px;
-        margin-top: -9.5%;
-        background-color:transparent;
-      }
-
+      margin-left: 88%;
+      line-height: 36px;
+      height: 36px;
+      margin-top: -9.5%;
+      background-color:transparent;
     }
 
   }
 
-  @include media(desktop) {
-    .marketplace-lander-content-title {
-      margin-bottom: 0;
-      margin-top: 0;
-      @include mega-type;
-      line-height: em(15);
-    }
-  }
-
-.eivey-footer{
-  color: #939598;
-  background-color: #f1f2f2;
-  font-size:14px;
-  margin-top: 8%;
-  text-align:left;
-  padding: 2% 7% 1%;
 }
+
+@include media(desktop) {
+  .marketplace-lander-content-title {
+    margin-bottom: 0;
+    margin-top: 0;
+    @include mega-type;
+    line-height: em(15);
+  }
+}
+
 .footer-support, .footer-company{
   font-size:14px;
   color: #939598;
@@ -2244,117 +2187,6 @@ figure.fluidratio {
   text-align:center;
 }
 
-.social-icon{
-  font-size:2em;
-  padding:10px;
-}
-
 .flash-notifcations{
   margin-top: 20px;
-}
-
-// Colour Tiles for filter list
-
-$checkbox_white_colour: #ffffff;
-$checkbox_grey_colour: #939598;
-$checkbox_black_colour: #000000;
-$checkbox_yellow_colour: #fff200;
-$checkbox_orange_colour: #d88829;
-$checkbox_red_colour: #d2232a;
-$checkbox_pink_colour: #ec008c;
-$checkbox_purple_colour: #7e3f8d;
-$checkbox_blue_colour: #23408f;
-$checkbox_green_colour:#008b4b;
-$checkbox_brown_colour:#9d5a45;
-.custom-filter-checkbox-container {
-  .colourTile {
-    height: 24px;
-    width: 24px;
-    margin: 5px 10px 0 0;
-    &.white {
-      background-color: $checkbox_white_colour;
-      border: 1px solid #ccc;
-    }
-    &.grey {
-      background-color: $checkbox_grey_colour;
-    }
-    &.black {
-      background-color: $checkbox_black_colour;
-    }
-    &.yellow {
-      background-color: $checkbox_yellow_colour;
-    }
-    &.orange {
-      background-color: $checkbox_orange_colour;
-    }
-    &.red {
-      background-color: $checkbox_red_colour;
-    }
-    &.pink {
-      background-color: $checkbox_pink_colour;
-    }
-    &.purple {
-      background-color: $checkbox_purple_colour;
-    }
-    &.blue {
-      background-color: $checkbox_blue_colour;
-    }
-    &.green {
-      background-color: $checkbox_green_colour;
-    }
-    &.brown {
-      background-color: $checkbox_brown_colour;
-    }
-    input[type="checkbox"]:checked:before {
-      content: '';
-
-    }
-
-    input[type=checkbox] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px; /*Desired width*/
-      height: 24px; /*Desired height*/
-      cursor: pointer;
-      display: inline-block;
-      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
-    }
-
-    input[type="checkbox"]:checked {
-      border: 3px solid #CCC;
-      position: relative;
-      height: 24px;
-      width: 24px;
-      box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-    }
-    input[type="checkbox"]:focus {
-      outline: 0 none;
-      box-shadow: none;
-    }
-  }
-}
-
-//Custom header search stuff
-.browse-view-search-form-input{
-  position: relative;
-  margin-left:58.75%;
-  width: 22em;
-  z-index: -99999;
-  margin-top: -25px;
-  .search-form-input{
-    width: 100%;
-    input{
-      padding: 0;
-    }
-    .action-button{
-      color: #939598;
-      font-size: 1.25em;
-      background-color:transparent;
-      padding:0;
-      margin-top: -1.6em;
-      width: 0px;
-      margin-left: 16em;
-    }
-  }
 }

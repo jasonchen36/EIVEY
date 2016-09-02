@@ -54,12 +54,13 @@ add_action('after_setup_theme', 'eivey_setup');
  * Enqueue scripts and styles.
  */
 function eivey_scripts() {
+    wp_enqueue_style('google-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans');
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css');
-    wp_enqueue_style('eivey-style-base', get_template_directory_uri().'/build/app.base.min.css');
-    wp_enqueue_style('eivey-style-main', get_template_directory_uri().'/build/app.main.min.css');
-    wp_enqueue_script('eivey-logic-base', get_template_directory_uri().'/build/app.base.min.js');
-//    wp_enqueue_script('eivey-logic-handlebars', get_template_directory_uri().'/build/app.handlebars.min.js');
-    wp_enqueue_script('eivey-logic-main', get_template_directory_uri().'/build/app.main.min.js', array(), '20160803', true);
+    wp_enqueue_style('eivey-style-base', '/frontend/build/app.base.min.css');
+    wp_enqueue_style('eivey-style-main', '/frontend/build/app.main.min.css');
+    wp_enqueue_script('eivey-logic-base', '/frontend/build/app.base.min.js');
+//    wp_enqueue_script('eivey-logic-handlebars', '/frontend/build/app.handlebars.min.js');
+    wp_enqueue_script('eivey-logic-main', '/frontend/build/app.main.min.js', array(), '20160803', true);
 }
 add_action('wp_enqueue_scripts', 'eivey_scripts');
 

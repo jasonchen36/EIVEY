@@ -1,0 +1,227 @@
+//core
+//-----------------------------
+$logo-width: 410px;
+
+header {
+  @include desktop {
+    margin-bottom: 25px;
+  }
+  .i--icon-logo, .i--icon-logo-white {
+    width: $logo-width;
+    height: 50px;
+    margin: 10px auto;
+    max-width: 100%;
+    @include desktop {
+      height: 100px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.standard-menu {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  li {
+    display: inline-block;
+    float: left;
+  }
+}
+
+.wordpress {
+  .show-for-sharetribe {
+    display: none;
+  }
+}
+
+//category menu
+//-----------------------------
+#menu-categories {
+  width: 100%;
+  li {
+    padding: 0 2.33%;
+    text-align: center;
+    margin-bottom: 5px;
+    &:first-child {
+      @include desktop{
+        padding-left: 0;
+      }
+    }
+    &:last-child {
+      @include desktop {
+        padding-right: 0;
+      }
+    }
+  }
+  a {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+
+
+//secondary header menu
+//-----------------------------
+#menu-header-secondary {
+  li {
+    padding: 0 10px;
+    &:not(:last-child){
+      border-right: 2px solid $color-global-grey;
+    }
+  }
+  a {
+    color: $color-global-grey;
+    text-transform: uppercase;
+    font-size: 15px;
+    &:hover {
+      color: $color-global-black;
+    }
+  }
+}
+
+
+//logo
+//-----------------------------
+#logo-tagline-border {
+  border-top: 2px dotted $color-global-grey;
+  width: $logo-width;
+  height: 2px;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+#logo-tagline {
+  color: $color-global-grey;
+  margin: 10px auto;
+  max-width: $logo-width;
+  text-transform: uppercase;
+  font-size: 17px;
+  text-align: center;
+  @extend .f--georgia;
+}
+
+
+//sell button
+//-----------------------------
+#header-menu-container {
+  display: block;
+  padding: 0 0.75em;
+  width: 200px;
+  float: right;
+  margin-top: 5px;
+}
+
+
+//search
+//-----------------------------
+.sharetribe-search {
+  .search-form-input-container {
+    padding-right: 10px;
+    margin-top: 10px;
+  }
+  #q {
+    border: 2px solid $color-sharetribe-grey;
+  }
+  .search-form-submit {
+    right: 20px;
+  }
+}
+
+.search-form-input-container {
+  position: relative;
+}
+
+.search-form-input, #q {
+  line-height: 1;
+  width: 100%;
+  padding: 0.5em 50px 0.5em 0.6875em;
+  border: none;
+}
+
+.search-form-submit {
+  $icon-size: 30px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 10px;
+  width: $icon-size;
+  height: $icon-size;
+  @include transition-with-defaults(opacity);
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+
+//user menu
+//-----------------------------
+.header-user-avatar {
+  display: block;
+  height: 2.5em;
+  margin-top: 5px;
+}
+
+#header-menu-user-container {
+  padding-top: 25px;
+}
+
+//mobile menu
+//-----------------------------
+#header-menu-mobile-container {
+  background-color: $color-global-dark-grey;
+}
+
+.i--icon-menu, .i--icon-user, .i--icon-bag {
+  $icon-size: 20px;
+  height: $icon-size;
+  width: $icon-size;
+  display: inline-block;
+  margin: 35px 5px 5px 5px;
+  @include transition-with-defaults(opacity);
+  @include tablet-up {
+    margin: 25px 5px 5px 5px;
+    $icon-size: 35px;
+    height: $icon-size;
+    width: $icon-size;
+  }
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+#mobile-menu-fullscreen-container, #mobile-user-menu-fullscreen-container {
+  padding: 10px;
+  .standard-menu {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    li {
+      margin: 5px 0;
+      padding: 0 15px;
+      display: block;
+      float: none;
+    }
+  }
+}
+
+.mobile-menu-close {
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.mobile-menu-header {
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+#mobile-user-menu-fullscreen-container {
+  i {
+    display: none;
+  }
+}

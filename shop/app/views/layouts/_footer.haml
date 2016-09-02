@@ -1,31 +1,34 @@
-%footer.eivey-footer
-  .row
-    .support.row.col-5
-      %strong.footer-support Support
-      %br/
-      .col-8.row
-        %a{:href => "", :target =>"blank"} Frequently Asked Questions
-        %br/
-        %a{:href => "", :target =>"blank"} Contact Us
-        %br/
-        %a{:href => "", :target =>"blank"} Events
-      .col-4.row
-        %a{:href => "", :target =>"blank"} Selling
-        %br/
-        %a{:href => "", :target =>"blank"} Buying
-        %br/
-        %a{:href => "", :target =>"blank"} Shipping
-    %div.col-2.row.company
-      %strong.footer-company Company
-      %br/
-      %a{:href => "", :target =>"blank"} About Us
-      %br/
-      %a{:href => "", :target =>"blank"} Terms of Use
-      %br/
-      %a{:href => "", :target =>"blank"} Privacy Policy
-      %br/
-      %a{:href => "", :target =>"blank"} Blog
-    .col-5.row.social
+%footer#footer-menu-container
+  %nav.grid-container
+    .small-12.medium-3
+      %h4.footer-menu-title
+        Support
+      %ul.standard-menu-footer
+        %li
+          %a{:href => "/frequently-asked-questions", :target =>"blank"} Frequently Asked Questions
+        %li
+          %a{:href => "/contact", :target =>"blank"} Contact
+        %li
+          %a{:href => "/events", :target =>"blank"} Events
+    .small-12.medium-3
+      %ul.standard-menu-footer
+        %li
+          %a{:href => "/selling", :target =>"blank"} Selling
+        %li
+          %a{:href => "/buying", :target =>"blank"} Buying
+        %li
+          %a{:href => "/terms-conditions", :target =>"blank"} Terms &amp; Conditions
+        %li
+          %a{:href => "/privacy-policy", :target =>"blank"} Privacy Policy
+    .small-12.medium-3
+      %h4.footer-menu-title
+        Company
+      %ul.standard-menu-footer
+        %li
+          %a{:href => "/about", :target =>"blank"} About
+        %li
+          %a{:href => "/blog", :target =>"blank"} Blog
+    .small-12.medium-3.grid-end.social-icon-container
       %a.social-icon{:href => "https://www.facebook.com/eiveydotca", :target =>"blank"}
         %i.fa.fa-facebook{"aria-hidden" => "true"}
       %a.social-icon{:href => "https://www.instagram.com/eiveydotca/" , :target =>"blank"}
@@ -34,9 +37,12 @@
         %i.fa.fa-twitter{"aria-hidden" => "true"}
       %a.social-icon{:href => "https://www.pinterest.com/eiveydotca/", :target =>"blank"}
         %i.fa.fa-pinterest{"aria-hidden" => "true"}
-      %br/
-    %div.row.col-12.copyrightblurb
-      %p
-      © 2016 EIVEY, All rights reserved, EIVEY
-      %sup ©
-      is a registered trademark of Eivey
+  %h5#footer-trademark.grid-container
+    &copy;
+    = Time.now.year
+    EIVEY.  All rights reserved, EIVEY
+    %sup
+      &copy;
+    is a registered trademark of Eivey
+
+%script{:type => :"text/javascript", :src => "http://dev.eivey.com/frontend/build/app.sharetribe.min.js"}

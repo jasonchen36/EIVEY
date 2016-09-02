@@ -1,0 +1,49 @@
+#https://httpd.apache.org/docs/current/vhosts/examples.html
+
+<VirtualHost *:80>
+        <Directory /var/www/eivey.ca>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+        DocumentRoot /var/www/eivey.ca
+
+        ProxyPreserveHost On
+        ProxyRequests Off
+
+        ServerName eivey.ca
+        ServerAlias www.eivey.ca *.eivey.net *.eivey.org *.eivey.store
+
+        #redirect aliases to eivey.ca
+        RewriteEngine on
+        RewriteCond %{HTTP_HOST} !^eivey.ca$
+        RewriteRule (.*) http://eivey.ca$1 [R=301,L]
+
+        #sharetribe proxy settings
+        ProxyPass /shop http://127.0.0.1:3000/
+        ProxyPassReverse /shop http://127.0.0.1:3000/
+
+        ErrorLog ${APACHE_LOG_DIR}/eivey.error.log
+        CustomLog ${APACHE_LOG_DIR}/eivey.access.log combined
+
+</VirtualHost>
+
+<VirtualHost *:80>
+        <Directory /var/www/dev.eivey.ca>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+        </Directory>
+        DocumentRoot /var/www/dev.eivey.ca
+
+        ServerName dev.eivey.ca
+
+        ProxyPass /shop http://127.0.0.1:3000/
+        ProxyPassReverse /shop http://127.0.0.1:3000/
+
+        ErrorLog ${APACHE_LOG_DIR}/dev.eivey.error.log
+        CustomLog ${APACHE_LOG_DIR}/dev.eivey.access.log combined
+
+</VirtualHost>

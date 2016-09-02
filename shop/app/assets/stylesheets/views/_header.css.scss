@@ -17,12 +17,6 @@ $textLineHeight: $headerHeight - em(3);
 /* Default spacing between header bar elements */
 $elementSpacing: lines(0.5);
 
-.header {
-  height: $headerHeight;
-  margin-bottom: 3em;
-  width: 100%;
-}
-
 .header-wrapper {
   @include wrapper(0);
 }
@@ -69,10 +63,7 @@ $elementSpacing: lines(0.5);
 }
 
 .header-text-link {
-  height: $headerHeight;
-  line-height: $textLineHeight;
-  padding-right: $elementSpacing;
-  padding-left: $elementSpacing;
+  padding: $elementSpacing;
   display: block;
   color: $body;
 
@@ -85,22 +76,11 @@ $elementSpacing: lines(0.5);
   }
 }
 
-@mixin header-menu-button($bgcolor) {
-  @include button($bgcolor);
-  @include header-block;
-  padding-left: em(20);
-  padding-right: em(20);
-  line-height: $buttonLineHeight;
-}
-
 .new-listing-link {
-  @include header-menu-button($link2);
-}
-
-.header-menu-container {
-  display: block;
-  padding: $elementPadding $elementSpacing;
-  height: $headerHeight;
+  @include button($link2);
+  width: 100%;
+  line-height: $buttonLineHeight;
+  margin: 0;
 }
 
 .header-menu-toggle-container {
@@ -126,22 +106,14 @@ $elementSpacing: lines(0.5);
   }
 }
 
-.header-user-avatar {
-    //@include header-block;
-  display: block;
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
-  height: 2.5em;
-}
-
 .header-user-toggle {
   padding-left: $elementSpacing;
   display: block;
+  min-width: 175px;
   @include clearfix;
 }
 
 @mixin header-toggle-menu {
-  min-width: em(200);
   position: absolute;
 }
 
@@ -151,6 +123,7 @@ $elementSpacing: lines(0.5);
 
 .header-toggle-menu-user {
   @include header-toggle-menu;
+  min-width: 175px;
 }
 
 .header-toggle-menu-menu {
@@ -168,7 +141,6 @@ $elementSpacing: lines(0.5);
 
   // Icon fix
   position: relative;
-  top: em(4);
 }
 
 .badge {

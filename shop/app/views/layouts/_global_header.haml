@@ -1,67 +1,105 @@
 -# Hide header in map view if mobile
-%header.header
-  .header-wrapper
-    .header-right.header-padding.visible-tablet
+%header#header-desktop-menu.grid-container.show-for-large
+
+  -#logo section
+  .small-12.medium-5
+    %a{:href => "/"}
+      %div.i--icon-logo
+    %span#logo-tagline-border
+    #logo-tagline
+      Buy &amp; Sell Pre-Loved Designer Fashion
+
+  -#account links and menus
+  #header-menu-user-container.small-12.medium-7.grid-end
+    #header-menu-container
       = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
-
-    .header-right.visible-tablet
-      #header-menu-desktop-anchor.header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
-
     - if logged_in
-      .header-right
+      .float-right
+        = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
         = render :partial => "layouts/header_anchors", locals: {avatar_url: avatar_url, current_user_name: current_user_name, icons: icons}
         = render :partial => "layouts/header_user_menu", locals: {unread_count: unread_count, inbox_path: inbox_path, profile_path: profile_path, manage_listings_path: manage_listings_path, settings_path: settings_path, logout_path: logout_path, icons: icons}
-
-      = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
-
-    - if available_locales.size > 1
-      .header-right.visible-desktop
-        #header-locales-menu.toggle.header-hover{data: {toggle: '#header-locales-toggle-menu', 'toggle-position' => 'absolute'}}
-          %span.header-text-link
-            = current_locale_name
-            = icon_map_tag(icons, "dropdown", ["icon-dropdown"])
-        #header-locales-toggle-menu.toggle-menu.header-toggle-menu-language.hidden
-          = render :partial => "layouts/locale_select", :collection => available_locales, :as => :loc_array, locals: {return_after_locale_change: return_after_locale_change}
-
     - unless logged_in
-      .header-right
-        = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
-          = t("header.login")
-      .header-right
-        = link_to sign_up_path, class: "header-text-link header-hover" do
-          = t("header.signup")
+      .float-right
+        .left
+          = link_to sign_up_path, class: "header-text-link header-hover" do
+            = t("header.signup")
+        .left
+          = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
+            = t("header.login")
 
-    .header-left.hidden-tablet
-      .header-menu-container.toggle.hidden{data: {toggle: '#header-menu-toggle-menu', 'toggle-position' => 'absolute'}}
-        #header-menu-mobile-anchor.header-menu-toggle-container.toggle-header-container
-          = icon_map_tag(icons, "rows", ["header-menu-icon"])
-          %span.visible-tablet-inline
-            = t("header.menu")
+  -# search bar
+  .small-12.medium-5.grid-end.sharetribe-search
+    .search-form-input-container
+      = text_field_tag "q", params[:q]
+      %a.search-form-submit.i--icon-search.l--search-submit
 
-    = render :partial => "layouts/header_menu", locals: { return_after_locale_change: return_after_locale_change, available_locales: available_locales, icons: icons}
+-#mobile menu
+%header#header-menu-mobile-container.grid-container.hide-for-large
+  .small-3
+    %a{href: "#"}
+      .i--icon-menu.l--menu-open
+  .small-6
+    %a{href: "/"}
+      .i--icon-logo-white
+  .small-3.grid-end.text-right
+    %a.show-for-sharetribe{href: "#"}
+      .i--icon-user.l--user-menu-open
+    -#%a.show-for-sharetribe{href: "#"}
+    -#  .i--icon-bag
+  .small-12.no-padding
+    .search-form-input-container
+      %input.search-form-input{type: "text"}
+      %a.search-form-submit.i--icon-search.l--search-submit{href: "#"}
 
-    -#
-      If necessary, the buttons will overlap with the logo. Buttons should be on top, that's
-      keep the logo here after buttons
-    .header-left.header-logo-container
-      = link_to landing_page_path, :class => "header-logo", :id => "header-logo" do
-        - if @current_community.logo.present?
-          %i.header-square-logo.hidden-tablet
-            -# Logo is here, it's a CSS background
-            %p.logo-tag BUY  SELL PRE-LOVED DESIGNER FASHION
+-#fullscreen takeovers
+#mobile-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a.mobile-menu-close.l--menu-close{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Clothing
+  %ul.standard-menu
+    %li
+      %a{href:"/shop/?category=tops"}
+        Tops
+    %li
+      %a{href:"/shop/?category=bottoms"}
+        Bottoms
+    %li
+      %a{href:"/shop/?category=dresses"}
+        Dresses
+    %li
+      %a{href:"/shop/?category=outerwear"}
+        Outerwear
+    %li
+      %a{href:"/shop/?category=shoes"}
+        Shoes
+    %li
+      %a{href:"/shop/?category=handbags"}
+        Handbags
+    %li
+      %a{href:"/shop/?category=accessories"}
+        Accessories
+    %li
+      %a{href:"/shop/?category=mens"}
+        Mens
+  %h3.mobile-menu-header
+    Company
+  %ul.standard-menu
+    %li
+      %a{href:"/about"}
+        About
+    %li
+      %a{href:"/contact"}
+        Contact
+    %li
+      %a{href:"/en/signup"}
+        Sign-Up
+    %li
+      %a{href:"/en/login"}
+        Log-In
 
-        - else
-          %span.header-square-logo-text.hidden-tablet
-            = @current_community.name(I18n.locale)[0]
-        - if @current_community.wide_logo.present?
-          %i.header-wide-logo.visible-tablet
-            -# Logo is here, it's a CSS background
-            %p.logo-tag BUY  SELL PRE-LOVED DESIGNER FASHION
-
-        - else
-          %span.header-wide-logo-text.visible-tablet
-            = @current_community.name(I18n.locale)
-            %p.logo-tag BUY  SELL PRE-LOVED DESIGNER FASHION
-  .col-12
-    .browse-view-search-form-input
-      = render partial: "homepage/search_bar"
+#mobile-user-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a.mobile-menu-close.l--user-menu-close{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Account
