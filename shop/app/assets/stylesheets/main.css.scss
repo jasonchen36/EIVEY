@@ -2075,11 +2075,6 @@ figure.fluidratio {
     }
   }
 
-  .search-form-input {
-    vertical-align: top;
-    display: inline;
-  }
-
   .browse-view-search-form {
     width: 100%;
     padding-top: lines(0.5);
@@ -2142,10 +2137,6 @@ figure.fluidratio {
     width: lines(4);
     padding: em(14) em(16) em(11) em(16);
     @include big-type;
-  }
-
-  .search-form-text-field {
-    width: lines(10);
   }
 
   .browse-view-search-form {

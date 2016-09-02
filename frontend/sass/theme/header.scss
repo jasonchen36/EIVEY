@@ -88,3 +88,19 @@ header {
   width: 200px;
   float: right;
 }
+
+//search
+//-----------------------------
+#search-form-input {
+  position: relative;
+  padding-right: 10px;
+  #q {
+    padding-right: 50px;
+  }
+}
+
+#search-button {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
