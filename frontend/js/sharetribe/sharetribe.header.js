@@ -7,6 +7,10 @@
         searchButtonSubmit = $('#search-button'),
         searchInput = $('#search-form-input #q');
 
+    function getSharetribeBaseUrl(){
+        return  helpers.getBaseUrl().split('/en')[0];
+    }
+
     function searchSubmit(){
         var searchQueryKey = 'q',
             searchValue = searchInput.val(),
@@ -14,20 +18,19 @@
         if (searchValue.length > 0){
             if (urlParameters.hasOwnProperty(searchQueryKey)){
                 urlParameters[searchQueryKey] = searchValue;
-                var urlParametersArray = [],
-                    baseUrl = helpers.getBaseUrl().split('/en')[0];
+                var urlParametersArray = [];
                 for (var key in urlParameters) {
                     if (urlParameters.hasOwnProperty(key)) {
                         urlParametersArray.push(key+'='+urlParameters[key]);
                     }
                 }
-                window.location.href = baseUrl+'?'+urlParametersArray.join('&');
+                window.location.href = getSharetribeBaseUrl()+'?'+urlParametersArray.join('&');
             } else {
                 var delimiter = '?';
                 if (window.location.href.indexOf('?') !== -1){
                     delimiter = '&';
                 }
-                window.location.href = window.location.href+delimiter+searchQueryKey+'='+searchValue;
+                window.location.href = getSharetribeBaseUrl()+delimiter+searchQueryKey+'='+searchValue;
             }
         }
     }
