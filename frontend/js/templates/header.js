@@ -2,14 +2,17 @@
 
     var $ = jQuery,
         helpers = app.helpers,
-        listenerSearchSubmit = $('.l--search-submit');
+        searchListenerClass = '.l--search-submit';
 
     function getSharetribeBaseUrl(){
-        var baseUrl = helpers.getBaseUrl().split('/en')[0],
+        var baseUrl = [location.protocol, '//', location.host].join(''),
             sharetribeDirectory = '/shop';
-        if (baseUrl.indexOf('.com') !== -1){
-            //not needed for production env
-            sharetribeDirectory = ':3000';
+        if (baseUrl.indexOf('.com') !== -1) {
+            //for local environment
+            sharetribeDirectory = '';
+            if (baseUrl.indexOf(':3000') === -1){
+                sharetribeDirectory = ':3000';
+            }
         }
         if (baseUrl.charAt(baseUrl.length - 1) === '/') {
             baseUrl = baseUrl.substring(0,baseUrl.length-1);
@@ -42,7 +45,7 @@
     }
 
     this.init = function(){
-        listenerSearchSubmit.on('click touchend', function(event){
+        $(document).on('click touchend', searchListenerClass, function (event) {
             event.preventDefault();
             searchSubmit($(this));
         });

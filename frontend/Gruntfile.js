@@ -281,7 +281,7 @@ module.exports = function(grunt){
             },
             mainJs: {
                 files: watchFiles.mainJs,
-                tasks: ['jshint:main','uglify:main'],
+                tasks: ['jshint:main','uglify:main','jshint:sharetribe','uglify:sharetribe'],
                 options: {
                     livereload: true
                 }

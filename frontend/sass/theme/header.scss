@@ -108,7 +108,7 @@ header {
   #q {
     border: 2px solid $color-sharetribe-grey;
   }
-  .search-button {
+  .search-form-submit {
     right: 20px;
   }
 }
@@ -123,7 +123,7 @@ header {
   border: none;
 }
 
-.search-button {
+.search-form-submit {
   $icon-size: 30px;
   position: absolute;
   top: 0;
@@ -158,12 +158,18 @@ header {
 }
 
 .i--icon-menu, .i--icon-user, .i--icon-bag {
-  $icon-size: 35px;
+  $icon-size: 20px;
   height: $icon-size;
   width: $icon-size;
   display: inline-block;
-  margin: 25px 5px 5px 5px;
+  margin: 35px 5px 5px 5px;
   @include transition-with-defaults(opacity);
+  @include tablet-up {
+    margin: 25px 5px 5px 5px;
+    $icon-size: 35px;
+    height: $icon-size;
+    width: $icon-size;
+  }
   &:hover {
     opacity: 0.75;
   }
