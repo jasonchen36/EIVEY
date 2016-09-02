@@ -33,8 +33,10 @@ footer {
 #footer-menu-container {
   background: $color-footer-background;
   padding: 25px 10px 20px 10px;
+  text-align: center;
   @include tablet-up {
     padding: 25px 0 20px 0;
+    text-align: left;
   }
 }
 
