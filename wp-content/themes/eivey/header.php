@@ -39,7 +39,7 @@
     </div>
 </header>
 <!--mobile menu-->
-<header id="header-menu-mobile-container" class="small-grid-container hide-for-large">
+<header id="header-menu-mobile-container" class="grid-container hide-for-large">
     <div class="small-3">
         <a href="#">
             <div class="i--icon-menu l--menu-open-submit"></div>

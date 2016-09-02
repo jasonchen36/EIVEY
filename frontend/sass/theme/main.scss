@@ -93,37 +93,37 @@ img {
 //visibility
 .hide-for-small {
   @include mobile {
-    display: none;
+    display: none!important;
   }
 }
 .hide-for-medium {
   @include tablet {
-    display: none;
+    display: none!important;
   }
 }
 .hide-for-medium-up {
   @include tablet-up {
-    display: none;
+    display: none!important;
   }
 }
 .hide-for-large {
   @include desktop {
-    display: none;
+    display: none!important;
   }
 }
 .show-for-medium {
   @include mobile {
-    display: none;
+    display: none!important;
   }
   @include desktop {
-    display: none;
+    display: none!important;
   }
 }
 .show-for-large {
   @include mobile {
-    display: none;
+    display: none!important;
   }
   @include tablet {
-    display: none;
+    display: none!important;
   }
 }

@@ -231,6 +231,9 @@ module.exports = function(grunt){
             sharetribe: {
                 files: {
                     'build/app.sharetribe.min.js': [
+                        'bower_components/bluebird/js/browser/bluebird.min.js',
+                        'bower_components/velocity/velocity.min.js',
+                        'bower_components/velocity/velocity.ui.min.js',
                         'js/app.sharetribe.js',
                         'js/lib/*.js',
                         'js/modules/*.js',

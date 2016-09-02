@@ -1,42 +1,99 @@
 -# Hide header in map view if mobile
-%header.header
-  #header-desktop-menu.grid-container.show-for-large
+%header#header-desktop-menu.grid-container.show-for-large
 
-    -#logo section
-    .small-12.medium-5
-      %a{:href => "/"}
-        %div.i--icon-logo
-      %span#logo-tagline-border
-      #logo-tagline
-        Buy &amp; Sell Pre-Loved Designer Fashion
+  -#logo section
+  .small-12.medium-5
+    %a{:href => "/"}
+      %div.i--icon-logo
+    %span#logo-tagline-border
+    #logo-tagline
+      Buy &amp; Sell Pre-Loved Designer Fashion
 
-    -#account links and menus
-    #header-menu-user-container.small-12.medium-7.grid-end
-      #header-menu-container
-        = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
-      - if logged_in
-        .float-right
-          = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
-          = render :partial => "layouts/header_anchors", locals: {avatar_url: avatar_url, current_user_name: current_user_name, icons: icons}
-          = render :partial => "layouts/header_user_menu", locals: {unread_count: unread_count, inbox_path: inbox_path, profile_path: profile_path, manage_listings_path: manage_listings_path, settings_path: settings_path, logout_path: logout_path, icons: icons}
-      - unless logged_in
-        .float-right
-          .left
-            = link_to sign_up_path, class: "header-text-link header-hover" do
-              = t("header.signup")
-          .left
-            = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
-              = t("header.login")
+  -#account links and menus
+  #header-menu-user-container.small-12.medium-7.grid-end
+    #header-menu-container
+      = link_to t("homepage.index.post_new_listing"), new_listing_path, :class => "new-listing-link", :id => "new-listing-link"
+    - if logged_in
+      .float-right
+        = render :partial => "layouts/header_right_visible_tablet", locals: {unread_count: unread_count, inbox_path: inbox_path, icons: icons}
+        = render :partial => "layouts/header_anchors", locals: {avatar_url: avatar_url, current_user_name: current_user_name, icons: icons}
+        = render :partial => "layouts/header_user_menu", locals: {unread_count: unread_count, inbox_path: inbox_path, profile_path: profile_path, manage_listings_path: manage_listings_path, settings_path: settings_path, logout_path: logout_path, icons: icons}
+    - unless logged_in
+      .float-right
+        .left
+          = link_to sign_up_path, class: "header-text-link header-hover" do
+            = t("header.signup")
+        .left
+          = link_to login_path, class: "header-text-link header-hover", id: "header-login-link" do
+            = t("header.login")
 
-    -# search bar
-    .small-12.medium-5.grid-end.sharetribe-search
-      .search-form-input-container
-        = text_field_tag "q", params[:q]
-        %a.search-form-submit.i--icon-search.l--search-submit
+  -# search bar
+  .small-12.medium-5.grid-end.sharetribe-search
+    .search-form-input-container
+      = text_field_tag "q", params[:q]
+      %a.search-form-submit.i--icon-search.l--search-submit
 
-  #header-mobile-menu.grid-container.hide-for-large
-    -#  todo, mobile menu
-    .small-12.medium-6
-      mobile menu here
-    .small-12.medium-6.grid-end.text-right
-      another menu
+-#mobile menu
+%header#header-menu-mobile-container.grid-container.hide-for-large
+  .small-3
+    %a{href: "#"}
+      .i--icon-menu.l--menu-open-submit
+  .small-6
+    %a{href: "/"}
+      .i--icon-logo-white
+  .small-3.grid-end.text-right
+    %a.show-for-sharetribe{href: "#"}
+      .i--icon-user
+    %a.show-for-sharetribe{href: "#"}
+      .i--icon-bag
+  .small-12.no-padding
+    .search-form-input-container
+      %input.search-form-input{type: "text"}
+      %a.search-form-submit.i--icon-search.l--search-submit{href: "#"}
+
+-#fullscreen takeover
+#mobile-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a#mobile-menu-close.l--menu-close-submit{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Clothing
+  %ul
+    %li
+      %a{href:"/shop/?category=tops"}
+        Tops
+    %li
+      %a{href:"/shop/?category=bottoms"}
+        Bottoms
+    %li
+      %a{href:"/shop/?category=dresses"}
+        Dresses
+    %li
+      %a{href:"/shop/?category=Outerwear"}
+        Outerwear
+    %li
+      %a{href:"/shop/?category=shoes"}
+        Shoes
+    %li
+      %a{href:"/shop/?category=handbags"}
+        Handbags
+    %li
+      %a{href:"/shop/?category=accessories"}
+        Accessories
+    %li
+      %a{href:"/shop/?category=mens"}
+        Mens
+  %h3.mobile-menu-header
+    Company
+  %ul
+    %li
+      %a{href:"/about"}
+        About
+    %li
+      %a{href:"/contact"}
+        Contact
+    %li
+      %a{href:"/en/signup"}
+        Sign-Up
+    %li
+      %a{href:"/en/login"}
+        Log-In

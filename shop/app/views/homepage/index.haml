@@ -40,7 +40,7 @@
 
   .home-toolbar
 
-    %ul#menu-categories.user-categories.standard-menu
+    %ul#menu-categories.user-categories.standard-menu.show-for-large
       - @main_categories.each do |category|
         - show_subcategories = show_subcategory_list(category, Maybe(@selected_category).id.to_i.or_else(nil))
         %li
