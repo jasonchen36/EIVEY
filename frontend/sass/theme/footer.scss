@@ -17,14 +17,20 @@ footer {
 //-----------------------------
 #footer-tagline {
   color: $color-global-grey;
-  margin: 75px 0 10px 0;
+  margin: 40px 0 10px 0;
   font-size: 24px;
   font-weight: normal;
   @extend .f--georgia;
+  @include desktop {
+    margin: 75px 0 10px 0;
+  }
 }
 
 #footer-social-accounts {
-  margin-bottom: 70px;
+  margin-bottom: 45px;
+  @include desktop {
+    margin-bottom: 70px;
+  }
 }
 
 

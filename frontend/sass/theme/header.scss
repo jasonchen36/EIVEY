@@ -3,7 +3,7 @@
 $logo-width: 410px;
 
 header {
-  @include tablet-up {
+  @include desktop {
     margin-bottom: 25px;
   }
   .i--icon-logo, .i--icon-logo-white {
