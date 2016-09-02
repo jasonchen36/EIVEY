@@ -217,6 +217,7 @@ module.exports = function(grunt){
                         'js/lib/*.js',
                         'js/modules/*.js',
                         'js/**/*.js',
+                        '!js/app.sharetribe.js',
                         '!js/sharetribe/**/*.js'
                     ]
                 },
