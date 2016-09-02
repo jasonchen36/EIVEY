@@ -18,7 +18,7 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body <?php body_class('wordpress'); ?>>
 <!--desktop menu-->
 <header class="grid-container show-for-large">
     <nav id="menu-header-secondary-container" class="small-12 text-right">
@@ -51,10 +51,10 @@
         </a>
     </div>
     <div class="small-3 grid-end text-right">
-        <a href="#">
+        <a href="#" class="show-for-sharetribe">
             <div class="i--icon-user"></div>
         </a>
-        <a href="#">
+        <a href="#" class="show-for-sharetribe">
             <div class="i--icon-bag"></div>
         </a>
     </div>
