@@ -49,7 +49,7 @@ sudo apt-get install ruby
 sudo gem install sass
 
 *on every deploy
-cd wp-content/themes/eivey
+cd frontend/
 npm install
 bower install
 grunt build
