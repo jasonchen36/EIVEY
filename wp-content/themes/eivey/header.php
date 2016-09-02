@@ -59,10 +59,13 @@
         </a>
     </div>
     <div class="small-12 no-padding">
-        <input type="text" />
+        <div class="search-form-input-container">
+            <input type="text" class="search-form-input mobile"/>
+            <a href="#" class="search-button i--icon-search"></a>
+        </div>
     </div>
 </header>
-<div id="mobile-menu" class="faded-out">
+<div id="mobile-menu" class="full-screen-takeover faded-out">
     <?php wp_nav_menu(array(
         'theme_location' => 'homepage',
         'menu_id' => 'menu-categories',

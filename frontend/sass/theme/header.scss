@@ -3,7 +3,9 @@
 $logo-width: 410px;
 
 header {
-  margin-bottom: 25px;
+  @include tablet-up {
+    margin-bottom: 25px;
+  }
   .i--icon-logo, .i--icon-logo-white {
     width: $logo-width;
     height: 100px;
@@ -94,23 +96,36 @@ header {
 
 //search
 //-----------------------------
-#search-form-input {
-  position: relative;
-  padding-right: 10px;
-  margin-top: 10px;
+.sharetribe-search {
+  .search-form-input-container {
+    padding-right: 10px;
+  }
   #q {
-    padding-right: 50px;
-    line-height: 1;
+    border: 2px solid $color-sharetribe-grey;
+  }
+  .search-button {
+    right: 20px;
   }
 }
+.search-form-input-container {
+  position: relative;
+  margin-top: 10px;
+}
 
-#search-button {
+.search-form-input, #q {
+  line-height: 1;
+  width: 100%;
+  padding: 0.5em 50px 0.5em 0.6875em;
+  border: none;
+}
+
+.search-button {
   $icon-size: 30px;
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
-  right: 20px;
+  right: 10px;
   width: $icon-size;
   height: $icon-size;
   @include transition-with-defaults(opacity);
