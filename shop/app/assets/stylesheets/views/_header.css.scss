@@ -63,10 +63,7 @@ $elementSpacing: lines(0.5);
 }
 
 .header-text-link {
-  height: $headerHeight;
-  line-height: $textLineHeight;
-  padding-right: $elementSpacing;
-  padding-left: $elementSpacing;
+  padding: $elementSpacing;
   display: block;
   color: $body;
 
@@ -109,14 +106,6 @@ $elementSpacing: lines(0.5);
   }
 }
 
-.header-user-avatar {
-    //@include header-block;
-  display: block;
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
-  height: 2.5em;
-}
-
 .header-user-toggle {
   padding-left: $elementSpacing;
   display: block;
@@ -152,7 +141,6 @@ $elementSpacing: lines(0.5);
 
   // Icon fix
   position: relative;
-  top: em(4);
 }
 
 .badge {
