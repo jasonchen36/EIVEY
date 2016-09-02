@@ -18,6 +18,15 @@ header {
   }
 }
 
+.standard-menu {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  li {
+    display: inline-block;
+    float: left;
+  }
+}
 
 //category menu
 //-----------------------------
@@ -112,6 +121,7 @@ header {
     right: 20px;
   }
 }
+
 .search-form-input-container {
   position: relative;
 }
@@ -173,4 +183,32 @@ header {
   &:hover {
     opacity: 0.75;
   }
+}
+
+#mobile-menu-fullscreen-container {
+  padding: 10px;
+  .standard-menu {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    li {
+      margin: 5px 0;
+      padding: 0 15px;
+      display: block;
+      float: none;
+    }
+  }
+}
+
+#mobile-menu-close {
+  font-weight: bold;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.mobile-menu-header {
+  margin-bottom: 0;
 }

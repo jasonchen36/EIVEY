@@ -42,7 +42,7 @@
 <header id="header-menu-mobile-container" class="small-grid-container hide-for-large">
     <div class="small-3">
         <a href="#">
-            <div class="i--icon-menu"></div>
+            <div class="i--icon-menu l--menu-open-submit"></div>
         </a>
     </div>
     <div class="small-6">
@@ -65,15 +65,18 @@
         </div>
     </div>
 </header>
-<div id="mobile-menu" class="full-screen-takeover faded-out">
+<div id="mobile-menu-fullscreen-container" class="full-screen-takeover faded-out">
+    <a id="mobile-menu-close" href="#" class="l--menu-close-submit">X</a>
+    <h3 class="mobile-menu-header">Clothing</h3>
     <?php wp_nav_menu(array(
         'theme_location' => 'homepage',
-        'menu_id' => 'menu-categories',
+        'menu_id' => 'menu-categories-mobile',
         'menu_class' => 'standard-menu'
     )); ?>
+    <h3 class="mobile-menu-header">Company</h3>
     <?php wp_nav_menu(array(
         'theme_location' => 'header_secondary',
-        'menu_id' => 'menu-header-secondary',
+        'menu_id' => 'menu-header-secondary-mobile',
         'menu_class' => 'standard-menu'
     )); ?>
 </div>

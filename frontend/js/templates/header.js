@@ -1,8 +1,12 @@
 (function(){
 
     var $ = jQuery,
+        animations = app.animations,
         helpers = app.helpers,
-        searchListenerClass = '.l--search-submit';
+        searchListenerClass = '.l--search-submit',
+        menuOpenListenerClass = '.l--menu-open-submit',
+        menuCloseListenerClass = '.l--menu-close-submit',
+        mobileMenu = $('#mobile-menu-fullscreen-container');
 
     function getSharetribeBaseUrl(){
         var baseUrl = [location.protocol, '//', location.host].join(''),
@@ -43,11 +47,29 @@
             }
         }
     }
+    
+    function openMenu(){
+        animations.fadeIn(mobileMenu);
+    }
+    
+    function closeMenu(){
+        animations.fadeOut(mobileMenu);
+    }
 
     this.init = function(){
         $(document).on('click touchend', searchListenerClass, function (event) {
             event.preventDefault();
             searchSubmit($(this));
+        });
+
+        $(document).on('click touchend', menuOpenListenerClass, function (event) {
+            event.preventDefault();
+            openMenu();
+        });
+
+        $(document).on('click touchend', menuCloseListenerClass, function (event) {
+            event.preventDefault();
+            closeMenu();
         });
     };
 
