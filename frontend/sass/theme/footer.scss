@@ -75,3 +75,9 @@ footer {
     }
   }
 }
+
+.social-icon-container {
+  @include mobile {
+    margin-top: 15px;
+  }
+}
