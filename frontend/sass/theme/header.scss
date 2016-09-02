@@ -191,7 +191,7 @@ header {
   }
 }
 
-#mobile-menu-fullscreen-container {
+#mobile-menu-fullscreen-container, #mobile-user-menu-fullscreen-container {
   padding: 10px;
   .standard-menu {
     display: block;
@@ -207,7 +207,7 @@ header {
   }
 }
 
-#mobile-menu-close {
+.mobile-menu-close {
   font-weight: bold;
   position: absolute;
   right: 10px;
@@ -217,4 +217,11 @@ header {
 
 .mobile-menu-header {
   margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+#mobile-user-menu-fullscreen-container {
+  i {
+    display: none;
+  }
 }

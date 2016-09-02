@@ -42,7 +42,7 @@
 <header id="header-menu-mobile-container" class="grid-container hide-for-large">
     <div class="small-3">
         <a href="#">
-            <div class="i--icon-menu l--menu-open-submit"></div>
+            <div class="i--icon-menu l--menu-open"></div>
         </a>
     </div>
     <div class="small-6">
@@ -66,7 +66,7 @@
     </div>
 </header>
 <div id="mobile-menu-fullscreen-container" class="full-screen-takeover faded-out">
-    <a id="mobile-menu-close" href="#" class="l--menu-close-submit">X</a>
+    <a href="#" class="mobile-menu-close l--menu-close">X</a>
     <h3 class="mobile-menu-header">Clothing</h3>
     <?php wp_nav_menu(array(
         'theme_location' => 'homepage',

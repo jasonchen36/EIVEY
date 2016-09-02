@@ -4,8 +4,8 @@
         animations = app.animations,
         helpers = app.helpers,
         searchListenerClass = '.l--search-submit',
-        menuOpenListenerClass = '.l--menu-open-submit',
-        menuCloseListenerClass = '.l--menu-close-submit',
+        menuOpenListenerClass = '.l--menu-open',
+        menuCloseListenerClass = '.l--menu-close',
         mobileMenu = $('#mobile-menu-fullscreen-container');
 
     function getSharetribeBaseUrl(){

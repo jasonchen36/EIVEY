@@ -37,27 +37,27 @@
 %header#header-menu-mobile-container.grid-container.hide-for-large
   .small-3
     %a{href: "#"}
-      .i--icon-menu.l--menu-open-submit
+      .i--icon-menu.l--menu-open
   .small-6
     %a{href: "/"}
       .i--icon-logo-white
   .small-3.grid-end.text-right
     %a.show-for-sharetribe{href: "#"}
-      .i--icon-user
-    %a.show-for-sharetribe{href: "#"}
-      .i--icon-bag
+      .i--icon-user.l--user-menu-open
+    -#%a.show-for-sharetribe{href: "#"}
+    -#  .i--icon-bag
   .small-12.no-padding
     .search-form-input-container
       %input.search-form-input{type: "text"}
       %a.search-form-submit.i--icon-search.l--search-submit{href: "#"}
 
--#fullscreen takeover
+-#fullscreen takeovers
 #mobile-menu-fullscreen-container.full-screen-takeover.faded-out
-  %a#mobile-menu-close.l--menu-close-submit{href: "#"}
+  %a.mobile-menu-close.l--menu-close{href: "#"}
     X
   %h3.mobile-menu-header
     Clothing
-  %ul
+  %ul.standard-menu
     %li
       %a{href:"/shop/?category=tops"}
         Tops
@@ -68,7 +68,7 @@
       %a{href:"/shop/?category=dresses"}
         Dresses
     %li
-      %a{href:"/shop/?category=Outerwear"}
+      %a{href:"/shop/?category=outerwear"}
         Outerwear
     %li
       %a{href:"/shop/?category=shoes"}
@@ -84,7 +84,7 @@
         Mens
   %h3.mobile-menu-header
     Company
-  %ul
+  %ul.standard-menu
     %li
       %a{href:"/about"}
         About
@@ -97,3 +97,9 @@
     %li
       %a{href:"/en/login"}
         Log-In
+
+#mobile-user-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a.mobile-menu-close.l--user-menu-close{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Account
