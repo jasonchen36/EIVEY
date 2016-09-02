@@ -20,6 +20,7 @@ var app = {
     // carousel: {},
 
     //templates
+    header: {},
 
     //functions
     init: function(){
@@ -40,6 +41,7 @@ var app = {
         // }
         
         //templates
+        app.header.init();
     }
 };
 

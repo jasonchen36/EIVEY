@@ -21,6 +21,10 @@ var app = {
 
     //templates
     header: {},
+    
+    sharetribe: {
+        header: {}
+    },
 
     //functions
     init: function(){
@@ -39,6 +43,7 @@ var app = {
 
         //templates
         app.header.init();
+        app.sharetribe.header.init();
     }
 };
 

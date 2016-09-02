@@ -8,9 +8,13 @@ header {
   }
   .i--icon-logo, .i--icon-logo-white {
     width: $logo-width;
-    height: 100px;
-    margin: auto;
+    height: 50px;
+    margin: 10px auto;
     max-width: 100%;
+    @include desktop {
+      height: 100px;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -99,6 +103,7 @@ header {
 .sharetribe-search {
   .search-form-input-container {
     padding-right: 10px;
+    margin-top: 10px;
   }
   #q {
     border: 2px solid $color-sharetribe-grey;
@@ -109,7 +114,6 @@ header {
 }
 .search-form-input-container {
   position: relative;
-  margin-top: 10px;
 }
 
 .search-form-input, #q {
@@ -154,6 +158,13 @@ header {
 }
 
 .i--icon-menu, .i--icon-user, .i--icon-bag {
-  height: 50px;
-  width: 50px;
+  $icon-size: 35px;
+  height: $icon-size;
+  width: $icon-size;
+  display: inline-block;
+  margin: 25px 5px 5px 5px;
+  @include transition-with-defaults(opacity);
+  &:hover {
+    opacity: 0.75;
+  }
 }

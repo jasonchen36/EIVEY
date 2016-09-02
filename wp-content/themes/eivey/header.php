@@ -50,7 +50,7 @@
             <div class="i--icon-logo-white"></div>
         </a>
     </div>
-    <div class="small-3 grid-end">
+    <div class="small-3 grid-end text-right">
         <a href="#">
             <div class="i--icon-user"></div>
         </a>
@@ -61,7 +61,7 @@
     <div class="small-12 no-padding">
         <div class="search-form-input-container">
             <input type="text" class="search-form-input mobile"/>
-            <a href="#" class="search-button i--icon-search"></a>
+            <a href="#" class="search-button i--icon-search l--search-submit"></a>
         </div>
     </div>
 </header>
