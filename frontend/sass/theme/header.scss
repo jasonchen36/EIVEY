@@ -38,6 +38,7 @@ header {
   }
 }
 
+
 //secondary header menu
 //-----------------------------
 #menu-header-secondary {
@@ -90,6 +91,7 @@ header {
   margin-top: 5px;
 }
 
+
 //search
 //-----------------------------
 #search-form-input {
@@ -128,4 +130,15 @@ header {
 
 #header-menu-user-container {
   padding-top: 25px;
+}
+
+//mobile menu
+//-----------------------------
+#header-menu-mobile-container {
+  background-color: $color-global-dark-grey;
+}
+
+.i--icon-menu, .i--icon-user, .i--icon-bag {
+  height: 50px;
+  width: 50px;
 }

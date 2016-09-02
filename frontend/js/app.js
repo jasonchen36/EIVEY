@@ -20,15 +20,11 @@ var app = {
     // carousel: {},
 
     //templates
-    templates: {
-        homepage: {}
-    },
 
     //functions
     init: function(){
         var $ = jQuery,
-            helpers = app.helpers,
-            templates = app.templates;
+            helpers = app.helpers;
 
         
         //helpers
@@ -44,9 +40,6 @@ var app = {
         // }
         
         //templates
-        if(helpers.isIndexPage){
-            templates.homepage.init();
-        }
     }
 };
 

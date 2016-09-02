@@ -51,7 +51,7 @@ footer {
   font-size: 15px;
   font-family: $font-open-sans-bold;
   margin: 15px 0 0 0;
-  color: $color-footer-text;
+  color: $color-global-dark-grey;
   @include tablet-up{
     margin: 0;
   }
@@ -62,10 +62,10 @@ footer {
   padding: 0;
   margin: 0;
   a {
-    color: $color-footer-text;
+    color: $color-global-dark-grey;
     font-size: 15px;
     &:hover {
-      color: lighten($color-footer-text, 20%);
+      color: lighten($color-global-dark-grey, 20%);
     }
   }
 }

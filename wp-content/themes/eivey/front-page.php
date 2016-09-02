@@ -3,7 +3,7 @@ $banner_image = get_post_meta(get_the_ID(), 'wpcf-homepage-banner-image', true);
 ?>
     <main class="small-grid-container">
         <div class="small-12">
-            <nav id="menu-homepage-container">
+            <nav id="menu-homepage-container" class="show-for-large">
                 <?php wp_nav_menu(array(
                     'theme_location' => 'homepage',
                     'menu_id' => 'menu-categories',

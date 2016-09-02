@@ -19,15 +19,16 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header class="grid-container">
+<!--desktop menu-->
+<header class="grid-container show-for-large">
     <nav id="menu-header-secondary-container" class="small-12 text-right">
         <?php wp_nav_menu(array(
-            'theme_location' => 'header_secondary', 
+            'theme_location' => 'header_secondary',
             'menu_id' => 'menu-header-secondary',
             'menu_class' => 'standard-menu'
         )); ?>
     </nav>
-    <div class="small-12 text-center">
+    <div class="small-12 text-center show-for-large">
         <a href="/">
             <div class="i--icon-logo"></div>
         </a>
@@ -37,3 +38,39 @@
         </div>
     </div>
 </header>
+<!--mobile menu-->
+<header id="header-menu-mobile-container" class="small-grid-container hide-for-large">
+    <div class="small-3">
+        <a href="#">
+            <div class="i--icon-menu"></div>
+        </a>
+    </div>
+    <div class="small-6">
+        <a href="/">
+            <div class="i--icon-logo"></div>
+        </a>
+    </div>
+    <div class="small-3 grid-end">
+        <a href="#">
+            <div class="i--icon-user"></div>
+        </a>
+        <a href="#">
+            <div class="i--icon-bag"></div>
+        </a>
+    </div>
+    <div class="small-12 no-padding">
+        <input type="text" />
+    </div>
+</header>
+<div id="mobile-menu" class="faded-out">
+    <?php wp_nav_menu(array(
+        'theme_location' => 'homepage',
+        'menu_id' => 'menu-categories',
+        'menu_class' => 'standard-menu'
+    )); ?>
+    <?php wp_nav_menu(array(
+        'theme_location' => 'header_secondary',
+        'menu_id' => 'menu-header-secondary',
+        'menu_class' => 'standard-menu'
+    )); ?>
+</div>

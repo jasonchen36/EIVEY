@@ -35,8 +35,4 @@
         return params;
     };
     
-    this.isIndexPage = function(){
-        return bodyElement.hasClass('home');
-    };
-    
 }).apply(app.helpers);
