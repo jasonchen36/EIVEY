@@ -20,6 +20,11 @@
         return data;
     };
 
+    this.getBaseUrl = function(){
+        //http://stackoverflow.com/questions/5817505/is-there-any-method-to-get-url-without-query-string-in-java-script
+        return [location.protocol, '//', location.host, location.pathname].join('');
+    };
+
     this.getUrlParameters = function(){
         var params={};
         window.location.search
