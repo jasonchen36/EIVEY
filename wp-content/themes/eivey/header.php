@@ -47,7 +47,7 @@
     </div>
     <div class="small-6">
         <a href="/">
-            <div class="i--icon-logo"></div>
+            <div class="i--icon-logo-white"></div>
         </a>
     </div>
     <div class="small-3 grid-end">
