@@ -146,7 +146,7 @@ $listing-author-avatar-height: 108;
 
 .listing-author-name {
   @include big-type;
-  height: em($listing-author-avatar-width, 22) / 2;
+  height: 75px;
   color: #636466;
 }
 
@@ -154,26 +154,6 @@ $listing-author-avatar-height: 108;
   display: block;
   @include ellipsis;
   color: #636466;
-}
-
-.listing-author-contact-button {
-  @include big-button($link);
-  width: 100%;
-  background: #abcdc6!important;
-  color: white;
-  text-align: center;
-  cursor: pointer;
-  margin: 0.75em 0;
-  padding: 0 1.5em;
-  padding-bottom: 4px;
-  margin-top:0px;
-  font-size: 22px;
-  height: 2.625em;
-  border: 0;
-  display: table;
-  line-height: 1.5em;
-  width: 100%;
-  text-transform: uppercase;
 }
 
 // Listing author activity
@@ -228,26 +208,6 @@ $listing-author-avatar-height: 108;
   margin-left: lines(0.2);
 }
 
-// Transaction action button
-.book-button {
-  @include big-button($link);
-  background-color: #abcdc6 !important;
-  margin-top: 0;
-  width: 100%;
-  text-align: center;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-align-items: center;
-  align-items: center;
-  text-transform: uppercase;
-}
-
-// Transaction action button
-.book-button .content {
-  width: 100%;
-  display: block;
-}
-
 .checkbox-option {
   &.selected {
 
@@ -255,15 +215,6 @@ $listing-author-avatar-height: 108;
   &.not-selected {
     color: $border;
   }
-}
-
-.paymenticon{
-  font-size: 2em!important;
-  padding-right: 18px;
-}
-.paymentHelp{
-  font-size:12px;
-  padding-left: 0px;
 }
 
 .checkbox-option-checkmark {

@@ -1,0 +1,52 @@
+//sidebar
+#pdp-payment-icons {
+  .fa {
+    font-size: 2em!important;
+    padding: 5px;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+#payment-help {
+  font-size:12px;
+  padding-left: 0;
+}
+
+#listing-author-contact-button, #book-button {
+  background: $color-sharetribe-green;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: $font-georgia;
+  width: 100%;
+  display: table;
+  border: none;
+  line-height: 2;
+  @include transition-with-defaults(opacity);
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+#listing-author-contact-button {
+  font-size: 16px;
+}
+
+// Transaction action button
+#book-button {
+  margin: 0 0 0.75em 0;
+  padding: 0 1.5em;
+  font-size: 22px;
+  height: 60px;
+}
+
+#book-button .content {
+  width: 100%;
+  display: block;
+}
