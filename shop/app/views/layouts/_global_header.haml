@@ -32,8 +32,7 @@
     .small-12.medium-5.grid-end
       #search-form-input.search-form-text-field
         = text_field_tag "q", params[:q]
-        %a#search-button{href:'#'}
-          = icon_tag("search", ["icon-part"])
+        %a#search-button.i--icon-search{href:'#'}
 
   #header-mobile-menu.grid-container.hide-for-large
     -#  todo, mobile menu

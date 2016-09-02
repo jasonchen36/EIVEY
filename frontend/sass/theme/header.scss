@@ -92,6 +92,7 @@ header {
 //search
 //-----------------------------
 #search-form-input {
+  margin-top: -20px;
   position: relative;
   padding-right: 10px;
   #q {
@@ -100,7 +101,22 @@ header {
 }
 
 #search-button {
+  $icon-size: 30px;
   position: absolute;
   top: 0;
+  bottom: 0;
+  margin: auto;
   right: 20px;
+  width: $icon-size;
+  height: $icon-size;
+  @include transition-with-defaults(opacity);
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+//user menu
+//-----------------------------
+#header-user-toggle-menu {
+  margin-top: -20px;
 }
