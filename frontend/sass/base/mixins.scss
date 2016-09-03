@@ -72,3 +72,101 @@ these are helper functions for common tasks that are difficult to implement acro
   -o-user-select: none;
   user-select: none;
 }
+
+
+//sharetribe imports
+//-----------------------------
+/*
+ * Button mixin- creates 3d-ish button effect with correct
+ * highlights/shadows, based on a base color.
+ */
+@mixin button( $button-color, $text-color: $color-global-white ) {
+  background: $button-color;
+  border-color: darken( $button-color, 10% ) darken( $button-color, 15% ) darken( $button-color, 15% );
+  color: $text-color;
+  box-shadow: 0 1px 0 darken( $button-color, 15% );
+  text-shadow: 0 -1px 1px darken( $button-color, 15% ),
+  1px 0 1px darken( $button-color, 15% ),
+  0 1px 1px darken( $button-color, 15% ),
+  -1px 0 1px darken( $button-color, 15% );
+
+  &:hover,
+  &:focus {
+    background: lighten( $button-color, 3% );
+    border-color: darken( $button-color, 15% );
+    color: $text-color;
+    box-shadow: 0 1px 0 darken( $button-color, 15% );
+  }
+
+  &:focus {
+    box-shadow: inset 0 1px 0 darken( $button-color, 10% ),
+    0 0 2px 1px #33b3db;
+  }
+
+  &:active {
+    background: darken( $button-color, 10% );
+    border-color: darken( $button-color, 15% );
+    box-shadow: inset 0 2px 0 darken( $button-color, 15% );
+  }
+
+  &[disabled],
+  &:disabled,
+  &.button-primary-disabled,
+  &.disabled {
+    color: hsl( hue( $button-color ), 10%, 80% ) !important;
+    background: darken( $button-color, 8% ) !important;
+    border-color: darken( $button-color, 15% ) !important;
+    text-shadow: none !important;
+  }
+
+  &.button-hero {
+    box-shadow: 0 2px 0 darken( $button-color, 15% ) !important;
+    &:active {
+      box-shadow: inset 0 3px 0 darken( $button-color, 15% ) !important;
+    }
+  }
+
+}
+
+// Form button or a link that looks like a button
+@mixin button($bg-color, $text-color: $color-global-white ) {
+  background: $bg-color;
+  color: $text-color;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.5em 1.5em;
+  border: 0;
+  display: table;
+  text-transform: uppercase;
+  font-family: $font-georgia;
+  width: 100%;
+  .content {
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+  }
+  &:hover {
+    background: darken($bg-color, 5%);
+    color: $text-color;
+  }
+  &:active {
+    background: darken($bg-color, 10%);
+    color: $text-color;
+  }
+}
+
+@mixin big-button($bg-color) {
+  @include button($bg-color);
+  font-size: 22px;
+  height: 60px;
+  line-height: 2;
+}
+
+@mixin grey-button {
+  @include button($color-sharetribe-grey);
+  color: $color-global-white;
+  &:hover, &:active {
+    color: $color-global-white;
+  }
+}

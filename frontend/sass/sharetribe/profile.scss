@@ -1,0 +1,25 @@
+//buttons
+//-----------------------------
+.profile-edit-link, .profile-contact-link {
+  @include button($color-sharetribe-green);
+}
+
+//description
+//-----------------------------
+#profile-description {
+  p {
+    font-family: $font-open-sans;
+    font-size: 16px;
+    margin: 10px 0;
+    padding: 0;
+    max-width: 100%;
+    color: $color-sharetribe-dark-grey;
+  }
+}
+
+//headers
+//-----------------------------
+.people-header {
+  padding-bottom: lines(0.25);
+  color: $color-sharetribe-dark-grey;
+}
