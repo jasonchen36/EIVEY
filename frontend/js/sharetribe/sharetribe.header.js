@@ -6,7 +6,8 @@
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
         userMenuAnchor = $('#header-user-desktop-anchor'),
-        mobileUserMenu = $('#mobile-user-menu-fullscreen-container');
+        mobileUserMenu = $('#mobile-user-menu-fullscreen-container'),
+        sellButton = $('#new-listing-link');
 
     function openUserMenu(){
         animations.fadeIn(mobileUserMenu);
@@ -24,12 +25,14 @@
         var that,
             childLink,
             childText,
-            linkHtml = '';
+            sellLink = sellButton.attr('href'),
+            sellText = sellButton.text().toLowerCase(),
+            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>';
         if (userMenuToggle.children().length > 0){
             userMenuToggle.children().each(function(){
                 that = $(this);
                 childLink = that.attr('href');
-                childText = that.text();
+                childText = that.text().toLowerCase();
                 linkHtml += '<li><a href="'+childLink+'">'+childText+'</a>';
             });
         } else {
