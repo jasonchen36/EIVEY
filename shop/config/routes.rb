@@ -96,7 +96,7 @@ Kassi::Application.routes.draw do
   devise_for :people, only: :omniauth_callbacks, controllers: { omniauth_callbacks: "sessions" }
 
   # Adds locale to every url right after the root path
-  scope "(/:locale)", :constraints => { :locale => locale_matcher } do
+  scope "/shop(/:locale)", :constraints => { :locale => locale_matcher } do
 
     put '/mercury_update' => "mercury_update#update", :as => :mercury_update
 
