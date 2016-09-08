@@ -30,20 +30,32 @@
 </VirtualHost>
 
 <VirtualHost *:80>
-        <Directory /var/www/dev.eivey.ca>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride All
-                Order allow,deny
-                allow from all
+     <Directory /var/www/dev.eivey.ca>
+             Options Indexes FollowSymLinks MultiViews
+             AllowOverride All
+             Order allow,deny
+             allow from all
+     </Directory>
+
+     ServerName dev.eivey.ca
+     DocumentRoot /var/www/dev.eivey.ca
+
+     PassengerRuby /usr/local/bin/ruby
+
+    ErrorLog ${APACHE_LOG_DIR}/dev.eivey.error.log
+    CustomLog ${APACHE_LOG_DIR}/dev.eivey.access.log combined
+
+    #passenger config
+    Alias /shop /var/www/dev.eivey.ca/shop/public
+        <Location /shop>
+            PassengerBaseURI /shop
+            PassengerAppRoot /var/www/dev.eivey.ca/shop
+
+        </Location>
+        <Directory /var/www/dev.eivey.ca/shop/public>
+            Allow from all
+            Options -MultiViews
+            Require all granted
         </Directory>
-        DocumentRoot /var/www/dev.eivey.ca
-
-        ServerName dev.eivey.ca
-
-        ProxyPass /shop http://127.0.0.1:3000/
-        ProxyPassReverse /shop http://127.0.0.1:3000/
-
-        ErrorLog ${APACHE_LOG_DIR}/dev.eivey.error.log
-        CustomLog ${APACHE_LOG_DIR}/dev.eivey.access.log combined
 
 </VirtualHost>
