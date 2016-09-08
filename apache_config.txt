@@ -20,10 +20,6 @@
         RewriteCond %{HTTP_HOST} !^eivey.ca$
         RewriteRule (.*) http://eivey.ca$1 [R=301,L]
 
-        #sharetribe proxy settings
-        ProxyPass /shop http://127.0.0.1:3000/
-        ProxyPassReverse /shop http://127.0.0.1:3000/
-
         ErrorLog ${APACHE_LOG_DIR}/eivey.error.log
         CustomLog ${APACHE_LOG_DIR}/eivey.access.log combined
 
