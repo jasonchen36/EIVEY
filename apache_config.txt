@@ -52,6 +52,7 @@
             Allow from all
             Options -MultiViews
             Require all granted
+            RailsEnv development
         </Directory>
 
 </VirtualHost>
