@@ -2,65 +2,131 @@
 
 ## Description ##
 
-* This is a peer-to-peer marketplace CMS forked from [Sharetribe](https://github.com/sharetribe/sharetribe) core.
+This site is built using two different CMSs: [WordPress](https://wordpress.org/) and [Sharetribe](https://github.com/sharetribe/sharetribe).  
+
+The WordPress site is up to date with the latest WordPress version and plugin dependencies.
+
+The Sharetribe site is forked from the Sharetribe core as of 08/2016 and no longer receives updates from the master repository.
 
 ## Software Architecture (High Level) ##
 
-* Built upon Ruby and Rails and MySQL
+The WordPress site is built upon PHP.
+
+The Sharetribe site is built upon Ruby on Rails and is installed in a subdirectory of the WordPress site, /shop.
+
+Both sites are run using Apache.  The config is located locally in /apache_config.txt and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config.
 
 ## How to Set Up a Dev Environment ##
 
-* Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
-    * If needed, upgrade your Ruby version using [these](https://gorails.com/setup/osx/10.11-el-capitan) instructions. 
-* Use a FQDN like dev.eivey.com to avoid problems caused by localhostw
-* Update your config/config.yml config file with config/config.dev.yml for development
+### Common ###
 
-### MySql ###
-* "Can't connect to local MySQL server through socket"
-    * If you are using AMPPS, run this command
-    * sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
+Clone the repo 
 
-### Rake (Rails) ###
-* List all available tasks
-    * bundle exec rake --tasks
-* Generate missing CSS files or rebuild after Sass modifications
-    * bundle exec rake sharetribe:generate_customization_stylesheets_immediately
-    
-### Sphinx ###
-* Indexing issues?
-   * [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
+```
+git clone https://bitbucket.org/ellefsontech/eivey.web dev.eivey.com
+cd dev.eivey.com
+```
 
-## How to Deploy (Wordpress) ##
-*checkout code
-git clone {repo url} html
-sudo chown -R ubuntu:ubuntu  html/
+Generate frontend files
 
-*install node
-sudo apt-get update
-sudo apt-get install nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-sudo apt-get install npm
-
-*install bower & grunt
-sudo npm install -g bower grunt-cli
-
-*install ruby & sass
-sudo apt-get install ruby
-sudo gem install sass
-
-*on every deploy
-cd frontend/
+```
+cd frontend
 npm install
 bower install
 grunt build
+cd ../
+```
+
+
+### WordPress ###
+
+Create /wp-config.php and update with the correct database credentials.
+
+```
+cp wp-config-sample.php wp-config.php
+```
+
+
+### Sharetribe ###
+
+Enter the Sharetribe directory
+
+```
+cd shop
+```
+
+Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
+
+* Note, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
+
+```
+bundle exec passenger start
+```
 
 
 
-UPDATE `table_name` SET `field_name` = replace(same_field_name, 'old address', 'new address')
+## How to Deploy ##
 
-run on:
-wp_options table on option_value
-wp_postmeta table on meta_value
-wp_posts table on post_content
+Update from Git
 
-enable mod rewrite on the server: https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-ubuntu-14-04
+```
+cd dev.eivey.com
+git pull
+```
+
+Generate common frontend files
+
+```
+cd frontend
+npm install
+bower install
+grunt build
+cd ../
+```
+
+Generate Sharetribe CSS manually
+   
+```
+cd shop
+bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+cd ../
+```
+
+Restart Passenger
+
+```
+cd shop
+passenger-config restart-app $(pwd)
+cd ../
+```
+
+
+## General ##
+
+### Passenger ###
+
+Check if passenger is runnning
+
+```
+sudo /usr/sbin/passenger-memory-stats
+```
+
+### MySql ###
+
+"Can't connect to local MySQL server through socket".  If you are using AMPPS, run:
+
+```
+sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
+```
+
+### Rake (Rails) ###
+
+List all available tasks
+
+```
+bundle exec rake --tasks
+```
+
+### Sphinx ###
+
+Indexing issues? [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
