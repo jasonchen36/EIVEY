@@ -1,0 +1,28 @@
+//sidebar
+//-----------------------------
+#pdp-payment-icons {
+  .fa {
+    font-size: 2em!important;
+    padding: 5px;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+#payment-help {
+  font-size:12px;
+  padding-left: 0;
+}
+
+#listing-author-contact-button {
+  font-size: 16px;
+  @include button($color-sharetribe-green);
+}
+
+#book-button {
+  @include big-button($color-sharetribe-green);
+}

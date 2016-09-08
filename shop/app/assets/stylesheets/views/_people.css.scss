@@ -17,20 +17,8 @@ $profile-pic-gutter-mobile: lines(0.5);
   }
 }
 
-.person-details{
-  p{
-    font-size:12px;
-    font-weight: 200;
-    margin: 10px;
-    padding:0;
-    max-width: 100%;
-  }
-}
 h1, h2{
   border-bottom:1px dotted #939598;
-}
-.people-header{
-  padding-bottom: lines(0.25);
 }
 
 .people-load-more-listings-container {
@@ -63,13 +51,6 @@ h1, h2{
   }
 }
 
-.profile-edit-link, .profile-contact-link {
-  @include big-button(#abcdc6);
-  width: 100%;
-  background-color: #abcdc6 !important;
-  color: white !important;
-}
-
 .people-image-mobile {
   width: $profile-pic-size-mobile;
   position: absolute;
@@ -77,7 +58,6 @@ h1, h2{
   left: 0;
 
   > img {
-    //@include border-radius($default-border-radius);
     width: 100%;
   }
 

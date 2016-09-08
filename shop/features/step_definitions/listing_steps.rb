@@ -256,13 +256,13 @@ end
 
 When(/^I (?:buy) that listing$/) do
   visit(path_to "the listing page")
-  find(".book-button").click
+  find("#book-button").click
 end
 
 When(/^I (?:buy) (\d+) hours worth of those listings$/) do |hours|
   visit(path_to "the listing page")
   fill_in('Number of hours:', with: hours)
-  find(".book-button").click
+  find("#book-button").click
 end
 
 When(/^I select category "(.*?)"$/) do |category_name|

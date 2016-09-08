@@ -6,7 +6,8 @@
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
         userMenuAnchor = $('#header-user-desktop-anchor'),
-        mobileUserMenu = $('#mobile-user-menu-fullscreen-container');
+        mobileUserMenu = $('#mobile-user-menu-fullscreen-container'),
+        sellButton = $('#new-listing-link');
 
     function openUserMenu(){
         animations.fadeIn(mobileUserMenu);
@@ -24,13 +25,25 @@
         var that,
             childLink,
             childText,
-            linkHtml = '';
-        userMenuToggle.children().each(function(){
-            that = $(this);
-            childLink = that.attr('href');
-            childText = that.text();
-            linkHtml += '<li><a href="'+childLink+'">'+childText+'</a>';
-        });
+            sellLink = sellButton.attr('href'),
+            sellText = sellButton.text().toLowerCase(),
+            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>';
+        if (userMenuToggle.children().length > 0){
+            userMenuToggle.children().each(function(){
+                that = $(this);
+                childLink = that.attr('href');
+                childText = that.text().toLowerCase();
+                linkHtml += '<li><a href="'+childLink+'">'+childText+'</a>';
+            });
+        } else {
+            linkHtml +=
+                '<li>' +
+                '<a href="/shop/en/signup">Sign-Up</a>' +
+                '</li>' +
+                '<li>' +
+                '<a href="/shop/en/login">Log-In</a>' +
+                '</li>';
+        }
         mobileUserMenu.append('<ul class="standard-menu">'+linkHtml+'</ul>');
 
         //listeners

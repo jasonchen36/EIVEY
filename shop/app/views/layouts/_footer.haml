@@ -5,35 +5,35 @@
         Support
       %ul.standard-menu-footer
         %li
-          %a{:href => "/frequently-asked-questions", :target =>"blank"} Frequently Asked Questions
+          %a{:href => "/frequently-asked-questions"} Frequently Asked Questions
         %li
-          %a{:href => "/contact", :target =>"blank"} Contact
+          %a{:href => "/contact"} Contact
         %li
-          %a{:href => "/events", :target =>"blank"} Events
+          %a{:href => "/events"} Events
     .small-12.medium-3
       %ul.standard-menu-footer
         %li
-          %a{:href => "/selling", :target =>"blank"} Selling
+          %a{:href => "/selling"} Selling
         %li
-          %a{:href => "/buying", :target =>"blank"} Buying
+          %a{:href => "/buying"} Buying
         %li
-          %a{:href => "/terms-conditions", :target =>"blank"} Terms &amp; Conditions
+          %a{:href => "/terms-conditions"} Terms &amp; Conditions
         %li
-          %a{:href => "/privacy-policy", :target =>"blank"} Privacy Policy
+          %a{:href => "/privacy-policy"} Privacy Policy
     .small-12.medium-3
       %h4.footer-menu-title
         Company
       %ul.standard-menu-footer
         %li
-          %a{:href => "/about", :target =>"blank"} About
+          %a{:href => "/about"} About
         %li
-          %a{:href => "/blog", :target =>"blank"} Blog
+          %a{:href => "/blog"} Blog
     .small-12.medium-3.grid-end.social-icon-container
       %a.social-icon{:href => "https://www.facebook.com/eiveydotca", :target =>"blank"}
         %i.fa.fa-facebook{"aria-hidden" => "true"}
-      %a.social-icon{:href => "https://www.instagram.com/eiveydotca/" , :target =>"blank"}
+      %a.social-icon{:href => "https://www.instagram.com/eiveydotca/", :target =>"blank"}
         %i.fa.fa-instagram{"aria-hidden" => "true"}
-      %a.social-icon{:href => "https://twitter.com/eiveydotca" ,:target =>"blank"}
+      %a.social-icon{:href => "https://twitter.com/eiveydotca", :target =>"blank"}
         %i.fa.fa-twitter{"aria-hidden" => "true"}
       %a.social-icon{:href => "https://www.pinterest.com/eiveydotca/", :target =>"blank"}
         %i.fa.fa-pinterest{"aria-hidden" => "true"}
@@ -45,4 +45,57 @@
       &copy;
     is a registered trademark of Eivey
 
-%script{:type => :"text/javascript", :src => "http://dev.eivey.com/frontend/build/app.sharetribe.min.js"}
+-#fullscreen takeovers
+#mobile-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a.mobile-menu-close.l--menu-close{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Clothing
+  %ul.standard-menu
+    %li
+      %a{href:"/shop/?category=tops"}
+        Tops
+    %li
+      %a{href:"/shop/?category=bottoms"}
+        Bottoms
+    %li
+      %a{href:"/shop/?category=dresses"}
+        Dresses
+    %li
+      %a{href:"/shop/?category=outerwear"}
+        Outerwear
+    %li
+      %a{href:"/shop/?category=shoes"}
+        Shoes
+    %li
+      %a{href:"/shop/?category=handbags"}
+        Handbags
+    %li
+      %a{href:"/shop/?category=accessories"}
+        Accessories
+    %li
+      %a{href:"/shop/?category=mens"}
+        Mens
+  %h3.mobile-menu-header
+    Company
+  %ul.standard-menu
+    %li
+      %a{href:"/about"}
+        About
+    %li
+      %a{href:"/contact"}
+        Contact
+    %li
+      %a{href:"/en/signup"}
+        Sign-Up
+    %li
+      %a{href:"/en/login"}
+        Log-In
+
+#mobile-user-menu-fullscreen-container.full-screen-takeover.faded-out
+  %a.mobile-menu-close.l--user-menu-close{href: "#"}
+    X
+  %h3.mobile-menu-header
+    Account
+
+%script{:type => :"text/javascript", :src => "/frontend/build/app.sharetribe.min.js"}
