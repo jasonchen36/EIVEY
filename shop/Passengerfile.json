@@ -1,5 +1,5 @@
 {
   "port": 3000,
-  "log_file": "passenger.log",
+  "log_file": "log/passenger.log",
   "environment": "production"
 }
