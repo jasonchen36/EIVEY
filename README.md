@@ -37,6 +37,13 @@ grunt build
 cd ../
 ```
 
+Start Grunt workflow
+
+```
+cd frontend
+grunt dev
+cd ../
+```
 
 ### WordPress ###
 
@@ -63,7 +70,9 @@ Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sha
 bundle exec passenger start
 ```
 
+WordPress will be available at [dev.eivey.com](http://dev.eivey.com)
 
+Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
 
 ## How to Deploy ##
 
