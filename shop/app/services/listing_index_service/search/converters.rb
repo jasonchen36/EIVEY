@@ -20,6 +20,7 @@ module ListingIndexService::Search::Converters
       .merge(location_hash(l, includes))
       .merge(author_hash(l, includes))
       .merge(listing_images_hash(l, includes))
+      .merge(custom_field_values_hash(l, includes))
   end
 
   def location_hash(l, includes)
@@ -82,5 +83,25 @@ module ListingIndexService::Search::Converters
         {}
       end
   end
+
+
+  def custom_field_values_hash(l, includes)
+      if includes.include?(:custom_field_values)
+        {
+          custom_field_values: Maybe(l.custom_field_values.first)
+            .map { |li|
+              [{
+                  id: li.id,
+                  numeric_value: li.numeric_value,
+                  custom_field_id: li.custom_field_id,
+                  text_value: li.text_value
+              }]
+            }.or_else([])
+        }
+      else
+        {}
+      end
+  end
+
 end
 
