@@ -22,6 +22,7 @@
     .fluid-thumbnail-grid-image-size
       %span.fluid-thumbnail-size
         Size:
+        = listing.custom_field_values.first.text_value
         = get_listing_attribute_value(listing, "size")
 
     -#.fluid-thumbnail-grid-image-price-container{:class => "#{modifier_class}"}

@@ -1,6 +1,6 @@
 module ListingIndexService::API
 
-  RELATED_RESOURCES = [:listing_images, :author, :num_of_reviews, :location].to_set
+  RELATED_RESOURCES = [:listing_images, :author, :num_of_reviews, :location,:custom_field_values].to_set
 
   ListingIndexResult = ListingIndexService::DataTypes::ListingIndexResult
 
@@ -20,7 +20,6 @@ module ListingIndexService::API
         search: ListingIndexService::DataTypes.create_search_params(search),
         includes: includes
       )
-
       search_result.maybe().map { |res|
         Result::Success.new(
           ListingIndexResult.call(
