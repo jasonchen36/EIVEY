@@ -334,7 +334,7 @@ GEM
       mimemagic (= 0.3.0)
     parser (2.3.0.6)
       ast (~> 2.2)
-    passenger (5.0.24)
+    passenger (5.0.30)
       rack
       rake (>= 0.8.1)
     paypal-sdk-core (0.3.4)
@@ -572,7 +572,7 @@ DEPENDENCIES
   oauth2!
   omniauth-facebook (~> 3.0.0)
   paperclip (~> 4.3.6)
-  passenger (~> 5.0.18)
+  passenger (>= 5.0.25)
   paypal-sdk-merchant (~> 1.116.0)
   paypal-sdk-permissions (~> 1.96.4)
   possibly (~> 0.2.0)
@@ -611,4 +611,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.3
+   1.12.5
