@@ -1,8 +1,18 @@
 .row.checkbox-group-container
-  - ArrayUtils.each_slice_columns(custom_field.options.sort, 2) do |column|
-    .col-6
-      - column.each do |opt|
-        .checkbox-container
+  - if custom_field.name.downcase.include? "colo" #matches "color","colour",and "colours"
+    #grid-color-filter-container.custom-filter-options
+      - custom_field.options.sort.each do |option|
+        .custom-filter-checkbox-container
+          - param_name = "custom_fields_#{custom_field.id}_#{option.id}"
           - selected = custom_field_value ? custom_field_value.selected_options.include?(opt) : false
-          = check_box_tag "custom_fields[#{custom_field.id}][]", opt.id, selected, {id: "custom_fields_#{custom_field.id}_#{opt.id}", :class => "custom_field_checkbox #{custom_field.required? ? 'required' : ''}"}
-          = label_tag "custom_fields_#{custom_field.id}_#{opt.id}", "#{opt.title(I18n.locale)}", {class: "light"}
+          = check_box_tag "custom_fields[#{custom_field.id}][]", option.id, selected, {id: param_name, :class => "custom_field_checkbox #{custom_field.required? ? 'required' : ''}"}
+          %label.color-filter-container{for: "#{param_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', "_")}"}
+            %span{class: "color-filter #{option.title.downcase}"}
+  -else
+    - ArrayUtils.each_slice_columns(custom_field.options.sort, 2) do |column|
+      .col-6
+        - column.each do |option|
+          .checkbox-container
+            - selected = custom_field_value ? custom_field_value.selected_options.include?(opt) : false
+            = check_box_tag "custom_fields[#{custom_field.id}][]", option.id, selected, {id: "custom_fields_#{custom_field.id}_#{option.id}", :class => "custom_field_checkbox #{custom_field.required? ? 'required' : ''}"}
+            = label_tag "custom_fields_#{custom_field.id}_#{option.id}", "#{option.title(I18n.locale)}", {class: "light"}
