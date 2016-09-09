@@ -76,8 +76,25 @@ Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
 
 #### Debugging ####
 
-You can debug Sharetribe using [Pry](http://pryrepl.org/)
+You can debug Sharetribe using [Pry](http://pryrepl.org/) and [Pry Remote](https://github.com/mon-ouie/pry-remote/)
 
+Anywhere in Ruby that you want to add a breakpoint, add
+
+```
+binding.remote_pry
+```
+
+In your console window, you should see
+
+```
+App 74317 stdout: [pry-remote] Waiting for client on druby://127.0.0.1:9876
+```
+
+Open a new terminal window and connect with the debugger using
+
+```
+pry-remote
+```
 
 ## How to Deploy ##
 
