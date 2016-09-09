@@ -7,7 +7,7 @@
           .custom-filter-title
             = field.name(I18n.locale)
           - make_scrollable = field.options.size > 12
-          - if field.name(I18n.locale).downcase == "color" || field.name(I18n.locale).downcase == "colour"
+          - if field.name(I18n.locale).downcase.include? "colo" #matches "color","colour",and "colours"
             #grid-color-filter-container.custom-filter-options
               - field.options.sort.each do |option|
                 .custom-filter-checkbox-container
