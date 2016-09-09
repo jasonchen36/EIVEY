@@ -80,7 +80,7 @@ module ListingIndexViewUtils
       custom_field_values=
         if includes.include?(:custom_field_values)
           l[:custom_field_values].map { |li|
-            CustomField.new(li[:id],"test",li[:text_value],li[:numeric_value])
+            CustomField.new(li[:id],li[:name],li[:text_value],li[:numeric_value])
           }
         else 
           []

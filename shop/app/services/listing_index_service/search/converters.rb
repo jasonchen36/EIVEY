@@ -88,7 +88,7 @@ module ListingIndexService::Search::Converters
   def custom_field_values_hash(l, includes)
       if includes.include?(:custom_field_values)
         {
-          custom_field_values: Maybe(l.custom_field_values.first)
+          custom_field_values: Maybe(l.custom_field_values.first)#todo, remove .first
             .map { |li|
               [{
                   id: li.id,
