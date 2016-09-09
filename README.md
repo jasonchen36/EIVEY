@@ -14,7 +14,9 @@ The WordPress site is built upon PHP.
 
 The Sharetribe site is built upon Ruby on Rails and is installed in a subdirectory of the WordPress site, /shop.
 
-Both sites are run using Apache.  The config is located locally in /apache_config.txt and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config.
+Both sites are run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config.
+
+[Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf
 
 ## How to Set Up a Dev Environment ##
 
