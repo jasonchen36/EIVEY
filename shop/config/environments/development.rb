@@ -52,7 +52,7 @@ Kassi::Application.configure do
   config.action_controller.action_on_unpermitted_parameters = :raise
 
   # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   if APP_CONFIG.mail_delivery_method == "sendmail"
     ActionMailer::Base.delivery_method = :sendmail
@@ -69,6 +69,13 @@ Kassi::Application.configure do
     }
   end
 
+  # Sendmail is used for some mails (e.g. Newsletter) so configure it even when smtp is the main method
+  ActionMailer::Base.sendmail_settings = {
+      :location       => '/usr/sbin/sendmail',
+      :arguments      => '-i -t'
+  }
+
+  ActionMailer::Base.perform_deliveries = true # the "deliver_*" methods are available
 
   # Expands the lines which load the assets
   config.assets.debug = false
