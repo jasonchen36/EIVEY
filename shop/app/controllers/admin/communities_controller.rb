@@ -434,7 +434,8 @@ class Admin::CommunitiesController < ApplicationController
   end
 
   def can_delete_marketplace?(community_id)
-    PlanService::API::Api.plans.get_current(community_id: community_id).data[:features][:deletable]
+    false
+    # PlanService::API::Api.plans.get_current(community_id: community_id).data[:features][:deletable]
   end
 
   def can_set_sender_address(plan)
