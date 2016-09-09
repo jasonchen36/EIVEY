@@ -45,6 +45,7 @@ class Admin::CommunitiesController < ApplicationController
              support_email: APP_CONFIG.support_email,
              sender_address: sender_address,
              user_defined_address: user_defined_address,
+             display_knowledge_base_articles: APP_CONFIG.display_knowledge_base_articles,
              post_sender_address_url: create_sender_address_admin_community_path,
              can_set_sender_address: can_set_sender_address(@current_plan),
              knowledge_base_url: APP_CONFIG.knowledge_base_url,
