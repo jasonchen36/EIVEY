@@ -149,9 +149,6 @@ module ListingsHelper
             field_value = li[:text_value]
           end
         }
-        # if custom_field_object == 'empty3'
-        #   binding.remote_pry
-        # end
       else
         # if single object
         if CustomField.find(custom_fields[:custom_field_id]).name.downcase == key.downcase
