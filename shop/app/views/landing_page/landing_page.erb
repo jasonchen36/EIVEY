@@ -62,8 +62,8 @@
 
   <%= render partial: "meta", locals: {cc: community_context, p: page, locale: landing_page_locale, url: landing_page_url } %>
 
-  <%= favicon_link_tag community_context[:favicon] %>
-  <%= favicon_link_tag community_context[:apple_touch_icon], rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
+  <%= #favicon_link_tag community_context[:favicon] %>
+  <%= #favicon_link_tag community_context[:apple_touch_icon], rel: 'apple-touch-icon-precomposed', type: 'image/png' %>
 
   <% if font_path.present? %>
     <%= render partial: "fonts", locals: { font_path: font_path } %>

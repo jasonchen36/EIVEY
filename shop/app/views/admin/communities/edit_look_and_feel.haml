@@ -42,11 +42,11 @@
 
         = render :partial => "layouts/info_text", :locals => { :text => t(".main_content_width", :main_width => 1008)}
 
-    .row
-      .col-12
-        = form.label :favicon, t(".favicon"), :class => "input"
-        = render :partial => "layouts/info_text", :locals => { :text => t(".favicon_info_text") }
-        = form.file_field(:favicon, :class => "file_field")
+    -#.row
+    -#  .col-12
+    -#    = form.label :favicon, t(".favicon"), :class => "input"
+    -#    = render :partial => "layouts/info_text", :locals => { :text => t(".favicon_info_text") }
+    -#    = form.file_field(:favicon, :class => "file_field")
 
     .row
       .col-12

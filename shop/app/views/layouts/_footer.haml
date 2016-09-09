@@ -1,3 +1,5 @@
+- prefix = ''
+
 %footer#footer-menu-container
   %nav.grid-container
     .small-12.medium-3
@@ -5,29 +7,29 @@
         Support
       %ul.standard-menu-footer
         %li
-          %a{:href => "/frequently-asked-questions"} Frequently Asked Questions
+          %a{:href => "#{prefix}/frequently-asked-questions"} Frequently Asked Questions
         %li
-          %a{:href => "/contact"} Contact
+          %a{:href => "#{prefix}/contact"} Contact
         %li
-          %a{:href => "/events"} Events
+          %a{:href => "#{prefix}/events"} Events
     .small-12.medium-3
       %ul.standard-menu-footer
         %li
-          %a{:href => "/selling"} Selling
+          %a{:href => "#{prefix}/selling"} Selling
         %li
-          %a{:href => "/buying"} Buying
+          %a{:href => "#{prefix}/buying"} Buying
         %li
-          %a{:href => "/terms-conditions"} Terms &amp; Conditions
+          %a{:href => "#{prefix}/terms-conditions"} Terms &amp; Conditions
         %li
-          %a{:href => "/privacy-policy"} Privacy Policy
+          %a{:href => "#{prefix}/privacy-policy"} Privacy Policy
     .small-12.medium-3
       %h4.footer-menu-title
         Company
       %ul.standard-menu-footer
         %li
-          %a{:href => "/about"} About
+          %a{:href => "#{prefix}/about"} About
         %li
-          %a{:href => "/blog"} Blog
+          %a{:href => "#{prefix}/blog"} Blog
     .small-12.medium-3.grid-end.social-icon-container
       %a.social-icon{:href => "https://www.facebook.com/eiveydotca", :target =>"blank"}
         %i.fa.fa-facebook{"aria-hidden" => "true"}
@@ -53,43 +55,43 @@
     Clothing
   %ul.standard-menu
     %li
-      %a{href:"/shop/?category=tops"}
+      %a{href:"#{prefix}/shop/?category=tops"}
         Tops
     %li
-      %a{href:"/shop/?category=bottoms"}
+      %a{href:"#{prefix}/shop/?category=bottoms"}
         Bottoms
     %li
-      %a{href:"/shop/?category=dresses"}
+      %a{href:"#{prefix}/shop/?category=dresses"}
         Dresses
     %li
-      %a{href:"/shop/?category=outerwear"}
+      %a{href:"#{prefix}/shop/?category=outerwear"}
         Outerwear
     %li
-      %a{href:"/shop/?category=shoes"}
+      %a{href:"#{prefix}/shop/?category=shoes"}
         Shoes
     %li
-      %a{href:"/shop/?category=handbags"}
+      %a{href:"#{prefix}/shop/?category=handbags"}
         Handbags
     %li
-      %a{href:"/shop/?category=accessories"}
+      %a{href:"#{prefix}/shop/?category=accessories"}
         Accessories
     %li
-      %a{href:"/shop/?category=mens"}
+      %a{href:"#{prefix}/shop/?category=mens"}
         Mens
   %h3.mobile-menu-header
     Company
   %ul.standard-menu
     %li
-      %a{href:"/about"}
+      %a{href:"#{prefix}/about"}
         About
     %li
-      %a{href:"/contact"}
+      %a{href:"#{prefix}/contact"}
         Contact
     %li
-      %a{href:"/en/signup"}
+      %a{href:"#{prefix}/shop/en/signup"}
         Sign-Up
     %li
-      %a{href:"/en/login"}
+      %a{href:"#{prefix}/shop/en/login"}
         Log-In
 
 #mobile-user-menu-fullscreen-container.full-screen-takeover.faded-out
@@ -98,4 +100,4 @@
   %h3.mobile-menu-header
     Account
 
-%script{:type => :"text/javascript", :src => "/frontend/build/app.sharetribe.min.js"}
+%script{:type => :"text/javascript", :src => "#{prefix}/frontend/build/app.sharetribe.min.js"}
