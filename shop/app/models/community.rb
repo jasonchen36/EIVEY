@@ -235,22 +235,22 @@ class Community < ActiveRecord::Base
                                                       "image/pjpeg",
                                                       "image/x-png"]
 
-  # has_attached_file :favicon,
-  #                   :styles => {
-  #                     :favicon => "32x32#"
-  #                   },
-  #                   :default_style => :favicon,
-  #                   :convert_options => {
-  #                     :favicon => "-depth 32 -strip",
-  #                   },
-  #                   :default_url => ActionController::Base.helpers.asset_path("favicon.ico")
-  #
-  # validates_attachment_content_type :favicon,
-  #                                   :content_type => ["image/jpeg",
-  #                                                     "image/png",
-  #                                                     "image/gif",
-  #                                                     "image/x-icon",
-  #                                                     "image/vnd.microsoft.icon"]
+  has_attached_file :favicon,
+                    :styles => {
+                      :favicon => "32x32#"
+                    },
+                    :default_style => :favicon,
+                    :convert_options => {
+                      :favicon => "-depth 32 -strip",
+                    },
+                    :default_url => ActionController::Base.helpers.asset_path("favicon.ico")
+
+  validates_attachment_content_type :favicon,
+                                    :content_type => ["image/jpeg",
+                                                      "image/png",
+                                                      "image/gif",
+                                                      "image/x-icon",
+                                                      "image/vnd.microsoft.icon"]
 
   # process_in_background definitions have to be after
   # after all attachments: https://github.com/jrgifford/delayed_paperclip/issues/129
@@ -259,7 +259,7 @@ class Community < ActiveRecord::Base
   process_in_background :cover_photo
   process_in_background :small_cover_photo
 
-  # process_in_background :favicon
+  process_in_background :favicon
 
   validates_format_of :twitter_handle, with: /\A[A-Za-z0-9_]{1,15}\z/, allow_nil: true
 
