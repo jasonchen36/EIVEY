@@ -54,13 +54,24 @@
   }
 }
 
-#grid-color-filter-container {
+#grid-color-filter-container, #grid-size-filter-container {
   .custom-filter-checkbox-container {
     float: left;
-    margin-top: 10px;
   }
   input {
     display: none;
+  }
+}
+
+#grid-color-filter-container {
+  .custom-filter-checkbox-container {
+    margin-top: 10px;
+  }
+}
+
+#grid-size-filter-container {
+  .custom-filter-checkbox-container {
+    margin-top: 5px;
   }
 }
 
@@ -75,7 +86,7 @@
   }
 }
 
-input[type=checkbox]:checked + .color-filter-container {
+input[type=checkbox]:checked + .color-filter-container, input[type=checkbox]:checked + .size-filter-container {
   border-color: $color-grid-grey;
 }
 
@@ -119,6 +130,28 @@ input[type=checkbox]:checked + .color-filter-container {
   &.brown {
     background-color: $color-filter-brown;
   }
+}
+
+.size-filter-container {
+  height: 30px;
+  width: 46px;
+  border: 3px solid transparent;
+  margin: 0;
+  @include transition-with-defaults(border);
+  &:hover {
+    border-color: $color-grid-grey;
+  }
+}
+
+.size-filter {
+  height: 24px;
+  width: 40px;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  background: $color-size-filter-grey;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .product-grid-filter{
