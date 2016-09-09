@@ -38,7 +38,7 @@ module ListingIndexViewUtils
 
   CustomField = Struct.new(
     :id,
-    :name,
+    :custom_field_id,
     :text_value,
     :numeric_value
   )
@@ -80,7 +80,7 @@ module ListingIndexViewUtils
       custom_field_values=
         if includes.include?(:custom_field_values)
           l[:custom_field_values].map { |li|
-            CustomField.new(li[:id],li[:name],li[:text_value],li[:numeric_value])
+            CustomField.new(li[:id],li[:custom_field_id],li[:text_value],li[:numeric_value])
           }
         else 
           []

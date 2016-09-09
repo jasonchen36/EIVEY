@@ -53,9 +53,9 @@ module ListingsHelper
 
   def listing_form_menu_titles()
     titles = {
-      "category" => t("listings.new.select_category"),
-      "subcategory" => t("listings.new.select_subcategory"),
-      "listing_shape" => t("listings.new.select_transaction_type")
+        "category" => t("listings.new.select_category"),
+        "subcategory" => t("listings.new.select_subcategory"),
+        "listing_shape" => t("listings.new.select_transaction_type")
     }
   end
 
@@ -69,8 +69,8 @@ module ListingsHelper
 
   def price_as_text(listing)
     humanized_money_with_symbol(listing.price).upcase +
-    unless listing.quantity.blank? then " / #{listing.quantity}" else "" end +
-    if @current_community.vat then " " + t("listings.displayed_price.price_excludes_vat") else "" end
+        unless listing.quantity.blank? then " / #{listing.quantity}" else "" end +
+        if @current_community.vat then " " + t("listings.displayed_price.price_excludes_vat") else "" end
   end
 
   def has_images?(listing)
@@ -113,13 +113,13 @@ module ListingsHelper
 
   def price_quantity_per_unit(listing)
     quantity =
-      if listing.unit_type.present?
-        ListingViewUtils.translate_unit(listing.unit_type, listing.unit_tr_key)
-      elsif listing.quantity.present?
-        listing.quantity
-      else
-        nil
-      end
+        if listing.unit_type.present?
+          ListingViewUtils.translate_unit(listing.unit_type, listing.unit_tr_key)
+        elsif listing.quantity.present?
+          listing.quantity
+        else
+          nil
+        end
 
     if quantity
       t("listings.show.price.per_quantity_unit", quantity_unit: quantity)
@@ -136,9 +136,13 @@ module ListingsHelper
     t(listing.action_button_tr_key)
   end
 
-  def get_listing_attribute_value(listing, key)
+  def get_custom_field_value(listing, key)
     puts listing.to_yaml
-    "todo"
+    if listing.custom_field_values.empty?
+      "empty"
+    else
+      listing.custom_field_values.first.custom_field_id
+    end
   end
 
 end
