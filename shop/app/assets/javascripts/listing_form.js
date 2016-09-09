@@ -150,7 +150,7 @@ window.ST = window.ST || {};
   // Ajax call to display listing form after categories and
   // listing shape has been selected
   function display_new_listing_form(selected_attributes, locale) {
-    var new_listing_path = '/' + locale + '/listings/new_form_content';
+    var new_listing_path = isInstalledInSubdirectory()+'/' + locale + '/listings/new_form_content';
     $.get(new_listing_path, selected_attributes, function(data) {
       $('.js-form-fields').html(data);
       $('.js-form-fields').removeClass('hidden');
@@ -158,7 +158,7 @@ window.ST = window.ST || {};
   }
 
   function display_edit_listing_form(selected_attributes, locale, id) {
-    var edit_listing_path = '/' + locale + '/listings/edit_form_content';
+    var edit_listing_path = isInstalledInSubdirectory()+'/' + locale + '/listings/edit_form_content';
     var request_params = _.assign({}, selected_attributes, {id: id});
     $.get(edit_listing_path, request_params, function(data) {
       $('.js-form-fields').html(data);

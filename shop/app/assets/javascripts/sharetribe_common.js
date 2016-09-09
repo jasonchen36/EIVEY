@@ -59,6 +59,14 @@ function auto_resize_text_areas(class_name) {
   $('textarea.' + class_name).autosize();
 }
 
+function isInstalledInSubdirectory(){
+    if (window.location.href.indexOf('shop') !== -1){
+        return '/shop';
+    } else {
+        return '';
+    }
+}
+
 function translate_validation_messages(locale) {
   function formatMinMaxMessage(message) {
     return function(otherName) {
