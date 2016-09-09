@@ -74,6 +74,11 @@ WordPress will be available at [dev.eivey.com](http://dev.eivey.com)
 
 Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
 
+#### Debugging ####
+
+You can debug Sharetribe using [Pry](http://pryrepl.org/)
+
+
 ## How to Deploy ##
 
 Update from Git
