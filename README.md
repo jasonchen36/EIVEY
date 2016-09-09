@@ -107,11 +107,23 @@ git pull
 
 Generate common frontend files
 
+* Note, do not run with "sudo"!
+
 ```
 cd frontend
 npm install
 bower install
 grunt build
+cd ../
+```
+
+Install Sharetribe dependencies
+
+* Note, do not run with "sudo"!
+
+```
+cd shop
+bundle install
 cd ../
 ```
 
