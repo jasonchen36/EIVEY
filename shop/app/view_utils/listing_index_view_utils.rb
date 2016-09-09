@@ -36,13 +36,6 @@ module ListingIndexViewUtils
     :thumb,
     :small_3x2)
 
-  CustomField = Struct.new(
-    :id,
-    :custom_field_id,
-    :text_value,
-    :numeric_value
-  )
-
   module_function
 
   def to_struct(result:, includes:, per_page:, page:)
@@ -74,18 +67,6 @@ module ListingIndexViewUtils
           []
         end
 
-
-      # Added size
-#      size = l.list_size
-      custom_field_values=
-        if includes.include?(:custom_field_values)
-          l[:custom_field_values].map { |li|
-            CustomField.new(li[:id],li[:custom_field_id],li[:text_value],li[:numeric_value])
-          }
-        else 
-          []
-        end
-
       ListingItem.new(
         l[:id],
         l[:url],
@@ -105,7 +86,7 @@ module ListingIndexViewUtils
         l[:shape_name_tr_key],
         l[:listing_shape_id],
         l[:icon_name],
-        custom_field_values
+        l[:custom_field_values]
       )
     }
 

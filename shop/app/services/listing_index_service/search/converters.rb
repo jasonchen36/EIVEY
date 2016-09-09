@@ -87,12 +87,15 @@ module ListingIndexService::Search::Converters
   def field_values_helper(field_values)
     converted_values = []
     field_values.each{ |li|
-      converted_values.push({
-          id: li.id,
-          custom_field_id: li.custom_field_id,
-          text_value: li.text_value,
-          numeric_value: li.numeric_value
-      })
+      converted_values.push(
+          {
+              id: li[:id],
+              custom_field_id: li[:custom_field_id],
+              text_value: CustomField.find(li[:custom_field_id]).name,
+              numeric_value: li[:numeric_value]
+          }
+      )
+      return converted_values
     }
   end
 

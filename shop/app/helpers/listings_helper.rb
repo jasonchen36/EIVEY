@@ -137,11 +137,31 @@ module ListingsHelper
   end
 
   def get_custom_field_value(listing, key)
-    puts listing.to_yaml
+    field_value = ''
     if listing.custom_field_values.empty?
-      "empty"
+
     else
-      listing.custom_field_values.first.custom_field_id
+      custom_fields = listing.custom_field_values
+      # if array of objects
+      if custom_fields.kind_of?(Array)
+        custom_fields.each {|li|
+          if CustomField.find(li[:custom_field_id]).name.downcase == key.downcase
+            field_value = li[:text_value]
+          end
+        }
+        # if custom_field_object == 'empty3'
+        #   binding.remote_pry
+        # end
+      else
+        # if single object
+        if CustomField.find(custom_fields[:custom_field_id]).name.downcase == key.downcase
+          field_value = custom_fields[:text_value]
+        end
+      end
+    end
+    if field_value.empty?
+    else
+      return key.capitalize+': '+field_value
     end
   end
 
