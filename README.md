@@ -8,17 +8,37 @@ The WordPress site is up to date with the latest WordPress version and plugin de
 
 The Sharetribe site is forked from the Sharetribe core as of 08/2016 and no longer receives updates from the master repository.
 
+
 ## Software Architecture (High Level) ##
 
 The WordPress site is built upon PHP.
 
 The Sharetribe site is built upon Ruby on Rails and is installed in a subdirectory of the WordPress site, /shop.
 
-Both sites are run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config.
+An Ubuntu server is used for production
 
+
+## Devops ##
+
+### Ubuntu ###
+Use Ubuntu 14 (tested with 14.04.5)
+
+### Apache ###
+PHP and Ruby are both run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config
+
+### Postfix ###
 [Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf  Logs are located in /var/log/mail.log
 
-[Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server
+### ImageMagick ###
+Be sure to install ImageMagick on Ubuntu 14 using apt-get.  Installing it via source tarballs means that it misses the convert and identify config needed for images  
+[Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
+
+### Upstart ###
+Upstart is already installed on Ubuntu 14. Upstart is used to run the delayed worker command for Sharetribe.  The config is located locally in /devops/upstart.conf and remotely in /etc/init/upstart.eivey.conf 
+
+### Ruby ###
+[Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server.  This is to prevent permissions issues and version conflicts between gems
+
 
 ## How to Set Up a Dev Environment ##
 
