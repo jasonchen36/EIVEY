@@ -30,11 +30,15 @@ PHP and Ruby are both run using Apache.  The config is located locally in /devop
 [Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf  Logs are located in /var/log/mail.log
 
 ### ImageMagick ###
-Be sure to install ImageMagick on Ubuntu 14 using apt-get.  Installing it via source tarballs means that it misses the convert and identify config needed for images  
+Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on Ubuntu 14 using apt-get.  Installing it via source tarball means that it misses the convert and identify commands' config needed for images  
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
 
-### Upstart ###
-Upstart is already installed on Ubuntu 14. Upstart is used to run the delayed worker command for Sharetribe.  The config is located locally in /devops/upstart.conf and remotely in /etc/init/upstart.eivey.conf 
+### Sharetribe Delayed Worker ###
+Run the following to daemonize the worker (cd into the shop directory for live/dev first)
+
+```
+nohup bundle exec rake jobs:work &
+```
 
 ### Ruby ###
 [Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server.  This is to prevent permissions issues and version conflicts between gems
