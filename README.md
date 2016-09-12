@@ -18,6 +18,8 @@ Both sites are run using Apache.  The config is located locally in /devops/apach
 
 [Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf  Logs are located in /var/log/mail.log
 
+[Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server
+
 ## How to Set Up a Dev Environment ##
 
 ### Common ###
