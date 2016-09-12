@@ -146,7 +146,7 @@ module Kassi
     # Configure Paperclip
     paperclip_options = {
           :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
-          :url => "/system/:attachment/:id/:style/:filename"
+          :url => "/shop/system/:attachment/:id/:style/:filename"
     }
 
     if APP_CONFIG.user_asset_host
