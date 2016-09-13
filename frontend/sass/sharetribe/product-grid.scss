@@ -1,6 +1,6 @@
 //grid items
 //-----------------------------
-.home-fluid-thumbnail-grid-border{
+.fluid-thumbnail-grid-border{
   border: 1px solid $color-grid-grey;
   padding: 5px;
   @include transition-with-defaults(border-color);
