@@ -108,7 +108,7 @@ $elementSpacing: lines(0.5);
 
 .header-user-toggle {
   padding-left: $elementSpacing;
-  display: block;
+  display: inline-block;
   min-width: 175px;
   @include clearfix;
 }

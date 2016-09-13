@@ -150,7 +150,7 @@ module ListingsHelper
               "ON custom_field_option_titles.custom_field_option_id = custom_field_options.id "+
               "INNER JOIN custom_field_names  "+
               "ON custom_field_options.custom_field_id = custom_field_names.custom_field_id "+
-              "WHERE custom_field_option_selections.listing_id = #{listing.id} AND LOWER(custom_field_names.value) = '#{key}' "+
+              "WHERE custom_field_option_selections.listing_id = #{listing.id} AND LOWER(custom_field_names.value) = '#{key.downcase}' "+
               "LIMIT 1"
       ).rows
       if field_value_raw.empty?
