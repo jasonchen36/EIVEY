@@ -10,7 +10,7 @@ function initialize_confirmation_pending_form(locale, email_in_use_message) {
        error.insertAfter(element);
      },
      rules: {
-       "person[email]": {required: true, email: true, remote: "/people/check_email_availability_and_validity"}
+       "person[email]": {required: true, email: true, remote: isInstalledInSubdirectory()+"/people/check_email_availability_and_validity"}
      },
      messages: {
        "person[email]": { remote: email_in_use_message }
