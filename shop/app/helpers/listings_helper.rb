@@ -138,22 +138,24 @@ module ListingsHelper
 
   def get_custom_field_value(listing, key)
     field_value = ''
-    if listing.custom_field_values.empty?
-
+    if !defined? listing or key.empty?
+      field_value = 'empty'
     else
-      custom_fields = listing.custom_field_values
-      # if array of objects
-      if custom_fields.kind_of?(Array)
-        custom_fields.each {|li|
-          if CustomField.find(li[:custom_field_id]).name.downcase == key.downcase
-            field_value = li[:text_value]
-          end
-        }
+      field_value_raw = ActiveRecord::Base.connection.exec_query(
+          "SELECT custom_field_option_titles.value "+
+              "FROM custom_field_option_titles "+
+              "INNER JOIN custom_field_option_selections "+
+              "ON custom_field_option_titles.custom_field_option_id=custom_field_option_selections.custom_field_option_id "+
+              "INNER JOIN custom_field_options "+
+              "ON custom_field_option_titles.custom_field_option_id = custom_field_options.id "+
+              "INNER JOIN custom_field_names  "+
+              "ON custom_field_options.custom_field_id = custom_field_names.custom_field_id "+
+              "WHERE custom_field_option_selections.listing_id = #{listing.id} AND LOWER(custom_field_names.value) = '#{key}' "+
+              "LIMIT 1"
+      ).rows
+      if field_value_raw.empty?
       else
-        # if single object
-        if CustomField.find(custom_fields[:custom_field_id]).name.downcase == key.downcase
-          field_value = custom_fields[:text_value]
-        end
+        field_value = field_value_raw[0][0]
       end
     end
     if field_value.empty?
