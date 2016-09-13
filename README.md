@@ -34,10 +34,16 @@ Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
 
 ### Sharetribe Delayed Worker ###
-Run the following to daemonize the worker (cd into the shop directory for live/dev first)
+Run the following to daemonize the worker (cd into the shop directory for live/dev first and update the ENV variable to the appropriate environment).  This relies on the [daemons](https://github.com/thuehlinger/daemons) gem
 
 ```
-nohup bundle exec rake jobs:work &
+RAILS_ENV=production script/delayed_job start
+```
+
+You can check the status of the task using
+
+```
+ruby script/delayed_job status
 ```
 
 ### Ruby ###
