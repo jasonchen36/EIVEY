@@ -5,7 +5,10 @@ RewriteBase /
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+#ignore sharetribe urls
 RewriteCond %{REQUEST_URI} !^/shop/.*$
+RewriteCond %{REQUEST_URI} !^/webhooks/.*$
+#rewrite to wordpress handler
 RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
