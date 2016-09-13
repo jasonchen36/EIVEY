@@ -11,7 +11,7 @@
       .col-12
         %p
           Webhook:
-          - hook_url = "#{request.protocol}webhooks.#{APP_CONFIG.domain}/webhooks/braintree?community_id=#{@current_community.id}"
+          - hook_url = "http://eivey.ca/shop/webhooks/braintree?community_id=1"
           = link_to hook_url, hook_url
         %p
           If configurations are correctly set the webhook URL should return randomly generated string with numbers and letters.
