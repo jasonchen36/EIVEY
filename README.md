@@ -119,7 +119,7 @@ WordPress will be available at [dev.eivey.com](http://dev.eivey.com)
 
 Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
 
-### Sharetribe Delayed Worker ###
+#### Sharetribe Delayed Worker ####
 Run the following to daemonize the worker (update the ENV variable to the appropriate environment).  This relies on the [daemons](https://github.com/thuehlinger/daemons) gem
 
 ```
