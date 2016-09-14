@@ -34,17 +34,26 @@ Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
 
 ### Sharetribe Delayed Worker ###
-Run the following to daemonize the worker (cd into the shop directory for live/dev first and update the ENV variable to the appropriate environment).  This relies on the [daemons](https://github.com/thuehlinger/daemons) gem
+[Monit](https://mmonit.com/) is used to keep the delayed workers alive.  The config is located locally in /devops/monit.conf and remotely in /etc/monit/conf.d/delayedjob.conf. Logs are located in /var/log/monit.log.  The core program configuration has been modified and is located locally in /devops/monitrc and remotely in /etc/monit/monitrc
+
+Monit can be started using
 
 ```
-RAILS_ENV=production script/delayed_job start
+sudo service monit start all
 ```
 
-You can check the status of the task using
+You can check Monit's status using
 
 ```
-ruby script/delayed_job status
+sudo service monit status
 ```
+
+and check the status of the delayed worker using
+
+```
+ps aux | grep "delay"
+```
+
 
 ### Ruby ###
 [Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server.  This is to prevent permissions issues and version conflicts between gems
@@ -109,6 +118,20 @@ bundle exec passenger start
 WordPress will be available at [dev.eivey.com](http://dev.eivey.com)
 
 Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
+
+### Sharetribe Delayed Worker ###
+Run the following to daemonize the worker (update the ENV variable to the appropriate environment).  This relies on the [daemons](https://github.com/thuehlinger/daemons) gem
+
+```
+RAILS_ENV=production script/delayed_job start
+```
+
+You can check the status of the task using
+
+```
+ruby script/delayed_job status
+```
+
 
 #### Debugging ####
 
