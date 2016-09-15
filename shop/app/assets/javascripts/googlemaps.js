@@ -411,7 +411,7 @@ function addCommunityMarkers() {
   markerContents = [];
   markers = [];
 
-  var request_path = '/en/tribes'
+  var request_path = isInstalledInSubdirectory()+'/en/tribes';
   $.getJSON(request_path, {dataType: "json"}, function(data) {
     var data_arr = data.data;
     //alert(data_arr);

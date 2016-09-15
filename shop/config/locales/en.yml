@@ -1083,8 +1083,8 @@ en:
     profile: Profile
     manage_listings: "Manage listings"
     invite: "Invite new members"
-    login: "Log in"
-    signup: "Sign up"
+    login: "Log-In"
+    signup: "Sign-Up"
     menu: Menu
   homepage:
     additional_private_listings_slate:
@@ -1827,7 +1827,7 @@ en:
       visible_to_everybody: "visible to everybody"
       create_account_with_facebook: "Sign up with Facebook"
       OR: OR
-      signup_with_email: "Sign up with email"
+      signup_with_email: "Sign up"
     profile_feedback:
       grade: "grade:"
       and_gave_following_feedback: "and gave the following feedback"

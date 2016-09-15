@@ -15,19 +15,6 @@
   }
 }
 
-.follow-button {
-  @include big-button(#abcdc6);
-  width: 100%;
-  color:white;
-  background-color: #abcdc6;
-
-  &.unfollow:hover:not(.button-disable-hover) {
-    background: $red;
-    color: white;
-  }
-
-}
-
 .disabled-button {
   &, &:hover {
     background-color: $border;

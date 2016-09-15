@@ -49,7 +49,14 @@ module ListingIndexService::DataTypes
     [:is_organization, :bool, default: false],
     [:avatar, entity: AvatarImage],
     [:is_deleted, :bool, default: false],
-    [:num_of_reviews, :fixnum, default: 0]
+    [:num_of_reviews, :fixnum, default: 0]  
+  )
+
+  CustomFieldValues = EntityUtils.define_builder(
+    [:id, :to_integer, :mandatory],
+    [:numeric_value, :to_float],
+    [:custom_field_id, :to_integer],
+    [:text_value, :string]
   )
 
   Listing = EntityUtils.define_builder(
@@ -63,6 +70,7 @@ module ListingIndexService::DataTypes
     [:category_id, :fixnum, :mandatory],
     [:author, entity: Author],
     [:listing_images, collection: ListingImage],
+    [:custom_field_values, collection: CustomFieldValues],    
     [:updated_at, :time, :mandatory, str_to_time: "%Y-%m-%dT%H:%M:%S.%L%z"], # 2014-12-08T20:51:29.000+0200
     [:created_at, :time, :mandatory, str_to_time: "%Y-%m-%dT%H:%M:%S.%L%z"],
     [:latitude],

@@ -2,65 +2,233 @@
 
 ## Description ##
 
-* This is a peer-to-peer marketplace CMS forked from [Sharetribe](https://github.com/sharetribe/sharetribe) core.
+This site is built using two different CMSs: [WordPress](https://wordpress.org/) and [Sharetribe](https://github.com/sharetribe/sharetribe).  
+
+The WordPress site is up to date with the latest WordPress version and plugin dependencies.
+
+The Sharetribe site is forked from the Sharetribe core as of 08/2016 and no longer receives updates from the master repository.
+
 
 ## Software Architecture (High Level) ##
 
-* Built upon Ruby and Rails and MySQL
+The WordPress site is built upon PHP.
+
+The Sharetribe site is built upon Ruby on Rails and is installed in a subdirectory of the WordPress site, /shop.
+
+An Ubuntu server is used for production
+
+
+## Devops ##
+
+### Ubuntu ###
+Use Ubuntu 14 (tested with 14.04.5)
+
+### Apache ###
+PHP and Ruby are both run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config
+
+### Postfix ###
+[Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf  Logs are located in /var/log/mail.log
+
+### ImageMagick ###
+Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on Ubuntu 14 using apt-get.  Installing it via source tarball means that it misses the convert and identify commands' config needed for images  
+[Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
+
+### Sharetribe Delayed Worker ###
+[Monit](https://mmonit.com/) is used to keep the delayed workers alive.  The config is located locally in /devops/monit.conf and remotely in /etc/monit/conf.d/delayedjob.conf. Logs are located in /var/log/monit.log.  The core program configuration has been modified and is located locally in /devops/monitrc and remotely in /etc/monit/monitrc
+
+Monit can be started using
+
+```
+sudo service monit start all
+```
+
+You can check Monit's status using
+
+```
+sudo service monit status
+```
+
+and check the status of the delayed worker using
+
+```
+ps aux | grep "delay"
+```
+
+
+### Ruby ###
+[Rbenv](https://github.com/rbenv/rbenv) is used to manage the Ruby version locally and on the remote server.  This is to prevent permissions issues and version conflicts between gems
+
 
 ## How to Set Up a Dev Environment ##
 
-* Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
-    * If needed, upgrade your Ruby version using [these](https://gorails.com/setup/osx/10.11-el-capitan) instructions. 
-* Use a FQDN like dev.eivey.com to avoid problems caused by localhostw
-* Update your config/config.yml config file with config/config.dev.yml for development
+### Common ###
 
-### MySql ###
-* "Can't connect to local MySQL server through socket"
-    * If you are using AMPPS, run this command
-    * sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
+Clone the repo 
 
-### Rake (Rails) ###
-* List all available tasks
-    * bundle exec rake --tasks
-* Generate missing CSS files or rebuild after Sass modifications
-    * bundle exec rake sharetribe:generate_customization_stylesheets_immediately
-    
-### Sphinx ###
-* Indexing issues?
-   * [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)
+```
+git clone https://bitbucket.org/ellefsontech/eivey.web dev.eivey.com
+cd dev.eivey.com
+```
 
-## How to Deploy (Wordpress) ##
-*checkout code
-git clone {repo url} html
-sudo chown -R ubuntu:ubuntu  html/
+Generate frontend files
 
-*install node
-sudo apt-get update
-sudo apt-get install nodejs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-sudo apt-get install npm
-
-*install bower & grunt
-sudo npm install -g bower grunt-cli
-
-*install ruby & sass
-sudo apt-get install ruby
-sudo gem install sass
-
-*on every deploy
-cd frontend/
+```
+cd frontend
 npm install
 bower install
 grunt build
+cd ../
+```
+
+Start Grunt workflow
+
+```
+cd frontend
+grunt dev
+cd ../
+```
+
+### WordPress ###
+
+Create /wp-config.php and update with the correct database credentials.
+
+```
+cp wp-config-sample.php wp-config.php
+```
 
 
+### Sharetribe ###
 
-UPDATE `table_name` SET `field_name` = replace(same_field_name, 'old address', 'new address')
+Enter the Sharetribe directory
 
-run on:
-wp_options table on option_value
-wp_postmeta table on meta_value
-wp_posts table on post_content
+```
+cd shop
+```
 
-enable mod rewrite on the server: https://www.digitalocean.com/community/tutorials/how-to-set-up-mod_rewrite-for-apache-on-ubuntu-14-04
+Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
+
+* Note, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
+
+* Note, you will probably want to comment out/remove hardcoded references to "/shop" like in /shop/config/application.rb and update the "prefix" variable to point to your local php instance in files like shop/app/views/layouts/_head.haml and shop/app/views/layouts/_footer.haml.  Just be sure not to check those changes into Git!
+
+```
+bundle exec passenger start
+```
+
+WordPress will be available at [dev.eivey.com](http://dev.eivey.com)
+
+Sharetribe will be available at [dev.eivey.com:3000](http://dev.eivey.com:3000)
+
+#### Sharetribe Delayed Worker ####
+Run the following to daemonize the worker (update the ENV variable to the appropriate environment).  This relies on the [daemons](https://github.com/thuehlinger/daemons) gem
+
+```
+RAILS_ENV=production script/delayed_job start
+```
+
+You can check the status of the task using
+
+```
+ruby script/delayed_job status
+```
+
+
+#### Debugging ####
+
+You can debug Sharetribe using [Pry](http://pryrepl.org/) and [Pry Remote](https://github.com/mon-ouie/pry-remote/)
+
+Anywhere in Ruby that you want to add a breakpoint, add
+
+```
+binding.remote_pry
+```
+
+In your console window, you should see
+
+```
+App 74317 stdout: [pry-remote] Waiting for client on druby://127.0.0.1:9876
+```
+
+Open a new terminal window and connect with the debugger using
+
+```
+pry-remote
+```
+
+## How to Deploy ##
+
+Update from Git
+
+```
+cd dev.eivey.com
+git pull
+```
+
+Generate common frontend files
+
+* Note, do not run with "sudo"!
+
+```
+cd frontend
+npm install
+bower install
+grunt build
+cd ../
+```
+
+Install Sharetribe dependencies
+
+* Note, do not run with "sudo"!
+
+```
+cd shop
+bundle install
+cd ../
+```
+
+Generate Sharetribe CSS manually
+   
+```
+cd shop
+bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+cd ../
+```
+
+Restart Passenger
+
+```
+cd shop
+passenger-config restart-app $(pwd)
+cd ../
+```
+
+
+## General ##
+
+### Passenger ###
+
+Check if passenger is runnning
+
+```
+sudo /usr/sbin/passenger-memory-stats
+```
+
+### MySql ###
+
+"Can't connect to local MySQL server through socket".  If you are using AMPPS, run:
+
+```
+sudo ln -s /Applications/AMPPS/var/mysql.sock /tmp/mysql.sock
+```
+
+### Rake (Rails) ###
+
+List all available tasks
+
+```
+bundle exec rake --tasks
+```
+
+### Sphinx ###
+
+Indexing issues? [Sharetribe response](https://github.com/sharetribe/sharetribe/issues/2334)

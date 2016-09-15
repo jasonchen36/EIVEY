@@ -186,6 +186,7 @@ body {
 
 // Used for views with left hand navigation
 .left-navi-section {
+  min-height: 750px;
   padding: lines(0.5) 0;
 
   @include media(tablet) {

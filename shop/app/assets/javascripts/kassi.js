@@ -520,14 +520,14 @@ function initialize_signup_form(locale, username_in_use_message, invalid_usernam
       }
     },
     rules: {
-      "person[username]": {required: true, minlength: 3, maxlength: 20, valid_username: true, remote: "/people/check_username_availability"},
+      "person[username]": {required: true, minlength: 3, maxlength: 20, valid_username: true, remote: isInstalledInSubdirectory()+"/people/check_username_availability"},
       "person[given_name]": {required: name_required, maxlength: 30},
       "person[family_name]": {required: name_required, maxlength: 30},
-      "person[email]": {required: true, email: true, remote: "/people/check_email_availability_and_validity"},
+      "person[email]": {required: true, email: true, remote: isInstalledInSubdirectory()+"/people/check_email_availability_and_validity"},
       "person[terms]": "required",
       "person[password]": { required: true, minlength: 4 },
       "person[password2]": { required: true, minlength: 4, equalTo: "#person_password1" },
-      "invitation_code": {required: invitation_required, remote: "/people/check_invitation_code"}
+      "invitation_code": {required: invitation_required, remote: isInstalledInSubdirectory()+"/people/check_invitation_code"}
     },
     messages: {
       "person[username]": { valid_username: invalid_username_message, remote: username_in_use_message },
@@ -630,7 +630,7 @@ function initialize_update_account_info_form(locale, change_text, cancel_text, e
       }
     },
     rules: {
-      "person[email_attributes][address]": {required: true, email: true, remote: "/people/check_email_availability"},
+      "person[email_attributes][address]": {required: true, email: true, remote: isInstalledInSubdirectory()+"/people/check_email_availability"},
       "person[send_notifications][]": {required: true}
     },
     messages: {
@@ -685,7 +685,7 @@ function initialize_profile_view(profile_id) {
       });
 
   $('#load-more-testimonials').click(function() {
-    request_path = profile_id + "/testimonials";
+    request_path = isInstalledInSubdirectory()+profile_id + "/testimonials";
     $.get(request_path, {per_page: 200, page: 1}, function(data) {
       $('#profile-testimonials-list').html(data);
     });

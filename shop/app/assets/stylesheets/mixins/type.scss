@@ -91,7 +91,7 @@ $giga-type:    110;
 
 @mixin normal-type {
   font-size: em($font-size, $normal-type); // 16 is the base font-size of all(?) browsers
-  line-height: lines(1); // 24px
+  line-height: 1; // 24px
 }
 
 @mixin big-type {

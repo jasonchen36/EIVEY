@@ -7,7 +7,7 @@ Domain Path: /embedded/locale
 License: GPLv2
 Requires at least: 3.7
 Tested up to: 4.6
-Stable tag: 2.1
+Stable tag: 2.2.1
 
 The complete and reliable plugin for managing custom post types, custom taxonomies and custom fields.
 
@@ -150,6 +150,24 @@ Additionally, Types is the only plugin that lets you define parent/child relatio
 9. Bulk editing child content using Field Tables
 
 == Changelog ==
+
+= 2.2.1 =
+
+* Fixed path for Toolset Installer
+
+= 2.2 =
+
+* Added feature to output title, description, caption and alt text using placeholders in image field.
+* Added types_import_from_zip_file API filter.
+* Added types_finished_saving_child_posts API action as a workaround for https://core.trac.wordpress.org/ticket/17817.
+* Fixed error when generic field definitions are queried by Types-specific arguments.
+* Fixed warnings when saving a child post with repetitive field in the parent's edit page.
+* Fixed issue where internal "Types Term Groups" post type was appearing in some places that it should not.
+* Fixed issue in RTL languages where save button was being overlapped by cancel button on field group conditions.
+* Fixed issue with post relationship query in WPML default language.
+* Fixed issue with term field checkboxes options which were not able to be edit
+* Fixed performance issue with frontend display table.
+* Fixed issue with same fields in multiple field groups and they are now being displayed only once in post/user/term edit pages.
 
 = 2.1 =
 

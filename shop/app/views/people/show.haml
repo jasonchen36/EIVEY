@@ -1,9 +1,8 @@
 - content_for :javascript do
   initialize_profile_view("#{@person.username}");
 
-- content_for :title_header do
-  %h1
-    %span.profile-title= @person.name(@current_community) + (@community_customization && @community_customization.storefront_label ? @community_customization.storefront_label : "")
+%h1
+  = @person.name(@current_community) + (@community_customization && @community_customization.storefront_label ? @community_customization.storefront_label : "")
 
 .row
   .col-4
@@ -23,7 +22,7 @@
       .profile-action-buttons-mobile
         = render :partial => "profile_action_buttons"
 
-    .row.person-details
+    #profile-description.row
       - if @person.description && !@person.description.blank?
         - text_with_line_breaks do
           = @person.description

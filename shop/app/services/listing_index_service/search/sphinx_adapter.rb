@@ -8,6 +8,7 @@ module ListingIndexService::Search
     INCLUDE_MAP = {
       listing_images: :listing_images,
       author: :author,
+      custom_field_values: :custom_field_values,
       num_of_reviews: {author: :received_testimonials},
       location: :location
     }

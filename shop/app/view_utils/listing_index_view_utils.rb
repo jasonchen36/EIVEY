@@ -18,7 +18,8 @@ module ListingIndexViewUtils
     :quantity,
     :shape_name_tr_key,
     :listing_shape_id,
-    :icon_name)
+    :icon_name,
+    :custom_field_values)
 
   Author = Struct.new(
     :id,
@@ -56,6 +57,7 @@ module ListingIndexViewUtils
           )
         end
 
+
       listing_images =
         if includes.include?(:listing_images)
           l[:listing_images].map { |li|
@@ -83,7 +85,8 @@ module ListingIndexViewUtils
         l[:quantity],
         l[:shape_name_tr_key],
         l[:listing_shape_id],
-        l[:icon_name]
+        l[:icon_name],
+        l[:custom_field_values]
       )
     }
 

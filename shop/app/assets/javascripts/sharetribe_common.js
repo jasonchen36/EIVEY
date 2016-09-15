@@ -10,7 +10,7 @@ function initialize_confirmation_pending_form(locale, email_in_use_message) {
        error.insertAfter(element);
      },
      rules: {
-       "person[email]": {required: true, email: true, remote: "/people/check_email_availability_and_validity"}
+       "person[email]": {required: true, email: true, remote: isInstalledInSubdirectory()+"/people/check_email_availability_and_validity"}
      },
      messages: {
        "person[email]": { remote: email_in_use_message }
@@ -57,6 +57,14 @@ function disable_submit_button(form_id) {
 
 function auto_resize_text_areas(class_name) {
   $('textarea.' + class_name).autosize();
+}
+
+function isInstalledInSubdirectory(){
+    if (window.location.href.indexOf('shop') !== -1){
+        return '/shop';
+    } else {
+        return '';
+    }
 }
 
 function translate_validation_messages(locale) {

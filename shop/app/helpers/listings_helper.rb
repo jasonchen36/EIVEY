@@ -53,9 +53,9 @@ module ListingsHelper
 
   def listing_form_menu_titles()
     titles = {
-      "category" => t("listings.new.select_category"),
-      "subcategory" => t("listings.new.select_subcategory"),
-      "listing_shape" => t("listings.new.select_transaction_type")
+        "category" => t("listings.new.select_category"),
+        "subcategory" => t("listings.new.select_subcategory"),
+        "listing_shape" => t("listings.new.select_transaction_type")
     }
   end
 
@@ -69,8 +69,8 @@ module ListingsHelper
 
   def price_as_text(listing)
     humanized_money_with_symbol(listing.price).upcase +
-    unless listing.quantity.blank? then " / #{listing.quantity}" else "" end +
-    if @current_community.vat then " " + t("listings.displayed_price.price_excludes_vat") else "" end
+        unless listing.quantity.blank? then " / #{listing.quantity}" else "" end +
+        if @current_community.vat then " " + t("listings.displayed_price.price_excludes_vat") else "" end
   end
 
   def has_images?(listing)
@@ -113,13 +113,13 @@ module ListingsHelper
 
   def price_quantity_per_unit(listing)
     quantity =
-      if listing.unit_type.present?
-        ListingViewUtils.translate_unit(listing.unit_type, listing.unit_tr_key)
-      elsif listing.quantity.present?
-        listing.quantity
-      else
-        nil
-      end
+        if listing.unit_type.present?
+          ListingViewUtils.translate_unit(listing.unit_type, listing.unit_tr_key)
+        elsif listing.quantity.present?
+          listing.quantity
+        else
+          nil
+        end
 
     if quantity
       t("listings.show.price.per_quantity_unit", quantity_unit: quantity)
@@ -136,8 +136,32 @@ module ListingsHelper
     t(listing.action_button_tr_key)
   end
 
-  def get_listing_attribute_value(listing, key)
-    "todo"
+  def get_custom_field_value(listing, key)
+    field_value = ''
+    if !defined? listing or key.empty?
+      field_value = 'empty'
+    else
+      field_value_raw = ActiveRecord::Base.connection.exec_query(
+          "SELECT custom_field_option_titles.value "+
+              "FROM custom_field_option_titles "+
+              "INNER JOIN custom_field_option_selections "+
+              "ON custom_field_option_titles.custom_field_option_id=custom_field_option_selections.custom_field_option_id "+
+              "INNER JOIN custom_field_options "+
+              "ON custom_field_option_titles.custom_field_option_id = custom_field_options.id "+
+              "INNER JOIN custom_field_names  "+
+              "ON custom_field_options.custom_field_id = custom_field_names.custom_field_id "+
+              "WHERE custom_field_option_selections.listing_id = #{listing.id} AND LOWER(custom_field_names.value) = '#{key.downcase}' "+
+              "LIMIT 1"
+      ).rows
+      if field_value_raw.empty?
+      else
+        field_value = field_value_raw[0][0]
+      end
+    end
+    if field_value.empty?
+    else
+      return key.capitalize+': '+field_value
+    end
   end
 
 end
