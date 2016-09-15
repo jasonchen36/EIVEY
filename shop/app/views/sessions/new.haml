@@ -20,12 +20,9 @@
     %p
       = t(".we_will_not_post_without_asking_you")
     %br/
-  - if false#facebook_connect_in_use?
+  - if facebook_connect_in_use?
     = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".log_in_with_your_facebook_account") }
     %p= t(".or_sign_up_with_your_username")
-
-  %h3
-    Login
 
   = form_tag("#{APP_CONFIG.login_domain}#{sessions_path}",:action => "create") do
     %label{:for => "login"}
