@@ -1827,7 +1827,7 @@ en:
       visible_to_everybody: "visible to everybody"
       create_account_with_facebook: "Sign up with Facebook"
       OR: OR
-      signup_with_email: "Sign up"
+      signup_with_email: "Sign up with email"
     profile_feedback:
       grade: "grade:"
       and_gave_following_feedback: "and gave the following feedback"

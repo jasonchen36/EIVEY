@@ -16,7 +16,7 @@
             :allowed_emails => @current_community.allowed_emails,
             :count => (@current_community.allowed_emails.split(",").count))
 
-  - unless true #!facebook_connect_in_use? || params[:no_fb]
+  - unless !facebook_connect_in_use? || params[:no_fb]
     = render :partial => "layouts/facebook_connect_button", :locals => { :button_text => t(".create_account_with_facebook") }
 
     .signup-horizontal-line
