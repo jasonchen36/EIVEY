@@ -1827,7 +1827,7 @@ en:
       visible_to_everybody: "visible to everybody"
       create_account_with_facebook: "Sign up with Facebook"
       OR: OR
-      signup_with_email: "Sign up"
+      signup_with_email: "Sign up with email"
     profile_feedback:
       grade: "grade:"
       and_gave_following_feedback: "and gave the following feedback"
@@ -1983,7 +1983,7 @@ en:
       given_name: "First name"
       first_name_with_initial: "(only first letter shown to other users)"
       first_name_only: "(not shown to other users)"
-      location_description: "You can give either your exact location or, for example, only your zip code. Please add at least your zip code. You can also select a location from the map below."
+      location_description: "You can give either your exact location or, for example, only your postal code. Please add at least your postal code. You can also select a location from the map below. "
       phone_number: "Phone number"
       profile_picture: "Profile picture"
       postal_code: "Postal code"

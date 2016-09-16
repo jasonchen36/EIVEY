@@ -379,10 +379,6 @@ $home-list-avatar-padding: lines(0.25);
 
 .home-categories-main {
   @extend .home-categories-link;
-
-  &.selected.has-subcategories {
-    border-bottom: 1px solid $border;
-  }
 }
 
 .home-categories-sub {
