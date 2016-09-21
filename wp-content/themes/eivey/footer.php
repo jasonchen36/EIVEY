@@ -13,16 +13,16 @@
 <footer class="small-grid-container text-center">
     <h3 id="footer-tagline">Follow Us!</h3>
     <div id="footer-social-accounts">
-        <a href="https://www.facebook.com/eivey.ca" target="_blank">
+        <a href="https://www.facebook.com/eiveydotca" target="_blank">
             <i class="fa fa-facebook" aria-hidden="true"></i>
         </a>
-        <a href="https://www.instagram.com/eiveycanada" target="_blank">
+        <a href="https://www.instagram.com/eiveydotca" target="_blank">
             <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
-        <a href="http://twitter.com/eivey_ca" target="_blank">
+        <a href="http://twitter.com/eiveydotca" target="_blank">
             <i class="fa fa-twitter" aria-hidden="true"></i>
         </a>
-        <a href="https://www.pinterest.com/eiveycanada/" target="_blank">
+        <a href="https://www.pinterest.com/eiveydotca" target="_blank">
             <i class="fa fa-pinterest-p" aria-hidden="true"></i>
         </a>
     </div>
