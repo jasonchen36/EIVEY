@@ -127,26 +127,26 @@ class Person < ActiveRecord::Base
 
   # These are the email notifications, excluding newsletters settings
   EMAIL_NOTIFICATION_TYPES = [
-    "email_about_new_messages",
-    "email_about_new_comments_to_own_listing",
-    "email_when_conversation_accepted",
-    "email_when_conversation_rejected",
-    "email_about_new_received_testimonials",
-    "email_about_accept_reminders",
-    "email_about_confirm_reminders",
-    "email_about_testimonial_reminders",
-    "email_about_completed_transactions",
-    "email_about_new_payments",
-    "email_about_payment_reminders",
-    "email_about_new_listings_by_followed_people"
+      "email_about_new_messages",
+      "email_about_new_comments_to_own_listing",
+      "email_when_conversation_accepted",
+      "email_when_conversation_rejected",
+      "email_about_new_received_testimonials",
+      "email_about_accept_reminders",
+      "email_about_confirm_reminders",
+      "email_about_testimonial_reminders",
+      "email_about_completed_transactions",
+      "email_about_new_payments",
+      "email_about_payment_reminders",
+      "email_about_new_listings_by_followed_people"
 
-    # These should not yet be shown in UI, although they might be stored in DB
-    # "email_when_new_friend_request",
-    # "email_when_new_feedback_on_transaction",
-    # "email_when_new_listing_from_friend"
+  # These should not yet be shown in UI, although they might be stored in DB
+  # "email_when_new_friend_request",
+  # "email_when_new_feedback_on_transaction",
+  # "email_when_new_listing_from_friend"
   ]
   EMAIL_NEWSLETTER_TYPES = [
-    "email_from_admins"
+      "email_from_admins"
   ]
 
   PERSONAL_EMAIL_ENDINGS = ["gmail.com", "hotmail.com", "yahoo.com"]
@@ -159,7 +159,7 @@ class Person < ActiveRecord::Base
   validates_length_of :family_name, :within => 1..255, :allow_nil => true, :allow_blank => true
 
   validates_format_of :username,
-                       :with => /\A[A-Z0-9_]*\z/i
+                      :with => /\A[A-Z0-9_]*\z/i
 
   USERNAME_BLACKLIST = YAML.load_file("#{Rails.root}/config/username_blacklist.yml")
 
@@ -167,10 +167,10 @@ class Person < ActiveRecord::Base
   validate :community_email_type_is_correct
 
   has_attached_file :image, :styles => {
-                      :medium => "288x288#",
-                      :small => "108x108#",
-                      :thumb => "48x48#",
-                      :original => "600x800>"}
+      :medium => "288x288#",
+      :small => "108x108#",
+      :thumb => "48x48#",
+      :original => "600x800>"}
 
   process_in_background :image
 
@@ -178,7 +178,7 @@ class Person < ActiveRecord::Base
   validates_attachment_size :image, :less_than => 9.megabytes
   validates_attachment_content_type :image,
                                     :content_type => ["image/jpeg", "image/png", "image/gif",
-                                      "image/pjpeg", "image/x-png"] #the two last types are sent by IE.
+                                                      "image/pjpeg", "image/x-png"] #the two last types are sent by IE.
 
   before_validation(:on => :create) do
     self.id = SecureRandom.urlsafe_base64
@@ -188,9 +188,9 @@ class Person < ActiveRecord::Base
   # Creates a new email
   def email_attributes=(attributes)
     ActiveSupport::Deprecation.warn(
-      ["Person.email_attributes is deprecated.",
-       "Instead of using nested attributes, build each associated",
-       "model individually inside a DB transaction in the controller."].join(" "))
+        ["Person.email_attributes is deprecated.",
+         "Instead of using nested attributes, build each associated",
+         "model individually inside a DB transaction in the controller."].join(" "))
 
     emails.build(attributes)
   end
@@ -222,9 +222,9 @@ class Person < ActiveRecord::Base
 
   def self.username_available?(username, community_id)
     !username.in?(USERNAME_BLACKLIST) &&
-      !Person
-        .where("username = :username AND (is_admin = '1' OR community_id = :cid)", username: username, cid: community_id)
-        .present?
+        !Person
+             .where("username = :username AND (is_admin = '1' OR community_id = :cid)", username: username, cid: community_id)
+             .present?
   end
 
   # Deprecated: This is view logic (how to display name) and thus should not be in model layer
@@ -240,12 +240,14 @@ class Person < ActiveRecord::Base
     elsif given_name.present?
       if display_type
         case display_type
-        when "first_name_with_initial"
-          return first_name_with_initial
-        when "first_name_only"
-          return given_name
-        else
-          return full_name
+          when "first_name_with_initial"
+            return first_name_with_initial
+          when "first_name_only"
+            return given_name
+          when "username"
+            return username
+          else
+            return full_name
         end
       else
         return first_name_with_initial
@@ -510,7 +512,7 @@ class Person < ActiveRecord::Base
 
   def self.find_by_email_address_and_community_id(email_address, community_id)
     Maybe(
-      Email.find_by_address_and_community_id(email_address, community_id)
+        Email.find_by_address_and_community_id(email_address, community_id)
     ).person.or_else(nil)
   end
 
@@ -568,12 +570,12 @@ class Person < ActiveRecord::Base
     pending_emails = Email.where(:person_id => id, :confirmed_at => nil).pluck(:address)
 
     allowed_emails = if community && community.allowed_emails
-      pending_emails.select do |e|
-        community.email_allowed?(e)
-      end
-    else
-      pending_emails
-    end
+                       pending_emails.select do |e|
+                         community.email_allowed?(e)
+                       end
+                     else
+                       pending_emails
+                     end
 
     allowed_emails.last
   end
