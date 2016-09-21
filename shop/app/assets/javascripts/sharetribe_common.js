@@ -60,7 +60,7 @@ function auto_resize_text_areas(class_name) {
 }
 
 function isInstalledInSubdirectory(){
-    if (window.location.href.indexOf('shop') !== -1){
+    if (window.location.href.indexOf('/shop') !== -1){
         return '/shop';
     } else {
         return '';

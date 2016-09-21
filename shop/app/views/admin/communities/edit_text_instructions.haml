@@ -13,7 +13,7 @@
   %h2= t(".edit_text_instructions", :community_name => @community.name(I18n.locale))
 
   .edit-community-details-edit-link
-    %a{:id => "edit_link", :href => "/editor" + request.path, :data => { :save_url => mercury_update_path }}
+    %a{:id => "edit_link", :href => get_editor_url(request.path), :data => { :save_url => mercury_update_path }}
       .icon-with-text-container
         = icon_tag("edit", ["icon-part"])
         .text-part= t("admin.communities.edit_details.edit_info")

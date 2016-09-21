@@ -100,10 +100,10 @@ window.Mercury = {
           redo:                ['Redo', 'Redo your last action'],
           sep:                 ' '
           },
-        insertLink:            ['Link', 'Insert Link', { modal: '/mercury/modals/link.html', regions: ['full', 'markdown'] }],
-        insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: '/mercury/modals/media.html', regions: ['full', 'markdown'] }],
-        insertTable:           ['Table', 'Insert Table', { modal: '/mercury/modals/table.html', regions: ['full', 'markdown'] }],
-        insertCharacter:       ['Character', 'Special Characters', { modal: '/mercury/modals/character.html', regions: ['full', 'markdown'] }]
+        insertLink:            ['Link', 'Insert Link', { modal: isInstalledInSubdirectory()+'/mercury/modals/link.html', regions: ['full', 'markdown'] }],
+        insertMedia:           ['Media', 'Insert Media (images and videos)', { modal: isInstalledInSubdirectory()+'/mercury/modals/media.html', regions: ['full', 'markdown'] }],
+        insertTable:           ['Table', 'Insert Table', { modal: isInstalledInSubdirectory()+'/mercury/modals/table.html', regions: ['full', 'markdown'] }],
+        insertCharacter:       ['Character', 'Special Characters', { modal: isInstalledInSubdirectory()+'/mercury/modals/character.html', regions: ['full', 'markdown'] }]
         // snippetPanel:          ['Snippet', 'Snippet Panel', { panel: '/mercury/panels/snippets.html' }],
         //         sep2:                  ' ',
         // historyPanel:          ['History', 'Page Version History', { panel: '/mercury/panels/history.html' }],
@@ -114,15 +114,15 @@ window.Mercury = {
       editable: {
         _regions:              ['full', 'markdown'],
         predefined:            {
-          style:               ['Style', null, { select: '/mercury/selects/style.html', preload: true }],
+          style:               ['Style', null, { select: isInstalledInSubdirectory()+'/mercury/selects/style.html', preload: true }],
           sep1:                ' ',
-          formatblock:         ['Block Format', null, { select: '/mercury/selects/formatblock.html', preload: true }],
+          formatblock:         ['Block Format', null, { select: isInstalledInSubdirectory()+'/mercury/selects/formatblock.html', preload: true }],
           sep2:                '-'
           },
         colors:                {
-          backColor:           ['Background Color', null, { palette: '/mercury/palettes/backcolor.html', context: true, preload: true, regions: ['full'] }],
+          backColor:           ['Background Color', null, { palette: isInstalledInSubdirectory()+'/mercury/palettes/backcolor.html', context: true, preload: true, regions: ['full'] }],
           sep1:                ' ',
-          foreColor:           ['Text Color', null, { palette: '/mercury/palettes/forecolor.html', context: true, preload: true, regions: ['full'] }],
+          foreColor:           ['Text Color', null, { palette: isInstalledInSubdirectory()+'/mercury/palettes/forecolor.html', context: true, preload: true, regions: ['full'] }],
           sep2:                '-'
           },
         decoration:            {
@@ -237,8 +237,8 @@ window.Mercury = {
     // **Note:** `:name` will be replaced with the snippet name in the urls (eg. /mercury/snippets/example/options.html)
     snippets: {
       method: 'POST',
-      optionsUrl: '/mercury/snippets/:name/options.html',
-      previewUrl: '/mercury/snippets/:name/preview.html'
+      optionsUrl: isInstalledInSubdirectory()+'/mercury/snippets/:name/options.html',
+      previewUrl: isInstalledInSubdirectory()+'/mercury/snippets/:name/preview.html'
       },
 
     // ## Image Uploading
@@ -270,7 +270,7 @@ window.Mercury = {
       allowedMimeTypes: ['image/jpeg', 'image/gif', 'image/png'],
       maxFileSize: 1235242880,
       inputName: 'image[image]',
-      url: '/mercury/images',
+      url: isInstalledInSubdirectory()+'/mercury/images',
       handler: false
       },
 
@@ -307,7 +307,7 @@ window.Mercury = {
     // callback functions are executed within the scope of the given region, so you have access to all it's methods.
     behaviors: {
       //foreColor: function(selection, options) { selection.wrap('<span style="color:' + options.value.toHex() + '">', true) },
-      htmlEditor: function() { Mercury.modal('/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
+      htmlEditor: function() { Mercury.modal(isInstalledInSubdirectory()+'/mercury/modals/htmleditor.html', { title: 'HTML Editor', fullHeight: true, handler: 'htmlEditor' }); }
       },
 
     // ## Global Behaviors
@@ -449,3 +449,11 @@ $(window).on('mercury:ready', function() {
 $(window).bind('mercury:saved', function() {
   window.location = window.location.href.replace(/\/editor\//i, '/');
 });
+
+function isInstalledInSubdirectory(){
+    if (window.location.href.indexOf('/shop') !== -1){
+        return '/shop';
+    } else {
+        return '';
+    }
+}
