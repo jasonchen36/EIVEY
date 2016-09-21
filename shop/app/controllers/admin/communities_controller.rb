@@ -274,7 +274,7 @@ class Admin::CommunitiesController < ApplicationController
            community_params.merge(stylesheet_needs_recompile: regenerate_css?(params, @current_community)),
            admin_look_and_feel_edit_path,
            :edit_look_and_feel) { |community|
-      Delayed::Job.enqueue(CompileCustomStylesheetJob.new(community.id), priority: 3)
+      # Delayed::Job.enqueue(CompileCustomStylesheetJob.new(community.id), priority: 3)
 
       # Onboarding wizard step recording
       state_changed = Admin::OnboardingWizard.new(community.id)

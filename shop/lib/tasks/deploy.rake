@@ -163,8 +163,8 @@ def restart
 end
 
 def generate_custom_css
-  puts 'Generating custom CSS for tribes who use it ...'
-  heroku("run rake sharetribe:generate_customization_stylesheets --app #{@app}")
+  # puts 'Generating custom CSS for tribes who use it ...'
+  # heroku("run rake sharetribe:generate_customization_stylesheets --app #{@app}")
 end
 
 def fetch_remote_heroku_branch
