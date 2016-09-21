@@ -719,7 +719,7 @@ en:
       email: "Email address"
       phone: "Phone number"
       address_street_address: "Street address"
-      address_postal_code: "Zip/Postal code"
+      address_postal_code: "Postal code"
       address_locality: City
       address_region: State
       date_of_birth: "Date of birth"
@@ -734,7 +734,7 @@ en:
       email: "Email address"
       phone: "Phone number"
       address_street_address: "Street address"
-      address_postal_code: "Zip/Postal code"
+      address_postal_code: "Postal code"
       address_locality: City
       address_region: State
       date_of_birth: "Date of birth"
