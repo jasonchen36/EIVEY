@@ -44,7 +44,7 @@ module ApplicationHelper
 
   # used to escape strings to URL friendly format
   def self.escape_for_url(str)
-     URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]"))
+    URI.escape(str, Regexp.new("[^-_!~*()a-zA-Z\\d]"))
   end
 
   def self.shorten_url(url)
@@ -107,23 +107,23 @@ module ApplicationHelper
 
   def missing_avatar(size = :medium)
     case size.to_sym
-    when :small
-      image_path("profile_image/small/missing.png")
-    when :thumb
-      image_path("profile_image/thumb/missing.png")
-    else
-      # default to medium size
-      image_path("profile_image/medium/missing.png")
+      when :small
+        image_path("profile_image/small/missing.png")
+      when :thumb
+        image_path("profile_image/thumb/missing.png")
+      else
+        # default to medium size
+        image_path("profile_image/medium/missing.png")
     end
   end
 
   def pageless(total_pages, target_id, url=nil, loader_message='Loading more results')
 
     opts = {
-      :totalPages => total_pages,
-      :url        => url,
-      :loaderMsg  => loader_message,
-      :targetDiv  => target_id # extra parameter for jquery.pageless.js patch
+        :totalPages => total_pages,
+        :url        => url,
+        :loaderMsg  => loader_message,
+        :targetDiv  => target_id # extra parameter for jquery.pageless.js patch
     }
 
     content_for :extra_javascript do
@@ -138,12 +138,12 @@ module ApplicationHelper
 
   def available_locales
     locales =
-      if @current_community
-        @current_community.locales
-          .map { |loc| Sharetribe::AVAILABLE_LOCALES.find { |app_loc| app_loc[:ident] == loc } }
-      else
-        Sharetribe::AVAILABLE_LOCALES
-      end
+        if @current_community
+          @current_community.locales
+              .map { |loc| Sharetribe::AVAILABLE_LOCALES.find { |app_loc| app_loc[:ident] == loc } }
+        else
+          Sharetribe::AVAILABLE_LOCALES
+        end
 
     locales.map { |loc| [loc[:name], loc[:ident]] }
   end
@@ -151,11 +151,11 @@ module ApplicationHelper
   def self.send_error_notification(message, error_class="Special Error", parameters={})
     if APP_CONFIG.use_airbrake
       Airbrake.notify(
-        :error_class      => error_class,
-        :error_message    => message,
-        :backtrace        => $@,
-        :environment_name => ENV['RAILS_ENV'],
-        :parameters       => parameters)
+          :error_class      => error_class,
+          :error_message    => message,
+          :backtrace        => $@,
+          :environment_name => ENV['RAILS_ENV'],
+          :parameters       => parameters)
     end
     Rails.logger.error "#{error_class}: #{message}"
   end
@@ -284,30 +284,30 @@ module ApplicationHelper
   # About view left hand navigation content
   def about_links
     links = [
-      {
-        :text => t('layouts.infos.about'),
-        :icon_class => icon_class("information"),
-        :path => about_infos_path,
-        :name => "about"
-      }
+        {
+            :text => t('layouts.infos.about'),
+            :icon_class => icon_class("information"),
+            :path => about_infos_path,
+            :name => "about"
+        }
     ]
     links << {
-      :text => t('layouts.infos.how_to_use'),
-      :icon_class => icon_class("how_to_use"),
-      :path => how_to_use_infos_path,
-      :name => "how_to_use"
+        :text => t('layouts.infos.how_to_use'),
+        :icon_class => icon_class("how_to_use"),
+        :path => how_to_use_infos_path,
+        :name => "how_to_use"
     }
     links << {
-      :text => t('layouts.infos.register_details'),
-      :icon_class => icon_class("privacy"),
-      :path => privacy_infos_path,
-      :name => "privacy"
+        :text => t('layouts.infos.register_details'),
+        :icon_class => icon_class("privacy"),
+        :path => privacy_infos_path,
+        :name => "privacy"
     }
     links << {
-      :text => t('layouts.infos.terms'),
-      :icon_class => icon_class("terms"),
-      :path => terms_infos_path,
-      :name => "terms"
+        :text => t('layouts.infos.terms'),
+        :icon_class => icon_class("terms"),
+        :path => terms_infos_path,
+        :name => "terms"
     }
   end
 
@@ -315,175 +315,175 @@ module ApplicationHelper
   # Admin view left hand navigation content
   def admin_links_for(community)
     links = [
-      {
-        :topic => :general,
-        :text => t("admin.communities.getting_started.getting_started"),
-        :icon_class => icon_class("openbook"),
-        :path => admin_getting_started_guide_path,
-        :name => "getting_started_guide"
-      },
-      {
-        :topic => :general,
-        :text => t("admin.left_hand_navigation.support"),
-        :icon_class => icon_class("help"),
-        :path => "mailto:#{APP_CONFIG.support_email}",
-        :name => "support",
-        :data_uv_trigger => "contact"
-      }
+        {
+            :topic => :general,
+            :text => t("admin.communities.getting_started.getting_started"),
+            :icon_class => icon_class("openbook"),
+            :path => admin_getting_started_guide_path,
+            :name => "getting_started_guide"
+        },
+        {
+            :topic => :general,
+            :text => t("admin.left_hand_navigation.support"),
+            :icon_class => icon_class("help"),
+            :path => "mailto:#{APP_CONFIG.support_email}",
+            :name => "support",
+            :data_uv_trigger => "contact"
+        }
     ]
 
     if APP_CONFIG.external_plan_service_in_use
       links << {
-        :topic => :general,
-        :text => t("admin.left_hand_navigation.subscription"),
-        :icon_class => icon_class("credit_card"),
-        :path => admin_plan_path,
-        :name => "plan",
+          :topic => :general,
+          :text => t("admin.left_hand_navigation.subscription"),
+          :icon_class => icon_class("credit_card"),
+          :path => admin_plan_path,
+          :name => "plan",
       }
     end
 
     links << {
-      :topic => :general,
-      :text => t("admin.left_hand_navigation.preview"),
-      :icon_class => icon_class("eye"),
-      :path => search_path(big_cover_photo: true),
-      :name => "preview",
+        :topic => :general,
+        :text => t("admin.left_hand_navigation.preview"),
+        :icon_class => icon_class("eye"),
+        :path => search_path(big_cover_photo: true),
+        :name => "preview",
     }
 
     links += [
-      {
-        :topic => :manage,
-        :text => t("admin.communities.manage_members.manage_members"),
-        :icon_class => icon_class("community"),
-        :path => admin_community_community_memberships_path(@current_community, sort: "join_date", direction: "desc"),
-        :name => "manage_members"
-      },
-      {
-        :topic => :manage,
-        :text => t("admin.emails.new.send_email_to_members"),
-        :icon_class => icon_class("send"),
-        :path => new_admin_community_email_path(:community_id => @current_community.id),
-        :name => "email_members"
-      },
-      {
-        :topic => :manage,
-        :text => t("admin.communities.edit_details.invite_people"),
-        :icon_class => "ss-adduser",
-        :path => new_invitation_path,
-        :name => "invite_people"
-      },
-      {
-        :topic => :manage,
-        :text => t("admin.communities.transactions.transactions"),
-        :icon_class => icon_class("coins"),
-        :path => admin_community_transactions_path(@current_community, sort: "last_activity", direction: "desc"),
-        :name => "transactions"
-      },
-      {
-        :topic => :configure,
-        :text => t("admin.communities.edit_details.community_details"),
-        :icon_class => "ss-page",
-        :path => admin_details_edit_path,
-        :name => "tribe_details"
-      },
-      {
-        :topic => :configure,
-        :text => t("admin.communities.edit_details.community_look_and_feel"),
-        :icon_class => "ss-paintroller",
-        :path => admin_look_and_feel_edit_path,
-        :name => "tribe_look_and_feel"
-      },
-      {
-        :topic => :configure,
-        :text => t("admin.communities.menu_links.menu_links"),
-        :icon_class => icon_class("link"),
-        :path => menu_links_admin_community_path(@current_community),
-        :name => "menu_links"
-      },
-      {
-        :topic => :configure,
-        :text => t("admin.categories.index.listing_categories"),
-        :icon_class => icon_class("list"),
-        :path => admin_categories_path,
-        :name => "listing_categories"
-      },
-      {
-        :topic => :configure,
-        :text => t("admin.custom_fields.index.listing_fields"),
-        :icon_class => icon_class("form"),
-        :path => admin_custom_fields_path,
-        :name => "listing_fields"
-      }
+        {
+            :topic => :manage,
+            :text => t("admin.communities.manage_members.manage_members"),
+            :icon_class => icon_class("community"),
+            :path => admin_community_community_memberships_path(@current_community, sort: "join_date", direction: "desc"),
+            :name => "manage_members"
+        },
+        {
+            :topic => :manage,
+            :text => t("admin.emails.new.send_email_to_members"),
+            :icon_class => icon_class("send"),
+            :path => new_admin_community_email_path(:community_id => @current_community.id),
+            :name => "email_members"
+        },
+        {
+            :topic => :manage,
+            :text => t("admin.communities.edit_details.invite_people"),
+            :icon_class => "ss-adduser",
+            :path => new_invitation_path,
+            :name => "invite_people"
+        },
+        {
+            :topic => :manage,
+            :text => t("admin.communities.transactions.transactions"),
+            :icon_class => icon_class("coins"),
+            :path => admin_community_transactions_path(@current_community, sort: "last_activity", direction: "desc"),
+            :name => "transactions"
+        },
+        {
+            :topic => :configure,
+            :text => t("admin.communities.edit_details.community_details"),
+            :icon_class => "ss-page",
+            :path => admin_details_edit_path,
+            :name => "tribe_details"
+        },
+        {
+            :topic => :configure,
+            :text => t("admin.communities.edit_details.community_look_and_feel"),
+            :icon_class => "ss-paintroller",
+            :path => admin_look_and_feel_edit_path,
+            :name => "tribe_look_and_feel"
+        },
+        {
+            :topic => :configure,
+            :text => t("admin.communities.menu_links.menu_links"),
+            :icon_class => icon_class("link"),
+            :path => menu_links_admin_community_path(@current_community),
+            :name => "menu_links"
+        },
+        {
+            :topic => :configure,
+            :text => t("admin.categories.index.listing_categories"),
+            :icon_class => icon_class("list"),
+            :path => admin_categories_path,
+            :name => "listing_categories"
+        },
+        {
+            :topic => :configure,
+            :text => t("admin.custom_fields.index.listing_fields"),
+            :icon_class => icon_class("form"),
+            :path => admin_custom_fields_path,
+            :name => "listing_fields"
+        }
     ]
 
     # Disabled for Braintree and Checkout
     gw = PaymentGateway.where(community_id: @current_community.id).first
     unless gw
       links << {
-        :topic => :configure,
-        :text => t("admin.listing_shapes.index.listing_shapes"),
-        :icon_class => icon_class("order_types"),
-        :path => admin_listing_shapes_path,
-        :name => "listing_shapes"
+          :topic => :configure,
+          :text => t("admin.listing_shapes.index.listing_shapes"),
+          :icon_class => icon_class("order_types"),
+          :path => admin_listing_shapes_path,
+          :name => "listing_shapes"
       }
     end
 
     if PaypalHelper.paypal_active?(@current_community.id)
       links << {
-        :topic => :configure,
-        :text => t("admin.communities.paypal_account.paypal_admin_account"),
-        :icon_class => icon_class("payments"),
-        :path => admin_paypal_preferences_path(),
-        :name => "paypal_account"
+          :topic => :configure,
+          :text => t("admin.communities.paypal_account.paypal_admin_account"),
+          :icon_class => icon_class("payments"),
+          :path => admin_paypal_preferences_path(),
+          :name => "paypal_account"
       }
     end
 
     if Maybe(@current_user).is_admin?.or_else { false }
       links << {
-        :topic => :configure,
-        :text => t("admin.communities.braintree_payment_gateway.braintree_payment_gateway"),
-        :icon_class => icon_class("payments"),
-        :path => payment_gateways_admin_community_path(@current_community),
-        :name => "payment_gateways"
+          :topic => :configure,
+          :text => t("admin.communities.braintree_payment_gateway.braintree_payment_gateway"),
+          :icon_class => icon_class("payments"),
+          :path => payment_gateways_admin_community_path(@current_community),
+          :name => "payment_gateways"
       }
     end
 
     links << {
-      :topic => :configure,
-      :text => t("admin.communities.social_media.social_media"),
-      :icon_class => icon_class("social_media"),
-      :path => social_media_admin_community_path(@current_community),
-      :name => "social_media"
+        :topic => :configure,
+        :text => t("admin.communities.social_media.social_media"),
+        :icon_class => icon_class("social_media"),
+        :path => social_media_admin_community_path(@current_community),
+        :name => "social_media"
     }
 
     links << {
-      :topic => :configure,
-      :text => t("admin.communities.analytics.analytics"),
-      :icon_class => icon_class("analytics"),
-      :path => analytics_admin_community_path(@current_community),
-      :name => "analytics"
+        :topic => :configure,
+        :text => t("admin.communities.analytics.analytics"),
+        :icon_class => icon_class("analytics"),
+        :path => analytics_admin_community_path(@current_community),
+        :name => "analytics"
     }
 
     links << {
-      :topic => :configure,
-      :text => t("admin.communities.edit_text_instructions.edit_text_instructions"),
-      :icon_class => icon_class("edit"),
-      :path => edit_text_instructions_admin_community_path(@current_community),
-      :name => "text_instructions"
+        :topic => :configure,
+        :text => t("admin.communities.edit_text_instructions.edit_text_instructions"),
+        :icon_class => icon_class("edit"),
+        :path => edit_text_instructions_admin_community_path(@current_community),
+        :name => "text_instructions"
     }
     links << {
-      :topic => :configure,
-      :text => t("admin.left_hand_navigation.emails_title"),
-      :icon_class => icon_class("mail"),
-      :path => edit_welcome_email_admin_community_path(@current_community),
-      :name => "welcome_email"
+        :topic => :configure,
+        :text => t("admin.left_hand_navigation.emails_title"),
+        :icon_class => icon_class("mail"),
+        :path => edit_welcome_email_admin_community_path(@current_community),
+        :name => "welcome_email"
     }
     links << {
-      :topic => :configure,
-      :text => t("admin.communities.settings.settings"),
-      :icon_class => icon_class("settings"),
-      :path => admin_settings_path,
-      :name => "admin_settings"
+        :topic => :configure,
+        :text => t("admin.communities.settings.settings"),
+        :icon_class => icon_class("settings"),
+        :path => admin_settings_path,
+        :name => "admin_settings"
     }
 
     links
@@ -493,27 +493,27 @@ module ApplicationHelper
   # Settings view left hand navigation content
   def settings_links_for(person, community=nil)
     links = [
-      {
-        :id => "settings-tab-profile",
-        :text => t("layouts.settings.profile"),
-        :icon_class => icon_class("profile"),
-        :path => person_settings_path(person),
-        :name => "profile"
-      },
-      {
-        :id => "settings-tab-account",
-        :text => t("layouts.settings.account"),
-        :icon_class => icon_class("account_settings"),
-        :path => account_person_settings_path(person) ,
-        :name => "account"
-      },
-      {
-        :id => "settings-tab-notifications",
-        :text => t("layouts.settings.notifications"),
-        :icon_class => icon_class("notification_settings"),
-        :path => notifications_person_settings_path(person),
-        :name => "notifications"
-      }
+        {
+            :id => "settings-tab-profile",
+            :text => t("layouts.settings.profile"),
+            :icon_class => icon_class("profile"),
+            :path => person_settings_path(person),
+            :name => "profile"
+        },
+        {
+            :id => "settings-tab-account",
+            :text => t("layouts.settings.account"),
+            :icon_class => icon_class("account_settings"),
+            :path => account_person_settings_path(person) ,
+            :name => "account"
+        },
+        {
+            :id => "settings-tab-notifications",
+            :text => t("layouts.settings.notifications"),
+            :icon_class => icon_class("notification_settings"),
+            :path => notifications_person_settings_path(person),
+            :name => "notifications"
+        }
     ]
 
     payment_type = MarketplaceService::Community::Query.payment_type(@current_community.id)
@@ -523,11 +523,11 @@ module ApplicationHelper
       path = payment_settings_path(payment_type, @current_user)
 
       links << {
-        :id => "settings-tab-payments",
-        :text => t("layouts.settings.payments"),
-        :icon_class => icon_class("payments"),
-        :path => path,
-        :name => "payments"
+          :id => "settings-tab-payments",
+          :text => t("layouts.settings.payments"),
+          :icon_class => icon_class("payments"),
+          :path => path,
+          :name => "payments"
       }
 
     end
@@ -572,12 +572,12 @@ module ApplicationHelper
   # on the number of new notifications
   def get_badge_class(count)
     case count
-    when 1..9
-      ""
-    when 10..99
-      "big-badge"
-    else
-      "huge-badge"
+      when 1..9
+        ""
+      when 10..99
+        "big-badge"
+      else
+        "huge-badge"
     end
   end
 
@@ -597,8 +597,8 @@ module ApplicationHelper
     community = Maybe(@current_community)
 
     (APP_CONFIG.fb_connect_id || community.facebook_connect_id.or_else(false)) &&
-     !@facebook_merge &&
-     community.facebook_connect_enabled?.or_else(false)
+        !@facebook_merge &&
+        community.facebook_connect_enabled?.or_else(false)
   end
 
   def community_slogan
@@ -656,10 +656,10 @@ module ApplicationHelper
 
   def with_stylesheet_url(community, &block)
     stylesheet_url = if community.has_custom_stylesheet?
-      stylesheet_asset_url(community.custom_stylesheet_url)
-    else
-      'application'
-    end
+                       stylesheet_asset_url(community.custom_stylesheet_url)
+                     else
+                       'application'
+                     end
 
     block.call(stylesheet_url)
   end
@@ -670,25 +670,25 @@ module ApplicationHelper
 
   def search_path(opts = {})
     PathHelpers.search_path(
-      community_id: @current_community.id,
-      logged_in: @current_user.present?,
-      locale_param: params[:locale],
-      default_locale: @current_community.default_locale,
-      opts: opts)
+        community_id: @current_community.id,
+        logged_in: @current_user.present?,
+        locale_param: params[:locale],
+        default_locale: @current_community.default_locale,
+        opts: opts)
   end
 
   def search_url(opts = {})
     PathHelpers.search_url(
-      community_id: @current_community.id,
-      opts: opts)
+        community_id: @current_community.id,
+        opts: opts)
   end
 
   def landing_page_path
     PathHelpers.landing_page_path(
-      community_id: @current_community.id,
-      logged_in: @current_user.present?,
-      default_locale: @current_community.default_locale,
-      locale_param: params[:locale])
+        community_id: @current_community.id,
+        logged_in: @current_user.present?,
+        default_locale: @current_community.default_locale,
+        locale_param: params[:locale])
   end
 
   # Give an array of translation keys you need in JavaScript. The keys will be loaded and ready to be used in JS
@@ -699,6 +699,14 @@ module ApplicationHelper
       js
     else
       content_for :extra_javascript do js end
+    end
+  end
+
+  def get_editor_url(path)
+    if path.index('/shop/')
+      path.sub! '/shop/', '/shop/editor'
+    else
+      "/editor" + path
     end
   end
 end
