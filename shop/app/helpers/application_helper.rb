@@ -704,7 +704,7 @@ module ApplicationHelper
 
   def get_editor_url(path)
     if path.index('/shop/')
-      path.sub! '/shop/', '/shop/editor'
+      path.sub! '/shop/', '/shop/editor/'
     else
       "/editor" + path
     end
