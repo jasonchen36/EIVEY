@@ -721,7 +721,7 @@ en:
       address_street_address: "Street address"
       address_postal_code: "Postal code"
       address_locality: City
-      address_region: State
+      address_region: Province
       date_of_birth: "Date of birth"
       ssn: SSN
       routing_number: "Routing number"
@@ -736,7 +736,7 @@ en:
       address_street_address: "Street address"
       address_postal_code: "Postal code"
       address_locality: City
-      address_region: State
+      address_region: Province
       date_of_birth: "Date of birth"
       ssn: SSN
       routing_number: "Routing number"
