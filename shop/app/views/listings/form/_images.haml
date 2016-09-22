@@ -1,4 +1,34 @@
-= form.label :image, t('.image'), :class => "input"
+%label.input{for: "listing_image"}
+  Image
+  %span.tooltip
+    %i.fa.fa-exclamation-circle{"aria-hidden" => "true"}
+    %span.tooltip-content
+      %span.text-bold
+        Things to consider
+      %br/
+      %br/
+      %span.text-bold
+        1) Well Styled
+      &ndash; look online to see how the product you are selling is positioned for the photo examples
+      %br/
+      %br/
+      %span.text-bold
+        2) Laser Focused
+      &ndash; Your photo shows the texture and details of the item.
+      %br/
+      %br/
+      %span.text-bold
+        3) Great Lighting and Contrast
+      &ndash; Natural light best captures your item. Make edges clean and clear with no dark shadows
+      %br/
+      %br/
+      %span.text-bold
+        4) Show the WHOLE Item
+      &ndash; Your primary photo should show the entire item to give potential buyers an exciting—and accurate—preview of exactly what they're buying.
+      %br/
+      %br/
+      %span.text-bold
+        5) Plain or white background
 
 = render partial: "layouts/info_text", locals: { text: t("listings.form.images.best_result", width: 660, height: 440) }
 
