@@ -107,7 +107,13 @@ cd shop
 
 Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
 
-* Note, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
+Run foreman once to generate the webpack folder in /shop/app/assets/webpack
+
+```
+foreman start -f Procfile.static
+```
+
+* Note, after generating the webpack folder, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
 
 * Note, you will probably want to comment out/remove hardcoded references to "/shop" like in /shop/config/application.rb and update the "prefix" variable to point to your local php instance in files like shop/app/views/layouts/_head.haml and shop/app/views/layouts/_footer.haml.  Just be sure not to check those changes into Git!
 
