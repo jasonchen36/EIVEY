@@ -7,9 +7,9 @@ module HomepageHelper
 
   def with_first_listing_image(listing, &block)
     Maybe(listing)
-      .listing_images
-      .map { |images| images.first }[:small_3x2].each { |url|
-      block.call(url)
+        .listing_images
+        .map { |images| images.first }[:medium].each { |url|
+      block.call(url.sub! 'medium', 'original')
     }
   end
 
