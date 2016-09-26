@@ -1,4 +1,5 @@
 - content = ""
+- prefix = 'http://dev.eivey.ca'
 
 - if @current_community.payment_gateway && @current_community.payment_gateway.has_additional_terms_of_use
   - content += render :partial => "payments/gateway_additional_terms",
@@ -7,10 +8,8 @@
 - content += render :layout => "layouts/mercury_editable_page", :locals => { :content_type => "terms_page_content" } do
   - if @community_customization && @community_customization.terms_page_content
     = @community_customization.terms_page_content.html_safe
-  - elsif File.exists?("app/views/infos/localized_terms/terms.#{I18n.locale}.haml")
-    = render :file => "infos/localized_terms/terms.#{I18n.locale}"
   - else
-    = render :file => "infos/localized_terms/terms.en"
+    %a{:href => "#{prefix}/terms-conditions"} Terms &amp; Conditions
 
 - content_for :meta_description, StringUtils.first_words(strip_tags(content.html_safe))
 - content_for :keywords, StringUtils.keywords(strip_tags(content.html_safe))
