@@ -2,6 +2,7 @@
 
     var $ = jQuery,
         animations = app.animations,
+        header = app.header,
         userMenuOpenListenerClass = '.l--user-menu-open',
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
@@ -24,7 +25,8 @@
             childText,
             sellLink = sellButton.attr('href'),
             sellText = sellButton.text().toLowerCase(),
-            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>';
+            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>',
+            baseUrl = header.getSharetribeBaseUrl();
         if (userMenuToggle.children().length > 0){
             userMenuToggle.children().each(function(){
                 that = $(this);
@@ -35,10 +37,10 @@
         } else {
             linkHtml +=
                 '<li>' +
-                '<a href="/shop/en/signup">Sign-Up</a>' +
+                '<a href="'+baseUrl+'/en/signup">Sign-Up</a>' +
                 '</li>' +
                 '<li>' +
-                '<a href="/shop/en/login">Log-In</a>' +
+                '<a href="'+baseUrl+'/en/login">Log-In</a>' +
                 '</li>';
         }
         mobileUserMenu.append('<ul class="standard-menu">'+linkHtml+'</ul>');

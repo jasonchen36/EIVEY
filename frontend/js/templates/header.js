@@ -1,6 +1,7 @@
 (function(){
 
     var $ = jQuery,
+        that = app.header,
         animations = app.animations,
         helpers = app.helpers,
         searchListenerClass = '.l--search-submit',
@@ -8,7 +9,7 @@
         menuCloseListenerClass = '.l--menu-close',
         mobileMenu = $('#mobile-menu-fullscreen-container');
 
-    function getSharetribeBaseUrl(){
+    this.getSharetribeBaseUrl = function(){
         var baseUrl = [location.protocol, '//', location.host].join(''),
             sharetribeDirectory = '/shop';
         if (baseUrl.indexOf('.com') !== -1 || baseUrl.indexOf(':3000') !== -1) {
@@ -19,11 +20,11 @@
             baseUrl = baseUrl.substring(0,baseUrl.length-1);
         }
         return baseUrl+sharetribeDirectory;
-    }
+    };
 
     function searchSubmit(activeSubmitButton){
         var searchValue = activeSubmitButton.prev().val();
-        window.location.href = getSharetribeBaseUrl()+'?q='+searchValue;
+        window.location.href = that.getSharetribeBaseUrl()+'?q='+searchValue;
     }
 
     function openMenu(){
