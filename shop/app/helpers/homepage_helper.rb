@@ -9,7 +9,7 @@ module HomepageHelper
     Maybe(listing)
         .listing_images
         .map { |images| images.first }[:medium].each { |url|
-      block.call(url.sub! 'medium', 'original')
+      block.call(url.sub! 'medium', 'big')
     }
   end
 
