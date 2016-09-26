@@ -1,6 +1,6 @@
 //grid items
 //-----------------------------
-.home-fluid-thumbnail-grid-item {
+.home-fluid-thumbnail-grid-item, .people-fluid-thumbnail-grid-item {
   //custom breakpoints to match sharetribe styling
   @media (max-width: 37.4em) {
     &:nth-child(2n+1) {
