@@ -17,10 +17,7 @@
         animations.fadeOut(mobileUserMenu);
     }
 
-    this.init = function(){
-        //set user menu dropdown to same width as anchor
-        userMenuToggle.width(userMenuAnchor.outerWidth());
-
+    function createMobileUserMenu(){
         //clone user menu
         var that,
             childLink,
@@ -45,6 +42,18 @@
                 '</li>';
         }
         mobileUserMenu.append('<ul class="standard-menu">'+linkHtml+'</ul>');
+    }
+
+    function createMobileMainMenu(){
+        $('#mobile-menu-main').html($('#menu-categories').children().clone());
+    }
+
+    this.init = function(){
+        //set user menu dropdown to same width as anchor
+        userMenuToggle.width(userMenuAnchor.outerWidth());
+
+        createMobileUserMenu();
+        createMobileMainMenu();
 
         //listeners
         $(document).on('click touchend', userMenuOpenListenerClass, function (event) {
