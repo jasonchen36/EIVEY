@@ -101,9 +101,9 @@
 
       = hidden_field_tag(:listing_id, @listing.id)
 
-      %button#book-button
-        .content
-          = action_button_label(@listing)
+      %form{:action => "expresscheckout.asp", :method => "POST"}
+        %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+
       #pdp-payment-icons.row
         %i.fa.fa-cc-paypal{"aria-hidden" => "true"}
         %i.fa.fa-cc-mastercard{"aria-hidden" => "true"}
