@@ -26,6 +26,10 @@ $susy: (
 /* Makes border-box properties */
 @include border-box-sizing;
 
+//modules
+//-----------------------------
+@import "modules/tooltip";
+
 
 //theme
 //-----------------------------

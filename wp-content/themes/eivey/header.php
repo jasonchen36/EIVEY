@@ -82,18 +82,3 @@
         </div>
     </div>
 </header>
-<div id="mobile-menu-fullscreen-container" class="full-screen-takeover faded-out">
-    <a href="#" class="mobile-menu-close l--menu-close">X</a>
-    <h3 class="mobile-menu-header">Clothing</h3>
-    <?php wp_nav_menu(array(
-        'theme_location' => 'homepage',
-        'menu_id' => 'menu-categories-mobile',
-        'menu_class' => 'standard-menu'
-    )); ?>
-    <h3 class="mobile-menu-header">Company</h3>
-    <?php wp_nav_menu(array(
-        'theme_location' => 'header_secondary',
-        'menu_id' => 'menu-header-secondary-mobile',
-        'menu_class' => 'standard-menu'
-    )); ?>
-</div>

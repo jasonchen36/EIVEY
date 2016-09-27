@@ -26,9 +26,6 @@ Use Ubuntu 14 (tested with 14.04.5)
 ### Apache ###
 PHP and Ruby are both run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config
 
-### Postfix ###
-[Postfix](http://www.postfix.org/) is installed for sending emails.  The config is located locally in /devops/postfix.conf and remotely in /etc/postfix/main.cf  Logs are located in /var/log/mail.log
-
 ### ImageMagick ###
 Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on Ubuntu 14 using apt-get.  Installing it via source tarball means that it misses the convert and identify commands' config needed for images  
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
@@ -107,7 +104,13 @@ cd shop
 
 Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
 
-* Note, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
+Run foreman once to generate the webpack folder in /shop/app/assets/webpack
+
+```
+foreman start -f Procfile.static
+```
+
+* Note, after generating the webpack folder, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
 
 * Note, you will probably want to comment out/remove hardcoded references to "/shop" like in /shop/config/application.rb and update the "prefix" variable to point to your local php instance in files like shop/app/views/layouts/_head.haml and shop/app/views/layouts/_footer.haml.  Just be sure not to check those changes into Git!
 

@@ -2,6 +2,7 @@
 
     var $ = jQuery,
         animations = app.animations,
+        header = app.header,
         userMenuOpenListenerClass = '.l--user-menu-open',
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
@@ -17,17 +18,15 @@
         animations.fadeOut(mobileUserMenu);
     }
 
-    this.init = function(){
-        //set user menu dropdown to same width as anchor
-        userMenuToggle.width(userMenuAnchor.outerWidth());
-
+    function createMobileUserMenu(){
         //clone user menu
         var that,
             childLink,
             childText,
             sellLink = sellButton.attr('href'),
             sellText = sellButton.text().toLowerCase(),
-            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>';
+            linkHtml = '<li><a href="'+sellLink+'">'+sellText+'</a>',
+            baseUrl = header.getSharetribeBaseUrl();
         if (userMenuToggle.children().length > 0){
             userMenuToggle.children().each(function(){
                 that = $(this);
@@ -38,13 +37,25 @@
         } else {
             linkHtml +=
                 '<li>' +
-                '<a href="/shop/en/signup">Sign-Up</a>' +
+                '<a href="'+baseUrl+'/en/signup">Sign-Up</a>' +
                 '</li>' +
                 '<li>' +
-                '<a href="/shop/en/login">Log-In</a>' +
+                '<a href="'+baseUrl+'/en/login">Log-In</a>' +
                 '</li>';
         }
         mobileUserMenu.append('<ul class="standard-menu">'+linkHtml+'</ul>');
+    }
+
+    function createMobileMainMenu(){
+        $('#mobile-menu-main').html($('#menu-categories').children().clone());
+    }
+
+    this.init = function(){
+        //set user menu dropdown to same width as anchor
+        userMenuToggle.width(userMenuAnchor.outerWidth());
+
+        createMobileUserMenu();
+        createMobileMainMenu();
 
         //listeners
         $(document).on('click touchend', userMenuOpenListenerClass, function (event) {
