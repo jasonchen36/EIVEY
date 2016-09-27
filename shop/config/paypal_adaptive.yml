@@ -1,0 +1,23 @@
+development:
+  environment: "sandbox"
+  username: "info-facilitator_api1.eivey.ca"
+  password: "DGGJ8UR3DWZHTGPS"
+  signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX"
+  application_id: "sandbox_app_id"
+  api_cert_file:
+
+test:
+  environment: "sandbox"
+  username: "sandbox_username"
+  password: "sandbox_password"
+  signature: "sandbox_signature"
+  application_id: "sandbox_app_id"
+  api_cert_file: "/path/to_cert"
+
+production:
+  environment: "production"
+  username: "my_production_username"
+  password: "my_production_password"
+  signature: "my_production_signature"
+  application_id: "my_production_app_id"
+  api_cert_file: "/path/to_cert"

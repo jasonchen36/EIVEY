@@ -1,3 +1,5 @@
+require 'paypal_adaptive'
+
 class TransactionsController < ApplicationController
 
   before_filter only: [:show] do |controller|
@@ -19,6 +21,31 @@ class TransactionsController < ApplicationController
   )
 
   def new
+
+    puts "hello"
+    pay_request = PaypalAdaptive::Request.new
+
+    data = {
+      "returnUrl" => "http://testserver.com/payments/completed_payment_request",
+      "requestEnvelope" => {"errorLanguage" => "en_US"},
+      "currencyCode"=>"USD",
+      "receiverList"=>{"receiver"=>[{"email"=>"testpp_1261697850_per@nextsprocket.com", "amount"=>"10.00"}]},
+      "cancelUrl"=>"http://testserver.com/payments/canceled_payment_request",
+      "actionType"=>"PAY",
+      "ipnNotificationUrl"=>"http://testserver.com/payments/ipn_notification"
+      }
+      puts "hello"
+      pay_response = pay_request.pay(data)
+
+      if pay_response.success?
+        puts "success"
+        redirect_to "www.dev.eivey.ca"
+      else
+        puts "fail"
+        puts pay_response.errors.first['message']
+        redirect_to "www.dev.eivey.ca"
+      end
+
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
