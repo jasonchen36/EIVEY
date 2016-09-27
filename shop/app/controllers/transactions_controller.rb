@@ -22,30 +22,36 @@ class TransactionsController < ApplicationController
 
   def new
 
-    puts "hello"
-    pay_request = PaypalAdaptive::Request.new
+    @pay_request = PaypalAdaptive::Request.new
 
-    data = {
-      "returnUrl" => "http://testserver.com/payments/completed_payment_request",
+=begin
+    do |config|
+      config.username = "Af1Jo_uBNDGWbu8TKGO6THnjvHTNh3Nagj17ifLUQrgldZ_K3sZIFFE2vis0_-G_xO8p32iQrdjagmE7"
+      config.password = "EMnXzV2COde6RWP4bU5-VrcMogw7LHu_UcUxOh9xnAQVN7bD2SkLdhbI1r2YQ7OscSt4g13IXHT8j92A"
+      config.access_token = "A101.KnDeShyv7sgHhZloriywWq9FsnsUihTspb_0VwawbhAm705HUsxHgAqxDR0eb2-q.gT6chJlCthYwIhwxxfCFnHtEH9O"
+
+    end
+=end
+
+
+    @data = {
+      "returnUrl" => "http://dev.eivey.ca/shop",
       "requestEnvelope" => {"errorLanguage" => "en_US"},
       "currencyCode"=>"USD",
-      "receiverList"=>{"receiver"=>[{"email"=>"testpp_1261697850_per@nextsprocket.com", "amount"=>"10.00"}]},
-      "cancelUrl"=>"http://testserver.com/payments/canceled_payment_request",
+      "receiverList"=>{"receiver"=>[{"email"=>"jason.chen@uwaterloo.ca", "amount"=>"10.00"}]},
+      "cancelUrl"=>"http://dev.eivey.ca/shop",
       "actionType"=>"PAY",
-      "ipnNotificationUrl"=>"http://testserver.com/payments/ipn_notification"
+      "ipnNotificationUrl"=>"http://dev.eivey.ca/shop"
       }
-      puts "hello"
-      pay_response = pay_request.pay(data)
+    @pay_response = @pay_request.pay(@data)
 
-      if pay_response.success?
-        puts "success"
-        redirect_to "www.dev.eivey.ca"
-      else
-        puts "fail"
-        puts pay_response.errors.first['message']
-        redirect_to "www.dev.eivey.ca"
-      end
-
+    if @pay_response.success?
+       redirect_to "https://api.sandbox.paypal.com/v1/payments/payment"
+    else
+      puts @pay_response.errors.first['message']
+       redirect_to "http://localhost:3000/"
+    end
+=begin
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -77,9 +83,30 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
+=end
   end
 
   def create
+    @pay_request = PaypalAdaptive::Request.new
+
+    @data = {
+      "returnUrl" => "http://dev.eivey.ca",
+      "requestEnvelope" => {"errorLanguage" => "en_US"},
+      "currencyCode"=>"USD",
+      "receiverList"=>{"receiver"=>[{"email"=>"testpp_1261697850_per@nextsprocket.com", "amount"=>"10.00"}]},
+      "cancelUrl"=>"http://dev.eivey.ca",
+      "actionType"=>"PAY",
+      "ipnNotificationUrl"=>"http://testserver.com/payments/ipn_notification"
+      }
+      @pay_response = @pay_request.pay(@data)
+
+      if pay_response.success?
+        redirect_to "http://dev.eivey.ca/shop"
+      else
+        puts pay_response.errors.first['message']
+        redirect_to "http://dev.eivey.ca/shop"
+      end
+=begin
     Result.all(
       ->() {
         TransactionForm.validate(params)
@@ -124,6 +151,7 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
+=end
   end
 
   def show
