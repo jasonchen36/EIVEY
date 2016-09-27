@@ -37,8 +37,8 @@ class TransactionsController < ApplicationController
   :payer => {
     :payment_method => "paypal" },
   :redirect_urls => {
-    :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
-    :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
+    :return_url => "http://dev.eivey.ca",
+    :cancel_url => "http://dev.eivey.ca" },
   :transactions => [ {
     :amount => {
       :total => "12",
@@ -52,6 +52,17 @@ class TransactionsController < ApplicationController
     end
 
     redirect_to @payment.links[1].href
+
+    payment = Payment.find(@payment.id)
+
+    if payment.execute( :payer_id => "XKHFMATN8Y32U" )
+      flash[:success] = "Success"
+    else
+      flash[:error] = "Error"
+      payment.error
+    end
+
+
 =begin
     Result.all(
       ->() {
@@ -88,25 +99,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @pay_request = PaypalAdaptive::Request.new
 
-    @data = {
-      "returnUrl" => "http://dev.eivey.ca",
-      "requestEnvelope" => {"errorLanguage" => "en_US"},
-      "currencyCode"=>"USD",
-      "receiverList"=>{"receiver"=>[{"email"=>"testpp_1261697850_per@nextsprocket.com", "amount"=>"10.00"}]},
-      "cancelUrl"=>"http://dev.eivey.ca",
-      "actionType"=>"PAY",
-      "ipnNotificationUrl"=>"http://testserver.com/payments/ipn_notification"
-      }
-      @pay_response = @pay_request.pay(@data)
-
-      if pay_response.success?
-        redirect_to "http://dev.eivey.ca/shop"
-      else
-        puts pay_response.errors.first['message']
-        redirect_to "http://dev.eivey.ca/shop"
-      end
 =begin
     Result.all(
       ->() {
