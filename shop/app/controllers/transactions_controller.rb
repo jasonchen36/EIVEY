@@ -1,5 +1,4 @@
-require 'paypal-sdk-rest'
-include PayPal::SDK::REST
+require 'paypal-sdk-adaptivepayments'
 
 class TransactionsController < ApplicationController
 
@@ -21,46 +20,47 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
-  PayPal::SDK.configure({
-  :mode => "sandbox",
-  :client_id     => "Af1Jo_uBNDGWbu8TKGO6THnjvHTNh3Nagj17ifLUQrgldZ_K3sZIFFE2vis0_-G_xO8p32iQrdjagmE7",
-  :client_secret => "EMnXzV2COde6RWP4bU5-VrcMogw7LHu_UcUxOh9xnAQVN7bD2SkLdhbI1r2YQ7OscSt4g13IXHT8j92A"
-})
+  PayPal::SDK.configure(
+  :mode      => "sandbox",  # Set "live" for production
+  :app_id    => "APP-80W284485P519543T",
+  :username  => "info-facilitator_api1.eivey.ca",
+  :password  => "DGGJ8UR3DWZHTGPS",
+  :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
+
+
 
 
 
 
   def new
+    @api = PayPal::SDK::AdaptivePayments.new
+    
+# Build request object
+    @pay = @api.build_pay({
+  :actionType => "PAY",
+  :cancelUrl => "http://dev.eivey.ca",
+  :currencyCode => "USD",
+  :feesPayer => "SENDER",
+  :ipnNotificationUrl => "http://dev.eivey.ca",
+  :receiverList => {
+    :receiver => [{
+      :amount => 10.0,
+      :email => "jason.chen@ellefsontech.com" }] },
+  :returnUrl => "http://dev.eivey.ca" })
 
-    @payment = PayPal::SDK::REST::Payment.new({
-  :intent => "sale",
-  :payer => {
-    :payment_method => "paypal" },
-  :redirect_urls => {
-    :return_url => "http://dev.eivey.ca",
-    :cancel_url => "http://dev.eivey.ca" },
-  :transactions => [ {
-    :amount => {
-      :total => "12",
-      :currency => "USD" },
-    :description => "creating a payment" } ] } )
+  # Make API call & get response
+  @response = @api.pay(@pay)
 
-    if @payment.create
-      @payment.id
-    else
-      @payment.error
-    end
+  if @response.success? && @response.payment_exec_status != "ERROR"
+    @response.payKey
+    redirect_to @api.payment_url(@response)  # Url to complete payment
+  else
+    @response.error[0].message
+  end
 
-    redirect_to @payment.links[1].href
 
-    payment = Payment.find(@payment.id)
 
-    if payment.execute( :payer_id => "XKHFMATN8Y32U" )
-      flash[:success] = "Success"
-    else
-      flash[:error] = "Error"
-      payment.error
-    end
+
 
 
 =begin
