@@ -3,7 +3,7 @@ development:
   username: "info-facilitator_api1.eivey.ca"
   password: "DGGJ8UR3DWZHTGPS"
   signature: "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX"
-  application_id: "sandbox_app_id"
+  application_id: "APP-80W284485P519543T"
   api_cert_file:
 
 test:

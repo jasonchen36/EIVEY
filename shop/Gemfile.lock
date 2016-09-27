@@ -345,6 +345,10 @@ GEM
       paypal-sdk-core (~> 0.3.0)
     paypal-sdk-permissions (1.96.4)
       paypal-sdk-core (~> 0.3.0)
+    paypal-sdk-rest (1.4.9)
+      multi_json (~> 1.0)
+      uuidtools (~> 2.1)
+      xml-simple
     paypal_adaptive (0.3.10)
       json (~> 1.0)
       jsonschema (~> 2.0.0)
@@ -503,6 +507,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     unicode-display_width (0.3.1)
+    uuidtools (2.1.5)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -580,6 +585,7 @@ DEPENDENCIES
   passenger (>= 5.0.25)
   paypal-sdk-merchant (~> 1.116.0)
   paypal-sdk-permissions (~> 1.96.4)
+  paypal-sdk-rest
   paypal_adaptive
   possibly (~> 0.2.0)
   premailer (~> 1.8.2)

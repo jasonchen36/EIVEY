@@ -1,4 +1,5 @@
-require 'paypal_adaptive'
+require 'paypal-sdk-rest'
+include PayPal::SDK::REST
 
 class TransactionsController < ApplicationController
 
@@ -20,37 +21,37 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
+  PayPal::SDK.configure({
+  :mode => "sandbox",
+  :client_id     => "Af1Jo_uBNDGWbu8TKGO6THnjvHTNh3Nagj17ifLUQrgldZ_K3sZIFFE2vis0_-G_xO8p32iQrdjagmE7",
+  :client_secret => "EMnXzV2COde6RWP4bU5-VrcMogw7LHu_UcUxOh9xnAQVN7bD2SkLdhbI1r2YQ7OscSt4g13IXHT8j92A"
+})
+
+
+
+
   def new
 
-    @pay_request = PaypalAdaptive::Request.new
+    @payment = PayPal::SDK::REST::Payment.new({
+  :intent => "sale",
+  :payer => {
+    :payment_method => "paypal" },
+  :redirect_urls => {
+    :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
+    :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
+  :transactions => [ {
+    :amount => {
+      :total => "12",
+      :currency => "USD" },
+    :description => "creating a payment" } ] } )
 
-=begin
-    do |config|
-      config.username = "Af1Jo_uBNDGWbu8TKGO6THnjvHTNh3Nagj17ifLUQrgldZ_K3sZIFFE2vis0_-G_xO8p32iQrdjagmE7"
-      config.password = "EMnXzV2COde6RWP4bU5-VrcMogw7LHu_UcUxOh9xnAQVN7bD2SkLdhbI1r2YQ7OscSt4g13IXHT8j92A"
-      config.access_token = "A101.KnDeShyv7sgHhZloriywWq9FsnsUihTspb_0VwawbhAm705HUsxHgAqxDR0eb2-q.gT6chJlCthYwIhwxxfCFnHtEH9O"
-
-    end
-=end
-
-
-    @data = {
-      "returnUrl" => "http://dev.eivey.ca/shop",
-      "requestEnvelope" => {"errorLanguage" => "en_US"},
-      "currencyCode"=>"USD",
-      "receiverList"=>{"receiver"=>[{"email"=>"jason.chen@uwaterloo.ca", "amount"=>"10.00"}]},
-      "cancelUrl"=>"http://dev.eivey.ca/shop",
-      "actionType"=>"PAY",
-      "ipnNotificationUrl"=>"http://dev.eivey.ca/shop"
-      }
-    @pay_response = @pay_request.pay(@data)
-
-    if @pay_response.success?
-       redirect_to "https://api.sandbox.paypal.com/v1/payments/payment"
+    if @payment.create
+      @payment.id
     else
-      puts @pay_response.errors.first['message']
-       redirect_to "http://localhost:3000/"
+      @payment.error
     end
+
+    redirect_to @payment.links[1].href
 =begin
     Result.all(
       ->() {
