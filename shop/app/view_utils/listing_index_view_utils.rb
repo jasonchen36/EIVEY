@@ -19,7 +19,8 @@ module ListingIndexViewUtils
     :shape_name_tr_key,
     :listing_shape_id,
     :icon_name,
-    :custom_field_values)
+    :custom_field_values,
+    :category)
 
   Author = Struct.new(
     :id,
@@ -87,7 +88,8 @@ module ListingIndexViewUtils
         l[:shape_name_tr_key],
         l[:listing_shape_id],
         l[:icon_name],
-        l[:custom_field_values]
+        l[:custom_field_values],
+        l:[:category]
       )
     }
 
