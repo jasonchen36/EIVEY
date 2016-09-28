@@ -31,18 +31,23 @@ Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
 
 ### Sharetribe Delayed Worker ###
-[Monit](https://mmonit.com/) is used to keep the delayed workers alive.  The config is located locally in /devops/monit.conf and remotely in /etc/monit/conf.d/delayedjob.conf. Logs are located in /var/log/monit.log.  The core program configuration has been modified and is located locally in /devops/monitrc and remotely in /etc/monit/monitrc
+[God](http://godrb.com/) is used to keep the delayed workers alive.  The config is located in /shop/script/delayed_job.god.
 
-Monit can be started using
+First start god by loading the appropriate config into it
+```
+god -c script/delayed_job.god
+```
+
+Then start the delayed job using
 
 ```
-sudo service monit start all
+god start delayed_job
 ```
 
-You can check Monit's status using
+You can check God's status using
 
 ```
-sudo service monit status
+god status
 ```
 
 and check the status of the delayed worker using
