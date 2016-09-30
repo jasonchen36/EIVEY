@@ -3,3 +3,6 @@
 wp-content/uploads/
 wp-content/aiowps_backups/
 wp-config.php
+
+
+npm-debug.log

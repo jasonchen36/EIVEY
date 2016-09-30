@@ -20,7 +20,6 @@ module ListingIndexService::Search::Converters
         .merge(location_hash(l, includes))
         .merge(author_hash(l, includes))
         .merge(listing_images_hash(l, includes))
-        .merge(custom_field_values_hash(l, includes))
   end
 
   def location_hash(l, includes)
@@ -81,42 +80,6 @@ module ListingIndexService::Search::Converters
       }
     else
       {}
-    end
-  end
-
-  def field_values_helper(listing)
-    converted_values = []
-    field_values = listing.custom_field_values
-    field_values.each{ |li|
-
-      converted_values.push(
-          {
-              id: li[:id],
-              custom_field_id: li[:custom_field_id],
-              text_value: ActiveRecord::Base.connection.exec_query(
-                  "SELECT custom_field_option_titles.value "+
-                      "FROM custom_field_option_titles "+
-                      "INNER JOIN custom_field_option_selections "+
-                      "ON custom_field_option_titles.custom_field_option_id=custom_field_option_selections.custom_field_option_id "+
-                      "WHERE custom_field_option_selections.listing_id = '#{listing.id}' "+
-                      "LIMIT 1"
-              ).rows[0][0],
-              numeric_value: li[:numeric_value]
-          }
-      )
-      return converted_values
-    }
-  end
-
-  def custom_field_values_hash(l, includes)
-    if includes.include?(:custom_field_values)
-      {
-          custom_field_values: field_values_helper(Maybe(l).or_else([]))
-      }
-    else
-      {
-          custom_field_values: []
-      }
     end
   end
 

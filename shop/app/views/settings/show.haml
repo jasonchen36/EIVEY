@@ -63,3 +63,22 @@
       = loc.hidden_field :latitude, :value => target_user.location.latitude
       = loc.hidden_field :longitude, :value => target_user.location.longitude
     = form.button t("settings.save_information"), :class => "send_button"
+    - content_for :extra_javascript do
+      :javascript
+        $('.send_button').click(function(){
+
+        function checkPostal(postal) {
+            var regex = new RegExp(/^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i);
+            if (regex.test(postal.valueOf())){
+                return true;
+            } else {
+              return false;
+            }
+        }
+
+        if (checkPostal(source.value)){
+        } else {
+          alert('Please add a correct Canadian postal code.')
+        }
+
+        });

@@ -19,7 +19,8 @@ module ListingIndexViewUtils
     :shape_name_tr_key,
     :listing_shape_id,
     :icon_name,
-    :custom_field_values)
+    :custom_field_values,
+    :category)
 
   Author = Struct.new(
     :id,
@@ -34,7 +35,8 @@ module ListingIndexViewUtils
 
   ListingImage = Struct.new(
     :thumb,
-    :small_3x2)
+    :small_3x2,
+    :medium)
 
   module_function
 
@@ -61,7 +63,7 @@ module ListingIndexViewUtils
       listing_images =
         if includes.include?(:listing_images)
           l[:listing_images].map { |li|
-            ListingImage.new(li[:thumb], li[:small_3x2])
+            ListingImage.new(li[:thumb], li[:small_3x2], li[:medium])
           }
         else
           []
@@ -86,7 +88,8 @@ module ListingIndexViewUtils
         l[:shape_name_tr_key],
         l[:listing_shape_id],
         l[:icon_name],
-        l[:custom_field_values]
+        l[:custom_field_values],
+        l:[:category]
       )
     }
 

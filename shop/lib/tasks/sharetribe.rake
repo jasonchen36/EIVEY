@@ -7,11 +7,11 @@ namespace :sharetribe do
     end
   end
 
-  desc "Generates customized CSS stylesheets in the background"
-  task :generate_customization_stylesheets => :environment do
-    # If preboot in use, give 2 minutes time to load new code
-    CommunityStylesheetCompiler.compile_all(run_at: 2.minutes.from_now)
-  end
+  # desc "Generates customized CSS stylesheets in the background"
+  # task :generate_customization_stylesheets => :environment do
+  #   # If preboot in use, give 2 minutes time to load new code
+  #   CommunityStylesheetCompiler.compile_all(run_at: 2.minutes.from_now)
+  # end
 
   desc "Generates customized CSS stylesheets immediately"
   task :generate_customization_stylesheets_immediately => :environment do

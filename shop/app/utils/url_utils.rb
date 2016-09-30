@@ -35,7 +35,9 @@ module URLUtils
   #
   # Returns the first "folder" in path. Does not validate the locale
   def extract_locale_from_url(url)
-    URI(url).path.split('/')[1]
+    # URI(url).path.split('/')[1]
+    # bug fix for shop path
+    'en'
   end
 
   # www.sharetribe.com => www.sharetribe.com
