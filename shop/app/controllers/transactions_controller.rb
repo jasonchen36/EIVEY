@@ -34,12 +34,12 @@ class TransactionsController < ApplicationController
 
   def new
     @api = PayPal::SDK::AdaptivePayments.new
-    
+
 # Build request object
     @pay = @api.build_pay({
   :actionType => "PAY",
   :cancelUrl => "http://dev.eivey.ca",
-  :currencyCode => "USD",
+  :currencyCode => "CAD",
   :feesPayer => "SENDER",
   :ipnNotificationUrl => "http://dev.eivey.ca",
   :receiverList => {
