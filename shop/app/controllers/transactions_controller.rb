@@ -28,28 +28,33 @@ class TransactionsController < ApplicationController
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
 
 
-
-
-
-
   def new
     @api = PayPal::SDK::AdaptivePayments.new
 
 # Build request object
     @pay = @api.build_pay({
-  :actionType => "PAY",
+  :actionType => "CREATE",
   :cancelUrl => "http://dev.eivey.ca",
   :currencyCode => "CAD",
-  :feesPayer => "EACHRECEIVER",
+  :feesPayer => "SENDER",
   :ipnNotificationUrl => "http://dev.eivey.ca",
   :receiverList => {
     :receiver => [{
       :amount => 10.0,
       :email => "jason.chen@ellefsontech.com" }] },
+  :SenderOptions => {
+    :addressOverride => true,
+    :requireShippingAddressSelection => false},
   :returnUrl => "http://dev.eivey.ca" })
 
   # Make API call & get response
   @response = @api.pay(@pay)
+
+  @set_payment_options = @api.build_set_payment_options({
+    :requireShippingAddressSelection => "true"
+    })
+
+  @set_payment_options_response = @api.set_payment_options(@set_payment_options)
 
   if @response.success? && @response.payment_exec_status != "ERROR"
     @response.payKey
