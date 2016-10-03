@@ -39,6 +39,8 @@
       - content_for :extra_javascript do
         :javascript
           source = document.getElementById("person_street_address");
+          given = document.getElementbyId("person_given_name");
+          family = document.getElementbyId("person_family_name");
           $(document).ready(function(){
             googlemapMarkerInit("settings_map_canvas","person_location","person_street_address", true, #{tribe_latitude}, #{tribe_longitude});
             });
@@ -76,9 +78,29 @@
             }
         }
 
+        function allLetter(input){
+        var letters = /^[A-Za-z]+$/;
+        if(inputtxt.value.match(letters)){
+          return true;
+        } else {
+          return false;
+        }
+        }
+
+
         if (checkPostal(source.value)){
         } else {
           alert('Please add a correct Canadian postal code.')
         }
 
+        });
+
+        if (allLetter(given.value)){
+        } else {
+          alert ('Please enter a name with only text characters.')
+        });
+
+        if (allLetter(family.value)){
+        } else {
+          alert ('Please enter a name with only text characters.')
         });
