@@ -58,6 +58,12 @@
       %h2
         = t("conversations.new.optional_message_to", author_name: link_to(author[:display_name], person_path(username: author[:username]))).html_safe
 
+        .row
+          .col-12
+            = button_tag t("conversations.new.send_message"), :class => "send_button"
+            %form{:action => "expresscheckout.asp", :method => "POST"}
+              %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+
       .row
         .col-12
           = form.text_area :content, :class => "text_area"
@@ -80,3 +86,5 @@
 
   %noscript
     = "For security reasons JavaScript has to be enabled"
+
+    
