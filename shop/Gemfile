@@ -186,5 +186,8 @@ gem 'color', '~> 1.8'
 #Custom gems
 gem 'daemons'
 
+
 #paypal adaptive
 gem 'paypal_adaptive'
+
+gem 'god'

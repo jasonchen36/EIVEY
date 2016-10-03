@@ -80,11 +80,10 @@ class HomepageController < ApplicationController
     if request.xhr? # checks if AJAX request
       search_result.on_success { |listings|
         @listings = listings # TODO Remove
-        @categories = categories
         @listingsWithCategories = []
         listings.each do |listing|
           listing.category = @categories.select { |c| c.id == listing.category_id }
-          @listingsWithCategories += listing
+          @listingsWithCategories.push(listing)
           puts "listings : "
           puts listing.category
         end

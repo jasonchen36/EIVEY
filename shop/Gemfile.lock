@@ -221,6 +221,7 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    god (0.13.7)
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -559,6 +560,7 @@ DEPENDENCIES
   faraday (~> 0.9.1)
   faraday_middleware (~> 0.10.0)
   flying-sphinx (~> 1.2.0)
+  god
   guard-rspec (~> 4.6.5)
   haml (~> 4.0.5)
   i18n-js!

@@ -1,4 +1,4 @@
-- prefix = 'http://dev.eivey.ca'
+- prefix = ''
 
 %footer#footer-menu-container
   %nav.grid-container
@@ -53,31 +53,7 @@
     X
   %h3.mobile-menu-header
     Clothing
-  %ul.standard-menu
-    %li
-      %a{href:"#{prefix}/shop/?category=tops"}
-        Tops
-    %li
-      %a{href:"#{prefix}/shop/?category=bottoms"}
-        Bottoms
-    %li
-      %a{href:"#{prefix}/shop/?category=dresses"}
-        Dresses
-    %li
-      %a{href:"#{prefix}/shop/?category=outerwear"}
-        Outerwear
-    %li
-      %a{href:"#{prefix}/shop/?category=shoes"}
-        Shoes
-    %li
-      %a{href:"#{prefix}/shop/?category=handbags"}
-        Handbags
-    %li
-      %a{href:"#{prefix}/shop/?category=accessories"}
-        Accessories
-    %li
-      %a{href:"#{prefix}/shop/?category=mens"}
-        Mens
+  %ul#mobile-menu-main.standard-menu
   %h3.mobile-menu-header
     Company
   %ul.standard-menu
@@ -88,10 +64,10 @@
       %a{href:"#{prefix}/contact"}
         Contact
     %li
-      %a{href:"#{prefix}/shop/en/signup"}
+      %a{href:"#{prefix}#{config.relative_url_root}/en/signup"}
         Sign-Up
     %li
-      %a{href:"#{prefix}/shop/en/login"}
+      %a{href:"#{prefix}#{config.relative_url_root}/en/login"}
         Log-In
 
 #mobile-user-menu-fullscreen-container.full-screen-takeover.faded-out
