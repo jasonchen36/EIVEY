@@ -36,7 +36,7 @@ class TransactionsController < ApplicationController
   :actionType => "CREATE",
   :cancelUrl => "http://dev.eivey.ca",
   :currencyCode => "CAD",
-  :feesPayer => "SENDER",
+  :feesPayer => "RECEIVER",
   :ipnNotificationUrl => "http://dev.eivey.ca",
   :receiverList => {
     :receiver => [{
