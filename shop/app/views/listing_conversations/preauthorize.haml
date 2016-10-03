@@ -48,11 +48,7 @@
       = form.date_select :start_on, { value: preauthorize_form.start_on }, { class: "hidden" }
       = form.date_select :end_on, { value: preauthorize_form.end_on }, { class: "hidden" }
 
-    .preauthorize-section
-      %h2
-        = t(".payment")
 
-      = render partial: "payments/braintree/credit_card_info", locals: {braintree_form: braintree_form}
 
     .preauthorize-section
       %h2
@@ -86,5 +82,3 @@
 
   %noscript
     = "For security reasons JavaScript has to be enabled"
-
-    
