@@ -38,6 +38,9 @@
       %li
         = render partial: "transactions/price_break_down", locals: price_break_down_locals
 
+  %form{:action => "http://localhost:3000/en/transactions/new?utf8=%E2%9C%93&listing_id=17", :method => "GET"}
+    %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+
   = form_for preauthorize_form,
     :url => form_action,
       :method => "post",
@@ -57,8 +60,6 @@
         .row
           .col-12
             = button_tag t("conversations.new.send_message"), :class => "send_button"
-            %form{:action => "expresscheckout.asp", :method => "POST"}
-              %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
 
       .row
         .col-12

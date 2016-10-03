@@ -30,13 +30,45 @@ class TransactionsController < ApplicationController
 
   def new
 
+    @api = PayPal::SDK::AdaptivePayments.new
+
+    # Build request object
+    @pay = @api.build_pay({
+    :actionType => "CREATE",
+    :cancelUrl => "http://dev.eivey.ca",
+    :currencyCode => "CAD",
+    :feesPayer => "EACHRECEIVER",
+    :ipnNotificationUrl => "http://dev.eivey.ca",
+    :receiverList => {
+    :receiver => [{
+      :amount => 10.0,
+      :email => "jason.chen@ellefsontech.com" }] },
+    :SenderOptions => {
+    :addressOverride => true,
+    :requireShippingAddressSelection => false},
+    :returnUrl => "http://dev.eivey.ca" })
+
+    # Make API call & get response
+    @response = @api.pay(@pay)
+
+    @set_payment_options = @api.build_set_payment_options({
+    :requireShippingAddressSelection => "true"
+    })
+
+    @set_payment_options_response = @api.set_payment_options(@set_payment_options)
+
+    if @response.success? && @response.payment_exec_status != "ERROR"
+    @response.payKey
+    redirect_to @api.payment_url(@response)  # Url to complete payment
+    else
+    @response.error[0].message
+    end
 
 
 
 
 
-
-
+=begin
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -68,7 +100,7 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
-
+=end
   end
 
   def create
