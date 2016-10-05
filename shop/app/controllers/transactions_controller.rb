@@ -20,38 +20,36 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
-
+=begin
   PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
   :username  => "info-facilitator_api1.eivey.ca",
   :password  => "DGGJ8UR3DWZHTGPS",
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
-
-
+=end
 
 
   def new
-
-
 
     @api = PayPal::SDK::AdaptivePayments.new
 
     # Build request object
     @pay = @api.build_pay({
-    :actionType => "PAY_PRIMARY",
+    :actionType => "CREATE",
     :cancelUrl => "http://dev.eivey.ca",
     :currencyCode => "CAD",
-    :feesPayer => "EACHRECEIVER",
-    :ipnNotificationUrl => "http://dev.eivey.ca",
+    :feesPayer => "SENDER",
+    :ipnNotificationUrl => "http://localhost:3000/en/transactions/thank-you",
     :receiverList => {
     :receiver => [{
       :amount => 10.0,
+
       :email => "jason.chen@ellefsontech.com" }] },
     :SenderOptions => {
     :addressOverride => true,
     :requireShippingAddressSelection => false},
-    :returnUrl => "http://localhost:3000/en/transactions/thank-you" })
+    :returnUrl => "http://dev.eivey.ca" })
 
     # Make API call & get response
     @response = @api.pay(@pay)
@@ -59,7 +57,6 @@ class TransactionsController < ApplicationController
     @set_payment_options = @api.build_set_payment_options({
     :requireShippingAddressSelection => "true"
     })
-
 
     @set_payment_options_response = @api.set_payment_options(@set_payment_options)
 
