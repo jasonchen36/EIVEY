@@ -44,7 +44,7 @@ class TransactionsController < ApplicationController
     :cancelUrl => "http://dev.eivey.ca",
     :currencyCode => "CAD",
     :feesPayer => "SENDER",
-    :ipnNotificationUrl => "http://dev.eivey.ca",
+    :ipnNotificationUrl => "http://localhost:3000/en/transactions/thank-you",
     :receiverList => {
     :receiver => [{
       :amount => 10.0,
