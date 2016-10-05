@@ -28,50 +28,12 @@ class TransactionsController < ApplicationController
   :password  => "DGGJ8UR3DWZHTGPS",
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
 =end
-
+  def thank_you
+    render "http://http://localhost:3000/en/transactions/thank-you"
+  end
 
   def new
 
-    @api = PayPal::SDK::AdaptivePayments.new
-
-    # Build request object
-    @pay = @api.build_pay({
-    :actionType => "CREATE",
-    :cancelUrl => "http://dev.eivey.ca",
-    :currencyCode => "CAD",
-    :feesPayer => "SENDER",
-    :ipnNotificationUrl => "http://localhost:3000/en/transactions/thank-you",
-    :receiverList => {
-    :receiver => [{
-      :amount => 10.0,
-
-      :email => "jason.chen@ellefsontech.com" }] },
-    :SenderOptions => {
-    :addressOverride => true,
-    :requireShippingAddressSelection => false},
-    :returnUrl => "http://dev.eivey.ca" })
-
-    # Make API call & get response
-    @response = @api.pay(@pay)
-
-    @set_payment_options = @api.build_set_payment_options({
-    :requireShippingAddressSelection => "true"
-    })
-
-    @set_payment_options_response = @api.set_payment_options(@set_payment_options)
-
-    if @response.success? && @response.payment_exec_status != "ERROR"
-    @response.payKey
-    redirect_to @api.payment_url(@response)  # Url to complete payment
-    else
-    @response.error[0].message
-    end
-
-
-
-
-
-=begin
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -92,7 +54,10 @@ class TransactionsController < ApplicationController
       when matches([:preauthorize, :paypal])
         redirect_to initiate_order_path(transaction_params)
       when matches([:preauthorize, :braintree])
-        redirect_to preauthorize_payment_path(transaction_params)
+        puts "helo"
+        puts listing_model
+      #  complete_paypal_payment(10.00,'awong@ellefsontech.com')
+       redirect_to preauthorize_payment_path(transaction_params)
       when matches([:postpay])
         redirect_to post_pay_listing_path(transaction_params)
       else
@@ -103,46 +68,51 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
-=end
+
+  end
+
+  def complete_paypal_payment(pay_amount, seller_paypal_email)
+    @api = PayPal::SDK::AdaptivePayments.new
+
+    # Build request object
+    @pay = @api.build_pay({
+    :actionType => "PAY_PRIMARY",
+    :cancelUrl => PAYPAL_CONFIG['cancel_url'],
+    :currencyCode => "CAD",
+    :feesPayer => "SECONDARYONLY",
+    :ipnNotificationUrl => PAYPAL_CONFIG['ipnNotificationUrl'],
+    :receiverList => {
+      :receiver => [{
+        :amount => pay_amount,
+        :email => PAYPAL_CONFIG['email'],
+        :primary => true },
+        {
+          :amount => (pay_amount * 0.75),
+          :email => seller_paypal_email,
+          :primary => false }] },
+    :returnUrl => PAYPAL_CONFIG['return_url'] })
+
+    # Make API call & get response
+    @response = @api.pay(@pay)
+
+
+    @set_payment_options_response = @api.set_payment_options(@set_payment_options)
+
+    if @response.success? && @response.payment_exec_status != "ERROR"
+    @response.payKey
+      puts "successfully checked out"
+    redirect_to @api.payment_url(@response)  # Url to complete payment
+    else
+      puts "error!"
+    puts @response.error[0].message
+    @response.error[0].message
+    end
   end
 
   def create
 
-    @api = PayPal::SDK::AdaptivePayments.new
 
-# Build request object
-    @pay = @api.build_pay({
-  :actionType => "CREATE",
-  :cancelUrl => "http://dev.eivey.ca",
-  :currencyCode => "CAD",
-  :feesPayer => "EACHRECEIVER",
-  :ipnNotificationUrl => "http://dev.eivey.ca",
-  :receiverList => {
-    :receiver => [{
-      :amount => 10.0,
-      :email => "jason.chen@ellefsontech.com" }] },
-  :SenderOptions => {
-    :addressOverride => true,
-    :requireShippingAddressSelection => false},
-  :returnUrl => "http://dev.eivey.ca" })
 
-  # Make API call & get response
-  @response = @api.pay(@pay)
-
-  @set_payment_options = @api.build_set_payment_options({
-    :requireShippingAddressSelection => "true"
-    })
-
-  @set_payment_options_response = @api.set_payment_options(@set_payment_options)
-
-  if @response.success? && @response.payment_exec_status != "ERROR"
-    @response.payKey
-    redirect_to @api.payment_url(@response)  # Url to complete payment
-  else
-    @response.error[0].message
-  end
-
-=begin
     Result.all(
       ->() {
         TransactionForm.validate(params)
@@ -179,15 +149,22 @@ class TransactionsController < ApplicationController
               payment_process: process[:process]}
           })
       }
-    ).on_success { |(_, (_, _, _, process), _, _, tx)|
+    ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
+      puts "successfully created"
+  #    puts listing_model.price
+#      puts author_model.braintree_account.email
+
+      complete_paypal_payment(listing_model.price, author_model.braintree_account.email)
       after_create_actions!(process: process, transaction: tx[:transaction], community_id: @current_community.id)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
-      redirect_to after_create_redirect(process: process, starter_id: @current_user.id, transaction: tx[:transaction]) # add more params here when needed
+      # redirect_to after_create_redirect(process: process, starter_id: @current_user.id, transaction: tx[:transaction]) # add more params here when needed
     }.on_error { |error_msg, data|
+      puts "failed to create"
+
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
-=end
+
   end
 
   def show
