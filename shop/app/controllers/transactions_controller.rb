@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
 =end
   def thank_you
-    render "http://http://localhost:3000/en/transactions/thank-you"
+    render "transactions/thank-you"
   end
 
   def new
