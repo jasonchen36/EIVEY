@@ -20,12 +20,18 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
+
   PayPal::SDK.configure(
   :mode      => "sandbox",  # Set "live" for production
   :app_id    => "APP-80W284485P519543T",
   :username  => "info-facilitator_api1.eivey.ca",
   :password  => "DGGJ8UR3DWZHTGPS",
   :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
+
+
+  def thank_you
+    render "transactions/thank-you"
+  end
 
 
   def new
@@ -453,4 +459,5 @@ class TransactionsController < ApplicationController
              form_action: person_transactions_path(person_id: @current_user, listing_id: listing_model.id)
            }
   end
+
 end

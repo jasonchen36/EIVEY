@@ -105,6 +105,9 @@ Kassi::Application.routes.draw do
     # All new transactions (in the future)
     get "/transactions/new" => "transactions#new", as: :new_transaction
 
+    # thank you
+    get "/transactions/thank-you" => "transactions#thank_you"
+
     # preauthorize flow
     get "/listings/:listing_id/preauthorize" => "preauthorize_transactions#preauthorize", :as => :preauthorize_payment
     post "/listings/:listing_id/preauthorized" => "preauthorize_transactions#preauthorized", :as => :preauthorized_payment
