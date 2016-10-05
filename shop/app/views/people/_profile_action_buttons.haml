@@ -1,7 +1,7 @@
 - if current_user?(@person)
   = render :partial => "people/edit_profile_button"
 - else
-  %a.profile-contact-link{href: new_person_person_message_path(@person)}
+  %a.button.green{href: new_person_person_message_path(@person)}
     .content
       Contact
       

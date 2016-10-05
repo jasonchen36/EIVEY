@@ -11,12 +11,11 @@
 }
 
 @mixin share-type-link {
-  color: $aside;
   font-size: em(10);
   font-weight: normal;
   white-space: nowrap;
   background: $highlight;
-  color: 939598;
+  color: #939598;
   @include border-radius(em(5));
   &:hover {
     background: $aside;

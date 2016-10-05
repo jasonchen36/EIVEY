@@ -1,9 +1,5 @@
 //buttons
 //-----------------------------
-.profile-edit-link, .profile-contact-link, .follow-button {
-  @include button($color-sharetribe-green);
-}
-
 .follow-button {
   margin-top: 10px;
   &.unfollow:hover:not(.button-disable-hover) {
