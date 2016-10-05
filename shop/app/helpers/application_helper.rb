@@ -314,23 +314,7 @@ module ApplicationHelper
   # rubocop:disable Metrics/MethodLength
   # Admin view left hand navigation content
   def admin_links_for(community)
-    links = [
-        {
-            :topic => :general,
-            :text => t("admin.communities.getting_started.getting_started"),
-            :icon_class => icon_class("openbook"),
-            :path => admin_getting_started_guide_path,
-            :name => "getting_started_guide"
-        },
-        {
-            :topic => :general,
-            :text => t("admin.left_hand_navigation.support"),
-            :icon_class => icon_class("help"),
-            :path => "mailto:#{APP_CONFIG.support_email}",
-            :name => "support",
-            :data_uv_trigger => "contact"
-        }
-    ]
+    links = []
 
     if APP_CONFIG.external_plan_service_in_use
       links << {
@@ -341,14 +325,6 @@ module ApplicationHelper
           :name => "plan",
       }
     end
-
-    links << {
-        :topic => :general,
-        :text => t("admin.left_hand_navigation.preview"),
-        :icon_class => icon_class("eye"),
-        :path => search_path(big_cover_photo: true),
-        :name => "preview",
-    }
 
     links += [
         {

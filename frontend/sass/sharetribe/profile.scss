@@ -33,3 +33,14 @@
   padding-bottom: lines(0.25);
   color: $color-sharetribe-dark-grey;
 }
+
+//mobile user menu
+//-----------------------------
+.left-navi-dropdown.hidden-tablet:after {
+  content: '\f0d7';
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  margin:0 0 0 10px;
+  text-decoration:none;
+}
