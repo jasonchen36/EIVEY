@@ -93,6 +93,8 @@ class Transaction < ActiveRecord::Base
     .where("listings.author_id = ? OR starter_id = ?", person.id, person.id)
   }
 
+ 
+
   def status
     current_state
   end

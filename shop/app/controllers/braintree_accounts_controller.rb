@@ -2,6 +2,7 @@ class BraintreeAccountsController < ApplicationController
 
   LIST_OF_STATES = [
       ['Alberta', 'AB'],
+      ['New York', 'NY'],
       ['British Columbia', 'BC'],
       ['Manitoba', 'MB'],
       ['New Brunswick', 'NB'],

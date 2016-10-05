@@ -1,0 +1,18 @@
+test: &default
+
+
+
+
+development:
+  <<: *default
+
+  #PayPal payment information to make a successful chained AdaptivePayments
+  cancel_url: "http://dev.eivey.ca"
+  ipnNotificationUrl: "http://dev.eivey.ca"
+  return_url: "http://localhost:3000/en/transactions/thank-you"
+  receiver_email_address_one: "jason.chen@ellefsontech.ca"
+  receiver_email_address_two: "jason.chen@uwaterloo.ca"
+
+production:
+  <<: *default
+  mode: live
