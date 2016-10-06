@@ -104,6 +104,7 @@ Kassi::Application.routes.draw do
 
     # All new transactions (in the future)
     get "/transactions/new" => "transactions#new", as: :new_transaction
+    get "/transactions/paid" => "transactions#paid"
 
     # thank you
     get "/transactions/thank-you" => "transactions#thank_you"

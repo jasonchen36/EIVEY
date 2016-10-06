@@ -92,14 +92,26 @@ class TransactionsController < ApplicationController
           :primary => false }] },
     :returnUrl => PAYPAL_CONFIG['return_url'] })
 
+
+
     # Make API call & get response
     @response = @api.pay(@pay)
 
+    @payment_details = @api.build_payment_details({
+      :payKey => @response.payKey
+      })
 
-    @set_payment_options_response = @api.set_payment_options(@set_payment_options)
+      @payment_details_response = @api.payment_details(@payment_details)
+
+      if @payment_details_response.success?
+        puts "ipn"
+        puts @payment_details_response.ipnNotificationUrl
+      end
+
+
 
     if @response.success? && @response.payment_exec_status != "ERROR"
-    @response.payKey
+      @response.payKey
       puts "successfully checked out"
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
@@ -151,8 +163,8 @@ class TransactionsController < ApplicationController
       }
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
       puts "successfully created"
-  #    puts listing_model.price
-#      puts author_model.braintree_account.email
+
+    
 
       complete_paypal_payment(listing_model.price, author_model.braintree_account.email)
       after_create_actions!(process: process, transaction: tx[:transaction], community_id: @current_community.id)
@@ -164,6 +176,13 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
+
+  end
+
+# This method will make the transaction state to paid after the listing has been paid for
+  def paid
+
+
 
   end
 
