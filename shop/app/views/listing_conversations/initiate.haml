@@ -38,12 +38,9 @@
       = form.date_select :end_on, { value: preauthorize_form.end_on }, { class: "hidden" }
 
     .preauthorize-section
-      %h2
-        = t("conversations.new.optional_message_to", author_name: author_link).html_safe
 
       .row
         .col-12
-          = form.text_area :content, :class => "text_area"
           = form.hidden_field :sender_id, :value => @current_user.id
 
       - if @current_community.transaction_agreement_in_use
