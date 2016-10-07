@@ -97,22 +97,21 @@ class TransactionsController < ApplicationController
     # Make API call & get response
     @response = @api.pay(@pay)
 
-    @payment_details = @api.build_payment_details({
-      :payKey => @response.payKey
-      })
 
-      @payment_details_response = @api.payment_details(@payment_details)
 
-      if @payment_details_response.success?
-        puts "ipn"
-        puts @payment_details_response.ipnNotificationUrl
-      end
+
 
 
 
     if @response.success? && @response.payment_exec_status != "ERROR"
-      @response.payKey
+      $payKey = @response.payKey
       puts "successfully checked out"
+    #  puts @payment_details_response.status
+    #  puts @payment_details_response.sender
+    #  puts @payment_details_response.senderEmail
+    #  str = @payment_details_response.senderEmail
+    #  payerID = str.match(/SenderIdentifier:([^\/.]*)$/)
+    #  puts payerID
       PaypalAdaptivePayment.create(
       {
         transaction_id: transactions[:id],
@@ -123,6 +122,8 @@ class TransactionsController < ApplicationController
       }
       )
     redirect_to @api.payment_url(@response)  # Url to complete payment
+
+
     else
       puts "error!"
     puts @response.error[0].message
@@ -190,14 +191,48 @@ class TransactionsController < ApplicationController
 # This method will make the transaction state to paid after the listing has been paid for
   def paid
 
+    @api = PayPal::SDK::AdaptivePayments.new
+
+    @execute_payment = @api.build_execute_payment({
+      :payKey => $payKey
+    })
+
+
+
+      @execute_payment_response = @api.execute_payment(@execute_payment)
+
+      if @execute_payment_response.success?
+        puts @execute_payment_response.paymentExecStatus
+        puts @execute_payment_response.payErrorList
+        puts @execute_payment_response.postPaymentDisclosureList
+      else
+        puts @execute_payment_response.error
+      end
+
+      @payment_details = @api.build_payment_details({
+        :payKey => $payKey
+        })
+
+    @payment_details_response = @api.payment_details(@payment_details)
+
+    if @payment_details_response.success?
+      puts "ipn"
+      puts @payment_details_response.ipnNotificationUrl
+    else
+      puts @payment_details_response.error
+    end
+
+    puts @payment_details_response.status
+
+    
     paypal_payment_id = params[:payKey]
     paypal_token = params[:token]
     paypal_payer_id = params[:payerID]
     puts "this is the payment id"
     puts paypal_payment_id
     payment = PaypalAdaptivePayment.where(id: paypal_payment_id).first
-    puts payment.transaction.id
-
+  #  puts payment.transaction.id
+    render "transactions/thank-you"
 
   end
 
