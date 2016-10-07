@@ -30,7 +30,7 @@
     </div>
 </footer>
 <section id="footer-menu-container">
-    <nav class="extra-small-grid-container">
+    <nav class="grid-container">
         <div class="small-12 medium-3">
             <h4 class="footer-menu-title">Support</h4>
             <?php wp_nav_menu(array(
