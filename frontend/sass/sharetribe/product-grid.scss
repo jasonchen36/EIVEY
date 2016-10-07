@@ -145,6 +145,9 @@ input[type=checkbox]:checked + .color-filter-container, input[type=checkbox]:che
   &.green {
     background-color: $color-filter-green;
   }
+  &.light-green {
+    background-color: $color-filter-light-green;
+  }
   &.brown {
     background-color: $color-filter-brown;
   }
