@@ -235,8 +235,8 @@ class TransactionsController < ApplicationController
     paypal_payer_id = params[:payerID]
     puts "this is the payment id"
     puts paypal_payment_id
-    payment = PaypalAdaptivePayment.where(id: $payKey).first
-  #  puts payment.transaction.id
+    payment = PaypalAdaptivePayment.where(paypal_payment_id: $payKey).first
+    puts payment
     render "transactions/thank-you"
 
   end
