@@ -229,14 +229,16 @@ class TransactionsController < ApplicationController
   else
   end
 
-
+=begin
     paypal_payment_id = params[:payKey]
     paypal_token = params[:token]
     paypal_payer_id = params[:payerID]
     puts "this is the payment id"
     puts paypal_payment_id
+=end
     payment = PaypalAdaptivePayment.where(paypal_payment_id: $payKey).first
-    puts payment
+    puts "the payment is &&"
+    puts payment.transaction_id
     render "transactions/thank-you"
 
   end
