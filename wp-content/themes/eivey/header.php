@@ -38,14 +38,7 @@
 <body <?php body_class('wordpress'); ?>>
 <!--desktop menu-->
 <header class="grid-container show-for-large">
-    <nav id="menu-header-secondary-container" class="small-12 text-right">
-        <?php wp_nav_menu(array(
-            'theme_location' => 'header_secondary',
-            'menu_id' => 'menu-header-secondary',
-            'menu_class' => 'standard-menu'
-        )); ?>
-    </nav>
-    <div class="small-12 text-center show-for-large">
+    <div id="header-logo-desktop" class="small-12 text-center show-for-large">
         <a href="/">
             <div class="i--icon-logo"></div>
         </a>
