@@ -1,6 +1,6 @@
 //core
 //-----------------------------
-$logo-width: 410px;
+$logo-width: 425px;
 
 header {
   @include desktop {
@@ -12,8 +12,9 @@ header {
     margin: 10px auto;
     max-width: 100%;
     @include desktop {
-      height: 100px;
-      margin: 0 auto;
+      height: 115px;
+      width: 480px;
+      margin: 0 auto -10px auto;
     }
   }
 }
@@ -93,11 +94,12 @@ header {
 
 #logo-tagline {
   color: $color-global-grey;
-  margin: 10px auto;
+  margin: 5px auto 10px auto;
   max-width: $logo-width;
   text-transform: uppercase;
-  font-size: 17px;
+  font-size: 16px;
   text-align: center;
+  letter-spacing: 2px;
   @extend .f--georgia;
 }
 
