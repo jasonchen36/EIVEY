@@ -10,7 +10,7 @@ development:
   cancel_url: "http://dev.eivey.ca"
   ipnNotificationUrl: "http://dev.eivey.ca"
   email: "jason.chen@ellefsontech.com"
-  return_url: "http://localhost:3000/en/transactions/thank-you"
+  return_url: "http://localhost:3000/en/transactions/paid"
 
 production:
   <<: *default

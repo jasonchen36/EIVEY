@@ -5,6 +5,7 @@ class CreatePaypalAdaptivePayments < ActiveRecord::Migration
       t.string :paypal_payer_id
       t.string :paypal_token
       t.integer :transaction_id
+      t.integer :community_id
 
       t.timestamps null: false
     end

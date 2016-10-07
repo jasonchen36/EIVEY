@@ -71,7 +71,7 @@ class TransactionsController < ApplicationController
 
   end
 
-  def complete_paypal_payment(pay_amount, seller_paypal_email)
+  def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id)
     @api = PayPal::SDK::AdaptivePayments.new
 
     # Build request object
@@ -90,7 +90,7 @@ class TransactionsController < ApplicationController
           :amount => (pay_amount * 0.75),
           :email => seller_paypal_email,
           :primary => false }] },
-    :returnUrl => PAYPAL_CONFIG['return_url'] })
+    :returnUrl => "http://localhost:3000/en/transactions/paid"})
 
 
 
@@ -113,6 +113,15 @@ class TransactionsController < ApplicationController
     if @response.success? && @response.payment_exec_status != "ERROR"
       @response.payKey
       puts "successfully checked out"
+      PaypalAdaptivePayment.create(
+      {
+        transaction_id: transactions[:id],
+        community_id: community_id,
+    #    paypal_payer_id:
+    #    paypal_token:
+        paypal_payment_id: @response.payKey
+      }
+      )
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
       puts "error!"
@@ -164,9 +173,8 @@ class TransactionsController < ApplicationController
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
       puts "successfully created"
 
-    
 
-      complete_paypal_payment(listing_model.price, author_model.braintree_account.email)
+      complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id)
       after_create_actions!(process: process, transaction: tx[:transaction], community_id: @current_community.id)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
       # redirect_to after_create_redirect(process: process, starter_id: @current_user.id, transaction: tx[:transaction]) # add more params here when needed
@@ -182,6 +190,13 @@ class TransactionsController < ApplicationController
 # This method will make the transaction state to paid after the listing has been paid for
   def paid
 
+    paypal_payment_id = params[:payKey]
+    paypal_token = params[:token]
+    paypal_payer_id = params[:payerID]
+    puts "this is the payment id"
+    puts paypal_payment_id
+    payment = PaypalAdaptivePayment.where(id: paypal_payment_id).first
+    puts payment.transaction.id
 
 
   end

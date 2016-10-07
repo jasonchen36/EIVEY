@@ -76,6 +76,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :starter, :class_name => "Person", :foreign_key => "starter_id"
   belongs_to :conversation
   has_many :testimonials
+  has_one :paypal_adaptive_payment, foreign_key: :transaction_id
 
   delegate :author, to: :listing
   delegate :title, to: :listing, prefix: true
@@ -93,7 +94,7 @@ class Transaction < ActiveRecord::Base
     .where("listings.author_id = ? OR starter_id = ?", person.id, person.id)
   }
 
- 
+
 
   def status
     current_state
