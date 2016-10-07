@@ -39,14 +39,14 @@
             )); ?>
         </div>
         <div class="small-12 medium-3">
-            <h4 class="footer-menu-title">&nbsp;</h4>
+            <h4 class="footer-menu-title show-for-large">&nbsp;</h4>
             <?php wp_nav_menu(array(
                 'theme_location' => 'footer-center-left',
                 'menu_class' => 'standard-menu-footer'
             )); ?>
         </div>
         <div class="small-12 medium-3">
-            <h4 class="footer-menu-title">&nbsp;</h4>
+            <h4 class="footer-menu-title show-for-large">&nbsp;</h4>
             <?php wp_nav_menu(array(
                 'theme_location' => 'footer-center-right',
                 'menu_class' => 'standard-menu-footer'

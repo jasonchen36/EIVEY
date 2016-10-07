@@ -749,7 +749,7 @@ en:
       credit_card_number: "Credit card number"
       cvv: CVV
       credit_card_expiration_date: "Credit card expiration date"
-      confirm_payment: "Confirm payment"
+      confirm_payment: "Place Order"
       exp: "Exp:"
   feedback:
     feedback_subject: "New feedback from %{service_name}"
@@ -758,7 +758,7 @@ en:
     anonymous_user: "Anonymous user"
   preauthorize_payments:
     edit:
-      confirm_payment: "Confirm payment"
+      confirm_payment: "Place Order"
   community_memberships:
     access_denied:
       access_denied: "Access denied"
