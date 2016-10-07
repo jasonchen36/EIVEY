@@ -38,25 +38,24 @@ header {
 //category menu
 //-----------------------------
 #menu-categories {
-  width: 100%;
+  margin: 0;
   li {
-    padding: 0 10px;
+    padding: 0 15px;
     text-align: center;
     margin-bottom: 5px;
-    &:first-child {
-      @include desktop{
-        padding-left: 0;
-      }
-    }
-    &:last-child {
-      @include desktop {
-        padding-right: 0;
-      }
-    }
   }
   a {
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 13px;
+    color: $color-global-dark-grey;
+  }
+}
+
+#menu-homepage-container {
+  text-align: center;
+  & > div {
+    display: inline-block;
   }
 }
 

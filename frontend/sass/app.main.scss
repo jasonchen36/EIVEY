@@ -34,11 +34,12 @@ $susy: (
 //theme
 //-----------------------------
 @import "theme/grid";
-@import "theme/main";
+@import "theme/global";
 @import "theme/header";
 @import "theme/footer";
 
 
 //templates
 //-----------------------------
-@import "theme/wordpress";
+@import "wordpress/main";
+@import "wordpress/home";
