@@ -193,6 +193,14 @@ class TransactionsController < ApplicationController
 
     @api = PayPal::SDK::AdaptivePayments.new
 
+    @payment_details = @api.build_payment_details({
+      :payKey => $payKey
+      })
+
+  @payment_details_response = @api.payment_details(@payment_details)
+
+  if @payment_details_response.status = "INCOMPLETE"
+
     @execute_payment = @api.build_execute_payment({
       :payKey => $payKey
     })
@@ -201,13 +209,6 @@ class TransactionsController < ApplicationController
 
       @execute_payment_response = @api.execute_payment(@execute_payment)
 
-      if @execute_payment_response.success?
-        puts @execute_payment_response.paymentExecStatus
-        puts @execute_payment_response.payErrorList
-        puts @execute_payment_response.postPaymentDisclosureList
-      else
-        puts @execute_payment_response.error
-      end
 
       @payment_details = @api.build_payment_details({
         :payKey => $payKey
@@ -222,15 +223,19 @@ class TransactionsController < ApplicationController
       puts @payment_details_response.error
     end
 
+    puts "status"
     puts @payment_details_response.status
 
-    
+  else
+  end
+
+
     paypal_payment_id = params[:payKey]
     paypal_token = params[:token]
     paypal_payer_id = params[:payerID]
     puts "this is the payment id"
     puts paypal_payment_id
-    payment = PaypalAdaptivePayment.where(id: paypal_payment_id).first
+    payment = PaypalAdaptivePayment.where(id: $payKey).first
   #  puts payment.transaction.id
     render "transactions/thank-you"
 
