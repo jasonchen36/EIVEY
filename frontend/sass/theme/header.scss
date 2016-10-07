@@ -99,7 +99,7 @@ header {
   font-size: 16px;
   text-align: center;
   letter-spacing: 2px;
-  @extend .f--georgia;
+  font-family: $font-georgia;
 }
 
 #header-logo-desktop {

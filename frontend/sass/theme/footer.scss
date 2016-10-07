@@ -16,21 +16,30 @@ footer {
 //footer top
 //-----------------------------
 #footer-tagline {
-  color: $color-global-grey;
+  color: $color-global-dark-grey;
   margin: 40px 0 10px 0;
-  font-size: 24px;
-  font-weight: normal;
-  @extend .f--georgia;
+  font-size: 35px;
+  font-family: $font-georgia;
+  font-weight: bold;
+  font-style: italic;
   @include desktop {
-    margin: 75px 0 10px 0;
+    margin: 50px 0 10px 0;
   }
 }
 
 #footer-social-accounts {
-  margin-bottom: 45px;
+  margin: 20px 0 40px 0;
   @include desktop {
     margin-bottom: 70px;
   }
+}
+
+.footer-tagline-social {
+  color: $color-global-dark-grey;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0;
+  font-family: $font-georgia;
 }
 
 
@@ -51,6 +60,8 @@ footer {
   font-size: 12px;
   margin-bottom: 0;
   text-align: center;
+  font-family: $font-georgia;
+  font-style: italic;
 }
 
 .footer-menu-title {
