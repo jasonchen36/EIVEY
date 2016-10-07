@@ -151,6 +151,15 @@ input[type=checkbox]:checked + .color-filter-container, input[type=checkbox]:che
   &.brown {
     background-color: $color-filter-brown;
   }
+  &.multi {
+    @extend .i--color-multi;
+  }
+  &.gold {
+    @extend .i--color-gold;
+  }
+  &.silver {
+    @extend .i--color-silver;
+  }
 }
 
 .size-filter-container {
