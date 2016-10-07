@@ -37,6 +37,7 @@
 
       %li
         = render partial: "transactions/price_break_down", locals: price_break_down_locals
+
   %h1 Shipping Address
   %input{:placeholder => "First Name", :type => "text"}/
   %input{:placeholder => "Last Name", :type => "text"}/
@@ -45,7 +46,7 @@
   %input{:placeholder => "City", :type => "text"}/
   %input{:placeholder => "Postal Code", :type => "text"}/
   %input{:placeholder => "Province", :type => "text"}/
-  %br 
+  %br
   %br
 
   %form{:action => "http://localhost:3000/en/transactions/new?utf8=%E2%9C%93&listing_id=17", :method => "GET"}

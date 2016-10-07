@@ -1,0 +1,20 @@
+//core
+//-----------------------------
+#homepage-banner-image {
+  width: 100%;
+}
+
+//footer
+//-----------------------------
+#homepage-footer {
+  display: none;
+}
+
+.wordpress.home {
+  #homepage-footer {
+    display: block;
+  }
+  #standard-footer {
+    display: none;
+  }
+}

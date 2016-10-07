@@ -20,6 +20,11 @@ Notes: Always design for mobile-first such that your media queries use min-width
   max-width: 700px;
 }
 
+.full-screen-grid-container {
+  @include container;
+  max-width: none;
+}
+
 .grid-content {
   /* Styles for mobile view go here */
   @include span(12); //optional since divs are 100% width by default
@@ -250,8 +255,8 @@ $grid-padding: 5px;
 //helper classes
 //-----------------------------
 @mixin grid-end {
-  float: right;
-  margin-right: 0;
+  float: right!important;
+  margin-right: 0!important;
 }
 
 .grid-end {

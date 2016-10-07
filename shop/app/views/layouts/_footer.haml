@@ -1,51 +1,60 @@
 - prefix = 'http://dev.eivey.ca'
 
 %footer#footer-menu-container
-  %nav.grid-container
-    .small-12.medium-3
-      %h4.footer-menu-title
-        Support
-      %ul.standard-menu-footer
-        %li
-          %a{:href => "#{prefix}/frequently-asked-questions"} Frequently Asked Questions
-        %li
-          %a{:href => "#{prefix}/contact"} Contact
-        %li
-          %a{:href => "#{prefix}/events"} Events
-    .small-12.medium-3
-      %ul.standard-menu-footer
-        %li
-          %a{:href => "#{prefix}/selling"} Selling
-        %li
-          %a{:href => "#{prefix}/buying"} Buying
-        %li
-          %a{:href => "#{prefix}/terms-conditions"} Terms &amp; Conditions
-        %li
-          %a{:href => "#{prefix}/privacy-policy"} Privacy Policy
-    .small-12.medium-3
-      %h4.footer-menu-title
-        Company
-      %ul.standard-menu-footer
-        %li
-          %a{:href => "#{prefix}/about"} About
-        %li
-          %a{:href => "#{prefix}/blog"} Blog
-    .small-12.medium-3.grid-end.social-icon-container
-      %a.social-icon{:href => "https://www.facebook.com/eiveydotca", :target =>"blank"}
-        %i.fa.fa-facebook{"aria-hidden" => "true"}
-      %a.social-icon{:href => "https://www.instagram.com/eiveydotca/", :target =>"blank"}
-        %i.fa.fa-instagram{"aria-hidden" => "true"}
-      %a.social-icon{:href => "https://twitter.com/eiveydotca", :target =>"blank"}
-        %i.fa.fa-twitter{"aria-hidden" => "true"}
-      %a.social-icon{:href => "https://www.pinterest.com/eiveydotca/", :target =>"blank"}
-        %i.fa.fa-pinterest{"aria-hidden" => "true"}
-  %h5#footer-trademark.grid-container
+  #standard-footer
+    %nav
+      .grid-container
+        .small-12.medium-2
+          %h4.footer-menu-title
+            Support
+          %ul.standard-menu-footer
+            %li
+              %a{:href => "#{prefix}/frequently-asked-questions"} Frequently Asked Questions
+            %li
+              %a{:href => "#{prefix}/contact"} Contact Us
+            %li
+              %a{:href => "#{prefix}/events"} Events
+        .small-12.medium-2
+          %h4.footer-menu-title.hide-for-small
+            &nbsp;
+          %ul.standard-menu-footer
+            %li
+              %a{:href => "#{prefix}/selling"} Selling
+            %li
+              %a{:href => "#{prefix}/buying"} Buying
+        .small-12.medium-2
+          %h4.footer-menu-title.hide-for-small
+            &nbsp;
+          %ul.standard-menu-footer
+            %li
+              %a{:href => "#{prefix}/terms-conditions"} Terms of Use
+            %li
+              %a{:href => "#{prefix}/privacy-policy"} Privacy Policy
+        .small-12.medium-2
+          %h4.footer-menu-title
+            Company
+          %ul.standard-menu-footer
+            %li
+              %a{:href => "#{prefix}/about"} About Us
+            %li
+              %a{:href => "#{prefix}/blog"} Blog
+        .small-12.medium-2.grid-end.social-icon-container
+          %a.social-icon{:href => "https://www.facebook.com/eiveydotca", :target =>"blank"}
+            %i.fa.fa-facebook{"aria-hidden" => "true"}
+          %a.social-icon{:href => "https://www.instagram.com/eiveydotca/", :target =>"blank"}
+            %i.fa.fa-instagram{"aria-hidden" => "true"}
+          %a.social-icon{:href => "https://www.pinterest.com/eiveydotca/", :target =>"blank"}
+            %i.fa.fa-pinterest{"aria-hidden" => "true"}
+          %a.social-icon{:href => "https://twitter.com/eiveydotca", :target =>"blank"}
+            %i.fa.fa-twitter{"aria-hidden" => "true"}
+          %h3.footer-nav-tagline
+            @eiveydotca
+          %h3.footer-nav-tagline
+            \#eiveydotca
+  %h5#footer-trademark
     &copy;
     = Time.now.year
-    EIVEY.  All rights reserved, EIVEY
-    %sup
-      &copy;
-    is a registered trademark of Eivey
+    EIVEY Inc.
 
 -#fullscreen takeovers
 #mobile-menu-fullscreen-container.full-screen-takeover.faded-out
