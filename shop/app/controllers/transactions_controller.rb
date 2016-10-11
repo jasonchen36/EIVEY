@@ -46,9 +46,6 @@ class TransactionsController < ApplicationController
       when matches([:preauthorize, :paypal])
         redirect_to initiate_order_path(transaction_params)
       when matches([:preauthorize, :braintree])
-        puts "helo"
-        puts listing_model
-      #  complete_paypal_payment(10.00,'awong@ellefsontech.com')
        redirect_to preauthorize_payment_path(transaction_params)
       when matches([:postpay])
         redirect_to post_pay_listing_path(transaction_params)
@@ -97,19 +94,10 @@ class TransactionsController < ApplicationController
 
     if @response.success? && @response.payment_exec_status != "ERROR"
 
-      puts "successfully checked out"
-    #  puts @payment_details_response.status
-    #  puts @payment_details_response.sender
-    #  puts @payment_details_response.senderEmail
-    #  str = @payment_details_response.senderEmail
-    #  payerID = str.match(/SenderIdentifier:([^\/.]*)$/)
-    #  puts payerID
       PaypalAdaptivePayment.create(
       {
         transaction_id: transactions[:id],
         community_id: community_id,
-    #    paypal_payer_id:
-    #    paypal_token:
         paypal_payment_id: @response.payKey
       }
       )
@@ -165,7 +153,7 @@ class TransactionsController < ApplicationController
           })
       }
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
-      puts "successfully created"
+
 
 
       complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process)
@@ -173,7 +161,7 @@ class TransactionsController < ApplicationController
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
       # redirect_to after_create_redirect(process: process, starter_id: @current_user.id, transaction: tx[:transaction]) # add more params here when needed
     }.on_error { |error_msg, data|
-      puts "failed to create"
+
 
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
@@ -213,33 +201,19 @@ class TransactionsController < ApplicationController
 
         @payment_details_response = @api.payment_details(@payment_details)
 
-        if @payment_details_response.success?
-          puts "ipn"
-          puts @payment_details_response.ipnNotificationUrl
-        else
-          puts @payment_details_response.error
-        end
-
-        puts "status"
-        puts @payment_details_response.status
 
       elsif @payment_details_response.status == "COMPLETED"
 
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
-      puts "the payment is &&"
-      puts payment.transaction_id
       transaction = Transaction.where(id: payment.transaction_id).first
-      puts "the listing id is"
-      puts transaction.listing_id
       id = transaction.listing_id
       @listing = Listing.where(id: id).first
-      # @listing.update_attribute(:open, false)
+      @listing.update_attribute(:open, false)
 
       MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
       render "transactions/thank-you"
       else
       puts "failed to complete the transaction"
-      #  render "The payment was not being completed. Please checkout your item."
       end
 
 
