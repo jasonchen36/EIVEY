@@ -200,13 +200,12 @@ class TransactionsController < ApplicationController
 
     @payment_details_response = @api.payment_details(@payment_details)
 
-    puts "this is the status"
-    puts @payment_details_response.status
-
-    if @payment_details_response.status == "COMPLETED"
+  
 
 
-=begin
+
+    if @payment_details_response.status == "INCOMPLETE" || @payment_details_response.status == "PROCESSING" || @payment_details_response.status == "PENDING"
+
         @execute_payment = @api.build_execute_payment({
           :payKey => payKey
         })
@@ -231,8 +230,8 @@ class TransactionsController < ApplicationController
 
         puts "status"
         puts @payment_details_response.status
-=end
-      end
+
+      elsif @payment_details_response.status == "COMPLETED"
 
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
       puts "the payment is &&"
@@ -246,10 +245,10 @@ class TransactionsController < ApplicationController
 
       MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
       render "transactions/thank-you"
-    else
+      else
       puts "failed to complete the transaction"
-    #  render "The payment was not being completed. Please checkout your item."
-    end
+      #  render "The payment was not being completed. Please checkout your item."
+      end
 
 
 
