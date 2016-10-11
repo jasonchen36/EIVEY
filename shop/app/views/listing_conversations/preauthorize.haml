@@ -25,7 +25,7 @@
 #new_message_form.centered-section
 
   - author_link = link_to(author[:display_name], person_path(username: author[:username]))
-
+= form_tag(form_action, method: :post, id: "transaction-form") do
   .preauthorize-section
     %h2.preauthorize-details-title
       = t(".details")

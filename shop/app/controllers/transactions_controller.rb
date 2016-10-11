@@ -20,14 +20,6 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
-=begin
-  PayPal::SDK.configure(
-  :mode      => "sandbox",  # Set "live" for production
-  :app_id    => "APP-80W284485P519543T",
-  :username  => "info-facilitator_api1.eivey.ca",
-  :password  => "DGGJ8UR3DWZHTGPS",
-  :signature => "AFcWxV21C7fd0v3bYYYRCpSSRl31AXJHEoBTy5hxb0LlTmIWTfMmKTnX" )
-=end
   def thank_you
     render "transactions/thank-you"
   end
@@ -200,7 +192,7 @@ class TransactionsController < ApplicationController
 
     @payment_details_response = @api.payment_details(@payment_details)
 
-  
+
 
 
 
