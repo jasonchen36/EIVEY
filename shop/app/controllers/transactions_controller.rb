@@ -12,7 +12,6 @@ class TransactionsController < ApplicationController
   end
 
   MessageForm = Form::Message
-
   TransactionForm = EntityUtils.define_builder(
     [:listing_id, :fixnum, :to_integer, :mandatory],
     [:message, :string],
@@ -26,7 +25,6 @@ class TransactionsController < ApplicationController
   end
 
   def new
-
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -36,9 +34,7 @@ class TransactionsController < ApplicationController
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
       booking = listing_model.unit_type == :day
-
       transaction_params = HashUtils.symbolize_keys({listing_id: listing_model.id}.merge(params.slice(:start_on, :end_on, :quantity, :delivery)))
-
       case [process[:process], gateway, booking]
       when matches([:none])
         render_free(listing_model: listing_model, author_model: author_model, community: @current_community, params: transaction_params)
@@ -58,12 +54,10 @@ class TransactionsController < ApplicationController
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
-
   end
 
   def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process)
     @api = PayPal::SDK::AdaptivePayments.new
-
     # Build request object
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
