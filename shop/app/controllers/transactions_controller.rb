@@ -1,4 +1,5 @@
 require 'paypal-sdk-adaptivepayments'
+require 'uri'
 
 class TransactionsController < ApplicationController
 
@@ -66,7 +67,7 @@ class TransactionsController < ApplicationController
     # Build request object
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
-    :cancelUrl => PAYPAL_CONFIG['cancel_url'],
+    :cancelUrl => url_for :controller => 'transactions', :action => 'new',
     :currencyCode => "CAD",
     :feesPayer => "SECONDARYONLY",
     :ipnNotificationUrl => PAYPAL_CONFIG['ipnNotificationUrl'],
@@ -79,7 +80,7 @@ class TransactionsController < ApplicationController
           :amount => (pay_amount * 0.75),
           :email => seller_paypal_email,
           :primary => false }] },
-    :returnUrl => "http://localhost:3000/en/transactions/paid?payKey=${payKey}"})
+    :returnUrl => URI.join(url_for :controller => 'transactions', :action => 'paid', '?payKey=${payKey}') })
     # Make API call & get response
     @response = @api.pay(@pay)
     if @response.success? && @response.payment_exec_status != "ERROR"
@@ -151,8 +152,9 @@ class TransactionsController < ApplicationController
     @payment_details = @api.build_payment_details({
       :payKey => payKey
       })
+    paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
     @payment_details_response = @api.payment_details(@payment_details)
-    if @payment_details_response.status == "INCOMPLETE" || @payment_details_response.status == "PROCESSING" || @payment_details_response.status == "PENDING"
+    if @payment_details_response.status == paypal_status.incomplete || @payment_details_response.status == paypal_status.pending || @payment_details_response.status == paypal_status.processing
         @execute_payment = @api.build_execute_payment({
           :payKey => payKey
           })
@@ -161,7 +163,7 @@ class TransactionsController < ApplicationController
           :payKey => payKey
           })
         @payment_details_response = @api.payment_details(@payment_details)
-    elsif @payment_details_response.status == "COMPLETED"
+    elsif @payment_details_response.status == paypal_status.completed
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
       transaction = Transaction.where(id: payment.transaction_id).first
       id = transaction.listing_id
