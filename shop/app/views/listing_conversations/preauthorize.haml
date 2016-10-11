@@ -25,7 +25,7 @@
 #new_message_form.centered-section
 
   - author_link = link_to(author[:display_name], person_path(username: author[:username]))
-= form_tag(form_action, method: :post, id: "transaction-form") do
+
   .preauthorize-section
     %h2.preauthorize-details-title
       = t(".details")
@@ -38,16 +38,49 @@
       %li
         = render partial: "transactions/price_break_down", locals: price_break_down_locals
 
-  %h1 Shipping Address
-  %input{:placeholder => "First Name", :type => "text"}/
-  %input{:placeholder => "Last Name", :type => "text"}/
-  %input{:placeholder => "Shipping Address", :type => "text"}/
-  %input{:placeholder => "Suite Number", :type => "text"}/
-  %input{:placeholder => "City", :type => "text"}/
-  %input{:placeholder => "Postal Code", :type => "text"}/
-  %input{:placeholder => "Province", :type => "text"}/
-  %br
-  %br
+  = form_for preauthorize_form,
+    :url => form_action,
+      :method => "post",
+      :html => { :id => "braintree-payment-form", :class => "hidden" } do |form|
 
-  %form{:action => "http://localhost:3000/en/transactions/new?utf8=%E2%9C%93&listing_id=17", :method => "GET"}
+    -# TODO Fix this, no respond_to?
+    - if preauthorize_form.respond_to?(:start_on) && preauthorize_form.respond_to?(:end_on)
+      = form.date_select :start_on, { value: preauthorize_form.start_on }, { class: "hidden" }
+      = form.date_select :end_on, { value: preauthorize_form.end_on }, { class: "hidden" }
+
+    .preauthorize-section
+      %h2
+        = t(".payment")
+
+      = render partial: "payments/braintree/credit_card_info", locals: {braintree_form: braintree_form}
+
+    .preauthorize-section
+
+      .row
+        .col-12
+          = form.hidden_field :sender_id, :value => @current_user.id
+
+      - if @current_community.transaction_agreement_in_use
+        = render :partial => "listing_conversations/transaction_agreement_checkbox", locals: { form: form }
+
+      - if local_assigns.has_key?(:quantity)
+        = form.hidden_field :quantity, value: quantity
+
+      .row
+        .col-12
+          = form.button t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
+
+
+    %h1 Shipping Address
+    %input{:placeholder => "First Name", :type => "text"}/
+    %input{:placeholder => "Last Name", :type => "text"}/
+    %input{:placeholder => "Shipping Address", :type => "text"}/
+    %input{:placeholder => "Suite Number", :type => "text"}/
+    %input{:placeholder => "City", :type => "text"}/
+    %input{:placeholder => "Postal Code", :type => "text"}/
+    %input{:placeholder => "Province", :type => "text"}/
+    %br
+    %br
+
+
     %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
