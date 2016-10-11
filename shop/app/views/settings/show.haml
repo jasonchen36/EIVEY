@@ -78,12 +78,12 @@
             }
         }
 
-        function allLetter(input){
-            var letters = /^[A-Za-z]+$/;
-            if(input.value.match(letters)){
-              return true;
+        function noNumbers?(input){
+            var numbers = /^[0-9]+$/;
+            if(input.value.match(numbers)){
+              return false;
             } else {
-            return false;
+              return true;
             }
         }
 
@@ -95,12 +95,12 @@
 
         });
 
-        if (allLetter(given.value)){
+        if (noNumbers?(given.value)){
         } else {
           alert ('Please enter a name with only text characters.')
         });
 
-        if (allLetter(family.value)){
+        if (noNumbers?(family.value)){
         } else {
           alert ('Please enter a name with only text characters.')
         });

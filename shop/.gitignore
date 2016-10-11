@@ -2,7 +2,6 @@
 db/*.sqlite3
 db/sphinx
 Passengerfile.json
-config/paypal.yml
 config/paypal_adaptive.yml
 config/paypal_payments.yml
 config/*.sphinx.conf

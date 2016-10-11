@@ -29,7 +29,6 @@ module Kassi
     config.autoload_paths += %W(#{config.root}/lib/rack_middleware)
      config.relative_url_root = '/shop'
      config.action_controller.relative_url_root = '/shop'
-
     # Load models from subdirectories too
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '**/')]
     config.autoload_paths += Dir[Rails.root.join('app', 'services')]

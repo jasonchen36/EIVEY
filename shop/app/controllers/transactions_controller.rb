@@ -80,20 +80,9 @@ class TransactionsController < ApplicationController
           :email => seller_paypal_email,
           :primary => false }] },
     :returnUrl => "http://localhost:3000/en/transactions/paid?payKey=${payKey}"})
-
-
-
     # Make API call & get response
     @response = @api.pay(@pay)
-
-
-
-
-
-
-
     if @response.success? && @response.payment_exec_status != "ERROR"
-
       PaypalAdaptivePayment.create(
       {
         transaction_id: transactions[:id],
@@ -103,8 +92,6 @@ class TransactionsController < ApplicationController
       )
     after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
-
-
     else
       puts "error!"
     puts @response.error[0].message
@@ -113,9 +100,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-
-
-
     Result.all(
       ->() {
         TransactionForm.validate(params)
@@ -153,71 +137,41 @@ class TransactionsController < ApplicationController
           })
       }
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
-
-
-
       complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process)
-
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
-      # redirect_to after_create_redirect(process: process, starter_id: @current_user.id, transaction: tx[:transaction]) # add more params here when needed
     }.on_error { |error_msg, data|
-
-
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
       redirect_to(session[:return_to_content] || root)
     }
-
   end
-
-# This method will make the transaction state to paid after the listing has been paid for
+# The paid method will update the transaction status in Sharetribe from "free" to "paid" after the transaction has closed.
   def paid
     payKey = params[:payKey]
     @api = PayPal::SDK::AdaptivePayments.new
-
     @payment_details = @api.build_payment_details({
       :payKey => payKey
       })
-
     @payment_details_response = @api.payment_details(@payment_details)
-
-
-
-
-
     if @payment_details_response.status == "INCOMPLETE" || @payment_details_response.status == "PROCESSING" || @payment_details_response.status == "PENDING"
-
         @execute_payment = @api.build_execute_payment({
           :payKey => payKey
-        })
-
-
-
+          })
         @execute_payment_response = @api.execute_payment(@execute_payment)
-
-
         @payment_details = @api.build_payment_details({
           :payKey => payKey
           })
-
         @payment_details_response = @api.payment_details(@payment_details)
-
-
-      elsif @payment_details_response.status == "COMPLETED"
-
+    elsif @payment_details_response.status == "COMPLETED"
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
       transaction = Transaction.where(id: payment.transaction_id).first
       id = transaction.listing_id
       @listing = Listing.where(id: id).first
       @listing.update_attribute(:open, false)
-
       MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
       render "transactions/thank-you"
-      else
+    else
       puts "failed to complete the transaction"
-      end
-
-
-
+    end
   end
 
   def show
@@ -238,35 +192,27 @@ class TransactionsController < ApplicationController
           community_id: @current_community.id)
       }
       .map { |tx_with_conv| [tx_with_conv, :admin] }
-
     transaction_conversation, role = m_participant.or_else { m_admin.or_else([]) }
-
     tx = TransactionService::Transaction.get(community_id: @current_community.id, transaction_id: params[:id])
          .maybe()
          .or_else(nil)
-
     unless tx.present? && transaction_conversation.present?
       flash[:error] = t("layouts.notifications.you_are_not_authorized_to_view_this_content")
       return redirect_to search_path
     end
-
     tx_model = Transaction.where(id: tx[:id]).first
     conversation = transaction_conversation[:conversation]
     listing = Listing.where(id: tx[:listing_id]).first
-
     messages_and_actions = TransactionViewUtils.merge_messages_and_transitions(
       TransactionViewUtils.conversation_messages(conversation[:messages], @current_community.name_display_type),
       TransactionViewUtils.transition_messages(transaction_conversation, conversation, @current_community.name_display_type))
-
     MarketplaceService::Transaction::Command.mark_as_seen_by_current(params[:id], @current_user.id)
-
     is_author =
       if role == :admin
         true
       else
         listing.author_id == @current_user.id
       end
-
     render "transactions/show", locals: {
       messages: messages_and_actions.reverse,
       transaction: tx,
@@ -283,13 +229,11 @@ class TransactionsController < ApplicationController
 
   def op_status
     process_token = params[:process_token]
-
     resp = Maybe(process_token)
       .map { |ptok| paypal_process.get_status(ptok) }
       .select(&:success)
       .data
       .or_else(nil)
-
     if resp
       render :json => resp
     else
