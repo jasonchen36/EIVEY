@@ -1,4 +1,4 @@
-class PaymentNotificationsController < ApplicationController
+class PaymentsNotificationsController < ApplicationController
 =begin
     include PaypalService::MerchantInjector
     include PaypalService::IPNInjector
