@@ -160,7 +160,7 @@ module ListingsHelper
     end
     if field_value.empty?
     else
-      return key.capitalize+': '+field_value
+      return ' | '+key.capitalize+': '+field_value
     end
   end
 

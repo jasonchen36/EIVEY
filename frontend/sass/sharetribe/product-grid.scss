@@ -34,10 +34,6 @@
   }
 }
 
-.fluid-thumbnail-grid-image-size {
-  line-height: 1em;
-}
-
 .fluid-thumbnail-grid-image-price {
   font-family: $font-open-sans;
   font-weight: 600;
@@ -45,6 +41,8 @@
 
 .fluid-thumbnail-grid-image-category {
   text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .fluid-thumbnail-grid-image-title {
@@ -54,7 +52,9 @@
 }
 
 .fluid-thumbnail-grid-image-image {
-  width: 100%;
+  height: 200px;
+  margin: auto;
+  display: block;
 }
 
 
@@ -65,11 +65,7 @@
 }
 
 .custom-filter-checkbox-container {
-  padding: 0 5px;
   margin-top: 5px;
-  &:first-child {
-    margin-top: 10px;
-  }
 }
 
 #grid-color-filter-container, #grid-size-filter-container {
@@ -78,18 +74,6 @@
   }
   input {
     display: none;
-  }
-}
-
-#grid-color-filter-container {
-  .custom-filter-checkbox-container {
-    margin-top: 10px;
-  }
-}
-
-#grid-size-filter-container {
-  .custom-filter-checkbox-container {
-    margin-top: 5px;
   }
 }
 
@@ -145,14 +129,26 @@ input[type=checkbox]:checked + .color-filter-container, input[type=checkbox]:che
   &.green {
     background-color: $color-filter-green;
   }
+  &.light-green {
+    background-color: $color-filter-light-green;
+  }
   &.brown {
     background-color: $color-filter-brown;
+  }
+  &.multi {
+    @extend .i--color-multi;
+  }
+  &.gold {
+    @extend .i--color-gold;
+  }
+  &.silver {
+    @extend .i--color-silver;
   }
 }
 
 .size-filter-container {
   height: 30px;
-  width: 46px;
+  width: 31px;
   border: 3px solid transparent;
   margin: 0;
   @include transition-with-defaults(border);
@@ -163,13 +159,13 @@ input[type=checkbox]:checked + .color-filter-container, input[type=checkbox]:che
 
 .size-filter {
   height: 24px;
-  width: 40px;
+  width: 25px;
   display: inline-block;
   cursor: pointer;
   text-align: center;
   background: $color-size-filter-grey;
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
 .product-grid-filter{
