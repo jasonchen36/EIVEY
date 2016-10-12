@@ -3,6 +3,7 @@ require 'uri'
 
 class TransactionsController < ApplicationController
 
+  protect_from_forgery :except => [:create] #Otherwise the request from PayPal wouldn't make it to the controller
   before_filter only: [:show] do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_inbox")
   end
@@ -94,6 +95,19 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def validate_IPN_notification(raw)
+    uri = URI.parse('https://www.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.open_timeout = 60
+    http.read_timeout = 60
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http.use_ssl = true
+    response = http.post(uri.request_uri, raw,
+                         'Content-Length' => "#{raw.size}",
+                         'User-Agent' => "My custom user agent"
+                       ).body
+  end
+
   def create
     Result.all(
       ->() {
@@ -132,6 +146,19 @@ class TransactionsController < ApplicationController
           })
       }
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
+      response = validate_IPN_notification(request.raw_post)
+      case response
+      when "VERIFIED"
+        # check that paymentStatus=Completed
+        # check that txnId has not been previously processed
+        # check that receiverEmail is your Primary PayPal email
+        # check that paymentAmount/paymentCurrency are correct
+        # process payment
+      when "INVALID"
+        # log for investigation
+      else
+        # error
+      end
       complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
     }.on_error { |error_msg, data|
@@ -139,6 +166,7 @@ class TransactionsController < ApplicationController
       redirect_to(session[:return_to_content] || root)
     }
   end
+
 # The paid method will update the transaction status in Sharetribe from "free" to "paid" after the transaction has closed.
   def paid
     payKey = params[:payKey]
