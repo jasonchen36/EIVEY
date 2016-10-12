@@ -62,7 +62,7 @@ class TransactionsController < ApplicationController
     # Build request object
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
-    :cancelUrl => url_for :controller => 'transactions', :action => 'new',
+    :cancelUrl => (url_for :controller => 'transactions', :action => 'new'),
     :currencyCode => "CAD",
     :feesPayer => "SECONDARYONLY",
     :ipnNotificationUrl => PAYPAL_CONFIG['ipnNotificationUrl'],
@@ -75,7 +75,7 @@ class TransactionsController < ApplicationController
           :amount => (pay_amount * 0.75),
           :email => seller_paypal_email,
           :primary => false }] },
-    :returnUrl => URI.join(url_for :controller => 'transactions', :action => 'paid', '?payKey=${payKey}') })
+    :returnUrl => URI.join((url_for :controller => 'transactions', :action => 'paid'), '?payKey=${payKey}') })
     # Make API call & get response
     @response = @api.pay(@pay)
     if @response.success? && @response.payment_exec_status != "ERROR"
@@ -176,7 +176,7 @@ class TransactionsController < ApplicationController
       })
     paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
     @payment_details_response = @api.payment_details(@payment_details)
-    if @payment_details_response.status == paypal_status.incomplete || @payment_details_response.status == paypal_status.pending || @payment_details_response.status == paypal_status.processing
+    if @payment_details_response.status == paypal_status[:incomplete] || @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
         @execute_payment = @api.build_execute_payment({
           :payKey => payKey
           })
@@ -185,12 +185,12 @@ class TransactionsController < ApplicationController
           :payKey => payKey
           })
         @payment_details_response = @api.payment_details(@payment_details)
-    elsif @payment_details_response.status == paypal_status.completed
+    elsif @payment_details_response.status == paypal_status[:completed]
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
       transaction = Transaction.where(id: payment.transaction_id).first
       id = transaction.listing_id
       @listing = Listing.where(id: id).first
-      @listing.update_attribute(:open, false)
+      # @listing.update_attribute(:open, false)
       MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
       render "transactions/thank-you"
     else
