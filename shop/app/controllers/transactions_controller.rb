@@ -93,6 +93,19 @@ class TransactionsController < ApplicationController
     puts @response.error[0].message
     @response.error[0].message
     end
+    response = validate_IPN_notification(request.raw_post)
+    case response
+    when "VERIFIED"
+      # check that paymentStatus=Completed
+      # check that txnId has not been previously processed
+      # check that receiverEmail is your Primary PayPal email
+      # check that paymentAmount/paymentCurrency are correct
+      # process payment
+    when "INVALID"
+      # log for investigation
+    else
+      # error
+    end
   end
 
   def validate_IPN_notification(raw)
@@ -146,19 +159,6 @@ class TransactionsController < ApplicationController
           })
       }
     ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
-      response = validate_IPN_notification(request.raw_post)
-      case response
-      when "VERIFIED"
-        # check that paymentStatus=Completed
-        # check that txnId has not been previously processed
-        # check that receiverEmail is your Primary PayPal email
-        # check that paymentAmount/paymentCurrency are correct
-        # process payment
-      when "INVALID"
-        # log for investigation
-      else
-        # error
-      end
       complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
     }.on_error { |error_msg, data|
