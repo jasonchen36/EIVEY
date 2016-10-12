@@ -93,7 +93,14 @@ class TransactionsController < ApplicationController
     puts @response.error[0].message
     @response.error[0].message
     end
-    response = validate_IPN_notification(request.raw_post)
+  end
+
+  def ipn
+    # response = validate_IPN_notification(request.raw_post)
+    puts "!!!!!!!!!!"
+    puts request.raw_post
+    # puts response
+=begin
     case response
     when "VERIFIED"
       puts "!!!!!!!!!!"
@@ -103,13 +110,11 @@ class TransactionsController < ApplicationController
       # check that receiverEmail is your Primary PayPal email
       # check that paymentAmount/paymentCurrency are correct
       # process payment
-    when "INVALID"
-      puts "???????????"
-      puts response
       # log for investigation
     else
       # error
     end
+=end
   end
 
   def validate_IPN_notification(raw)
@@ -189,6 +194,7 @@ class TransactionsController < ApplicationController
           :payKey => payKey
           })
         @payment_details_response = @api.payment_details(@payment_details)
+        render "transactions/thank-you"
     elsif @payment_details_response.status == paypal_status[:completed]
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
       transaction = Transaction.where(id: payment.transaction_id).first
@@ -199,6 +205,7 @@ class TransactionsController < ApplicationController
       render "transactions/thank-you"
     else
       puts "failed to complete the transaction"
+      render "transactions/thank-you"
     end
   end
 

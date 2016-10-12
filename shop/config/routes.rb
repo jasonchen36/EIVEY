@@ -28,6 +28,7 @@ Kassi::Application.routes.draw do
   post '/webhooks/paypal_ipn' => 'paypal_ipn#ipn_hook', as: :paypal_ipn_hook
   post '/webhooks/plans' => 'plans#create'
   get '/webhooks/trials' => 'plans#get_trials'
+  post "/webhooks/transactions_ipn" => "payment_notifications#ipn"  
 
   post '/bounces' => 'amazon_bounces#notification'
 
@@ -108,6 +109,7 @@ Kassi::Application.routes.draw do
 
     # thank you
     get "/transactions/thank-you" => "transactions#thank_you"
+
 
     # preauthorize flow
     get "/listings/:listing_id/preauthorize" => "preauthorize_transactions#preauthorize", :as => :preauthorize_payment
