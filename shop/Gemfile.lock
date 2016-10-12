@@ -256,7 +256,6 @@ GEM
       railties (>= 3.2)
       sprockets-rails
     json (1.8.3)
-    jsonschema (2.0.2)
     jwt (1.5.2)
     kgio (2.9.3)
     launchy (2.4.3)
@@ -348,9 +347,6 @@ GEM
       paypal-sdk-core (~> 0.3.0)
     paypal-sdk-permissions (1.96.4)
       paypal-sdk-core (~> 0.3.0)
-    paypal_adaptive (0.3.10)
-      json (~> 1.0)
-      jsonschema (~> 2.0.0)
     possibly (0.2.0)
     powerpack (0.1.1)
     premailer (1.8.6)
@@ -585,7 +581,6 @@ DEPENDENCIES
   paypal-sdk-adaptivepayments
   paypal-sdk-merchant (~> 1.116.0)
   paypal-sdk-permissions (~> 1.96.4)
-  paypal_adaptive
   possibly (~> 0.2.0)
   premailer (~> 1.8.2)
   protected_attributes (~> 1.1.3)

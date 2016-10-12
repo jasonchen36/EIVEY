@@ -61,7 +61,7 @@ class TransactionsController < ApplicationController
     # Build request object
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
-    :cancelUrl => url_for :controller => 'transactions', :action => 'new',
+    :cancelUrl => (url_for :controller => 'transactions', :action => 'new'),
     :currencyCode => "CAD",
     :feesPayer => "SECONDARYONLY",
     :ipnNotificationUrl => PAYPAL_CONFIG['ipnNotificationUrl'],
@@ -74,7 +74,7 @@ class TransactionsController < ApplicationController
           :amount => (pay_amount * 0.75),
           :email => seller_paypal_email,
           :primary => false }] },
-    :returnUrl => URI.join(url_for :controller => 'transactions', :action => 'paid', '?payKey=${payKey}') })
+    :returnUrl => URI.join((url_for :controller => 'transactions', :action => 'paid'), '?payKey=${payKey}') })
     # Make API call & get response
     @response = @api.pay(@pay)
     if @response.success? && @response.payment_exec_status != "ERROR"
