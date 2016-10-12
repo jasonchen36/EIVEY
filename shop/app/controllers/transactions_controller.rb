@@ -96,12 +96,16 @@ class TransactionsController < ApplicationController
     response = validate_IPN_notification(request.raw_post)
     case response
     when "VERIFIED"
+      puts "!!!!!!!!!!"
+      puts response
       # check that paymentStatus=Completed
       # check that txnId has not been previously processed
       # check that receiverEmail is your Primary PayPal email
       # check that paymentAmount/paymentCurrency are correct
       # process payment
     when "INVALID"
+      puts "???????????"
+      puts response
       # log for investigation
     else
       # error
