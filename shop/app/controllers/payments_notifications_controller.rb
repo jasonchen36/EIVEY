@@ -1,3 +1,6 @@
+require 'rubygems'
+require 'json'
+
 class PaymentsNotificationsController < ApplicationController
 =begin
     include PaypalService::MerchantInjector
@@ -10,6 +13,7 @@ class PaymentsNotificationsController < ApplicationController
     def ipn_hook
       puts "!!!!!!!!"
       puts request.raw_post
+      puts JSON.parse(request.raw_post)["pay_key"]
 =begin
       logger = PaypalService::Logger.new
 

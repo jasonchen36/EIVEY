@@ -3,6 +3,8 @@ require 'uri'
 
 class TransactionsController < ApplicationController
 
+  TransactionStore = TransactionService::Store::Transaction
+
   protect_from_forgery :except => [:create] #Otherwise the request from PayPal wouldn't make it to the controller
   before_filter only: [:show] do |controller|
     controller.ensure_logged_in t("layouts.notifications.you_must_log_in_to_view_your_inbox")
@@ -57,15 +59,17 @@ class TransactionsController < ApplicationController
     }
   end
 
-  def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process)
+  def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
+    puts "this is the IPN URL"
+    puts (url_for :controller => 'payments_notifications', :action => 'ipn_hook')
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
     :cancelUrl => (url_for :controller => 'transactions', :action => 'new'),
     :currencyCode => "CAD",
     :feesPayer => "SECONDARYONLY",
-    :ipnNotificationUrl => PAYPAL_CONFIG['ipnNotificationUrl'],
+    :ipnNotificationUrl => (url_for :controller => 'payments_notifications', :action => 'ipn_hook'),
     :receiverList => {
       :receiver => [{
         :amount => pay_amount,
@@ -86,6 +90,19 @@ class TransactionsController < ApplicationController
         paypal_payment_id: @response.payKey
       }
       )
+      TransactionStore.create(
+        community_id: community_id,
+        listing_id: listing_id,
+        starter_id: starter_id,
+        transaction_id: transactions[:id],
+        automatic_confirmation_after_days: 3,
+        payment_process: :none,
+        payment_gateway: :paypal
+      )
+      TransactionStore.upsert_shipping_address(
+        community_id: community_id,
+        transaction_id: transactions[:id],
+        addr: { :city => "testing"})
     after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
@@ -167,8 +184,8 @@ class TransactionsController < ApplicationController
               payment_process: process[:process]}
           })
       }
-    ).on_success { |(_, (listing_id, listing_model, author_model, process), _, _, tx)|
-      complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process)
+    ).on_success { |(_, (listing_id, listing_model, author_model, process, starter_id), _, _, tx)|
+      complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process, listing_id, starter_id)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
     }.on_error { |error_msg, data|
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
