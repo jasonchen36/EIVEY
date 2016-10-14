@@ -10,3 +10,19 @@
     }
   }
 }
+
+
+//search
+//-----------------------------
+.sharetribe-search {
+  .search-form-input-container {
+    padding-right: 10px;
+    margin-top: 40px;
+  }
+  #q {
+    border: 2px solid $color-sharetribe-grey;
+  }
+  .search-form-submit {
+    right: 20px;
+  }
+}

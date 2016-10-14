@@ -165,19 +165,6 @@ header {
 
 //search
 //-----------------------------
-.sharetribe-search {
-  .search-form-input-container {
-    padding-right: 10px;
-    margin-top: 10px;
-  }
-  #q {
-    border: 2px solid $color-sharetribe-grey;
-  }
-  .search-form-submit {
-    right: 20px;
-  }
-}
-
 .search-form-input-container {
   position: relative;
 }
@@ -187,6 +174,7 @@ header {
   width: 100%;
   padding: 0.5em 50px 0.5em 0.6875em;
   border: none;
+  min-height: 0;
 }
 
 .search-form-submit {
