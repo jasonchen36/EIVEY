@@ -74,7 +74,9 @@ class BraintreeAccountsController < ApplicationController
       render :new, locals: { form_action: @create_path } and return
     end
 
-    success = if merchant_account_result.success?
+    #TODO: check paypal for success
+    #success = if merchant_account_result.success?
+    success = if true
       BTLog.info("Successfully created Paypal account for person id #{@current_user.id}")
       update_status!(@braintree_account, merchant_account_result.merchant_account.status)
     else
@@ -101,6 +103,7 @@ class BraintreeAccountsController < ApplicationController
   end
 
   private
+
 
   # Before filter
   def ensure_user_does_not_have_account
