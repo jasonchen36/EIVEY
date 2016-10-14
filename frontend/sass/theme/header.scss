@@ -43,6 +43,7 @@ header {
   border-top: 4px solid $border-color;
   margin-top: 10px;
   text-align: left;
+  z-index: 1001;
   &:before {
     width: 0;
     height: 0;
@@ -152,32 +153,8 @@ header {
 }
 
 
-//sell button
-//-----------------------------
-#header-menu-container {
-  display: block;
-  padding: 0 0.75em;
-  width: 200px;
-  float: right;
-  margin-top: 5px;
-}
-
-
 //search
 //-----------------------------
-.sharetribe-search {
-  .search-form-input-container {
-    padding-right: 10px;
-    margin-top: 10px;
-  }
-  #q {
-    border: 2px solid $color-sharetribe-grey;
-  }
-  .search-form-submit {
-    right: 20px;
-  }
-}
-
 .search-form-input-container {
   position: relative;
 }
@@ -187,6 +164,7 @@ header {
   width: 100%;
   padding: 0.5em 50px 0.5em 0.6875em;
   border: none;
+  min-height: 0;
 }
 
 .search-form-submit {
@@ -204,22 +182,6 @@ header {
   }
 }
 
-
-//user menu
-//-----------------------------
-.header-user-avatar {
-  display: block;
-  height: 2.5em;
-  margin-top: 5px;
-}
-
-#header-menu-user-container {
-  padding-top: 25px;
-}
-
-#header-user-desktop-anchor {
-  height: 50px;
-}
 
 //mobile menu
 //-----------------------------
