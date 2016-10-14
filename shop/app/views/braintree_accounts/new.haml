@@ -6,7 +6,6 @@
 .left-navi-section.settings-section
 
   %h2= t(".add_payout_details")
-   Paypal Email
   = form_for @braintree_account, :url => form_action, :html => { :id => "braintree_account_form"} do |form|
 
     = form.label :email, t(".email"), :class => "input"
