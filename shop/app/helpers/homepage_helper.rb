@@ -23,4 +23,18 @@ module HomepageHelper
     precision = (distance < 1) ? 1 : 2
     (distance < 0.1) ? "< #{number_with_delimiter(0.1, locale: locale)}" : number_with_precision(distance, precision: precision, significant: true, locale: locale)
   end
+
+  def is_root_category(category)
+    category.parent_id == nil
+  end
+
+  def get_subcategories(category, categories)
+    categories
+        .select{|subcategory| subcategory.parent_id == category.id}
+        .sort{|category1,category2| category1.sort_priority <=> category2.sort_priority}
+  end
+
+  def has_subcategories(subcategories)
+    subcategories.length > 0
+  end
 end

@@ -1,10 +1,36 @@
-#header-user-desktop-anchor.header-user-toggle.header-hover.toggle{data: {toggle: '#header-user-toggle-menu', 'toggle-anchor-position' => 'left', 'toggle-position' => 'absolute'}}
-  .header-user-toggle.header-hover.toggle{data: {toggle: '#header-user-toggle-menu', 'toggle-anchor-position' => 'right', 'toggle-position' => 'absolute'}}
-    #header-user-mobile-anchor
-      .left
-        = image_tag avatar_url, alt: '', class: 'header-user-avatar'
-      .left
-        %span.header-text-link
-          %span#header-user-display-name.visible-tablet-inline
-            = current_user_name
-          = icon_map_tag(icons, "dropdown", ["icon-dropdown"])
+%ul#desktop-user-menu.standard-menu
+  %li
+    = image_tag avatar_url, alt: '', class: 'header-user-avatar'
+    %span#desktop-user-menu-name
+      = current_user_name
+    %ul.sub-menu#header-user-toggle-menu
+      %li
+        = link_to inbox_path do
+          = icon_map_tag(icons, "mail", ["icon-with-text"])
+          = t("layouts.conversations.messages")
+          - if unread_count > 0
+            .mobile-badge{:class => get_badge_class(unread_count)}
+              = unread_count
+      %li
+        = link_to profile_path do
+          = icon_map_tag(icons, "user", ["icon-with-text"])
+          = t("header.profile")
+      %li
+        = link_to manage_listings_path do
+          = icon_map_tag(icons, "list", ["icon-with-text"])
+          = t("header.manage_listings")
+
+      %li
+        = link_to settings_path do
+          = icon_map_tag(icons, "settings", ["icon-with-text"])
+          = t("layouts.logged_in.settings")
+
+      - if @current_user && @current_community && @current_user.has_admin_rights?
+        %li
+          = link_to admin_details_edit_path do
+            = icon_map_tag(icons, "admin", ["icon-with-text"])
+            = t("layouts.logged_in.admin")
+      %li
+        = link_to logout_path do
+          = icon_map_tag(icons, "logout", ["icon-with-text"])
+          = t("layouts.logged_in.logout")
