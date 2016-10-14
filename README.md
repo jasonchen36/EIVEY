@@ -304,6 +304,12 @@ foreman start -f Procfile.static
 bundle exec passenger start
 ```
 
+build styles
+
+```
+bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+```
+
 ### Config files ###
 TODO: make sure all the config changes are listed here.
 Make sure that the following are updated:

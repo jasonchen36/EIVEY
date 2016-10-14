@@ -78,14 +78,14 @@ class BraintreeAccountsController < ApplicationController
     #success = if merchant_account_result.success?
     success = if true
       BTLog.info("Successfully created Paypal account for person id #{@current_user.id}")
-      update_status!(@braintree_account, merchant_account_result.merchant_account.status)
+    #  update_status!(@braintree_account, merchant_account_result.merchant_account.status)
     else
-      BTLog.error("Failed to created Paypal account for person id #{@current_user.id}: #{merchant_account_result.message}")
+      BTLog.error("Failed to created Paypal account for person id #{@current_user.id}: unkown reason")
 
-      error_string = "Your Paypal payout details could not be saved, because of following errors: "
-      merchant_account_result.errors.each do |e|
-        error_string << e.message + " "
-      end
+      error_string = "Your Paypal payout details could not be saved, because of following errors: unknown "
+   #   merchant_account_result.errors.each do |e|
+    #    error_string << e.message + " "
+     # end
       flash[:error] = error_string
 
       @braintree_account.destroy
