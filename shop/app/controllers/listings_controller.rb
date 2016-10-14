@@ -224,9 +224,9 @@ class ListingsController < ApplicationController
       all_locales: @current_community.locales
     )
 
-    has_paypal_account=false
+    paypal_account={exists: false}
     if !@current_user.braintree_account.nil?
-      has_paypal_account=true
+      paypal_account={exists: true}
     end
       
     render :new, locals: {
@@ -234,7 +234,7 @@ class ListingsController < ApplicationController
              subcategories: @current_community.subcategories,
              shapes: get_shapes,
              category_tree: category_tree,
-             has_paypal_account: has_paypal_account
+             paypal_account: paypal_account
            }
   end
 
