@@ -102,7 +102,14 @@ class TransactionsController < ApplicationController
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
         transaction_id: transactions[:id],
-        addr: { :city => "testing"})
+        addr: { :city => "Toronto",
+                :country => "Canada",
+                :state_or_province => "Ontario",
+                :street1 => "45 Orange Street",
+                :name => "Jason",
+                :phone => "905-456-8343",
+                :status => "paid",
+                :postal_code => "L5D 3U7"})
     after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
