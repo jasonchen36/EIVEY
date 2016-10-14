@@ -43,6 +43,7 @@ header {
   border-top: 4px solid $border-color;
   margin-top: 10px;
   text-align: left;
+  z-index: 1001;
   &:before {
     width: 0;
     height: 0;
@@ -152,17 +153,6 @@ header {
 }
 
 
-//sell button
-//-----------------------------
-#header-menu-container {
-  display: block;
-  padding: 0 0.75em;
-  width: 200px;
-  float: right;
-  margin-top: 5px;
-}
-
-
 //search
 //-----------------------------
 .search-form-input-container {
@@ -192,22 +182,6 @@ header {
   }
 }
 
-
-//user menu
-//-----------------------------
-.header-user-avatar {
-  display: block;
-  height: 2.5em;
-  margin-top: 5px;
-}
-
-#header-menu-user-container {
-  padding-top: 25px;
-}
-
-#header-user-desktop-anchor {
-  height: 50px;
-}
 
 //mobile menu
 //-----------------------------

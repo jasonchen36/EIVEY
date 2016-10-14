@@ -26,3 +26,47 @@
     right: 20px;
   }
 }
+
+
+//user menu
+//-----------------------------
+.header-user-avatar {
+  height: 2.5em;
+  vertical-align: middle;
+}
+
+#header-menu-user-container {
+  padding-top: 35px;
+}
+
+#desktop-user-menu {
+  margin: 5px 5px 0 10px;
+  width: 105px;
+}
+
+#desktop-user-menu-name {
+  &:after {
+    content: '\f0d7';
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+  }
+}
+
+#inbox-link {
+  .icon-envelope {
+    color: $color-sharetribe-dark-grey;
+  }
+}
+
+
+//sell button
+//-----------------------------
+#header-menu-container {
+  display: block;
+  padding: 0 0.75em;
+  width: 175px;
+  float: right;
+  margin-top: 7px;
+}
