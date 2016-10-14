@@ -224,17 +224,16 @@ class ListingsController < ApplicationController
       all_locales: @current_community.locales
     )
 
-    paypal_account={exists: false}
-    if !@current_user.braintree_account.nil?
-      paypal_account={exists: true}
-    end
+ #   paypal_account={exists: false}
+ #   if !@current_user.braintree_account.nil?
+ #     paypal_account={exists: true}
+ #   end
       
     render :new, locals: {
              categories: @current_community.top_level_categories,
              subcategories: @current_community.subcategories,
              shapes: get_shapes,
-             category_tree: category_tree,
-             paypal_account: paypal_account
+             category_tree: category_tree
            }
   end
 
