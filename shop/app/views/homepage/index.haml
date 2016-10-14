@@ -44,14 +44,14 @@
       - @categories.each do |category|
         - if is_root_category(category)
           %li
-            %a{href:"#{config.relative_url_root}/#{category.url}"}
+            %a{href:"#{config.relative_url_root}/?category=#{category.url}"}
               = category.display_name(I18n.locale)
             - subcategories = get_subcategories(category, @categories)
             - if has_subcategories(subcategories)
               %ul.sub-menu
                 - subcategories.each do |subcategory|
                   %li
-                    %a{href:"#{config.relative_url_root}/#{subcategory.url}"}
+                    %a{href:"#{config.relative_url_root}/?category=#{subcategory.url}"}
                       = subcategory.display_name(I18n.locale)
 
     - if listing_shape_menu_enabled || @category_menu_enabled
