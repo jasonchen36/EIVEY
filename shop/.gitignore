@@ -4,6 +4,7 @@ db/sphinx
 Passengerfile.json
 config/paypal_adaptive.yml
 config/paypal_payments.yml
+config/paypal.yml
 config/*.sphinx.conf
 config/database.yml
 config/config.yml

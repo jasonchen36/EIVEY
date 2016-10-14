@@ -45,14 +45,16 @@
           = button_tag t("conversations.new.send_message"), :class => "send_button"
 
           %h1 Shipping Address
-          %input{:placeholder => "First Name", :type => "text"}/
-          %input{:placeholder => "Last Name", :type => "text"}/
-          %input{:placeholder => "Shipping Address", :type => "text"}/
+          %input{:placeholder => "First Name", :value => "Jason", :type => "text"}/
+          %input{:placeholder => "Last Name", :value => "Chen", :type => "text"}/
+          %input{:placeholder => "Shipping Address", :id => "address", :value => "456 Orange Street", :type => "text"}/
           %input{:placeholder => "Suite Number", :type => "text"}/
-          %input{:placeholder => "City", :type => "text"}/
-          %input{:placeholder => "Postal Code", :type => "text"}/
-          %input{:placeholder => "Province", :type => "text"}/
-          %br
-          %br
-          
+          %input{:placeholder => "City", :value => "Toronto", :type => "text"}/
+          %input{:placeholder => "Postal Code", :value => "L3D 8V3", :type => "text"}/
+          %input{:placeholder => "Province", :value => "Ontario", :type => "text"}/
+
           %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+
+          :javascript
+            var output = document.getElementById('address').value
+            console.log(output)
