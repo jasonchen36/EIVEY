@@ -47,7 +47,7 @@ coverage/
 *.sock
 .vagrant
 .env
-
+*.swp
 # React on Rails
 npm-debug.log*
 node_modules

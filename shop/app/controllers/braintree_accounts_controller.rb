@@ -54,25 +54,12 @@ class BraintreeAccountsController < ApplicationController
     @list_of_states = LIST_OF_STATES
     braintree_params = params.require(:braintree_account).permit(
       :person_id,
-      :first_name,
-      :last_name,
-      :email,
-      :phone,
-      :address_street_address,
-      :address_postal_code,
-      :address_locality,
-      :address_region,
-      :"date_of_birth(1i)",
-      :"date_of_birth(2i)",
-      :"date_of_birth(3i)",
-      :routing_number,
-      :account_number
+      :email
     )
 
     model_attributes = braintree_params
       .merge(person: @current_user)
       .merge(community_id: @current_community.id)
-      .merge(hidden_account_number: StringUtils.trim_and_hide(params[:braintree_account][:account_number]))
 
     @braintree_account = BraintreeAccount.new(model_attributes)
     if @braintree_account.valid?
@@ -80,7 +67,8 @@ class BraintreeAccountsController < ApplicationController
       # Braintree may trigger the webhook very, very fast (at least in sandbox)
       # and saving account to DB now ensures that the webhook finds the account
       @braintree_account.save!
-      merchant_account_result = BraintreeApi.create_merchant_account(@braintree_account, @current_community)
+      #TODO: check with paypal it's an actual paypal account
+      merchant_account_result ={success: true}
     else
       flash[:error] = @braintree_account.errors.full_messages
       render :new, locals: { form_action: @create_path } and return
