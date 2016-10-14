@@ -1,0 +1,35 @@
+//thank you
+//-----------------------------
+.thank-you-border {
+  border: 1px solid $color-sharetribe-green;
+}
+
+#transactions-thank-you-outer-border {
+  max-width: 900px;
+  margin: 50px auto 0 auto;
+  border-width: 5px;
+  padding: 10px;
+  @include tablet-up {
+    padding: 15px;
+  }
+}
+
+#transactions-thank-you-inner-border {
+  padding: 15px;
+  @include tablet-up {
+    padding: 30px;
+  }
+}
+
+#transactions-thank-you-content {
+  max-width: 450px;
+  margin: auto;
+  text-align: center;
+  * {
+    font-family: $font-georgia;
+  }
+  h1, p {
+    font-style: italic;
+    color: $color-sharetribe-dark-grey;
+  }
+}

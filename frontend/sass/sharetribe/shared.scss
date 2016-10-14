@@ -1,0 +1,5 @@
+.button {
+  &.green {
+    @include button($color-sharetribe-green);
+  }
+}

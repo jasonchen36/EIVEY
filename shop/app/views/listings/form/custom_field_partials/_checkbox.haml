@@ -7,7 +7,7 @@
           - selected = custom_field_value ? custom_field_value.selected_options.include?(option) : false
           = check_box_tag "custom_fields[#{custom_field.id}][]", option.id, selected, {id: param_name, :class => "custom_field_checkbox #{custom_field.required? ? 'required' : ''}"}
           %label.color-filter-container{for: "#{param_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', "_")}"}
-            %span{class: "color-filter #{option.title.downcase}"}
+            %span{class: "color-filter #{option.title.downcase.tr(" ", "-")}"}
   -else
     - ArrayUtils.each_slice_columns(custom_field.options.sort, 2) do |column|
       .col-6

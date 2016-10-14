@@ -18,9 +18,7 @@
 
     .fluid-thumbnail-grid-image-category
       = localized_category_from_id(listing.category_id)
-
-    .fluid-thumbnail-grid-image-size
-      %span.fluid-thumbnail-size
+      %span
         = get_custom_field_value(listing, "size")
 
     - if listing.price

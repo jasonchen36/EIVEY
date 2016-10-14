@@ -18,6 +18,10 @@ class TransactionsController < ApplicationController
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
   )
 
+  def thank_you
+    render "transactions/thank-you"
+  end
+
   def new
     Result.all(
       ->() {
@@ -365,4 +369,5 @@ class TransactionsController < ApplicationController
              form_action: person_transactions_path(person_id: @current_user, listing_id: listing_model.id)
            }
   end
+
 end

@@ -1,6 +1,6 @@
 //core
 //-----------------------------
-$logo-width: 410px;
+$logo-width: 425px;
 
 header {
   @include desktop {
@@ -12,8 +12,9 @@ header {
     margin: 10px auto;
     max-width: 100%;
     @include desktop {
-      height: 100px;
-      margin: 0 auto;
+      height: 115px;
+      width: 480px;
+      margin: 0 auto -10px auto;
     }
   }
 }
@@ -22,9 +23,52 @@ header {
   display: inline-block;
   list-style: none;
   padding: 0;
-  li {
+  & > li {
     display: inline-block;
     float: left;
+    &:hover > .sub-menu {
+      display: block;
+    }
+  }
+}
+
+.sub-menu {
+  $border-color: #ddb35a;
+  position: absolute;
+  display: none;
+  padding: 0;
+  list-style: none;
+  background: white;
+  border: 1px solid #c6c7c8;
+  border-top: 4px solid $border-color;
+  margin-top: 10px;
+  text-align: left;
+  z-index: 1001;
+  &:before {
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid $border-color;
+    border-right: 10px solid transparent;
+    content: '';
+    top: -10px;
+    left: -1px;
+    position: absolute;
+  }
+  &:after {
+    height: 20px;
+    content: '';
+    top: -20px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+  }
+  a {
+    padding: 5px 15px;
+    display: block;
+    @include transition-raw("background-color 300ms ease-out 0s,color 300ms ease-out 0s");
+    &:hover {
+      background-color: #ececec;
+    }
   }
 }
 
@@ -37,25 +81,27 @@ header {
 //category menu
 //-----------------------------
 #menu-categories {
-  width: 100%;
-  li {
-    padding: 0 10px;
+  margin: 0;
+  & > li {
+    padding: 0 15px;
     text-align: center;
     margin-bottom: 5px;
-    &:first-child {
-      @include desktop{
-        padding-left: 0;
-      }
-    }
-    &:last-child {
-      @include desktop {
-        padding-right: 0;
-      }
-    }
   }
   a {
     text-transform: uppercase;
     font-weight: bold;
+    font-size: 13px;
+    color: $color-global-dark-grey;
+    &:hover {
+      color: $color-global-grey;
+    }
+  }
+}
+
+#menu-homepage-container {
+  text-align: center;
+  & > div {
+    display: inline-block;
   }
 }
 
@@ -93,41 +139,22 @@ header {
 
 #logo-tagline {
   color: $color-global-grey;
-  margin: 10px auto;
+  margin: 5px auto 10px auto;
   max-width: $logo-width;
   text-transform: uppercase;
-  font-size: 17px;
+  font-size: 16px;
   text-align: center;
-  @extend .f--georgia;
+  letter-spacing: 2px;
+  font-family: $font-georgia;
 }
 
-
-//sell button
-//-----------------------------
-#header-menu-container {
-  display: block;
-  padding: 0 0.75em;
-  width: 200px;
-  float: right;
-  margin-top: 5px;
+#header-logo-desktop {
+  margin-top: 60px;
 }
 
 
 //search
 //-----------------------------
-.sharetribe-search {
-  .search-form-input-container {
-    padding-right: 10px;
-    margin-top: 10px;
-  }
-  #q {
-    border: 2px solid $color-sharetribe-grey;
-  }
-  .search-form-submit {
-    right: 20px;
-  }
-}
-
 .search-form-input-container {
   position: relative;
 }
@@ -137,6 +164,7 @@ header {
   width: 100%;
   padding: 0.5em 50px 0.5em 0.6875em;
   border: none;
+  min-height: 0;
 }
 
 .search-form-submit {
@@ -154,22 +182,6 @@ header {
   }
 }
 
-
-//user menu
-//-----------------------------
-.header-user-avatar {
-  display: block;
-  height: 2.5em;
-  margin-top: 5px;
-}
-
-#header-menu-user-container {
-  padding-top: 25px;
-}
-
-#header-user-desktop-anchor {
-  height: 50px;
-}
 
 //mobile menu
 //-----------------------------

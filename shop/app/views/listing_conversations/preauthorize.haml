@@ -55,12 +55,9 @@
       = render partial: "payments/braintree/credit_card_info", locals: {braintree_form: braintree_form}
 
     .preauthorize-section
-      %h2
-        = t("conversations.new.optional_message_to", author_name: link_to(author[:display_name], person_path(username: author[:username]))).html_safe
 
       .row
         .col-12
-          = form.text_area :content, :class => "text_area"
           = form.hidden_field :sender_id, :value => @current_user.id
 
       - if @current_community.transaction_agreement_in_use
@@ -72,11 +69,6 @@
       .row
         .col-12
           = form.button t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
-
-      .row
-        .col-12
-          %p
-            = t(".you_will_be_charged", author: author_link, expiration_period: expiration_period ).html_safe
 
   %noscript
     = "For security reasons JavaScript has to be enabled"

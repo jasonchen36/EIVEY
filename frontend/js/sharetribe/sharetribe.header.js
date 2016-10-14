@@ -6,7 +6,6 @@
         userMenuOpenListenerClass = '.l--user-menu-open',
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
-        userMenuAnchor = $('#header-user-desktop-anchor'),
         mobileUserMenu = $('#mobile-user-menu-fullscreen-container'),
         sellButton = $('#new-listing-link');
 
@@ -30,7 +29,7 @@
         if (userMenuToggle.children().length > 0){
             userMenuToggle.children().each(function(){
                 that = $(this);
-                childLink = that.attr('href');
+                childLink = that.children().first().attr('href');
                 childText = that.text().toLowerCase();
                 linkHtml += '<li><a href="'+childLink+'">'+childText+'</a>';
             });
@@ -51,9 +50,6 @@
     }
 
     this.init = function(){
-        //set user menu dropdown to same width as anchor
-        userMenuToggle.width(userMenuAnchor.outerWidth());
-
         createMobileUserMenu();
         createMobileMainMenu();
 
