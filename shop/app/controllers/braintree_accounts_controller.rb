@@ -75,12 +75,12 @@ class BraintreeAccountsController < ApplicationController
     end
 
     success = if merchant_account_result.success?
-      BTLog.info("Successfully created Braintree account for person id #{@current_user.id}")
+      BTLog.info("Successfully created Paypal account for person id #{@current_user.id}")
       update_status!(@braintree_account, merchant_account_result.merchant_account.status)
     else
-      BTLog.error("Failed to created Braintree account for person id #{@current_user.id}: #{merchant_account_result.message}")
+      BTLog.error("Failed to created Paypal account for person id #{@current_user.id}: #{merchant_account_result.message}")
 
-      error_string = "Your payout details could not be saved, because of following errors: "
+      error_string = "Your Paypal payout details could not be saved, because of following errors: "
       merchant_account_result.errors.each do |e|
         error_string << e.message + " "
       end
@@ -107,7 +107,7 @@ class BraintreeAccountsController < ApplicationController
     braintree_account = BraintreeAccount.find_by_person_id(@current_user.id)
 
     unless braintree_account.blank?
-      flash[:error] = "Cannot create a new Braintree account. You already have one"
+      flash[:error] = "Cannot create a new Paypal account. You already have one"
       redirect_to @show_path
     end
   end
