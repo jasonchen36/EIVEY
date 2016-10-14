@@ -15,7 +15,7 @@
                   = check_box_tag param_name, "#{option.id}", params[param_name]
                   -#make name css friendly
                   %label.color-filter-container{for: "#{param_name.to_s.delete(']').tr('^-a-zA-Z0-9:.', "_")}"}
-                    %span{class: "color-filter #{option.title.downcase}"}
+                    %span{class: "color-filter #{option.title.downcase.tr(" ", "-")}"}
           - elsif field.name(I18n.locale).downcase.include? "size"
             #grid-size-filter-container.custom-filter-options
               - field.options.sort.each do |option|
