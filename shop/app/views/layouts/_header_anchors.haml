@@ -3,7 +3,7 @@
     = image_tag avatar_url, alt: '', class: 'header-user-avatar'
     %span#desktop-user-menu-name
       = current_user_name
-    %ul.sub-menu
+    %ul.sub-menu#header-user-toggle-menu
       %li
         = link_to inbox_path do
           = icon_map_tag(icons, "mail", ["icon-with-text"])
