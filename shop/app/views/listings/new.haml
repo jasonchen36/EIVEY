@@ -33,6 +33,9 @@
           %a.select.selected.hidden{:data => {:id => value[:id]}}
             .link-text= t(".selected_transaction_type", :transaction_type => t(value[:name_tr_key]))
 
+   - if has_paypal_account
+    %input{:type=>"text", :required => true}
+
   %h2.listing-form-title{:id => "foo"}
 
   #option-groups
