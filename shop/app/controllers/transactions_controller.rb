@@ -28,7 +28,11 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @shipping_addresses = ShippingAddress.last
+    if ShippingAddress.find(:all).empty?
+      @shipping_addresses = ShippingAddress.new
+    else
+      @shipping_addresses = ShippingAddress.last
+    end
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -61,6 +65,11 @@ class TransactionsController < ApplicationController
   end
 
   def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
+    if ShippingAddress.find(:all).empty?
+      @shipping_addresses = ShippingAddress.new
+    else
+      @shipping_addresses = ShippingAddress.last
+    end 
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
     puts "this is the IPN URL"
@@ -103,14 +112,14 @@ class TransactionsController < ApplicationController
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
         transaction_id: transactions[:id],
-        addr: { :city => "Toronto",
-                :country => "Canada",
-                :state_or_province => "Ontario",
-                :street1 => "45 Orange Street",
-                :name => "Jason Chen",
-                :phone => "905-456-8343",
-                :status => "paid",
-                :postal_code => "L5D 3U7"})
+        addr: { :city => @shipping_addresses.city,
+                :country => @shipping_addresses.country,
+                :state_or_province => @shipping_addresses.state_or_province,
+                :street1 => @shipping_addresses.street1,
+                :name => @shipping_addresses.name.partition(" ").first + " " + @shipping_addresses.name.partition(" ").last,
+                :phone => @shipping_addresses.phone,
+                :status => @shipping_addresses.status,
+                :postal_code => @shipping_addresses.postal_code})
     after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
