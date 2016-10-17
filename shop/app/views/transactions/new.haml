@@ -54,6 +54,11 @@
           %input{:placeholder => "Province", :value => "Ontario", :type => "text"}/
 
           %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+          - @users.each do |user|
+            = user.name
+            %br/
+            = user.email
+            %br/
 
           :javascript
             var output = document.getElementById('address').value
