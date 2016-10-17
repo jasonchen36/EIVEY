@@ -34,6 +34,9 @@
 
 - if local_assigns[:show_onboarding_popup]
   = render :layout => "layouts/lightbox", :partial => "layouts/onboarding_popup", locals: {title: t(popup_title_key), body: t(popup_body_key), action_label: t(popup_button_key), action_link: popup_action_link, image: asset_path(popup_image), id: "onboarding-popup" }
+.row.col-12#listing-title-container
+  %h1#listing-title
+    = @listing.title
 
 .row
   .col-8.listing-details-container
