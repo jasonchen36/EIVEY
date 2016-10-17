@@ -1,5 +1,27 @@
+//buttons
+//-----------------------------
 .button {
   &.green {
     @include button($color-sharetribe-green);
   }
+}
+
+
+//page title
+//-----------------------------
+.standard-title-container {
+  border-bottom: 1px dotted $color-sharetribe-dark-grey;
+  margin-bottom: 10px!important;
+}
+
+.standard-title {
+  font-family: $font-georgia;
+  color: $color-sharetribe-dark-grey;
+  margin: 0 0 5px 0;
+  font-style: italic;
+  font-size: 25px;
+}
+
+.page-title {
+  font-size: 40px;
 }

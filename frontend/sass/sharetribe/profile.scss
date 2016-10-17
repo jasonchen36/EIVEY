@@ -25,9 +25,9 @@
 
 //headers
 //-----------------------------
-.people-header {
-  padding-bottom: lines(0.25);
-  color: $color-sharetribe-dark-grey;
+.people-show-closed-link {
+  margin-top: 10px;
+  font-family: $font-georgia;
 }
 
 //mobile user menu
@@ -39,4 +39,13 @@
   font-style: normal;
   margin:0 0 0 10px;
   text-decoration:none;
+}
+
+//listings
+//-----------------------------
+#load-more-listings {
+  a {
+    font-family: $font-georgia;
+    font-style: italic;
+  }
 }
