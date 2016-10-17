@@ -28,11 +28,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    if ShippingAddress.find(:all).empty?
-      @shipping_addresses = ShippingAddress.new
-    else
-      @shipping_addresses = ShippingAddress.last
-    end
+    @shipping_addresses = ShippingAddress.last
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -65,11 +61,7 @@ class TransactionsController < ApplicationController
   end
 
   def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
-    if ShippingAddress.find(:all).empty?
-      @shipping_addresses = ShippingAddress.new
-    else
-      @shipping_addresses = ShippingAddress.last
-    end 
+    @shipping_addresses = ShippingAddress.last
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
     puts "this is the IPN URL"
@@ -228,6 +220,11 @@ class TransactionsController < ApplicationController
           :payKey => payKey
           })
         @payment_details_response = @api.payment_details(@payment_details)
+        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+        transaction = Transaction.where(id: payment.transaction_id).first
+        id = transaction.listing_id
+        @listing = Listing.where(id: id).first
+        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
         render "transactions/thank-you"
     elsif @payment_details_response.status == paypal_status[:completed]
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
