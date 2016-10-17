@@ -43,15 +43,6 @@
   clear: both; // Price floats to left
 }
 
-.listing-details{
-  padding-left:0px !important;
-  font-size:12px;
-  p{
-    margin-left: 0 !important;
-    font-weight:200 !important;
-  }
-}
-
 .listing-price-quantity {
   vertical-align: top;
   $hugeTypeLineHeight: lines(2);
