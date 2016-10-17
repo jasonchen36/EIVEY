@@ -102,7 +102,7 @@ class TransactionsController < ApplicationController
       )
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
-        transaction_id: transactions[:transaction_id],
+        transaction_id: transactions[:id],
         addr: { :city => "Toronto",
                 :country => "Canada",
                 :state_or_province => "Ontario",
