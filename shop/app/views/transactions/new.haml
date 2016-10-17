@@ -48,7 +48,10 @@
         .col-12
           = button_tag t("conversations.new.send_message"), :class => "send_button"
 
-          %h1 Shipping Address
+          %p
+            Addition:
+            = @shipping_addresses.name
+
           %input{:placeholder => "First Name", :value => "Jason", :type => "text"}/
           %input{:placeholder => "Last Name", :value => "Chen", :type => "text"}/
           %input{:placeholder => "Shipping Address", :id => "address", :value => "456 Orange Street", :type => "text"}/
@@ -58,11 +61,6 @@
           %input{:placeholder => "Province", :value => "Ontario", :type => "text"}/
 
           %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
-          - @users.each do |user|
-            = user.name
-            %br/
-            = user.email
-            %br/
 
           :javascript
             var output = document.getElementById('address').value

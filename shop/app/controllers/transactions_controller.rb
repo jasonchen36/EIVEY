@@ -28,6 +28,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
+    @shipping_addresses = ShippingAddress.last
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -101,12 +102,12 @@ class TransactionsController < ApplicationController
       )
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
-        transaction_id: transactions[:id],
+        transaction_id: transactions[:transaction_id],
         addr: { :city => "Toronto",
                 :country => "Canada",
                 :state_or_province => "Ontario",
                 :street1 => "45 Orange Street",
-                :name => "Jason",
+                :name => "Jason Chen",
                 :phone => "905-456-8343",
                 :status => "paid",
                 :postal_code => "L5D 3U7"})
