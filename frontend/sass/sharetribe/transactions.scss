@@ -33,3 +33,18 @@
     color: $color-sharetribe-dark-grey;
   }
 }
+
+//preauthorize
+//-----------------------------
+.authorize-title {
+  font-size: 22px;
+  color: $color-sharetribe-dark-grey;
+  margin: 50px 0 5px 0;
+  a {
+    color: $color-sharetribe-dark-grey;
+  }
+}
+
+.initiate-transaction-total-wrapper {
+  font-size: 22px;
+}

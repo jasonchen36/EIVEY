@@ -1,7 +1,7 @@
 - content_for :javascript do
   initialize_profile_view("#{@person.username}");
 .standard-title-container
-  %h1.standard-title.page-title
+  %h1.page-title
     = @person.name(@current_community) + (@community_customization && @community_customization.storefront_label ? @community_customization.storefront_label : "")
 
 .row
