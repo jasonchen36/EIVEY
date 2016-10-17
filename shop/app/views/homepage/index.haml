@@ -118,6 +118,7 @@
     - if @category_menu_enabled
       .col-3.visible-tablet
         -#%p.product-grid-filter Filters
+        - @show_categories = false
         - if @show_categories
           .row
             #category-filter-title.custom-filter-title

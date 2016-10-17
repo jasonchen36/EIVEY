@@ -7,7 +7,8 @@
         userMenuCloseListenerClass = '.l--user-menu-close',
         userMenuToggle = $('#header-user-toggle-menu'),
         mobileUserMenu = $('#mobile-user-menu-fullscreen-container'),
-        sellButton = $('#new-listing-link');
+        sellButton = $('#new-listing-link'),
+        menuCategories = $('#menu-categories');
 
     function openUserMenu(){
         animations.fadeIn(mobileUserMenu);
@@ -46,7 +47,11 @@
     }
 
     function createMobileMainMenu(){
-        $('#mobile-menu-main').html($('#menu-categories').children().clone());
+        if (menuCategories.children().length > 0){
+            $('#mobile-menu-main').html(menuCategories.children().clone());
+        } else {
+            $('#mobile-menu-clothing').hide();
+        }
     }
 
     this.init = function(){

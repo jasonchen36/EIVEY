@@ -1554,12 +1554,6 @@ input[type=text].delivery-price-field {
   ------------------------
 */
 
-.initiate-transaction-totals {
-  background-color: $highlight;
-  padding: lines(0.5);
-  margin-bottom: lines(0.5);
-}
-
 .initiate-transaction-per-unit-wrapper,
 .initiate-transaction-booking-wrapper,
 .initiate-transaction-quantity-wrapper,
@@ -1588,9 +1582,6 @@ input[type=text].delivery-price-field {
   margin-right: lines(0.25);
 }
 
-.initiate-transaction-total-wrapper {
-  font-weight: bold;
-}
 
 /*
   ------------------------

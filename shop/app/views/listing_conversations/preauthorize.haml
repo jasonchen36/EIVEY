@@ -22,21 +22,31 @@
     = action_button_label
     = link_to(listing[:title], listing_path(listing[:id]))
 
+.standard-title-container
+  %h2.page-title
+    = t("listing_conversations.preauthorize.details")
+
 #new_message_form.centered-section
 
   - author_link = link_to(author[:display_name], person_path(username: author[:username]))
 
   .preauthorize-section
-    %h2.preauthorize-details-title
-      = t(".details")
 
-    %ul.no-bullets
-      %li
-        %div
-          = t(".by", listing: link_to("#{listing[:title]}", listing_path(listing[:id])), author: author_link).html_safe
+    .standard-title-container
+      .authorize-title
+        %strong
+          = link_to("#{listing[:title]}", listing_path(listing[:id]))
+        by
+        = author_link
 
-      %li
-        = render partial: "transactions/price_break_down", locals: price_break_down_locals
+    %div
+      = render partial: "transactions/price_break_down", locals: price_break_down_locals
+      %p#preauthorize-message
+        Free shipping
+        %br
+        Ships within 5-7 business days from date of purchase
+        %br
+        * Eivey only buys & sells in Canada
 
   = form_for preauthorize_form,
     :url => form_action,
