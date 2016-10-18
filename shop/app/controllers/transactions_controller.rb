@@ -28,6 +28,7 @@ class TransactionsController < ApplicationController
   end
 
   def new
+    @shipping_addresses = ShippingAddress.last
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -60,6 +61,7 @@ class TransactionsController < ApplicationController
   end
 
   def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
+    @shipping_addresses = ShippingAddress.last
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
     puts "this is the IPN URL"
@@ -102,14 +104,14 @@ class TransactionsController < ApplicationController
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
         transaction_id: transactions[:id],
-        addr: { :city => "Toronto",
-                :country => "Canada",
-                :state_or_province => "Ontario",
-                :street1 => "45 Orange Street",
-                :name => "Jason",
-                :phone => "905-456-8343",
-                :status => "paid",
-                :postal_code => "L5D 3U7"})
+        addr: { :city => @shipping_addresses.city,
+                :country => @shipping_addresses.country,
+                :state_or_province => @shipping_addresses.state_or_province,
+                :street1 => @shipping_addresses.street1,
+                :name => @shipping_addresses.name.partition(" ").first + " " + @shipping_addresses.name.partition(" ").last,
+                :phone => @shipping_addresses.phone,
+                :status => @shipping_addresses.status,
+                :postal_code => @shipping_addresses.postal_code})
     after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
@@ -163,6 +165,7 @@ class TransactionsController < ApplicationController
         fetch_data(form[:listing_id])
       },
       ->(form, (_, _, _, process)) {
+        default_message_if_empty(form)
         validate_form(form, process)
       },
       ->(_, (listing_id, listing_model), _) {
@@ -218,6 +221,11 @@ class TransactionsController < ApplicationController
           :payKey => payKey
           })
         @payment_details_response = @api.payment_details(@payment_details)
+        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+        transaction = Transaction.where(id: payment.transaction_id).first
+        id = transaction.listing_id
+        @listing = Listing.where(id: id).first
+        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
         render "transactions/thank-you"
     elsif @payment_details_response.status == paypal_status[:completed]
       payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
@@ -408,6 +416,13 @@ class TransactionsController < ApplicationController
       Result::Error.new("Message cannot be empty")
     else
       Result::Success.new
+    end
+  end
+
+  def default_message_if_empty(form_params)
+    if form_params[:message].blank?
+      form_params[:message] = "Payment Initiated"
+    else
     end
   end
 

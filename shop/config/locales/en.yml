@@ -287,6 +287,8 @@ en:
           last_activity: "Latest activity"
           initiated_by: Starter
           other_party: "Other party"
+          seller_address: "Seller Address"
+          buyer_address: "Buyer Address"
         status:
           free: Conversation
           pending: Pending

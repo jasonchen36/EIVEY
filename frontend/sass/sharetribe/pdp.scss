@@ -26,3 +26,22 @@
 #book-button {
   @include big-button($color-sharetribe-green);
 }
+
+.listing-price {
+  margin-top: 50px;
+}
+
+.listing-price-amount {
+  color: $color-sharetribe-dark-grey;
+  font-size: 55px;
+  font-family: $font-georgia;
+}
+
+#listing-author-link {
+  font-family: $font-georgia;
+  font-style: italic;
+  font-size: 30px;
+}
+
+//main content
+//-----------------------------
