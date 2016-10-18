@@ -165,6 +165,7 @@ class TransactionsController < ApplicationController
         fetch_data(form[:listing_id])
       },
       ->(form, (_, _, _, process)) {
+        default_message_if_empty(form)
         validate_form(form, process)
       },
       ->(_, (listing_id, listing_model), _) {
@@ -415,6 +416,13 @@ class TransactionsController < ApplicationController
       Result::Error.new("Message cannot be empty")
     else
       Result::Success.new
+    end
+  end
+
+  def default_message_if_empty(form_params)
+    if form_params[:message].blank?
+      form_params[:message] = "Payment Initiated"
+    else
     end
   end
 

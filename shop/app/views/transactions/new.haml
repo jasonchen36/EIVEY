@@ -34,32 +34,13 @@
     = hidden_field_tag(:end_on, booking_end)
 
 
-    .preauthorize-section
-      %h2
-        = t("conversations.new.send_message_to_user", person: author_link).html_safe
-      .row
-        .col-12
-          = text_area_tag(:message, nil, :class => "text_area")
+    %h1 Shipping Address
 
-      - if quantity
-        = hidden_field_tag(:quantity, quantity)
-
-      .row
-        .col-12
-          = button_tag t("conversations.new.send_message"), :class => "send_button"
-
-          %h1 Shipping Address
-
-          %input{:placeholder => "First Name", :value => @shipping_addresses.name.partition(" ").first, :type => "text"}/
-          %input{:placeholder => "Last Name", :value => @shipping_addresses.name.partition(" ").last, :type => "text"}/
-          %input{:placeholder => "Shipping Address", :id => "address", :value => @shipping_addresses.street1, :type => "text"}/
-          %input{:placeholder => "Suite Number", :type => "text"}/
-          %input{:placeholder => "City", :value => @shipping_addresses.city, :type => "text"}/
-          %input{:placeholder => "Postal Code", :value => @shipping_addresses.postal_code, :type => "text"}/
-          %input{:placeholder => "Province", :value => @shipping_addresses.state_or_province, :type => "text"}/
-
-          %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
-
-          :javascript
-            var output = document.getElementById('address').value
-            console.log(output)
+    %input{:placeholder => "First Name", :value => @shipping_addresses.name.partition(" ").first, :type => "text"}/
+    %input{:placeholder => "Last Name", :value => @shipping_addresses.name.partition(" ").last, :type => "text"}/
+    %input{:placeholder => "Shipping Address", :id => "address", :value => @shipping_addresses.street1, :type => "text"}/
+    %input{:placeholder => "Suite Number", :type => "text"}/
+    %input{:placeholder => "City", :value => @shipping_addresses.city, :type => "text"}/
+    %input{:placeholder => "Postal Code", :value => @shipping_addresses.postal_code, :type => "text"}/
+    %input{:placeholder => "Province", :value => @shipping_addresses.state_or_province, :type => "text"}/
+    %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
