@@ -26,18 +26,23 @@ We need to install a number of things, so make sure ubuntu apt-get is updated.
 
 apt-get update
 
+4MAC: Use homebrew to install packages instead. [http://brew.sh/](http://brew.sh/)
 
 ### Apache ###
 Install Apache. 
 ```
 sudo apt-get install apache
 ```
+4MAC: Apache is apparently pre-installed with el-capitan.  you can start it with `apachectl start`
+PHP and Rails are both run using Apache. 
 
-PHP and Rails are both run using Apache.  The config is located locally in /devops/apache.conf and remotely in /etc/apache2/sites-enabled/eivey.ca.conf  [Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config
 
 ### PHP ###
 
- (TODO: version?)
+```
+ apt-get install php5 
+```
+4MAC: PHP is apparently pre-installed?
 
 TODO: line to install PHP and dependencies in Ubuntu
 
@@ -46,17 +51,20 @@ make sure you have mysql adapter
 ```
 apt-get install libmysqlclient-dev
 ```
+4MAC: ?
 If you don't you will run into issues with bundle
 
 ### Wordpress ###
 
-TODO: how to set up wordpress
+Wordpress is a PHP package based in project root.  To get it working, you will need PHP and Apache running, serving the projectroot.
+You will also need to update the config and db config (see config and db config sections)
 
 ### ImageMagick ###
 install imagemagick
 ```
 sudo apt-get install imagemagick
 ```
+4MAC: `brew install imagemagick`
 
 Be sure to install [ImageMagick](http://www.imagemagick.org/script/index.php) on Ubuntu 14 using apt-get.  Installing it via source tarball means that it misses the convert and identify commands' config needed for images  
 [Help Docs](https://www.digitalocean.com/community/questions/rails-4-paperclip-imagemagick-content-type-error-for-images)
@@ -66,11 +74,13 @@ TODO: do we need sphinx?
 ```
 sudo apt-get install sphinxsearch
 ```
+4MAC: `brew install sphinx --mysql`
 ### Git ###
 Install git
 ```
 sudo apt-get install git
 ```
+4MAC: `brew install git`
 
 ### Ruby ###
 The version of ruby for this sharetribe is 2.3.1
@@ -113,8 +123,9 @@ Check that ruby is installed, and Set your global to use ruby 2.3.1
 ruby -v
 rbenv global 2.3.1
 ```
+4MAC: ruby is already pre-installed?
 
-### Sharetribe Delayed Worker ###
+### Install god ###
 
 Install god
 ```
@@ -123,29 +134,12 @@ gem install god
 
 [God](http://godrb.com/) is used to keep the delayed workers alive.  The config is located in /shop/script/delayed_job.god.
 
-First start god by loading the appropriate config into it
-```
-god -c script/delayed_job.god
-```
-
-Then start the delayed job using
+### Bundler ###
+install bundler
 
 ```
-god start delayed_job
+gem install bundler
 ```
-
-You can check God's status using
-
-```
-god status
-```
-
-and check the status of the delayed worker using
-
-```
-ps aux | grep "delay"
-```
-
 
 ### Add SSH keys so that you can clone repo ###
 make sure your ssh keys are added to the repo, so we can pull the repo onto this remote server.
@@ -196,69 +190,14 @@ mv eivey.web dev.eivey.web
 sudo mv dev.eivey.web /var/www
 ```
 
-
-
-
-## How to Set Up a Dev Environment ##
-
-### Common ###
-
-Clone the repo 
-
-```
-git clone https://bitbucket.org/ellefsontech/eivey.web dev.eivey.com
-cd dev.eivey.com
-```
-
-Generate frontend files
-
-```
-cd frontend
-npm install
-./node_modules/.bin/bower install
-grunt build
-cd ../
-```
-
-Start Grunt workflow
-
-```
-cd frontend
-grunt dev
-cd ../
-```
-
-### WordPress ###
-
-Create /wp-config.php and update with the correct database credentials.
-
-```
-cp wp-config-sample.php wp-config.php
-```
-
-### Sharetribe installs ###
-
-go to the sharetribe folder
-```
-cd shop
-```
-
-install bundler
-
-```
-gem install bundler
-```
-
-install sphinx
-```
-sudo apt-get install sphinxsearch
-```
-
+### Node ###
 install node
 ```
 sudo apt-get install node
 sudo apt-get install npm
 ```
+4MAC: `brew install node`
+4MAC: `brew install npm`
 
 Install n globally (node version manager)
 ```
@@ -271,25 +210,142 @@ use the accepted version of node
 node -v
 ```
 Version should show v6.1.0 if not, restart your terminal.
+Install npm packages (you should NOT have to sudo npm packages for local installs)
+```
+npm install
+```
+
+### sharetribe dependencies ###
+go to /shop
+```
+cd [project_root]shop
+```
+
 Install npm packages
 ```
 npm install
 ```
+
+Install bundle packages
+
+```
+bundle install
+```
+
+### frontend dependencies ###
+go to the frontend folder
+```
+cd [project_root]shop/frontend
+```
+install npm packages
+```
+npm install
+```
+
 If this fails, delete your node_modules folder, make sure you have the right version of node, and try again.
-
-
-### Sharetribe ###
-
-Enter the Sharetribe directory
+Try this something like 10 times before giving up.  Seriously.  One of the fixes we had was apparently to delete the node modules folder and reinstall 10 times.  literally
 
 ```
-cd shop
+npm install  
+rm -rf node_modules
+```
+& repeated ~10 times. via Mike Stumpf
+
+
+Install bower and grunt (still in frontend folder)
+```
+./node_modules/.bin/bower install
+./node_modules/.bin/grunt build
 ```
 
-Follow the instructions listed on the [Sharetribe ReadMe](https://github.com/sharetribe/sharetribe)
-TODO: We need to break this file down and list here, as we are no longer using everything.  
+
+### Sharetribe dependencies ###
+There are number of packages for the sharetribe package that need to be installed locally.
 
 
+## Configs ##
+### Apache Config ###
+
+The config is located locally in /devops/apache.conf.
+
+
+To get it working on a server, you need to put it in 
+```
+/etc/apache2/sites-available/eivey.ca.conf
+```
+
+Once you have done this, make a sym-link to sites-enabled. you can do this with the apache tool a2ensite.
+```
+sudo a2ensite example.com.conf
+```
+
+[Passenger](https://www.phusionpassenger.com/library/) is used to run Sharetribe and is part of the Apache config
+
+In the config, make sure that the name for the site is the location of your server.
+Chances are you are not setting up production, so you should remove the staging virtualHost (named eivey.ca)
+```
+ServerName staging.eivey.ca
+```
+For folder locations, make sure that they are pointing to the folder you copied the project into
+```
+DocumentRoot /var/www/staging.eivey.ca
+...
+ErrorLog /var/log/apache2/staging.eivey.error.log
+...
+```
+
+If this is your first time setting up the server, you need to create a sym-link to sites-enabled.
+
+  to restart apache with the updates
+
+```
+sudo service apache2 restart
+```
+
+### Use cloned DBs ###
+To get the correct DBs, clone already used Dbs
+
+### Config files ###
+TODO: make sure all the config changes are listed here.
+Make sure that the following are updated:
+In shop':
+```
+cd [project_root]shop
+```
+copy the examples, and change them to point to your database and paypal credentials
+/config/database.yml (use database.yml.example as example)
+/config/paypal.yml
+/config/paypal_payments.yml
+/Passenger.json (should use development for testing)
+
+
+### eivey db configs ###
+communities table
+  - update url to point to server (no port) eg. dev.eivey.ca
+    ServerName staging.eivey.ca
+  
+  - God & Sphinx (make sure run, see God and Sphinx
+
+### Wordpress db configs ###
+
+You need to login to the wordpress DB, and change the following table:
+
+evy_options - 
+  Update siteUrl & home options to the site url.
+
+### Wordpress config file ###
+Create /wp-config.php and update with the correct database credentials.
+
+```
+cp wp-config-sample.php wp-config.php
+```
+
+## Build project resources ##
+Now that everything is installed and configs are set, we can build desired resources and restart the project.
+
+### Build ###
+
+#### Foreman run ####
 Run foreman once to generate the webpack folder in /shop/app/assets/webpack
 
 ```
@@ -298,11 +354,150 @@ foreman start -f Procfile.static
 
 * Note, after generating the webpack folder, do not start the app using foreman.  Instead, change your shop/Passengerfile.json environment to be "development" and start the app using Passenger:
 
-* Note, you will probably want to comment out/remove hardcoded references to "/shop" like in /shop/config/application.rb and update the "prefix" variable to point to your local php instance in files like shop/app/views/layouts/_head.haml and shop/app/views/layouts/_footer.haml.  Just be sure not to check those changes into Git!
+#### Re/Build new frontend resources ####
+Build/rebuild modified frontend resources
+```
+cd [project_root]shop/frontend
+./node_modules/.bin/grunt build
+```
+
+
+#### Re/Build sharetribe resources ####
+Build sharetribe frontend Resources
 
 ```
-bundle exec passenger start
+bundle exec rake sharetribe:generate_customization_stylesheets_immediately
 ```
+
+#### Update Sphinx index ####
+Update Sphinx index
+```
+  bundle exec rake ts:index
+```
+
+Start the Sphinx daemon:
+```
+  bundle exec rake ts:start
+```
+
+If the sphinx indexer is already started, stop and restart
+```
+  bundle exec rake ts:stop
+  bundle exec rake ts:start
+```
+
+
+#### Sharetribe Delayed Worker ####
+
+First start god by loading the appropriate config into it
+```
+god -c script/delayed_job.god
+```
+
+Then start the delayed job using
+
+```
+god start delayed_job
+```
+
+You can check God's status using
+
+```
+god status
+```
+
+and check the status of the delayed worker using
+
+```
+ps aux | grep "delay"
+```
+
+### Start / Restart resources ###
+
+
+? TODO: do we need to start passenger, or started with apache?
+
+Restart passenger
+```
+cd shop
+passenger-config restart-app
+```
+
+If needed, restart apache
+```
+sudo service apache2 restart
+```
+
+### Sharetribe site ###
+
+WordPress will be available at root. [hosturl](http://hosturl)
+
+Sharetribe will be available at root/shop [hosturl/shop](http://hosturl/shop)
+
+
+## How to Deploy ##
+ Assuming the project is currently running, go through these steps:
+Update from Git
+
+```
+cd [projectroot]
+git pull
+```
+
+Regenerate common frontend files
+
+* Note, do not run with "sudo"!
+
+```
+cd [projectroot]shop/frontend
+grunt build
+```
+
+Install Sharetribe dependencies
+
+* Note, do not run with "sudo"!
+
+```
+cd shop
+bundle install
+cd ../
+```
+
+Regenerate Sharetribe CSS manually
+   
+```
+cd [projectroot]shop
+bundle exec rake sharetribe:generate_customization_stylesheets_immediately
+```
+
+Restart Passenger
+
+```
+cd shop
+passenger-config restart-app $(pwd)
+cd ../
+```
+
+If things are not working right, try reindexing
+```
+bundle exec rake ts:index
+bundle exec rake ts:stop
+bundle exec rake ts:start
+```
+
+check if delayed worker is running
+```
+god status
+```
+If it's not, check the delayed worker section to restart.
+
+If things are not working, things may not be correctly installed. Make sure all dependencies are installed correctly, and that config files are configured correctly, and that all required services are up.
+
+
+## Running in Dev ##
+* Note, you will probably want to comment out/remove hardcoded references to "/shop" like in /shop/config/application.rb and update the "prefix" variable to point to your local php instance in files like shop/app/views/layouts/_head.haml and shop/app/views/layouts/_footer.haml.  Just be sure not to check those changes into Git!
+
+
 
 build styles
 
@@ -310,14 +505,12 @@ build styles
 bundle exec rake sharetribe:generate_customization_stylesheets_immediately
 ```
 
-### Config files ###
-TODO: make sure all the config changes are listed here.
-Make sure that the following are updated:
-In shop':
-/config/database.yml (use database.yml.example as example)
-/config/paypal_adaptive.yml
-/config/paypal_payments.yml
-/Passenger.json
+Instead of running directly through apache, you may want to run passenger localy.
+
+```
+bundle exec passenger start
+```
+
 
 ### Sharetribe site ###
 
@@ -360,54 +553,6 @@ Open a new terminal window and connect with the debugger using
 ```
 pry-remote
 ```
-
-## How to Deploy ##
-
-Update from Git
-
-```
-cd dev.eivey.com
-git pull
-```
-
-Generate common frontend files
-
-* Note, do not run with "sudo"!
-
-```
-cd frontend
-npm install
-bower install
-grunt build
-cd ../
-```
-
-Install Sharetribe dependencies
-
-* Note, do not run with "sudo"!
-
-```
-cd shop
-bundle install
-cd ../
-```
-
-Generate Sharetribe CSS manually
-   
-```
-cd shop
-bundle exec rake sharetribe:generate_customization_stylesheets_immediately
-cd ../
-```
-
-Restart Passenger
-
-```
-cd shop
-passenger-config restart-app $(pwd)
-cd ../
-```
-
 
 ## General ##
 
