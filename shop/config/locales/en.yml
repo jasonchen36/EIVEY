@@ -1508,6 +1508,9 @@ en:
         shipping_price: "Shipping fee"
         shipping_price_additional: "Additional items"
         pickup: Pickup
+      paypal:
+        paypal_email: "Paypal Email"
+        paypal_email_placeholder: "Enter your Paypal email"
       origin:
         location: Location
         origin: Origin
