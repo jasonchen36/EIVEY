@@ -30,17 +30,19 @@
 
   = form_tag(form_action, method: :post, id: "transaction-form") do
 
-    = hidden_field_tag(:start_on, booking_start)
-    = hidden_field_tag(:end_on, booking_end)
-
-
     %h1 Shipping Address
-
-    %input{:placeholder => "First Name", :value => @shipping_addresses.name.partition(" ").first, :type => "text"}/
-    %input{:placeholder => "Last Name", :value => @shipping_addresses.name.partition(" ").last, :type => "text"}/
-    %input{:placeholder => "Shipping Address", :id => "address", :value => @shipping_addresses.street1, :type => "text"}/
-    %input{:placeholder => "Suite Number", :type => "text"}/
-    %input{:placeholder => "City", :value => @shipping_addresses.city, :type => "text"}/
-    %input{:placeholder => "Postal Code", :value => @shipping_addresses.postal_code, :type => "text"}/
-    %input{:placeholder => "Province", :value => @shipping_addresses.state_or_province, :type => "text"}/
-    %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+    %h2 Name
+    = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name)
+    %h2 Address
+    = text_field_tag(:street, nil, :class => "text_area", :value => @shipping_addresses.street1)
+    %h2 City
+    = text_field_tag(:city, nil, :class => "text_area", :value => @shipping_addresses.city)
+    %h2 Province
+    = text_field_tag(:province, nil, :class => "text_area", :value => @shipping_addresses.state_or_province)
+    %h2 Postal Code
+    = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code)
+    %h2 Country
+    = text_field_tag(:country, nil, :class => "text_area", :value => @shipping_addresses.country)
+    %h2 Phone
+    = text_field_tag(:phone, nil, :class => "text_area", :value => @shipping_addresses.phone)
+    = button_tag t("Place Order")
