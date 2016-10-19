@@ -35,7 +35,6 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @shipping_addresses = ShippingAddress.last
     Result.all(
       ->() {
         fetch_data(params[:listing_id])
@@ -44,6 +43,13 @@ class TransactionsController < ApplicationController
         ensure_can_start_transactions(listing_model: listing_model, current_user: @current_user, current_community: @current_community)
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
+      puts "this is the person id"
+      puts @current_user.username
+      if PaypalAdaptivePayment.where(paypal_payer_id: @current_user.username).first
+        @shipping_addresses = ShippingAddress.last
+      else
+        @shipping_addresses = ShippingAddress.new
+      end
       booking = listing_model.unit_type == :day
       transaction_params = HashUtils.symbolize_keys({listing_id: listing_model.id}.merge(params.slice(:start_on, :end_on, :quantity, :delivery)))
       case [process[:process], gateway, booking]
@@ -70,7 +76,7 @@ class TransactionsController < ApplicationController
   def complete_paypal_payment(form, pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
-    puts "this is the IPN URL"
+    puts "this is the IPN URL!"
     puts (url_for :controller => 'payments_notifications', :action => 'ipn_hook')
     @pay = @api.build_pay({
     :actionType => "PAY_PRIMARY",
@@ -88,38 +94,6 @@ class TransactionsController < ApplicationController
           :email => seller_paypal_email,
           :primary => false }] },
     :returnUrl => URI.join((url_for :controller => 'transactions', :action => 'paid'), '?payKey=${payKey}') })
-
-    paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
-    @payment_details_response = @api.payment_details(@payment_details)
-    if @payment_details_response.status == paypal_status[:incomplete] || @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
-        @execute_payment = @api.build_execute_payment({
-          :payKey => payKey
-          })
-        @execute_payment_response = @api.execute_payment(@execute_payment)
-        @payment_details = @api.build_payment_details({
-          :payKey => payKey
-          })
-        @payment_details_response = @api.payment_details(@payment_details)
-        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
-        transaction = Transaction.where(id: payment.transaction_id).first
-        id = transaction.listing_id
-        @listing = Listing.where(id: id).first
-        puts "THIS IS ALSO GETTING HIT!!!!!!"
-        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
-        render "transactions/thank-you"
-    elsif @payment_details_response.status == paypal_status[:completed]
-      payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
-      transaction = Transaction.where(id: payment.transaction_id).first
-      id = transaction.listing_id
-      @listing = Listing.where(id: id).first
-      # @listing.update_attribute(:open, false)
-      puts "THIS IS ALSO ALSO GETTING HIT!!!!!!"
-      MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
-      render "transactions/thank-you"
-    else
-      puts "failed to complete the transaction"
-    end
-
     # Make API call & get response
     @response = @api.pay(@pay)
     if @response.success? && @response.payment_exec_status != "ERROR"
@@ -127,7 +101,8 @@ class TransactionsController < ApplicationController
       {
         transaction_id: transactions[:id],
         community_id: community_id,
-        paypal_payment_id: @response.payKey
+        paypal_payment_id: @response.payKey,
+        paypal_payer_id: params[:person_id]
       }
       )
       TransactionStore.create(
@@ -247,9 +222,44 @@ class TransactionsController < ApplicationController
     puts form
   end
 
-# The paid method will render the thank you page.
+# The paid method will check to make sure the transaction is complete.
   def paid
-    render "transactions/thank-you"
+    payKey = params[:payKey]
+    @api = PayPal::SDK::AdaptivePayments.new
+    @payment_details = @api.build_payment_details({
+     :payKey => payKey
+      })
+    paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
+    @payment_details_response = @api.payment_details(@payment_details)
+    if @payment_details_response.status == paypal_status[:incomplete] || @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
+        @execute_payment = @api.build_execute_payment({
+          :payKey => payKey
+          })
+        @execute_payment_response = @api.execute_payment(@execute_payment)
+        @payment_details = @api.build_payment_details({
+          :payKey => payKey
+          })
+        @payment_details_response = @api.payment_details(@payment_details)
+        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+        transaction = Transaction.where(id: payment.transaction_id).first
+        id = transaction.listing_id
+        @listing = Listing.where(id: id).first
+        puts "THIS IS ALSO GETTING HIT!!!!!!"
+        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
+        render "transactions/thank-you"
+    elsif @payment_details_response.status == paypal_status[:completed]
+      payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+      transaction = Transaction.where(id: payment.transaction_id).first
+      id = transaction.listing_id
+      @listing = Listing.where(id: id).first
+      # @listing.update_attribute(:open, false)
+      puts "THIS IS ALSO ALSO GETTING HIT!!!!!!"
+      MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
+      render "transactions/thank-you"
+    else
+      puts "failed to complete the transaction"
+      render "transactions/thank-you"
+    end
   end
 
   def show

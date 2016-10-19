@@ -2,6 +2,7 @@ require 'rubygems'
 require 'json'
 
 class PaymentsNotificationsController < ApplicationController
+
 =begin
     include PaypalService::MerchantInjector
     include PaypalService::IPNInjector
@@ -27,5 +28,5 @@ class PaymentsNotificationsController < ApplicationController
 =end
       # We received the message ok, so send back 200 OK with empty body
       render nothing: true
-    end
+    #end
 end
