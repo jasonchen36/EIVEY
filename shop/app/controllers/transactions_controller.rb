@@ -18,6 +18,13 @@ class TransactionsController < ApplicationController
   TransactionForm = EntityUtils.define_builder(
     [:listing_id, :fixnum, :to_integer, :mandatory],
     [:message, :string],
+    [:name, :string],
+    [:city, :string],
+    [:street, :string],
+    [:phone, :string],
+    [:province, :string],
+    [:postal, :string],
+    [:country, :string],
     [:quantity, :fixnum, :to_integer, default: 1],
     [:start_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ],
     [:end_on, transform_with: ->(v) { Maybe(v).map { |d| TransactionViewUtils.parse_booking_date(d) }.or_else(nil) } ]
@@ -60,8 +67,7 @@ class TransactionsController < ApplicationController
     }
   end
 
-  def complete_paypal_payment(pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
-    @shipping_addresses = ShippingAddress.last
+  def complete_paypal_payment(form, pay_amount, seller_paypal_email, transactions, community_id, process, listing_id, starter_id)
     @api = PayPal::SDK::AdaptivePayments.new
     # Build request object
     puts "this is the IPN URL"
@@ -82,6 +88,38 @@ class TransactionsController < ApplicationController
           :email => seller_paypal_email,
           :primary => false }] },
     :returnUrl => URI.join((url_for :controller => 'transactions', :action => 'paid'), '?payKey=${payKey}') })
+
+    paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
+    @payment_details_response = @api.payment_details(@payment_details)
+    if @payment_details_response.status == paypal_status[:incomplete] || @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
+        @execute_payment = @api.build_execute_payment({
+          :payKey => payKey
+          })
+        @execute_payment_response = @api.execute_payment(@execute_payment)
+        @payment_details = @api.build_payment_details({
+          :payKey => payKey
+          })
+        @payment_details_response = @api.payment_details(@payment_details)
+        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+        transaction = Transaction.where(id: payment.transaction_id).first
+        id = transaction.listing_id
+        @listing = Listing.where(id: id).first
+        puts "THIS IS ALSO GETTING HIT!!!!!!"
+        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
+        render "transactions/thank-you"
+    elsif @payment_details_response.status == paypal_status[:completed]
+      payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
+      transaction = Transaction.where(id: payment.transaction_id).first
+      id = transaction.listing_id
+      @listing = Listing.where(id: id).first
+      # @listing.update_attribute(:open, false)
+      puts "THIS IS ALSO ALSO GETTING HIT!!!!!!"
+      MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
+      render "transactions/thank-you"
+    else
+      puts "failed to complete the transaction"
+    end
+
     # Make API call & get response
     @response = @api.pay(@pay)
     if @response.success? && @response.payment_exec_status != "ERROR"
@@ -101,18 +139,19 @@ class TransactionsController < ApplicationController
         payment_process: :none,
         payment_gateway: :paypal
       )
+      puts "?????"
+      puts params
       TransactionStore.upsert_shipping_address(
         community_id: community_id,
         transaction_id: transactions[:id],
-        addr: { :city => @shipping_addresses.city,
-                :country => @shipping_addresses.country,
-                :state_or_province => @shipping_addresses.state_or_province,
-                :street1 => @shipping_addresses.street1,
-                :name => @shipping_addresses.name.partition(" ").first + " " + @shipping_addresses.name.partition(" ").last,
-                :phone => @shipping_addresses.phone,
-                :status => @shipping_addresses.status,
-                :postal_code => @shipping_addresses.postal_code})
-    after_create_actions!(process: process, transaction: transactions, community_id: community_id)
+        addr: { :city => form[:city],
+                :country => form[:country],
+                :state_or_province => form[:province],
+                :street1 => form[:street],
+                :name => form[:name].partition(" ").first + " " + form[:name].partition(" ").last,
+                :phone => form[:phone],
+                :postal_code => form[:postal]})
+    # after_create_actions!(process: process, transaction: transactions, community_id: community_id)
     redirect_to @api.payment_url(@response)  # Url to complete payment
     else
       puts "error!"
@@ -173,7 +212,7 @@ class TransactionsController < ApplicationController
       },
       ->(form, (listing_id, listing_model, author_model, process, gateway), _, _) {
         booking_fields = Maybe(form).slice(:start_on, :end_on).select { |booking| booking.values.all? }.or_else({})
-
+        testing(params)
         quantity = Maybe(booking_fields).map { |b| DateUtils.duration_days(b[:start_on], b[:end_on]) }.or_else(form[:quantity])
 
         TransactionService::Transaction.create(
@@ -194,8 +233,8 @@ class TransactionsController < ApplicationController
               payment_process: process[:process]}
           })
       }
-    ).on_success { |(_, (listing_id, listing_model, author_model, process, starter_id), _, _, tx)|
-      complete_paypal_payment(listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process, listing_id, starter_id)
+    ).on_success { |(form, (listing_id, listing_model, author_model, process, starter_id), _, _, tx)|
+      complete_paypal_payment(form,listing_model.price, author_model.braintree_account.email, tx[:transaction], @current_community.id, process, listing_id, starter_id)
       flash[:notice] = after_create_flash(process: process) # add more params here when needed
     }.on_error { |error_msg, data|
       flash[:error] = Maybe(data)[:error_tr_key].map { |tr_key| t(tr_key) }.or_else("Could not start a transaction, error message: #{error_msg}")
@@ -203,42 +242,14 @@ class TransactionsController < ApplicationController
     }
   end
 
-# The paid method will update the transaction status in Sharetribe from "free" to "paid" after the transaction has closed.
+  def testing (form)
+    puts "these are params!"
+    puts form
+  end
+
+# The paid method will render the thank you page.
   def paid
-    payKey = params[:payKey]
-    @api = PayPal::SDK::AdaptivePayments.new
-    @payment_details = @api.build_payment_details({
-      :payKey => payKey
-      })
-    paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
-    @payment_details_response = @api.payment_details(@payment_details)
-    if @payment_details_response.status == paypal_status[:incomplete] || @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
-        @execute_payment = @api.build_execute_payment({
-          :payKey => payKey
-          })
-        @execute_payment_response = @api.execute_payment(@execute_payment)
-        @payment_details = @api.build_payment_details({
-          :payKey => payKey
-          })
-        @payment_details_response = @api.payment_details(@payment_details)
-        payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
-        transaction = Transaction.where(id: payment.transaction_id).first
-        id = transaction.listing_id
-        @listing = Listing.where(id: id).first
-        MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
-        render "transactions/thank-you"
-    elsif @payment_details_response.status == paypal_status[:completed]
-      payment = PaypalAdaptivePayment.where(paypal_payment_id: payKey).first
-      transaction = Transaction.where(id: payment.transaction_id).first
-      id = transaction.listing_id
-      @listing = Listing.where(id: id).first
-      # @listing.update_attribute(:open, false)
-      MarketplaceService::Transaction::Command.transition_to(payment.transaction_id, "paid")
-      render "transactions/thank-you"
-    else
-      puts "failed to complete the transaction"
-      render "transactions/thank-you"
-    end
+    render "transactions/thank-you"
   end
 
   def show
@@ -368,6 +379,7 @@ class TransactionsController < ApplicationController
     when :none
       # TODO Do I really have to do the state transition here?
       # Shouldn't it be handled by the TransactionService
+      puts "THIS LINE IS HIT!!!!!!!!!!!"
       MarketplaceService::Transaction::Command.transition_to(transaction[:id], "free")
 
       # TODO: remove references to transaction model
