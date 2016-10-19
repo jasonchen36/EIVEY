@@ -54,25 +54,12 @@ class BraintreeAccountsController < ApplicationController
     @list_of_states = LIST_OF_STATES
     braintree_params = params.require(:braintree_account).permit(
       :person_id,
-      :first_name,
-      :last_name,
-      :email,
-      :phone,
-      :address_street_address,
-      :address_postal_code,
-      :address_locality,
-      :address_region,
-      :"date_of_birth(1i)",
-      :"date_of_birth(2i)",
-      :"date_of_birth(3i)",
-      :routing_number,
-      :account_number
+      :email
     )
 
     model_attributes = braintree_params
       .merge(person: @current_user)
       .merge(community_id: @current_community.id)
-      .merge(hidden_account_number: StringUtils.trim_and_hide(params[:braintree_account][:account_number]))
 
     @braintree_account = BraintreeAccount.new(model_attributes)
     if @braintree_account.valid?
@@ -80,22 +67,25 @@ class BraintreeAccountsController < ApplicationController
       # Braintree may trigger the webhook very, very fast (at least in sandbox)
       # and saving account to DB now ensures that the webhook finds the account
       @braintree_account.save!
-      merchant_account_result = BraintreeApi.create_merchant_account(@braintree_account, @current_community)
+      #TODO: check with paypal it's an actual paypal account
+      merchant_account_result ={success: true}
     else
       flash[:error] = @braintree_account.errors.full_messages
       render :new, locals: { form_action: @create_path } and return
     end
 
-    success = if merchant_account_result.success?
-      BTLog.info("Successfully created Braintree account for person id #{@current_user.id}")
-      update_status!(@braintree_account, merchant_account_result.merchant_account.status)
+    #TODO: check paypal for success
+    #success = if merchant_account_result.success?
+    success = if true
+      BTLog.info("Successfully created Paypal account for person id #{@current_user.id}")
+    #  update_status!(@braintree_account, merchant_account_result.merchant_account.status)
     else
-      BTLog.error("Failed to created Braintree account for person id #{@current_user.id}: #{merchant_account_result.message}")
+      BTLog.error("Failed to created Paypal account for person id #{@current_user.id}: unkown reason")
 
-      error_string = "Your payout details could not be saved, because of following errors: "
-      merchant_account_result.errors.each do |e|
-        error_string << e.message + " "
-      end
+      error_string = "Your Paypal payout details could not be saved, because of following errors: unknown "
+   #   merchant_account_result.errors.each do |e|
+    #    error_string << e.message + " "
+     # end
       flash[:error] = error_string
 
       @braintree_account.destroy
@@ -114,12 +104,13 @@ class BraintreeAccountsController < ApplicationController
 
   private
 
+
   # Before filter
   def ensure_user_does_not_have_account
     braintree_account = BraintreeAccount.find_by_person_id(@current_user.id)
 
     unless braintree_account.blank?
-      flash[:error] = "Cannot create a new Braintree account. You already have one"
+      flash[:error] = "Cannot create a new Paypal account. You already have one"
       redirect_to @show_path
     end
   end
