@@ -1,6 +1,6 @@
 //core
 //-----------------------------
-$logo-width: 425px;
+$logo-width: 400px;
 
 header {
   @include desktop {
@@ -13,7 +13,7 @@ header {
     max-width: 100%;
     @include desktop {
       height: 115px;
-      width: 480px;
+      width: 455px;
       margin: 0 auto -10px auto;
     }
   }
@@ -142,7 +142,7 @@ header {
   margin: 5px auto 10px auto;
   max-width: $logo-width;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   letter-spacing: 2px;
   font-family: $font-georgia;
