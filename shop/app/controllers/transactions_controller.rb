@@ -43,7 +43,7 @@ class TransactionsController < ApplicationController
         ensure_can_start_transactions(listing_model: listing_model, current_user: @current_user, current_community: @current_community)
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
-      if PaypalAdaptivePayment.where(paypal_payer_id: @current_user.username).first
+      if PaypalAdaptivePayment.where(paypal_payer_id: @current_user.id).first
         @shipping_addresses = ShippingAddress.last
       else
         @shipping_addresses = ShippingAddress.new
@@ -100,7 +100,7 @@ class TransactionsController < ApplicationController
         transaction_id: transaction[:id],
         community_id: community_id,
         paypal_payment_id: @response.payKey,
-        paypal_payer_id: params[:person_id]
+        paypal_payer_id: @current_user.id
       }
       )
 
