@@ -66,9 +66,29 @@ class BraintreeAccountsController < ApplicationController
       # Save Braintree account before calling the Braintree API
       # Braintree may trigger the webhook very, very fast (at least in sandbox)
       # and saving account to DB now ensures that the webhook finds the account
-      @braintree_account.save!
+      @paypal_api = PayPal::SDK::AdaptiveAccounts.new
+    # puts @paypal_api.methods 
+      # Build request object
+      @get_verified_status = @paypal_api.build_get_verified_status({
+        :emailAddress => model_attributes[:email],
+        :matchCriteria => "NONE" })
+      
+      # Make API call & get response
+      @get_verified_status_response = @paypal_api.get_verified_status(@get_verified_status)
+      
+      # Access Response
+      if @get_verified_status_response.success?
+        puts "successful validation! Real Email!"
+        @braintree_account.save! 
+      else
+        puts "failed validation!"
+        puts @get_verified_status_response.response_status
+        flash[:error] = "Sorry, but your email failed validation with paypal. Please check that the email is attached to a valid paypal account."
+       # @braintree_account.errors.full_messages
+        render :new, locals: { form_action: @create_path } and return
+      end
+#      @braintree_account.save!
       #TODO: check with paypal it's an actual paypal account
-      merchant_account_result ={success: true}
     else
       flash[:error] = @braintree_account.errors.full_messages
       render :new, locals: { form_action: @create_path } and return

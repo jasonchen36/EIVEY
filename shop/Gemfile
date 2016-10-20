@@ -13,6 +13,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'compass-rails', '~> 2.0'
 
 gem 'paypal-sdk-adaptivepayments'
+gem 'paypal-sdk-adaptiveaccounts', '~> 1.102', '>= 1.102.1'
 
 # Requiring 'compass' gem directly is not normally needed,
 # 'compass-rails' already does that.

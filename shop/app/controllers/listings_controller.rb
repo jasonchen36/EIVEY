@@ -259,11 +259,11 @@ class ListingsController < ApplicationController
     form_content
   end
 
-  def create
-
+  def add_paypal_account (params)
     if @current_user.braintree_account.nil?
+      #TODO: combine with braintree_accounts_controller create code and put into a service used by both
       paypal_email_params={email:  params[:other][:paypal_email]}
-        model_attributes = paypal_email_params
+      model_attributes = paypal_email_params
       .merge(person: @current_user)
       .merge(community_id: @current_community.id)
 
@@ -271,12 +271,33 @@ class ListingsController < ApplicationController
       @braintree_account = BraintreeAccount.new(model_attributes)
 
       if @braintree_account.valid?
-        @braintree_account.save!
+        @paypal_api = PayPal::SDK::AdaptiveAccounts.new
+        @get_verified_status = @paypal_api.build_get_verified_status({
+          :emailAddress => model_attributes[:email],
+          :matchCriteria => "NONE" })
+        
+        @get_verified_status_response = @paypal_api.get_verified_status(@get_verified_status)
+        
+        # Access Response
+        if @get_verified_status_response.success?
+          @braintree_account.save!
+          return true
+        else
+          return false
+        end
       else 
-        flash[:error] = t("listings.error.something_went_wrong", error_code: "Paypal email failed validation")
-      return redirect_to new_listing_path
+      return false
 
       end
+    else
+      return true
+    end
+  end
+
+  def create
+    if !add_paypal_account(params)
+      flash[:error] = t("listings.error.something_went_wrong", error_code: "Paypal email failed validation")
+      return redirect_to new_listing_path
     end
 
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
@@ -384,8 +405,6 @@ class ListingsController < ApplicationController
 
     missing_paypal = @current_user.braintree_account.nil?
    
-
-
     render locals: {
              category_tree: category_tree,
              categories: @current_community.top_level_categories,
@@ -400,6 +419,11 @@ class ListingsController < ApplicationController
   end
 
   def update
+    if !add_paypal_account(params)
+      flash[:error] = t("listings.error.something_went_wrong", error_code: "Paypal email failed validation")
+      return redirect_to edit_listing_path
+    end
+
     if (params[:listing][:origin] && (params[:listing][:origin_loc_attributes][:address].empty? || params[:listing][:origin].blank?))
       params[:listing].delete("origin_loc_attributes")
       if @listing.origin_loc

@@ -200,6 +200,7 @@ module MarketplaceService
       end
 
       def transition_to(transaction_id, new_status, metadata = nil)
+        # transition to make sure it works.
         new_status = new_status.to_sym
 
         if Query.can_transition_to?(transaction_id, new_status)
@@ -212,6 +213,7 @@ module MarketplaceService
           Events.handle_transition(transaction_entity, payment_type, old_status, new_status)
 
           Entity.transaction(save_transition(transaction, new_status, metadata))
+        else 
         end
       end
 
