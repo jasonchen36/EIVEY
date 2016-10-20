@@ -43,8 +43,12 @@ class TransactionsController < ApplicationController
         ensure_can_start_transactions(listing_model: listing_model, current_user: @current_user, current_community: @current_community)
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
-      if PaypalAdaptivePayment.where(paypal_payer_id: @current_user.id).first
-        @shipping_addresses = ShippingAddress.last
+        current_trans = Transaction.for_person( @current_user)
+        current_trans_with_address = current_trans.joins(:shipping_address).uniq.all
+#      current_user_address= ShippingAddress.joins(:author =>@current_user.id).last
+      if current_trans_with_address.any?
+        current_user_address = current_trans_with_address.last.shipping_address
+        @shipping_addresses = current_user_address
       else
         @shipping_addresses = ShippingAddress.new
       end
