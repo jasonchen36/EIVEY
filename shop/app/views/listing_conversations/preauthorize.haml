@@ -58,13 +58,50 @@
       = form.date_select :start_on, { value: preauthorize_form.start_on }, { class: "hidden" }
       = form.date_select :end_on, { value: preauthorize_form.end_on }, { class: "hidden" }
 
+
     .preauthorize-section
       %h2
-        = t(".payment")
-
-      = render partial: "payments/braintree/credit_card_info", locals: {braintree_form: braintree_form}
-
-    .preauthorize-section
+        Shipping Address
+      .row
+        .col-6
+          %input{:placeholder => "First Name", :type => "text"}
+        .col-6
+          %input{:placeholder => "Last Name", :type => "text"}
+      .row
+        .col-12
+          %input{:placeholder => "Shipping Address", :type => "text"}
+      .row
+        .col-12
+          %input{:placeholder => "Suite Number", :type => "text"}
+      .row
+        .col-6
+          %input{:placeholder => "City", :type => "text"}
+        .col-3
+          %input{:placeholder => "Postal Code", :type => "text"}
+        .col-3
+          %select#preauthorize-province
+            %option{value:"",disabled:"disabled",selected:"selected"}
+              Province
+            %option{value:"AB"}
+              Alberta
+            %option{value:"BC"}
+              British Columbia
+            %option{value:"MB"}
+              Manitoba
+            %option{value:"NB"}
+              New Brunswick
+            %option{value:"NL"}
+              Newfoundland and Labrador
+            %option{value:"NS"}
+              Nova Scotia
+            %option{value:"ON"}
+              Ontario
+            %option{value:"PE"}
+              Prince Edward Island
+            %option{value:"QC"}
+              Quebec
+            %option{value:"SK"}
+              Saskatchewan
 
       .row
         .col-12
@@ -76,24 +113,12 @@
       - if local_assigns.has_key?(:quantity)
         = form.hidden_field :quantity, value: quantity
 
-      .row
-        .col-12
-          = form.button t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
+      -#.preauthorize-section
+      -#  %h2
+      -#    = t(".payment")
+      -#  = render partial: "payments/braintree/credit_card_info", locals: {braintree_form: braintree_form}
 
-
-    %h1 Shipping Address
-    %input{:placeholder => "First Name", :type => "text"}/
-    %input{:placeholder => "Last Name", :type => "text"}/
-    %input{:placeholder => "Shipping Address", :type => "text"}/
-    %input{:placeholder => "Suite Number", :type => "text"}/
-    %input{:placeholder => "City", :type => "text"}/
-    %input{:placeholder => "Postal Code", :type => "text"}/
-    %input{:placeholder => "Province", :type => "text"}/
-    %br
-    %br
-
-
-    %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+      = form.button t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
 
     %noscript
-    = "For security reasons JavaScript has to be enabled"
+      = "For security reasons JavaScript has to be enabled"
