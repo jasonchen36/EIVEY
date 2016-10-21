@@ -20,6 +20,7 @@ class PaymentsNotificationsController < ApplicationController
       puts 'ipn valid'
       puts request.body.read
       @results['body'] = request.body.read
+      @results['params']=params
  #     payKey = params[:pay_key]
 #      check_if_paid(payKey)
     else
