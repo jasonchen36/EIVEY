@@ -4,23 +4,29 @@ require 'paypal-sdk-adaptivepayments'
 
 
 class PaymentsNotificationsController < ApplicationController
+#  IPNDataTypes = PaypalService::DataTypes::IPN
 
 
     skip_before_filter :verify_authenticity_token, :fetch_logged_in_user, :fetch_community, :fetch_community_membership, :check_http_auth
   def ipn_hook
     @api = PayPal::SDK::AdaptivePayments.new
     puts "IPN HOOK"
-    puts @api.methods
+#    puts @api.methods
     puts params
     logger = PaypalService::Logger.new
 
     @results = {name:'ipn'}
 
+      @results['params']=params
+      @results['raw_post']=request.raw_post
+      @results['ipn_valid']= @api.ipn_valid?(request.raw_post) 
+
+#      ipn_msg = IPNDataTypes.from_params(request.raw_post)
+#      @results['ipn_msg'] = ipn_msg      
     if @api.ipn_valid?(request.raw_post)  # return true if PP backend verifies the msg
       puts 'ipn valid'
       puts request.body.read
       @results['body'] = request.body.read
-      @results['params']=params
  #     payKey = params[:pay_key]
 #      check_if_paid(payKey)
     else
