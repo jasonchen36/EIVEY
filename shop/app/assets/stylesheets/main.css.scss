@@ -1350,13 +1350,7 @@ $noscript-height: lines(4);
   position: relative;
   text-align: left;
 }
-.price-container span{
-  position: absolute;
-  transform: translate(0,-50%);
-  top: 44%;
-  pointer-events: none;
-  margin-left: 0.4em; /* adjust as appropriate */
-}
+
 .price-container input{
   text-indent: 1em; /* adjust as appropriate */
 }

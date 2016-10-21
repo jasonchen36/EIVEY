@@ -1491,7 +1491,7 @@ en:
       location:
         location: Location
       price:
-        price: Price
+        price: Listing Price
         per: per
         per_day: "per day"
         mass: "piece, kg, l, m2, ..."
