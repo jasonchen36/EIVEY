@@ -1,0 +1,3 @@
+= fields_for :other do |o|
+  = o.label :paypal_email, t(".paypal_email") + "*", :class => "input"
+  = o.text_field(:paypal_email, :class => "title_text_field", :maxlength => "60", :placeholder => t(".paypal_email_placeholder"))

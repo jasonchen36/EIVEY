@@ -6,3 +6,5 @@ wp-config.php
 
 
 npm-debug.log
+
+*.swp

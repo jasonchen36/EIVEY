@@ -19,5 +19,5 @@
         %a{href: "mailto:hello@eivey.ca"}
           hello@eivey.ca
 
-      %a.button.green{href: "/shop"}
-        View More Items For Sale
+      = link_to "View More Items For Sale", url_for(:controller => "landing_page", :action => "index"), class: "button green"
+   

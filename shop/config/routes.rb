@@ -28,6 +28,7 @@ Kassi::Application.routes.draw do
   post '/webhooks/paypal_ipn' => 'paypal_ipn#ipn_hook', as: :paypal_ipn_hook
   post '/webhooks/plans' => 'plans#create'
   get '/webhooks/trials' => 'plans#get_trials'
+  post "/webhooks/transactions_ipn" => "payments_notifications#ipn_hook"  
 
   post '/bounces' => 'amazon_bounces#notification'
 
@@ -104,9 +105,11 @@ Kassi::Application.routes.draw do
 
     # All new transactions (in the future)
     get "/transactions/new" => "transactions#new", as: :new_transaction
+    get "/transactions/paid" => "transactions#paid"
 
     # thank you
     get "/transactions/thank-you" => "transactions#thank_you"
+
 
     # preauthorize flow
     get "/listings/:listing_id/preauthorize" => "preauthorize_transactions#preauthorize", :as => :preauthorize_payment
@@ -129,10 +132,13 @@ Kassi::Application.routes.draw do
     get "/login" => "sessions#new", :as => :login
     get "/listing_bubble/:id" => "listings#listing_bubble", :as => :listing_bubble
     get "/listing_bubble_multiple/:ids" => "listings#listing_bubble_multiple", :as => :listing_bubble_multiple
-    get '/:person_id/settings/payments/braintree/new' => 'braintree_accounts#new', :as => :new_braintree_settings_payment
-    get '/:person_id/settings/payments/braintree/show' => 'braintree_accounts#show', :as => :show_braintree_settings_payment
-    post '/:person_id/settings/payments/braintree/create' => 'braintree_accounts#create', :as => :create_braintree_settings_payment
+ 
     get '/:person_id/settings/payments/paypal_account' => 'paypal_accounts#index', :as => :paypal_account_settings_payment
+
+  # alternative braintree payments
+      get '/:person_id/settings/payments/paypal/new' => 'braintree_accounts#new', :as => :new_braintree_settings_payment
+    get '/:person_id/settings/payments/paypal/show' => 'braintree_accounts#show', :as => :show_braintree_settings_payment
+    post '/:person_id/settings/payments/paypal/create' => 'braintree_accounts#create', :as => :create_braintree_settings_payment
 
     # community membership related actions
 

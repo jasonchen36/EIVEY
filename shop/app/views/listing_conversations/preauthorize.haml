@@ -80,5 +80,20 @@
         .col-12
           = form.button t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
 
-  %noscript
+
+    %h1 Shipping Address
+    %input{:placeholder => "First Name", :type => "text"}/
+    %input{:placeholder => "Last Name", :type => "text"}/
+    %input{:placeholder => "Shipping Address", :type => "text"}/
+    %input{:placeholder => "Suite Number", :type => "text"}/
+    %input{:placeholder => "City", :type => "text"}/
+    %input{:placeholder => "Postal Code", :type => "text"}/
+    %input{:placeholder => "Province", :type => "text"}/
+    %br
+    %br
+
+
+    %input{:align => "top", :alt => "Check out with PayPal", :border => "0", :name => "submit", :src => "https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif", :type => "image"}/
+
+    %noscript
     = "For security reasons JavaScript has to be enabled"

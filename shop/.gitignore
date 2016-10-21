@@ -1,6 +1,10 @@
 .DS_Store
 db/*.sqlite3
 db/sphinx
+Passengerfile.json
+config/paypal_adaptive.yml
+config/paypal_payments.yml
+config/paypal.yml
 config/*.sphinx.conf
 config/database.yml
 config/config.yml
@@ -44,7 +48,7 @@ coverage/
 *.sock
 .vagrant
 .env
-
+*.swp
 # React on Rails
 npm-debug.log*
 node_modules

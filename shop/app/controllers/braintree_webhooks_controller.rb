@@ -11,8 +11,16 @@ class BraintreeWebhooksController < ApplicationController
 
   # This module contains all the handlers per notification kind.
   # Method name MUST match to the notification kind
+
+  def ipn
+    puts "!!!!!!!!!!"
+    puts request.raw_post
+  end
+
   module Handlers
     class << self
+
+
       def sub_merchant_account_approved(notification, community)
         person_id = notification.merchant_account.id
         BTLog.warn("Approved submerchant account for person #{person_id}")

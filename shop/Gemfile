@@ -12,6 +12,9 @@ gem 'uglifier', '~> 2.7.2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'compass-rails', '~> 2.0'
 
+gem 'paypal-sdk-adaptivepayments'
+gem 'paypal-sdk-adaptiveaccounts', '~> 1.102', '>= 1.102.1'
+
 # Requiring 'compass' gem directly is not normally needed,
 # 'compass-rails' already does that.
 #
@@ -183,4 +186,5 @@ gem 'color', '~> 1.8'
 
 #Custom gems
 gem 'daemons'
+
 gem 'god'

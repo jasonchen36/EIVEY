@@ -30,20 +30,19 @@
 
   = form_tag(form_action, method: :post, id: "transaction-form") do
 
-    = hidden_field_tag(:start_on, booking_start)
-    = hidden_field_tag(:end_on, booking_end)
-
-
-    .preauthorize-section
-      %h2
-        = t("conversations.new.send_message_to_user", person: author_link).html_safe
-      .row
-        .col-12
-          = text_area_tag(:message, nil, :class => "text_area")
-
-      - if quantity
-        = hidden_field_tag(:quantity, quantity)
-
-      .row
-        .col-12
-          = button_tag t("conversations.new.send_message"), :class => "send_button"
+    %h1 Shipping Address
+    %h2 Name
+    = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name)
+    %h2 Address
+    = text_field_tag(:street, nil, :class => "text_area", :value => @shipping_addresses.street1)
+    %h2 City
+    = text_field_tag(:city, nil, :class => "text_area", :value => @shipping_addresses.city)
+    %h2 Province
+    = text_field_tag(:province, nil, :class => "text_area", :value => @shipping_addresses.state_or_province)
+    %h2 Postal Code
+    = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code)
+    %h2 Country
+    = text_field_tag(:country, nil, :class => "text_area", :value => @shipping_addresses.country)
+    %h2 Phone
+    = text_field_tag(:phone, nil, :class => "text_area", :value => @shipping_addresses.phone)
+    = button_tag t("Place Order")

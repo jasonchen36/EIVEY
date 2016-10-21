@@ -34,4 +34,5 @@ class ShippingAddress < ActiveRecord::Base
   )
 
   belongs_to :tx, class_name: "Transaction", foreign_key: "transaction_id"
+  delegate :author, to: :tx
 end
