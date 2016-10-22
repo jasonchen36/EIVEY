@@ -189,7 +189,7 @@ class TransactionsController < ApplicationController
     paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
     @payment_details_response = @api.payment_details(@payment_details)
     if @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
-      puts 'Transaction Not yet completed, waiting on IPN:'+@payment_details_response.status 
+      logger.debug 'Transaction Not yet completed, waiting on IPN:'+@payment_details_response.status 
       render "transactions/thank-you"
     elsif @payment_details_response.status == paypal_status[:completed] || @payment_details_response.status == paypal_status[:incomplete]
 
@@ -203,10 +203,10 @@ class TransactionsController < ApplicationController
       # Move conversations for transaction into messages
        Delayed::Job.enqueue(MessageSentJob.new(transaction.conversation.messages.last.id, @current_community.id))
 
-      puts 'Transaction Completed:'+@payment_details_response.status 
+      logger.debug 'Transaction Completed:'+@payment_details_response.status 
       render "transactions/thank-you"
     else
-      puts 'Unknown Transaction type:'+@payment_details_response.status 
+      logger.debug 'Unknown Transaction type:'+@payment_details_response.status 
       render "transactions/thank-you"
     end
   end
