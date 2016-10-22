@@ -11,7 +11,6 @@ class PaymentsNotificationsController < ApplicationController
   def ipn_hook
     @api = PayPal::SDK::AdaptivePayments.new
     puts "IPN HOOK"
-#    puts @api.methods
     puts params
     logger = PaypalService::Logger.new
 
@@ -20,15 +19,13 @@ class PaymentsNotificationsController < ApplicationController
       @results['params']=params
       @results['raw_post']=request.raw_post
       @results['ipn_valid']= @api.ipn_valid?(request.raw_post) 
-
-#      ipn_msg = IPNDataTypes.from_params(request.raw_post)
-#      @results['ipn_msg'] = ipn_msg      
-    if @api.ipn_valid?(request.raw_post)  # return true if PP backend verifies the msg
-      puts 'ipn valid'
-      puts request.body.read
       @results['body'] = request.body.read
- #     payKey = params[:pay_key]
-#      check_if_paid(payKey)
+
+    if @api.ipn_valid?(request.raw_post)  # return true if PP backend verifies the msg
+      logger.info 'ipn valid'
+      @results['body'] = request.body.read
+      payKey = params[:pay_key]
+      check_if_paid(payKey)
     else
       puts 'bad request'
       logger.warn("Fake IPN message received: #{request.raw_post}")
