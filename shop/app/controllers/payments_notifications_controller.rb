@@ -34,7 +34,7 @@ class PaymentsNotificationsController < ApplicationController
       logger.warn("Fake IPN message received: #{request.raw_post}")
     end
 
-    puts @results
+    logger.info @results
     render :json => @results
     # We received the message ok, so send back 200 OK with empty body
 #    render nothing: true
