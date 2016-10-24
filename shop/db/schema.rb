@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728102918) do
+ActiveRecord::Schema.define(version: 20161006173348) do
 
   create_table "auth_tokens", force: :cascade do |t|
     t.string   "token",            limit: 255
@@ -854,6 +854,16 @@ ActiveRecord::Schema.define(version: 20160728102918) do
   add_index "paypal_accounts", ["community_id"], name: "index_paypal_accounts_on_community_id", using: :btree
   add_index "paypal_accounts", ["payer_id"], name: "index_paypal_accounts_on_payer_id", using: :btree
   add_index "paypal_accounts", ["person_id"], name: "index_paypal_accounts_on_person_id", using: :btree
+
+  create_table "paypal_adaptive_payments", force: :cascade do |t|
+    t.string   "paypal_payment_id", limit: 255
+    t.string   "paypal_payer_id",   limit: 255
+    t.string   "paypal_token",      limit: 255
+    t.integer  "transaction_id",    limit: 4
+    t.integer  "community_id",      limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "paypal_ipn_messages", force: :cascade do |t|
     t.text     "body",       limit: 65535

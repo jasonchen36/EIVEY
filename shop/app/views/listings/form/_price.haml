@@ -1,6 +1,32 @@
 .price-container
   - if shape[:price_enabled]
-    = form.label :price, t(".price")
+    %label.input{for: "listing_image"}
+      = t(".price")
+      %span.tooltip
+        %i.fa.fa-question-circle{"aria-hidden" => "true"}
+        %span.tooltip-content
+          %span
+            Suggested listing price is 30-50% of original purchase price, depending on style, proof of authenticity, original packaging, tags and condition.
+          %br
+          %br
+          %span.text-bold
+            Eivey Fee
+          %br
+          $15-$60 retail selling price: minimum $15 fee, included in retail
+          %br
+          $61-$1499: 25% fee, included in retail
+          %br
+          $1500 and higher: 15% fee, included in retail
+          %br
+          %br
+          %span.text-bold
+            Example
+          %br
+          Retail selling price set at $100, your profit will be $75.
+          %br
+          %br
+          This fee includes credit card and PayPal fees, PayPal transaction dispute coverage, prepaid & pre addressed shipping to anywhere in Canada and an Eivey Mailing Kit delivered to seller.
+
     = render partial: "listings/form/currency_selector", locals: {form: form}
     = form.text_field :price, :class => "price-field", :maxlength => "10", :placeholder => "0", :value => (@listing.price ? @listing.price.to_s: 0)
 

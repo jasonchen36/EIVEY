@@ -17,33 +17,68 @@
 
   .preauthorize-section
 
-    .standard-title-container
-      .authorize-title
+    .authorize-title-container
+      %h2.authorize-title
         %strong
           = link_to("#{listing[:title]}", listing_path(listing[:id]))
         by
         = author_link
 
     - m_price_break_down.each do |price_break_down|
-      %div
+      .text-italic
         = render partial: "transactions/price_break_down", locals: price_break_down
+        %p#preauthorize-message
+          Free shipping
+          %br
+          Ships within 5-7 business days from date of purchase
+          %br
+          * Eivey only buys & sells in Canada
 
   = form_tag(form_action, method: :post, id: "transaction-form") do
-
-    = hidden_field_tag(:start_on, booking_start)
-    = hidden_field_tag(:end_on, booking_end)
-
+    .preauthorize-section
+      .authorize-title-container
+        %h2.authorize-title
+          Shipping Address
+      .row
+        .col-6
+          = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name, :placeholder=>"First Name")
+        .col-6
+          = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name, :placeholder=>"Last Name")
+      .row
+        .col-12
+          = text_field_tag(:street, nil, :class => "text_area", :value => @shipping_addresses.street1, :placeholder => "Shipping Address")
+      .row
+        .col-12
+          = text_field_tag(:street2, nil, :class => "text_area", :value => @shipping_addresses.street1, :placeholder => "Suite Number")
+      .row
+        .col-6
+          = text_field_tag(:city, nil, :class => "text_area", :value => @shipping_addresses.city, :placeholder=> "City")
+        .col-3
+          = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code, :placeholder => "Postal Code")
+        .col-3
+          %select#preauthorize-province
+            %option{value:"",disabled:"disabled",selected:"selected"}
+              Province
+            %option{value:"AB"}
+              Alberta
+            %option{value:"BC"}
+              British Columbia
+            %option{value:"MB"}
+              Manitoba
+            %option{value:"NB"}
+              New Brunswick
+            %option{value:"NL"}
+              Newfoundland and Labrador
+            %option{value:"NS"}
+              Nova Scotia
+            %option{value:"ON"}
+              Ontario
+            %option{value:"PE"}
+              Prince Edward Island
+            %option{value:"QC"}
+              Quebec
+            %option{value:"SK"}
+              Saskatchewan
 
     .preauthorize-section
-      %h2
-        = t("conversations.new.send_message_to_user", person: author_link).html_safe
-      .row
-        .col-12
-          = text_area_tag(:message, nil, :class => "text_area")
-
-      - if quantity
-        = hidden_field_tag(:quantity, quantity)
-
-      .row
-        .col-12
-          = button_tag t("conversations.new.send_message"), :class => "send_button"
+      = button_tag t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"

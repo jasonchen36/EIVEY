@@ -84,8 +84,6 @@ class HomepageController < ApplicationController
         listings.each do |listing|
           listing.category = @categories.select { |c| c.id == listing.category_id }
           @listingsWithCategories.push(listing)
-          puts "listings : "
-          puts listing.category
         end
 
         if @view_type == "grid" then

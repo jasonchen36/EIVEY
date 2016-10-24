@@ -287,6 +287,8 @@ en:
           last_activity: "Latest activity"
           initiated_by: Starter
           other_party: "Other party"
+          seller_address: "Seller Address"
+          buyer_address: "Buyer Address"
         status:
           free: Conversation
           pending: Pending
@@ -1489,7 +1491,7 @@ en:
       location:
         location: Location
       price:
-        price: Price
+        price: Listing Price
         per: per
         per_day: "per day"
         mass: "piece, kg, l, m2, ..."
@@ -1506,6 +1508,9 @@ en:
         shipping_price: "Shipping fee"
         shipping_price_additional: "Additional items"
         pickup: Pickup
+      paypal:
+        paypal_email: "Paypal Email"
+        paypal_email_placeholder: "Enter your Paypal email"
       origin:
         location: Location
         origin: Origin

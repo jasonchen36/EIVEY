@@ -24,57 +24,10 @@
         = "Error: Unknown account status '#{status}'"
 
   %dl.braintree-account-details
-    %dt.braintree-account-key
-      = t(".first_name")
-    %dd.braintree-account-value
-      = @braintree_account.first_name
-
-    %dt.braintree-account-key
-      = t(".last_name")
-    %dd.braintree-account-value
-      = @braintree_account.last_name
 
     %dt.braintree-account-key
       = t(".email")
     %dd.braintree-account-value
       = @braintree_account.email
 
-    %dt.braintree-account-key
-      = t(".phone")
-    %dd.braintree-account-value
-      = @braintree_account.phone
 
-    %dt.braintree-account-key
-      = t(".address_street_address")
-    %dd.braintree-account-value
-      = @braintree_account.address_street_address
-
-    %dt.braintree-account-key
-      = t(".address_postal_code")
-    %dd.braintree-account-value
-      = @braintree_account.address_postal_code
-
-    %dt.braintree-account-key
-      = t(".address_locality")
-    %dd.braintree-account-value
-      = @braintree_account.address_locality
-
-    %dt.braintree-account-key
-      = t(".address_region")
-    %dd.braintree-account-value
-      = @state_name
-
-    %dt.braintree-account-key
-      = t(".date_of_birth")
-    %dd.braintree-account-value
-      = @braintree_account.date_of_birth
-
-    %dt.braintree-account-key
-      = t(".routing_number")
-    %dd.braintree-account-value
-      = @braintree_account.routing_number
-
-    %dt.braintree-account-key
-      = t(".account_number")
-    %dd.braintree-account-value
-      = @braintree_account.hidden_account_number

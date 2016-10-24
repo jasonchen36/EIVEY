@@ -7,9 +7,9 @@ module TransactionHelper
     when "confirmed"
       "fa-check"
     when "rejected"
-      "ss-delete"
+      "fa-ban"
     when "canceled"
-      "ss-delete"
+      "fa-ban"
     when "paid"
       "fa-check"
     when "preauthorized"
@@ -19,9 +19,9 @@ module TransactionHelper
     when "accept_preauthorized"
       "fa-check"
     when "reject_preauthorized"
-      "ss-delete"
+      "fa-ban"
     when "errored"
-      "ss-delete"
+      "fa-ban"
     end
   end
 

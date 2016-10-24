@@ -134,7 +134,6 @@ $listing-author-avatar-height: 108;
 .listing-author-name-link {
   display: block;
   @include ellipsis;
-  color: #636466;
 }
 
 // Listing author activity

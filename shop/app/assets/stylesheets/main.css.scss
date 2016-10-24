@@ -67,12 +67,10 @@ a, input, button {
 }
 
 body {
-  background: $background;
-  color: $body;
   height: auto; // fixes some height issues in the map view
   //border: solid darken($highlight, 9%);
   //border-width: 0 0 lines(1);
-}f
+}
 
  ul {
    padding-left: lines(1);
@@ -1350,13 +1348,7 @@ $noscript-height: lines(4);
   position: relative;
   text-align: left;
 }
-.price-container span{
-  position: absolute;
-  transform: translate(0,-50%);
-  top: 44%;
-  pointer-events: none;
-  margin-left: 0.4em; /* adjust as appropriate */
-}
+
 .price-container input{
   text-indent: 1em; /* adjust as appropriate */
 }

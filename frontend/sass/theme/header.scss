@@ -1,6 +1,6 @@
 //core
 //-----------------------------
-$logo-width: 425px;
+$logo-width: 400px;
 
 header {
   @include desktop {
@@ -13,7 +13,7 @@ header {
     max-width: 100%;
     @include desktop {
       height: 115px;
-      width: 480px;
+      width: 455px;
       margin: 0 auto -10px auto;
     }
   }
@@ -142,7 +142,7 @@ header {
   margin: 5px auto 10px auto;
   max-width: $logo-width;
   text-transform: uppercase;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   letter-spacing: 2px;
   font-family: $font-georgia;
@@ -162,20 +162,37 @@ header {
 .search-form-input, #q {
   line-height: 1;
   width: 100%;
-  padding: 0.5em 50px 0.5em 0.6875em;
   border: none;
   min-height: 0;
 }
 
+.search-form-input {
+  padding: 0.5em 50px 0.5em 0.6875em;
+  border: 2px solid $color-sharetribe-grey;
+  &+ .search-form-submit {
+    $icon-size: 30px;
+    width: $icon-size;
+    height: $icon-size;
+    top: 0;
+  }
+}
+
+#q {
+  padding: 0.25em 40px 0.25em 0.6875em;
+  margin-top: 0.25em;
+  &+ .search-form-submit {
+    $icon-size: 26px;
+    width: $icon-size;
+    height: $icon-size;
+    top: 4px;
+  }
+}
+
 .search-form-submit {
-  $icon-size: 30px;
   position: absolute;
-  top: 0;
   bottom: 0;
   margin: auto;
   right: 10px;
-  width: $icon-size;
-  height: $icon-size;
   @include transition-with-defaults(opacity);
   &:hover {
     opacity: 0.75;
@@ -187,21 +204,16 @@ header {
 //-----------------------------
 #header-menu-mobile-container {
   background-color: $color-global-dark-grey;
+  margin-bottom: 30px;
 }
 
 .i--icon-menu, .i--icon-user, .i--icon-bag {
-  $icon-size: 20px;
+  $icon-size: 35px;
   height: $icon-size;
   width: $icon-size;
   display: inline-block;
-  margin: 35px 5px 5px 5px;
+  margin: 25px 5px 5px 5px;
   @include transition-with-defaults(opacity);
-  @include tablet-up {
-    margin: 25px 5px 5px 5px;
-    $icon-size: 35px;
-    height: $icon-size;
-    width: $icon-size;
-  }
   &:hover {
     opacity: 0.75;
   }

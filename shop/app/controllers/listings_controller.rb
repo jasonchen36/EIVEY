@@ -224,11 +224,14 @@ class ListingsController < ApplicationController
       all_locales: @current_community.locales
     )
 
+    missing_paypal=@current_user.braintree_account.nil?
+      
     render :new, locals: {
              categories: @current_community.top_level_categories,
              subcategories: @current_community.subcategories,
              shapes: get_shapes,
-             category_tree: category_tree
+             category_tree: category_tree,
+             missing_paypal: missing_paypal
            }
   end
 
@@ -243,7 +246,6 @@ class ListingsController < ApplicationController
     else
       @listing.build_origin_loc()
     end
-
     form_content
   end
 
@@ -257,7 +259,47 @@ class ListingsController < ApplicationController
     form_content
   end
 
+  def add_paypal_account (params)
+    if @current_user.braintree_account.nil?
+      #TODO: combine with braintree_accounts_controller create code and put into a service used by both
+      paypal_email_params={email:  params[:other][:paypal_email]}
+      model_attributes = paypal_email_params
+      .merge(person: @current_user)
+      .merge(community_id: @current_community.id)
+
+      @current_user.braintree_account
+      @braintree_account = BraintreeAccount.new(model_attributes)
+
+      if @braintree_account.valid?
+        @paypal_api = PayPal::SDK::AdaptiveAccounts.new
+        @get_verified_status = @paypal_api.build_get_verified_status({
+          :emailAddress => model_attributes[:email],
+          :matchCriteria => "NONE" })
+        
+        @get_verified_status_response = @paypal_api.get_verified_status(@get_verified_status)
+        
+        # Access Response
+        if @get_verified_status_response.success?
+          @braintree_account.save!
+          return true
+        else
+          return false
+        end
+      else 
+      return false
+
+      end
+    else
+      return true
+    end
+  end
+
   def create
+    if !add_paypal_account(params)
+      flash[:error] = t("listings.error.something_went_wrong", error_code: "Paypal email failed validation")
+      return redirect_to new_listing_path
+    end
+
     params[:listing].delete("origin_loc_attributes") if params[:listing][:origin_loc_attributes][:address].blank?
 
     shape = get_shape(Maybe(params)[:listing][:listing_shape_id].to_i.or_else(nil))
@@ -361,6 +403,8 @@ class ListingsController < ApplicationController
         [@listing.category.id, nil]
       end
 
+    missing_paypal = @current_user.braintree_account.nil?
+   
     render locals: {
              category_tree: category_tree,
              categories: @current_community.top_level_categories,
@@ -369,11 +413,17 @@ class ListingsController < ApplicationController
              category_id: category_id,
              subcategory_id: subcategory_id,
              shape_id: @listing.listing_shape_id,
-             form_content: form_locals(shape)
+             form_content: form_locals(shape),
+             missing_paypal: missing_paypal
            }
   end
 
   def update
+    if !add_paypal_account(params)
+      flash[:error] = t("listings.error.something_went_wrong", error_code: "Paypal email failed validation")
+      return redirect_to edit_listing_path
+    end
+
     if (params[:listing][:origin] && (params[:listing][:origin_loc_attributes][:address].empty? || params[:listing][:origin].blank?))
       params[:listing].delete("origin_loc_attributes")
       if @listing.origin_loc
@@ -534,17 +584,21 @@ class ListingsController < ApplicationController
     @listing.listing_shape_id = shape[:id]
 
     payment_type = MarketplaceService::Community::Query.payment_type(@current_community.id)
+
     allow_posting, error_msg = payment_setup_status(
                      community: @current_community,
                      user: @current_user,
                      listing: @listing,
                      payment_type: payment_type,
-                     process: process)
+                     process: process
+                     )
 
     if allow_posting
+      missing_paypal = @current_user.braintree_account.nil?
       render :partial => "listings/form/form_content", locals: form_locals(shape).merge(
-               run_js_immediately: true
-             )
+              missing_paypal: missing_paypal,
+              run_js_immediately: true
+            )
     else
       render :partial => "listings/payout_registration_before_posting", locals: { error_msg: error_msg }
     end
