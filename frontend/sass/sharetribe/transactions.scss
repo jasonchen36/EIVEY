@@ -30,7 +30,6 @@
   }
   h1, p {
     font-style: italic;
-    color: $color-sharetribe-dark-grey;
   }
 }
 
@@ -38,11 +37,7 @@
 //-----------------------------
 .authorize-title {
   font-size: 22px;
-  color: $color-sharetribe-dark-grey;
   margin: 50px 0 5px 0;
-  a {
-    color: $color-sharetribe-dark-grey;
-  }
 }
 
 .authorize-title-container {
@@ -53,19 +48,11 @@
 
 .initiate-transaction-total-wrapper {
   font-size: 22px;
-  color: $color-sharetribe-dark-grey;
 }
 
 #preauthorize-message {
   font-size: 14px;
-  color: $color-sharetribe-dark-grey;
   margin-top: 20px;
-}
-
-.preauthorize-section {
-  a, h2 {
-    color: $color-sharetribe-dark-grey;
-  }
 }
 
 #preauthorize-province {
