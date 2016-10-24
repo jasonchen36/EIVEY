@@ -45,6 +45,12 @@
   }
 }
 
+.authorize-title-container {
+  @extend .standard-title-container;
+  margin-bottom: 20px!important;
+  border-bottom-style: solid;
+}
+
 .initiate-transaction-total-wrapper {
   font-size: 22px;
   color: $color-sharetribe-dark-grey;

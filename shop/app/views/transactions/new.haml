@@ -9,6 +9,7 @@
 
 .standard-title-container
   %h2.page-title
+    = t("listing_conversations.preauthorize.details")
 
 #new_message_form.centered-section
 
@@ -16,20 +17,28 @@
 
   .preauthorize-section
 
-    .standard-title-container
-      .authorize-title
+    .authorize-title-container
+      %h2.authorize-title
         %strong
           = link_to("#{listing[:title]}", listing_path(listing[:id]))
         by
         = author_link
 
     - m_price_break_down.each do |price_break_down|
-      %div
+      .text-italic
         = render partial: "transactions/price_break_down", locals: price_break_down
+        %p#preauthorize-message
+          Free shipping
+          %br
+          Ships within 5-7 business days from date of purchase
+          %br
+          * Eivey only buys & sells in Canada
 
   = form_tag(form_action, method: :post, id: "transaction-form") do
-    .preauthroize-section
-      %h2 Shipping Address
+    .preauthorize-section
+      .authorize-title-container
+        %h2.authorize-title
+          Shipping Address
       .row
         .col-6
           = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name, :placeholder=>"First Name")
@@ -47,7 +56,6 @@
         .col-3
           = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code, :placeholder => "Postal Code")
         .col-3
-          = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code)
           %select#preauthorize-province
             %option{value:"",disabled:"disabled",selected:"selected"}
               Province
@@ -72,6 +80,5 @@
             %option{value:"SK"}
               Saskatchewan
 
-      %h2 Phone
-      = text_field_tag(:phone, nil, :class => "text_area", :value => @shipping_addresses.phone)
-      = button_tag t("preauthorize_payments.edit.confirm_payment")
+    .preauthorize-section
+      = button_tag t("preauthorize_payments.edit.confirm_payment"), :class => "send_button"
