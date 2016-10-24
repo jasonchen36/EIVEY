@@ -67,12 +67,10 @@ a, input, button {
 }
 
 body {
-  background: $background;
-  color: $body;
   height: auto; // fixes some height issues in the map view
   //border: solid darken($highlight, 9%);
   //border-width: 0 0 lines(1);
-}f
+}
 
  ul {
    padding-left: lines(1);
