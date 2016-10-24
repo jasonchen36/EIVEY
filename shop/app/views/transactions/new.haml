@@ -9,7 +9,6 @@
 
 .standard-title-container
   %h2.page-title
-    = t("listing_conversations.preauthorize.details")
 
 #new_message_form.centered-section
 
@@ -29,20 +28,50 @@
         = render partial: "transactions/price_break_down", locals: price_break_down
 
   = form_tag(form_action, method: :post, id: "transaction-form") do
+    .preauthroize-section
+      %h2 Shipping Address
+      .row
+        .col-6
+          = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name, :placeholder=>"First Name")
+        .col-6
+          = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name, :placeholder=>"Last Name")
+      .row
+        .col-12
+          = text_field_tag(:street, nil, :class => "text_area", :value => @shipping_addresses.street1, :placeholder => "Shipping Address")
+      .row
+        .col-12
+          = text_field_tag(:street2, nil, :class => "text_area", :value => @shipping_addresses.street1, :placeholder => "Suite Number")
+      .row
+        .col-6
+          = text_field_tag(:city, nil, :class => "text_area", :value => @shipping_addresses.city, :placeholder=> "City")
+        .col-3
+          = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code, :placeholder => "Postal Code")
+        .col-3
+          = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code)
+          %select#preauthorize-province
+            %option{value:"",disabled:"disabled",selected:"selected"}
+              Province
+            %option{value:"AB"}
+              Alberta
+            %option{value:"BC"}
+              British Columbia
+            %option{value:"MB"}
+              Manitoba
+            %option{value:"NB"}
+              New Brunswick
+            %option{value:"NL"}
+              Newfoundland and Labrador
+            %option{value:"NS"}
+              Nova Scotia
+            %option{value:"ON"}
+              Ontario
+            %option{value:"PE"}
+              Prince Edward Island
+            %option{value:"QC"}
+              Quebec
+            %option{value:"SK"}
+              Saskatchewan
 
-    %h1 Shipping Address
-    %h2 Name
-    = text_field_tag(:name, nil, :class => "text_area", :value => @shipping_addresses.name)
-    %h2 Address
-    = text_field_tag(:street, nil, :class => "text_area", :value => @shipping_addresses.street1)
-    %h2 City
-    = text_field_tag(:city, nil, :class => "text_area", :value => @shipping_addresses.city)
-    %h2 Province
-    = text_field_tag(:province, nil, :class => "text_area", :value => @shipping_addresses.state_or_province)
-    %h2 Postal Code
-    = text_field_tag(:postal, nil, :class => "text_area", :value => @shipping_addresses.postal_code)
-    %h2 Country
-    = text_field_tag(:country, nil, :class => "text_area", :value => @shipping_addresses.country)
-    %h2 Phone
-    = text_field_tag(:phone, nil, :class => "text_area", :value => @shipping_addresses.phone)
-    = button_tag t("preauthorize_payments.edit.confirm_payment")
+      %h2 Phone
+      = text_field_tag(:phone, nil, :class => "text_area", :value => @shipping_addresses.phone)
+      = button_tag t("preauthorize_payments.edit.confirm_payment")

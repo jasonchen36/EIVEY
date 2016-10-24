@@ -21,6 +21,7 @@ class TransactionsController < ApplicationController
     [:name, :string],
     [:city, :string],
     [:street, :string],
+    [:street2, :string],
     [:phone, :string],
     [:province, :string],
     [:postal, :string],
@@ -43,9 +44,10 @@ class TransactionsController < ApplicationController
         ensure_can_start_transactions(listing_model: listing_model, current_user: @current_user, current_community: @current_community)
       }
     ).on_success { |((listing_id, listing_model, author_model, process, gateway))|
+      
         current_trans = Transaction.for_person( @current_user)
         current_trans_with_address = current_trans.joins(:shipping_address).uniq.all
-#      current_user_address= ShippingAddress.joins(:author =>@current_user.id).last
+
       if current_trans_with_address.any?
         current_user_address = current_trans_with_address.last.shipping_address
         @shipping_addresses = current_user_address
@@ -53,6 +55,7 @@ class TransactionsController < ApplicationController
         @shipping_addresses = ShippingAddress.new
       end
       booking = listing_model.unit_type == :day
+
       transaction_params = HashUtils.symbolize_keys({listing_id: listing_model.id}.merge(params.slice(:start_on, :end_on, :quantity, :delivery)))
       case [process[:process], gateway, booking]
       when matches([:none])
@@ -115,6 +118,7 @@ class TransactionsController < ApplicationController
                 :country => form[:country],
                 :state_or_province => form[:province],
                 :street1 => form[:street],
+                :street2 => form[:street2],
                 :name => form[:name].partition(" ").first + " " + form[:name].partition(" ").last,
                 :phone => form[:phone],
                 :postal_code => form[:postal]})
@@ -160,7 +164,8 @@ class TransactionsController < ApplicationController
               listing_quantity: quantity,
               content: form[:message],
               booking_fields: booking_fields,
-              payment_gateway: process[:process] == :none ? :none : gateway, # TODO This is a bit awkward
+              payment_gateway: :braintree,
+              # payment_gateway: process[:process] == :none ? :none : gateway, # TODO This is a bit awkward
               payment_process: process[:process]}
           })
       }
@@ -184,7 +189,7 @@ class TransactionsController < ApplicationController
     paypal_status = { :completed => "COMPLETED", :incomplete => "INCOMPLETE", :pending => "PENDING", :processing => "PROCESSING" }
     @payment_details_response = @api.payment_details(@payment_details)
     if @payment_details_response.status == paypal_status[:pending] || @payment_details_response.status == paypal_status[:processing]
-      puts 'Transaction Not yet completed, waiting on IPN:'+@payment_details_response.status 
+      logger.debug 'Transaction Not yet completed, waiting on IPN:'+@payment_details_response.status 
       render "transactions/thank-you"
     elsif @payment_details_response.status == paypal_status[:completed] || @payment_details_response.status == paypal_status[:incomplete]
 
@@ -198,10 +203,10 @@ class TransactionsController < ApplicationController
       # Move conversations for transaction into messages
        Delayed::Job.enqueue(MessageSentJob.new(transaction.conversation.messages.last.id, @current_community.id))
 
-      puts 'Transaction Completed:'+@payment_details_response.status 
+      logger.debug 'Transaction Completed:'+@payment_details_response.status 
       render "transactions/thank-you"
     else
-      puts 'Unknown Transaction type:'+@payment_details_response.status 
+      logger.debug 'Unknown Transaction type:'+@payment_details_response.status 
       render "transactions/thank-you"
     end
   end
@@ -376,6 +381,7 @@ class TransactionsController < ApplicationController
       },
       ->(l_id) {
         # TODO Do not use Models directly. The data should come from the APIs
+#666 - wat.
         Maybe(@current_community.listings.where(id: l_id).first)
           .map     { |listing_model| Result::Success.new(listing_model) }
           .or_else { Result::Error.new("Cannot find listing with id #{l_id}") }
