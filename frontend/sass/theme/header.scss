@@ -168,6 +168,7 @@ header {
 
 .search-form-input {
   padding: 0.5em 50px 0.5em 0.6875em;
+  border: 2px solid $color-sharetribe-grey;
   &+ .search-form-submit {
     $icon-size: 30px;
     width: $icon-size;
@@ -207,18 +208,12 @@ header {
 }
 
 .i--icon-menu, .i--icon-user, .i--icon-bag {
-  $icon-size: 20px;
+  $icon-size: 35px;
   height: $icon-size;
   width: $icon-size;
   display: inline-block;
-  margin: 35px 5px 5px 5px;
+  margin: 25px 5px 5px 5px;
   @include transition-with-defaults(opacity);
-  @include tablet-up {
-    margin: 25px 5px 5px 5px;
-    $icon-size: 35px;
-    height: $icon-size;
-    width: $icon-size;
-  }
   &:hover {
     opacity: 0.75;
   }

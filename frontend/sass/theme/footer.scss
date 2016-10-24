@@ -27,12 +27,16 @@ footer {
 #footer-tagline {
   color: $color-global-dark-grey;
   margin: 40px 0 10px 0;
-  font-size: 35px;
+  font-size: 20px;
   font-family: $font-georgia;
   font-weight: bold;
   font-style: italic;
+  @include tablet {
+    font-size: 30px;
+  }
   @include desktop {
     margin: 50px 0 10px 0;
+    font-size: 35px;
   }
 }
 
@@ -45,10 +49,16 @@ footer {
 
 .footer-tagline-social {
   color: $color-global-dark-grey;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: normal;
   margin: 0;
   font-family: $font-georgia;
+  @include tablet {
+    font-size: 20px;
+  }
+  @include desktop {
+    font-size: 24px;
+  }
 }
 
 
